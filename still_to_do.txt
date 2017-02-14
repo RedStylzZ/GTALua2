@@ -1,0 +1,5 @@
+. implement console input
+. improve keypress detection
+. improve the calling of addons
+. implement GTALua compatible classes and variables
+. implement event handlers

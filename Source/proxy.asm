@@ -1,0 +1,834 @@
+.code
+extern mProcs:QWORD
+AddIPAddress_wrapper proc
+	jmp mProcs[0*8]
+AddIPAddress_wrapper endp
+AllocateAndGetInterfaceInfoFromStack_wrapper proc
+	jmp mProcs[1*8]
+AllocateAndGetInterfaceInfoFromStack_wrapper endp
+AllocateAndGetIpAddrTableFromStack_wrapper proc
+	jmp mProcs[2*8]
+AllocateAndGetIpAddrTableFromStack_wrapper endp
+CancelIPChangeNotify_wrapper proc
+	jmp mProcs[3*8]
+CancelIPChangeNotify_wrapper endp
+CancelMibChangeNotify2_wrapper proc
+	jmp mProcs[4*8]
+CancelMibChangeNotify2_wrapper endp
+CloseCompartment_wrapper proc
+	jmp mProcs[5*8]
+CloseCompartment_wrapper endp
+CloseGetIPPhysicalInterfaceForDestination_wrapper proc
+	jmp mProcs[6*8]
+CloseGetIPPhysicalInterfaceForDestination_wrapper endp
+ConvertCompartmentGuidToId_wrapper proc
+	jmp mProcs[7*8]
+ConvertCompartmentGuidToId_wrapper endp
+ConvertCompartmentIdToGuid_wrapper proc
+	jmp mProcs[8*8]
+ConvertCompartmentIdToGuid_wrapper endp
+ConvertGuidToStringA_wrapper proc
+	jmp mProcs[9*8]
+ConvertGuidToStringA_wrapper endp
+ConvertGuidToStringW_wrapper proc
+	jmp mProcs[10*8]
+ConvertGuidToStringW_wrapper endp
+ConvertInterfaceAliasToLuid_wrapper proc
+	jmp mProcs[11*8]
+ConvertInterfaceAliasToLuid_wrapper endp
+ConvertInterfaceGuidToLuid_wrapper proc
+	jmp mProcs[12*8]
+ConvertInterfaceGuidToLuid_wrapper endp
+ConvertInterfaceIndexToLuid_wrapper proc
+	jmp mProcs[13*8]
+ConvertInterfaceIndexToLuid_wrapper endp
+ConvertInterfaceLuidToAlias_wrapper proc
+	jmp mProcs[14*8]
+ConvertInterfaceLuidToAlias_wrapper endp
+ConvertInterfaceLuidToGuid_wrapper proc
+	jmp mProcs[15*8]
+ConvertInterfaceLuidToGuid_wrapper endp
+ConvertInterfaceLuidToIndex_wrapper proc
+	jmp mProcs[16*8]
+ConvertInterfaceLuidToIndex_wrapper endp
+ConvertInterfaceLuidToNameA_wrapper proc
+	jmp mProcs[17*8]
+ConvertInterfaceLuidToNameA_wrapper endp
+ConvertInterfaceLuidToNameW_wrapper proc
+	jmp mProcs[18*8]
+ConvertInterfaceLuidToNameW_wrapper endp
+ConvertInterfaceNameToLuidA_wrapper proc
+	jmp mProcs[19*8]
+ConvertInterfaceNameToLuidA_wrapper endp
+ConvertInterfaceNameToLuidW_wrapper proc
+	jmp mProcs[20*8]
+ConvertInterfaceNameToLuidW_wrapper endp
+ConvertInterfacePhysicalAddressToLuid_wrapper proc
+	jmp mProcs[21*8]
+ConvertInterfacePhysicalAddressToLuid_wrapper endp
+ConvertIpv4MaskToLength_wrapper proc
+	jmp mProcs[22*8]
+ConvertIpv4MaskToLength_wrapper endp
+ConvertLengthToIpv4Mask_wrapper proc
+	jmp mProcs[23*8]
+ConvertLengthToIpv4Mask_wrapper endp
+ConvertRemoteInterfaceAliasToLuid_wrapper proc
+	jmp mProcs[24*8]
+ConvertRemoteInterfaceAliasToLuid_wrapper endp
+ConvertRemoteInterfaceGuidToLuid_wrapper proc
+	jmp mProcs[25*8]
+ConvertRemoteInterfaceGuidToLuid_wrapper endp
+ConvertRemoteInterfaceIndexToLuid_wrapper proc
+	jmp mProcs[26*8]
+ConvertRemoteInterfaceIndexToLuid_wrapper endp
+ConvertRemoteInterfaceLuidToAlias_wrapper proc
+	jmp mProcs[27*8]
+ConvertRemoteInterfaceLuidToAlias_wrapper endp
+ConvertRemoteInterfaceLuidToGuid_wrapper proc
+	jmp mProcs[28*8]
+ConvertRemoteInterfaceLuidToGuid_wrapper endp
+ConvertRemoteInterfaceLuidToIndex_wrapper proc
+	jmp mProcs[29*8]
+ConvertRemoteInterfaceLuidToIndex_wrapper endp
+ConvertStringToGuidA_wrapper proc
+	jmp mProcs[30*8]
+ConvertStringToGuidA_wrapper endp
+ConvertStringToGuidW_wrapper proc
+	jmp mProcs[31*8]
+ConvertStringToGuidW_wrapper endp
+ConvertStringToInterfacePhysicalAddress_wrapper proc
+	jmp mProcs[32*8]
+ConvertStringToInterfacePhysicalAddress_wrapper endp
+CreateAnycastIpAddressEntry_wrapper proc
+	jmp mProcs[33*8]
+CreateAnycastIpAddressEntry_wrapper endp
+CreateCompartment_wrapper proc
+	jmp mProcs[34*8]
+CreateCompartment_wrapper endp
+CreateIpForwardEntry_wrapper proc
+	jmp mProcs[35*8]
+CreateIpForwardEntry_wrapper endp
+CreateIpForwardEntry2_wrapper proc
+	jmp mProcs[36*8]
+CreateIpForwardEntry2_wrapper endp
+CreateIpNetEntry_wrapper proc
+	jmp mProcs[37*8]
+CreateIpNetEntry_wrapper endp
+CreateIpNetEntry2_wrapper proc
+	jmp mProcs[38*8]
+CreateIpNetEntry2_wrapper endp
+CreatePersistentTcpPortReservation_wrapper proc
+	jmp mProcs[39*8]
+CreatePersistentTcpPortReservation_wrapper endp
+CreatePersistentUdpPortReservation_wrapper proc
+	jmp mProcs[40*8]
+CreatePersistentUdpPortReservation_wrapper endp
+CreateProxyArpEntry_wrapper proc
+	jmp mProcs[41*8]
+CreateProxyArpEntry_wrapper endp
+CreateSortedAddressPairs_wrapper proc
+	jmp mProcs[42*8]
+CreateSortedAddressPairs_wrapper endp
+CreateUnicastIpAddressEntry_wrapper proc
+	jmp mProcs[43*8]
+CreateUnicastIpAddressEntry_wrapper endp
+DeleteAnycastIpAddressEntry_wrapper proc
+	jmp mProcs[44*8]
+DeleteAnycastIpAddressEntry_wrapper endp
+DeleteCompartment_wrapper proc
+	jmp mProcs[45*8]
+DeleteCompartment_wrapper endp
+DeleteIPAddress_wrapper proc
+	jmp mProcs[46*8]
+DeleteIPAddress_wrapper endp
+DeleteIpForwardEntry_wrapper proc
+	jmp mProcs[47*8]
+DeleteIpForwardEntry_wrapper endp
+DeleteIpForwardEntry2_wrapper proc
+	jmp mProcs[48*8]
+DeleteIpForwardEntry2_wrapper endp
+DeleteIpNetEntry_wrapper proc
+	jmp mProcs[49*8]
+DeleteIpNetEntry_wrapper endp
+DeleteIpNetEntry2_wrapper proc
+	jmp mProcs[50*8]
+DeleteIpNetEntry2_wrapper endp
+DeletePersistentTcpPortReservation_wrapper proc
+	jmp mProcs[51*8]
+DeletePersistentTcpPortReservation_wrapper endp
+DeletePersistentUdpPortReservation_wrapper proc
+	jmp mProcs[52*8]
+DeletePersistentUdpPortReservation_wrapper endp
+DeleteProxyArpEntry_wrapper proc
+	jmp mProcs[53*8]
+DeleteProxyArpEntry_wrapper endp
+DeleteUnicastIpAddressEntry_wrapper proc
+	jmp mProcs[54*8]
+DeleteUnicastIpAddressEntry_wrapper endp
+DisableMediaSense_wrapper proc
+	jmp mProcs[55*8]
+DisableMediaSense_wrapper endp
+EnableRouter_wrapper proc
+	jmp mProcs[56*8]
+EnableRouter_wrapper endp
+FlushIpNetTable_wrapper proc
+	jmp mProcs[57*8]
+FlushIpNetTable_wrapper endp
+FlushIpNetTable2_wrapper proc
+	jmp mProcs[58*8]
+FlushIpNetTable2_wrapper endp
+FlushIpPathTable_wrapper proc
+	jmp mProcs[59*8]
+FlushIpPathTable_wrapper endp
+FreeMibTable_wrapper proc
+	jmp mProcs[60*8]
+FreeMibTable_wrapper endp
+GetAdapterIndex_wrapper proc
+	jmp mProcs[61*8]
+GetAdapterIndex_wrapper endp
+GetAdapterOrderMap_wrapper proc
+	jmp mProcs[62*8]
+GetAdapterOrderMap_wrapper endp
+GetAdaptersAddresses_wrapper proc
+	jmp mProcs[63*8]
+GetAdaptersAddresses_wrapper endp
+GetAdaptersInfo_wrapper proc
+	jmp mProcs[64*8]
+GetAdaptersInfo_wrapper endp
+GetAnycastIpAddressEntry_wrapper proc
+	jmp mProcs[65*8]
+GetAnycastIpAddressEntry_wrapper endp
+GetAnycastIpAddressTable_wrapper proc
+	jmp mProcs[66*8]
+GetAnycastIpAddressTable_wrapper endp
+GetBestInterface_wrapper proc
+	jmp mProcs[67*8]
+GetBestInterface_wrapper endp
+GetBestInterfaceEx_wrapper proc
+	jmp mProcs[68*8]
+GetBestInterfaceEx_wrapper endp
+GetBestRoute_wrapper proc
+	jmp mProcs[69*8]
+GetBestRoute_wrapper endp
+GetBestRoute2_wrapper proc
+	jmp mProcs[70*8]
+GetBestRoute2_wrapper endp
+GetCurrentThreadCompartmentId_wrapper proc
+	jmp mProcs[71*8]
+GetCurrentThreadCompartmentId_wrapper endp
+GetCurrentThreadCompartmentScope_wrapper proc
+	jmp mProcs[72*8]
+GetCurrentThreadCompartmentScope_wrapper endp
+GetExtendedTcpTable_wrapper proc
+	jmp mProcs[73*8]
+GetExtendedTcpTable_wrapper endp
+GetExtendedUdpTable_wrapper proc
+	jmp mProcs[74*8]
+GetExtendedUdpTable_wrapper endp
+GetFriendlyIfIndex_wrapper proc
+	jmp mProcs[75*8]
+GetFriendlyIfIndex_wrapper endp
+GetIcmpStatistics_wrapper proc
+	jmp mProcs[76*8]
+GetIcmpStatistics_wrapper endp
+GetIcmpStatisticsEx_wrapper proc
+	jmp mProcs[77*8]
+GetIcmpStatisticsEx_wrapper endp
+GetIfEntry_wrapper proc
+	jmp mProcs[78*8]
+GetIfEntry_wrapper endp
+GetIfEntry2_wrapper proc
+	jmp mProcs[79*8]
+GetIfEntry2_wrapper endp
+GetIfStackTable_wrapper proc
+	jmp mProcs[80*8]
+GetIfStackTable_wrapper endp
+GetIfTable_wrapper proc
+	jmp mProcs[81*8]
+GetIfTable_wrapper endp
+GetIfTable2_wrapper proc
+	jmp mProcs[82*8]
+GetIfTable2_wrapper endp
+GetIfTable2Ex_wrapper proc
+	jmp mProcs[83*8]
+GetIfTable2Ex_wrapper endp
+GetInterfaceInfo_wrapper proc
+	jmp mProcs[84*8]
+GetInterfaceInfo_wrapper endp
+GetInvertedIfStackTable_wrapper proc
+	jmp mProcs[85*8]
+GetInvertedIfStackTable_wrapper endp
+GetIpAddrTable_wrapper proc
+	jmp mProcs[86*8]
+GetIpAddrTable_wrapper endp
+GetIpErrorString_wrapper proc
+	jmp mProcs[87*8]
+GetIpErrorString_wrapper endp
+GetIpForwardEntry2_wrapper proc
+	jmp mProcs[88*8]
+GetIpForwardEntry2_wrapper endp
+GetIpForwardTable_wrapper proc
+	jmp mProcs[89*8]
+GetIpForwardTable_wrapper endp
+GetIpForwardTable2_wrapper proc
+	jmp mProcs[90*8]
+GetIpForwardTable2_wrapper endp
+GetIpInterfaceEntry_wrapper proc
+	jmp mProcs[91*8]
+GetIpInterfaceEntry_wrapper endp
+GetIpInterfaceTable_wrapper proc
+	jmp mProcs[92*8]
+GetIpInterfaceTable_wrapper endp
+GetIpNetEntry2_wrapper proc
+	jmp mProcs[93*8]
+GetIpNetEntry2_wrapper endp
+GetIpNetTable_wrapper proc
+	jmp mProcs[94*8]
+GetIpNetTable_wrapper endp
+GetIpNetTable2_wrapper proc
+	jmp mProcs[95*8]
+GetIpNetTable2_wrapper endp
+GetIpNetworkConnectionBandwidthEstimates_wrapper proc
+	jmp mProcs[96*8]
+GetIpNetworkConnectionBandwidthEstimates_wrapper endp
+GetIpPathEntry_wrapper proc
+	jmp mProcs[97*8]
+GetIpPathEntry_wrapper endp
+GetIpPathTable_wrapper proc
+	jmp mProcs[98*8]
+GetIpPathTable_wrapper endp
+GetIpStatistics_wrapper proc
+	jmp mProcs[99*8]
+GetIpStatistics_wrapper endp
+GetIpStatisticsEx_wrapper proc
+	jmp mProcs[100*8]
+GetIpStatisticsEx_wrapper endp
+GetJobCompartmentId_wrapper proc
+	jmp mProcs[101*8]
+GetJobCompartmentId_wrapper endp
+GetMulticastIpAddressEntry_wrapper proc
+	jmp mProcs[102*8]
+GetMulticastIpAddressEntry_wrapper endp
+GetMulticastIpAddressTable_wrapper proc
+	jmp mProcs[103*8]
+GetMulticastIpAddressTable_wrapper endp
+GetNetworkInformation_wrapper proc
+	jmp mProcs[104*8]
+GetNetworkInformation_wrapper endp
+GetNetworkParams_wrapper proc
+	jmp mProcs[105*8]
+GetNetworkParams_wrapper endp
+GetNumberOfInterfaces_wrapper proc
+	jmp mProcs[106*8]
+GetNumberOfInterfaces_wrapper endp
+GetOwnerModuleFromPidAndInfo_wrapper proc
+	jmp mProcs[107*8]
+GetOwnerModuleFromPidAndInfo_wrapper endp
+GetOwnerModuleFromTcp6Entry_wrapper proc
+	jmp mProcs[108*8]
+GetOwnerModuleFromTcp6Entry_wrapper endp
+GetOwnerModuleFromTcpEntry_wrapper proc
+	jmp mProcs[109*8]
+GetOwnerModuleFromTcpEntry_wrapper endp
+GetOwnerModuleFromUdp6Entry_wrapper proc
+	jmp mProcs[110*8]
+GetOwnerModuleFromUdp6Entry_wrapper endp
+GetOwnerModuleFromUdpEntry_wrapper proc
+	jmp mProcs[111*8]
+GetOwnerModuleFromUdpEntry_wrapper endp
+GetPerAdapterInfo_wrapper proc
+	jmp mProcs[112*8]
+GetPerAdapterInfo_wrapper endp
+GetPerTcp6ConnectionEStats_wrapper proc
+	jmp mProcs[113*8]
+GetPerTcp6ConnectionEStats_wrapper endp
+GetPerTcp6ConnectionStats_wrapper proc
+	jmp mProcs[114*8]
+GetPerTcp6ConnectionStats_wrapper endp
+GetPerTcpConnectionEStats_wrapper proc
+	jmp mProcs[115*8]
+GetPerTcpConnectionEStats_wrapper endp
+GetPerTcpConnectionStats_wrapper proc
+	jmp mProcs[116*8]
+GetPerTcpConnectionStats_wrapper endp
+GetRTTAndHopCount_wrapper proc
+	jmp mProcs[117*8]
+GetRTTAndHopCount_wrapper endp
+GetSessionCompartmentId_wrapper proc
+	jmp mProcs[118*8]
+GetSessionCompartmentId_wrapper endp
+GetTcp6Table_wrapper proc
+	jmp mProcs[119*8]
+GetTcp6Table_wrapper endp
+GetTcp6Table2_wrapper proc
+	jmp mProcs[120*8]
+GetTcp6Table2_wrapper endp
+GetTcpStatistics_wrapper proc
+	jmp mProcs[121*8]
+GetTcpStatistics_wrapper endp
+GetTcpStatisticsEx_wrapper proc
+	jmp mProcs[122*8]
+GetTcpStatisticsEx_wrapper endp
+GetTcpTable_wrapper proc
+	jmp mProcs[123*8]
+GetTcpTable_wrapper endp
+GetTcpTable2_wrapper proc
+	jmp mProcs[124*8]
+GetTcpTable2_wrapper endp
+GetTeredoPort_wrapper proc
+	jmp mProcs[125*8]
+GetTeredoPort_wrapper endp
+GetUdp6Table_wrapper proc
+	jmp mProcs[126*8]
+GetUdp6Table_wrapper endp
+GetUdpStatistics_wrapper proc
+	jmp mProcs[127*8]
+GetUdpStatistics_wrapper endp
+GetUdpStatisticsEx_wrapper proc
+	jmp mProcs[128*8]
+GetUdpStatisticsEx_wrapper endp
+GetUdpTable_wrapper proc
+	jmp mProcs[129*8]
+GetUdpTable_wrapper endp
+GetUniDirectionalAdapterInfo_wrapper proc
+	jmp mProcs[130*8]
+GetUniDirectionalAdapterInfo_wrapper endp
+GetUnicastIpAddressEntry_wrapper proc
+	jmp mProcs[131*8]
+GetUnicastIpAddressEntry_wrapper endp
+GetUnicastIpAddressTable_wrapper proc
+	jmp mProcs[132*8]
+GetUnicastIpAddressTable_wrapper endp
+GetWPAOACSupportLevel_wrapper proc
+	jmp mProcs[133*8]
+GetWPAOACSupportLevel_wrapper endp
+Icmp6CreateFile_wrapper proc
+	jmp mProcs[134*8]
+Icmp6CreateFile_wrapper endp
+Icmp6ParseReplies_wrapper proc
+	jmp mProcs[135*8]
+Icmp6ParseReplies_wrapper endp
+Icmp6SendEcho2_wrapper proc
+	jmp mProcs[136*8]
+Icmp6SendEcho2_wrapper endp
+IcmpCloseHandle_wrapper proc
+	jmp mProcs[137*8]
+IcmpCloseHandle_wrapper endp
+IcmpCreateFile_wrapper proc
+	jmp mProcs[138*8]
+IcmpCreateFile_wrapper endp
+IcmpParseReplies_wrapper proc
+	jmp mProcs[139*8]
+IcmpParseReplies_wrapper endp
+IcmpSendEcho_wrapper proc
+	jmp mProcs[140*8]
+IcmpSendEcho_wrapper endp
+IcmpSendEcho2_wrapper proc
+	jmp mProcs[141*8]
+IcmpSendEcho2_wrapper endp
+IcmpSendEcho2Ex_wrapper proc
+	jmp mProcs[142*8]
+IcmpSendEcho2Ex_wrapper endp
+InitializeCompartmentEntry_wrapper proc
+	jmp mProcs[143*8]
+InitializeCompartmentEntry_wrapper endp
+InitializeIpForwardEntry_wrapper proc
+	jmp mProcs[144*8]
+InitializeIpForwardEntry_wrapper endp
+InitializeIpInterfaceEntry_wrapper proc
+	jmp mProcs[145*8]
+InitializeIpInterfaceEntry_wrapper endp
+InitializeUnicastIpAddressEntry_wrapper proc
+	jmp mProcs[146*8]
+InitializeUnicastIpAddressEntry_wrapper endp
+InternalCleanupPersistentStore_wrapper proc
+	jmp mProcs[147*8]
+InternalCleanupPersistentStore_wrapper endp
+InternalCreateAnycastIpAddressEntry_wrapper proc
+	jmp mProcs[148*8]
+InternalCreateAnycastIpAddressEntry_wrapper endp
+InternalCreateIpForwardEntry_wrapper proc
+	jmp mProcs[149*8]
+InternalCreateIpForwardEntry_wrapper endp
+InternalCreateIpForwardEntry2_wrapper proc
+	jmp mProcs[150*8]
+InternalCreateIpForwardEntry2_wrapper endp
+InternalCreateIpNetEntry_wrapper proc
+	jmp mProcs[151*8]
+InternalCreateIpNetEntry_wrapper endp
+InternalCreateIpNetEntry2_wrapper proc
+	jmp mProcs[152*8]
+InternalCreateIpNetEntry2_wrapper endp
+InternalCreateUnicastIpAddressEntry_wrapper proc
+	jmp mProcs[153*8]
+InternalCreateUnicastIpAddressEntry_wrapper endp
+InternalDeleteAnycastIpAddressEntry_wrapper proc
+	jmp mProcs[154*8]
+InternalDeleteAnycastIpAddressEntry_wrapper endp
+InternalDeleteIpForwardEntry_wrapper proc
+	jmp mProcs[155*8]
+InternalDeleteIpForwardEntry_wrapper endp
+InternalDeleteIpForwardEntry2_wrapper proc
+	jmp mProcs[156*8]
+InternalDeleteIpForwardEntry2_wrapper endp
+InternalDeleteIpNetEntry_wrapper proc
+	jmp mProcs[157*8]
+InternalDeleteIpNetEntry_wrapper endp
+InternalDeleteIpNetEntry2_wrapper proc
+	jmp mProcs[158*8]
+InternalDeleteIpNetEntry2_wrapper endp
+InternalDeleteUnicastIpAddressEntry_wrapper proc
+	jmp mProcs[159*8]
+InternalDeleteUnicastIpAddressEntry_wrapper endp
+InternalFindInterfaceByAddress_wrapper proc
+	jmp mProcs[160*8]
+InternalFindInterfaceByAddress_wrapper endp
+InternalGetAnycastIpAddressEntry_wrapper proc
+	jmp mProcs[161*8]
+InternalGetAnycastIpAddressEntry_wrapper endp
+InternalGetAnycastIpAddressTable_wrapper proc
+	jmp mProcs[162*8]
+InternalGetAnycastIpAddressTable_wrapper endp
+InternalGetBoundTcp6EndpointTable_wrapper proc
+	jmp mProcs[163*8]
+InternalGetBoundTcp6EndpointTable_wrapper endp
+InternalGetBoundTcpEndpointTable_wrapper proc
+	jmp mProcs[164*8]
+InternalGetBoundTcpEndpointTable_wrapper endp
+InternalGetForwardIpTable2_wrapper proc
+	jmp mProcs[165*8]
+InternalGetForwardIpTable2_wrapper endp
+InternalGetIPPhysicalInterfaceForDestination_wrapper proc
+	jmp mProcs[166*8]
+InternalGetIPPhysicalInterfaceForDestination_wrapper endp
+InternalGetIfEntry2_wrapper proc
+	jmp mProcs[167*8]
+InternalGetIfEntry2_wrapper endp
+InternalGetIfTable_wrapper proc
+	jmp mProcs[168*8]
+InternalGetIfTable_wrapper endp
+InternalGetIfTable2_wrapper proc
+	jmp mProcs[169*8]
+InternalGetIfTable2_wrapper endp
+InternalGetIpAddrTable_wrapper proc
+	jmp mProcs[170*8]
+InternalGetIpAddrTable_wrapper endp
+InternalGetIpForwardEntry2_wrapper proc
+	jmp mProcs[171*8]
+InternalGetIpForwardEntry2_wrapper endp
+InternalGetIpForwardTable_wrapper proc
+	jmp mProcs[172*8]
+InternalGetIpForwardTable_wrapper endp
+InternalGetIpInterfaceEntry_wrapper proc
+	jmp mProcs[173*8]
+InternalGetIpInterfaceEntry_wrapper endp
+InternalGetIpInterfaceTable_wrapper proc
+	jmp mProcs[174*8]
+InternalGetIpInterfaceTable_wrapper endp
+InternalGetIpNetEntry2_wrapper proc
+	jmp mProcs[175*8]
+InternalGetIpNetEntry2_wrapper endp
+InternalGetIpNetTable_wrapper proc
+	jmp mProcs[176*8]
+InternalGetIpNetTable_wrapper endp
+InternalGetIpNetTable2_wrapper proc
+	jmp mProcs[177*8]
+InternalGetIpNetTable2_wrapper endp
+InternalGetMulticastIpAddressEntry_wrapper proc
+	jmp mProcs[178*8]
+InternalGetMulticastIpAddressEntry_wrapper endp
+InternalGetMulticastIpAddressTable_wrapper proc
+	jmp mProcs[179*8]
+InternalGetMulticastIpAddressTable_wrapper endp
+InternalGetRtcSlotInformation_wrapper proc
+	jmp mProcs[180*8]
+InternalGetRtcSlotInformation_wrapper endp
+InternalGetTcp6Table2_wrapper proc
+	jmp mProcs[181*8]
+InternalGetTcp6Table2_wrapper endp
+InternalGetTcp6TableWithOwnerModule_wrapper proc
+	jmp mProcs[182*8]
+InternalGetTcp6TableWithOwnerModule_wrapper endp
+InternalGetTcp6TableWithOwnerPid_wrapper proc
+	jmp mProcs[183*8]
+InternalGetTcp6TableWithOwnerPid_wrapper endp
+InternalGetTcpTable_wrapper proc
+	jmp mProcs[184*8]
+InternalGetTcpTable_wrapper endp
+InternalGetTcpTable2_wrapper proc
+	jmp mProcs[185*8]
+InternalGetTcpTable2_wrapper endp
+InternalGetTcpTableEx_wrapper proc
+	jmp mProcs[186*8]
+InternalGetTcpTableEx_wrapper endp
+InternalGetTcpTableWithOwnerModule_wrapper proc
+	jmp mProcs[187*8]
+InternalGetTcpTableWithOwnerModule_wrapper endp
+InternalGetTcpTableWithOwnerPid_wrapper proc
+	jmp mProcs[188*8]
+InternalGetTcpTableWithOwnerPid_wrapper endp
+InternalGetTunnelPhysicalAdapter_wrapper proc
+	jmp mProcs[189*8]
+InternalGetTunnelPhysicalAdapter_wrapper endp
+InternalGetUdp6TableWithOwnerModule_wrapper proc
+	jmp mProcs[190*8]
+InternalGetUdp6TableWithOwnerModule_wrapper endp
+InternalGetUdp6TableWithOwnerPid_wrapper proc
+	jmp mProcs[191*8]
+InternalGetUdp6TableWithOwnerPid_wrapper endp
+InternalGetUdpTable_wrapper proc
+	jmp mProcs[192*8]
+InternalGetUdpTable_wrapper endp
+InternalGetUdpTableEx_wrapper proc
+	jmp mProcs[193*8]
+InternalGetUdpTableEx_wrapper endp
+InternalGetUdpTableWithOwnerModule_wrapper proc
+	jmp mProcs[194*8]
+InternalGetUdpTableWithOwnerModule_wrapper endp
+InternalGetUdpTableWithOwnerPid_wrapper proc
+	jmp mProcs[195*8]
+InternalGetUdpTableWithOwnerPid_wrapper endp
+InternalGetUnicastIpAddressEntry_wrapper proc
+	jmp mProcs[196*8]
+InternalGetUnicastIpAddressEntry_wrapper endp
+InternalGetUnicastIpAddressTable_wrapper proc
+	jmp mProcs[197*8]
+InternalGetUnicastIpAddressTable_wrapper endp
+InternalIcmpCreateFileEx_wrapper proc
+	jmp mProcs[198*8]
+InternalIcmpCreateFileEx_wrapper endp
+InternalSetIfEntry_wrapper proc
+	jmp mProcs[199*8]
+InternalSetIfEntry_wrapper endp
+InternalSetIpForwardEntry_wrapper proc
+	jmp mProcs[200*8]
+InternalSetIpForwardEntry_wrapper endp
+InternalSetIpForwardEntry2_wrapper proc
+	jmp mProcs[201*8]
+InternalSetIpForwardEntry2_wrapper endp
+InternalSetIpInterfaceEntry_wrapper proc
+	jmp mProcs[202*8]
+InternalSetIpInterfaceEntry_wrapper endp
+InternalSetIpNetEntry_wrapper proc
+	jmp mProcs[203*8]
+InternalSetIpNetEntry_wrapper endp
+InternalSetIpNetEntry2_wrapper proc
+	jmp mProcs[204*8]
+InternalSetIpNetEntry2_wrapper endp
+InternalSetIpStats_wrapper proc
+	jmp mProcs[205*8]
+InternalSetIpStats_wrapper endp
+InternalSetTcpEntry_wrapper proc
+	jmp mProcs[206*8]
+InternalSetTcpEntry_wrapper endp
+InternalSetTeredoPort_wrapper proc
+	jmp mProcs[207*8]
+InternalSetTeredoPort_wrapper endp
+InternalSetUnicastIpAddressEntry_wrapper proc
+	jmp mProcs[208*8]
+InternalSetUnicastIpAddressEntry_wrapper endp
+IpReleaseAddress_wrapper proc
+	jmp mProcs[209*8]
+IpReleaseAddress_wrapper endp
+IpRenewAddress_wrapper proc
+	jmp mProcs[210*8]
+IpRenewAddress_wrapper endp
+LookupPersistentTcpPortReservation_wrapper proc
+	jmp mProcs[211*8]
+LookupPersistentTcpPortReservation_wrapper endp
+LookupPersistentUdpPortReservation_wrapper proc
+	jmp mProcs[212*8]
+LookupPersistentUdpPortReservation_wrapper endp
+NTPTimeToNTFileTime_wrapper proc
+	jmp mProcs[213*8]
+NTPTimeToNTFileTime_wrapper endp
+NTTimeToNTPTime_wrapper proc
+	jmp mProcs[214*8]
+NTTimeToNTPTime_wrapper endp
+NhGetGuidFromInterfaceName_wrapper proc
+	jmp mProcs[215*8]
+NhGetGuidFromInterfaceName_wrapper endp
+NhGetInterfaceDescriptionFromGuid_wrapper proc
+	jmp mProcs[216*8]
+NhGetInterfaceDescriptionFromGuid_wrapper endp
+NhGetInterfaceNameFromDeviceGuid_wrapper proc
+	jmp mProcs[217*8]
+NhGetInterfaceNameFromDeviceGuid_wrapper endp
+NhGetInterfaceNameFromGuid_wrapper proc
+	jmp mProcs[218*8]
+NhGetInterfaceNameFromGuid_wrapper endp
+NhpAllocateAndGetInterfaceInfoFromStack_wrapper proc
+	jmp mProcs[219*8]
+NhpAllocateAndGetInterfaceInfoFromStack_wrapper endp
+NotifyAddrChange_wrapper proc
+	jmp mProcs[220*8]
+NotifyAddrChange_wrapper endp
+NotifyCompartmentChange_wrapper proc
+	jmp mProcs[221*8]
+NotifyCompartmentChange_wrapper endp
+NotifyIpInterfaceChange_wrapper proc
+	jmp mProcs[222*8]
+NotifyIpInterfaceChange_wrapper endp
+NotifyRouteChange_wrapper proc
+	jmp mProcs[223*8]
+NotifyRouteChange_wrapper endp
+NotifyRouteChange2_wrapper proc
+	jmp mProcs[224*8]
+NotifyRouteChange2_wrapper endp
+NotifyStableUnicastIpAddressTable_wrapper proc
+	jmp mProcs[225*8]
+NotifyStableUnicastIpAddressTable_wrapper endp
+NotifyTeredoPortChange_wrapper proc
+	jmp mProcs[226*8]
+NotifyTeredoPortChange_wrapper endp
+NotifyUnicastIpAddressChange_wrapper proc
+	jmp mProcs[227*8]
+NotifyUnicastIpAddressChange_wrapper endp
+OpenCompartment_wrapper proc
+	jmp mProcs[228*8]
+OpenCompartment_wrapper endp
+ParseNetworkString_wrapper proc
+	jmp mProcs[229*8]
+ParseNetworkString_wrapper endp
+PfAddFiltersToInterface_wrapper proc
+	jmp mProcs[230*8]
+PfAddFiltersToInterface_wrapper endp
+PfAddGlobalFilterToInterface_wrapper proc
+	jmp mProcs[231*8]
+PfAddGlobalFilterToInterface_wrapper endp
+PfBindInterfaceToIPAddress_wrapper proc
+	jmp mProcs[232*8]
+PfBindInterfaceToIPAddress_wrapper endp
+PfBindInterfaceToIndex_wrapper proc
+	jmp mProcs[233*8]
+PfBindInterfaceToIndex_wrapper endp
+PfCreateInterface_wrapper proc
+	jmp mProcs[234*8]
+PfCreateInterface_wrapper endp
+PfDeleteInterface_wrapper proc
+	jmp mProcs[235*8]
+PfDeleteInterface_wrapper endp
+PfDeleteLog_wrapper proc
+	jmp mProcs[236*8]
+PfDeleteLog_wrapper endp
+PfGetInterfaceStatistics_wrapper proc
+	jmp mProcs[237*8]
+PfGetInterfaceStatistics_wrapper endp
+PfMakeLog_wrapper proc
+	jmp mProcs[238*8]
+PfMakeLog_wrapper endp
+PfRebindFilters_wrapper proc
+	jmp mProcs[239*8]
+PfRebindFilters_wrapper endp
+PfRemoveFilterHandles_wrapper proc
+	jmp mProcs[240*8]
+PfRemoveFilterHandles_wrapper endp
+PfRemoveFiltersFromInterface_wrapper proc
+	jmp mProcs[241*8]
+PfRemoveFiltersFromInterface_wrapper endp
+PfRemoveGlobalFilterFromInterface_wrapper proc
+	jmp mProcs[242*8]
+PfRemoveGlobalFilterFromInterface_wrapper endp
+PfSetLogBuffer_wrapper proc
+	jmp mProcs[243*8]
+PfSetLogBuffer_wrapper endp
+PfTestPacket_wrapper proc
+	jmp mProcs[244*8]
+PfTestPacket_wrapper endp
+PfUnBindInterface_wrapper proc
+	jmp mProcs[245*8]
+PfUnBindInterface_wrapper endp
+ResolveIpNetEntry2_wrapper proc
+	jmp mProcs[246*8]
+ResolveIpNetEntry2_wrapper endp
+ResolveNeighbor_wrapper proc
+	jmp mProcs[247*8]
+ResolveNeighbor_wrapper endp
+RestoreMediaSense_wrapper proc
+	jmp mProcs[248*8]
+RestoreMediaSense_wrapper endp
+SendARP_wrapper proc
+	jmp mProcs[249*8]
+SendARP_wrapper endp
+SetAdapterIpAddress_wrapper proc
+	jmp mProcs[250*8]
+SetAdapterIpAddress_wrapper endp
+SetCurrentThreadCompartmentId_wrapper proc
+	jmp mProcs[251*8]
+SetCurrentThreadCompartmentId_wrapper endp
+SetCurrentThreadCompartmentScope_wrapper proc
+	jmp mProcs[252*8]
+SetCurrentThreadCompartmentScope_wrapper endp
+SetIfEntry_wrapper proc
+	jmp mProcs[253*8]
+SetIfEntry_wrapper endp
+SetIpForwardEntry_wrapper proc
+	jmp mProcs[254*8]
+SetIpForwardEntry_wrapper endp
+SetIpForwardEntry2_wrapper proc
+	jmp mProcs[255*8]
+SetIpForwardEntry2_wrapper endp
+SetIpInterfaceEntry_wrapper proc
+	jmp mProcs[256*8]
+SetIpInterfaceEntry_wrapper endp
+SetIpNetEntry_wrapper proc
+	jmp mProcs[257*8]
+SetIpNetEntry_wrapper endp
+SetIpNetEntry2_wrapper proc
+	jmp mProcs[258*8]
+SetIpNetEntry2_wrapper endp
+SetIpStatistics_wrapper proc
+	jmp mProcs[259*8]
+SetIpStatistics_wrapper endp
+SetIpStatisticsEx_wrapper proc
+	jmp mProcs[260*8]
+SetIpStatisticsEx_wrapper endp
+SetIpTTL_wrapper proc
+	jmp mProcs[261*8]
+SetIpTTL_wrapper endp
+SetJobCompartmentId_wrapper proc
+	jmp mProcs[262*8]
+SetJobCompartmentId_wrapper endp
+SetNetworkInformation_wrapper proc
+	jmp mProcs[263*8]
+SetNetworkInformation_wrapper endp
+SetPerTcp6ConnectionEStats_wrapper proc
+	jmp mProcs[264*8]
+SetPerTcp6ConnectionEStats_wrapper endp
+SetPerTcp6ConnectionStats_wrapper proc
+	jmp mProcs[265*8]
+SetPerTcp6ConnectionStats_wrapper endp
+SetPerTcpConnectionEStats_wrapper proc
+	jmp mProcs[266*8]
+SetPerTcpConnectionEStats_wrapper endp
+SetPerTcpConnectionStats_wrapper proc
+	jmp mProcs[267*8]
+SetPerTcpConnectionStats_wrapper endp
+SetSessionCompartmentId_wrapper proc
+	jmp mProcs[268*8]
+SetSessionCompartmentId_wrapper endp
+SetTcpEntry_wrapper proc
+	jmp mProcs[269*8]
+SetTcpEntry_wrapper endp
+SetUnicastIpAddressEntry_wrapper proc
+	jmp mProcs[270*8]
+SetUnicastIpAddressEntry_wrapper endp
+UnenableRouter_wrapper proc
+	jmp mProcs[271*8]
+UnenableRouter_wrapper endp
+do_echo_rep_wrapper proc
+	jmp mProcs[272*8]
+do_echo_rep_wrapper endp
+do_echo_req_wrapper proc
+	jmp mProcs[273*8]
+do_echo_req_wrapper endp
+if_indextoname_wrapper proc
+	jmp mProcs[274*8]
+if_indextoname_wrapper endp
+if_nametoindex_wrapper proc
+	jmp mProcs[275*8]
+if_nametoindex_wrapper endp
+register_icmp_wrapper proc
+	jmp mProcs[276*8]
+register_icmp_wrapper endp
+end
