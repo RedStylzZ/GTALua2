@@ -9,7 +9,7 @@ It will not load extra mods with .asi, .ev1 or .whatever extensions. Once you ha
 
 This mod is based on Infamous Team's code base and on the awesome GTALua by Freeaky. Due credit where credit is due.
 
-GTALua2 is distributed under the DWTFYWALAYGPC license: Do Whatever The <beep> You Want with it As Long As You Give Proper Credit.
+GTALua2 is distributed under the DWTFYWALAYGPC license: Do Whatever The -beep- You Want with it As Long As You Give Proper Credit.
 
 If you use this mod online, be aware that you do it at your own risk, there's always a chance that you will be banned, and when you do, blame anything but GTALua2, blame Santa, blame Trump, blame Putin, whatever. Just don't come blaming me, your message will be silently removed.
 GTALua2 is not a virus, it will not steal your password, your credit card number or anything. It will not get your wife pregnant, if it happens then maybe it is because you are playing too much GTA.
