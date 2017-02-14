@@ -17,4 +17,6 @@ All the source code is here, go through it. If you cannot understand it, then yo
 
 Hafe fun, report bugs and suggest improvements.
 
+Discord channel: https://discord.gg/CjcstmA
+
 Mockba the Borg.
