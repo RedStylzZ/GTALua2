@@ -1,4 +1,4 @@
-GTALua2 - Implementation of Lua 5.3.x onto the GTA V game
+# GTALua2 - Implementation of Lua 5.3.x onto the GTA V game
 
 This code is still in beta status and will definitely have bugs.
 I bear no responsibility if you attempt to use this online. Online modding is not safe, and it will probably get you banned.
