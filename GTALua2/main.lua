@@ -16,6 +16,13 @@ require (LuaFolder () .. "/internal/game")
 require (LuaFolder () .. "/internal/loadnatives")
 require (LuaFolder () .. "/internal/ui")
 
+-- Load game object classes
+require (LuaFolder () .. "/classes/entity")
+require (LuaFolder () .. "/classes/ped")
+
+-- Global to handle threads (coroutines)
+LuaThreads = {}
+
 -- Main code starts here
 
 ClrScr ()
@@ -42,26 +49,30 @@ end
 
 print("Loaded "..addonCount.." addons ...")
 
-if addonCount > 0 then
-	for k, v in pairs(addons) do
-		success, err = xpcall (v.Init, debug.traceback)
-		if success == false then
-			print ("Error: " .. err .. " - Addon disabled.")
-			addons[k].Enabled = false
-		end
+for k, v in pairs(addons) do
+	success, err = xpcall (v.Init, debug.traceback)
+	if success == false then
+		print ("Error: " .. err .. " - Addon disabled.")
+		addons[k].Enabled = false
 	end
 end
-	
+
+local Command = nil
 function Run ()
-	if addonCount > 0 then
-		for k, v in pairs(addons) do
-			if addons[k].Enabled then
-				success, err = xpcall (v.Run, debug.traceback)
-				if success == false then
-					print ("Error: " .. err .. " - Addon disabled.")
-					addons[k].Enabled = false
-				end
+	-- Disable cheat code key to be used as console key
+	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlEnterCheatCode, true)
+	if IsKeyJustDown(VK_OEM_3) then -- cheat code key was pressed
+		console.OnInput(ui.OnscreenKeyboard("Console Command", 20))
+	end
+
+	-- Execute existing addons
+	for k, v in pairs(addons) do
+		if addons[k].Enabled then
+			success, err = xpcall (v.Run, debug.traceback)
+			if success == false then
+				print ("Error: " .. err .. " - Addon disabled.")
+				addons[k].Enabled = false
 			end
 		end
-	end	
+	end
 end

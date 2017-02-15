@@ -47,9 +47,9 @@ function Frames:Run()
 	if IsKeyJustDown(ToggleKey) then
 		ShowFrames = not ShowFrames
 		if ShowFrames then
-			ui.MapMessage("~BLIP_BENNYS~ FPS display enabled.")
+			ui.MapMessage("Frames/S display enabled.")
 		else
-			ui.MapMessage("~BLIP_BENNYS~ FPS display disabled.")
+			ui.MapMessage("Frames/S display disabled.")
 		end
 	end
 end

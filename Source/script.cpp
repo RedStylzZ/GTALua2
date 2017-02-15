@@ -164,9 +164,18 @@ static int LuaCurPos(lua_State *L) {
 
 	return 0;
 }
-static int ClrScr(lua_State *L) {
+
+static int LuaClrScr(lua_State *L) {
 
 	ClearConsole();
+
+	return 0;
+}
+
+static int LuaWait(lua_State *L) {
+	int ms = (int)luaL_checkinteger(L, 1);
+
+	WAIT(ms);
 
 	return 0;
 }
@@ -194,10 +203,11 @@ void init() {
 	lua_register(L, "IsKeyDown", IsKeyDown);
 	lua_register(L, "IsKeyJustDown", IsKeyJustDown);
 	lua_register(L, "IsKeyJustUp", IsKeyJustUp);
-	lua_register(L, "ClrScr", ClrScr);
+	lua_register(L, "ClrScr", LuaClrScr);
 	lua_register(L, "FGColor", LuaFGColor);
 	lua_register(L, "BGColor", LuaBGColor);
 	lua_register(L, "CurPos", LuaCurPos);
+	lua_register(L, "Wait", LuaWait);
 
 	register_Cmem(L);
 	register_Cval(L);
