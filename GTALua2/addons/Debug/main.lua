@@ -12,7 +12,7 @@ Debug.ScriptInfo = {
 }
 
 -- Variables for measuring framerate
-local ToggleKey = KEY_F10
+local ToggleKey = KEY_F9
 local ShowDebug = false
 
 -- Functions must match module folder name
@@ -25,7 +25,7 @@ end
 function Debug:Run()
 	if ShowDebug then
 		-- Shows Debug Info
-		local Myself = Ped:new(2)
+		local Myself = LocalPlayer()
 		local MyPos = Myself:GetPosition()
 		local MyHdg = Myself:GetHeading()
 		local debugtext = "Debugging"

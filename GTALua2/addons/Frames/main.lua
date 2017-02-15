@@ -16,7 +16,7 @@ local _FrameCount = 0
 local _FrameSum = 0
 local _FrameTime = 0
 
-local ToggleKey = KEY_F9
+local ToggleKey = KEY_F8
 local ShowFrames = false
 
 -- Functions must match module folder name
@@ -47,9 +47,9 @@ function Frames:Run()
 	if IsKeyJustDown(ToggleKey) then
 		ShowFrames = not ShowFrames
 		if ShowFrames then
-			ui.MapMessage("Frames/S display enabled.")
+			ui.MapMessage("FPS display enabled.")
 		else
-			ui.MapMessage("Frames/S display disabled.")
+			ui.MapMessage("FPS display disabled.")
 		end
 	end
 end
