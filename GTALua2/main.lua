@@ -9,9 +9,9 @@ require (LuaFolder () .. "/globals/enums")
 require (LuaFolder () .. "/globals/keycodes")
 
 -- Load internal modules
+require (LuaFolder () .. "/internal/functions") -- extra functions must be first
 require (LuaFolder () .. "/internal/callnative")
 require (LuaFolder () .. "/internal/console")
-require (LuaFolder () .. "/internal/functions")
 require (LuaFolder () .. "/internal/game")
 require (LuaFolder () .. "/internal/loadnatives")
 require (LuaFolder () .. "/internal/ui")
@@ -31,6 +31,7 @@ FGColor(console_White)
 
 -- Load external addons
 print("Loading all addons ...")
+print("-----------------------------")
 addons = {}
 addonCount = 0
 
@@ -38,13 +39,15 @@ local f = io.popen("dir /b /a:d "..LuaFolder().."\\addons")
 for addon in f:lines() do
 	local array = explode(".", addon)
 	name = array[1]
-	print("  Loading "..name.." ...")
-	require(LuaFolder().."/addons/"..name.."/main")
-	addons[name] = export
-	addonCount = addonCount + 1
+	if file_exists(LuaFolder().."/addons/"..name.."/main.lua") then
+		require(LuaFolder().."/addons/"..name.."/main")
+		addons[name] = export
+		addonCount = addonCount + 1
+		print("  Loaded: "..name..".")
+	else
+		print("  Not loaded: "..name..".")
+	end
 end
-
-print("Loaded "..addonCount.." addons ...")
 
 for k, v in pairs(addons) do
 	success, err = xpcall (v.Init, debug.traceback)

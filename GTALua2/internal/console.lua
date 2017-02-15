@@ -24,8 +24,11 @@ end
 function console.RegisterCommand(name, descr, callback)
 	console.Commands[name] = callback
 	console.Descriptions[name] = descr
+	print("  Loaded: "..name.." - "..descr)
 end
 
+print("Loading console commands ...")
+print("-----------------------------")
 -- Help
 function console.help()
 	print("List of available commands:")
@@ -51,12 +54,16 @@ console.RegisterCommand("list", "Lists all registered addons", console.list)
 -- Loads an addon
 function console.load(name)
 	print("Loading "..name.." ...")
-	require(LuaFolder().."/addons/"..name.."/main")
-	addons[name] = export
-	success, err = xpcall (addons[name].Init, debug.traceback)
-	if success == false then
-		print ("Error: " .. err .. " - Addon removed.")
-		addons[name] = nil
+	if file_exists(LuaFolder().."/addons/"..name.."/main.lua") then
+		require(LuaFolder().."/addons/"..name.."/main")
+		addons[name] = export
+		success, err = xpcall (addons[name].Init, debug.traceback)
+		if success == false then
+			print ("Error: " .. err .. " - Addon removed.")
+			addons[name] = nil
+		end
+	else
+		print("Addon folder or main file doesn't exist.")
 	end
 end
 console.RegisterCommand("load", "Loads an addon from file", console.load)
@@ -88,15 +95,19 @@ function console.unload(name)
 		package.loaded[LuaFolder().."/addons/"..name.."/main"] = nil
 		addons[name] = nil
 	else
-		print("Can't find addon "..name.." ...")
+		print("Can't find loaded addon "..name..".")
 	end	
 end
 console.RegisterCommand("unload", "Unloads an addon", console.unload)
 
--- Runs a Lua command
-function console.lua(...)
-	local str = table.concat({...}, " ")
-	local func = load(str)
-	func()
+-- Load extra console commands (console addons)
+local f = io.popen("dir /b /a:d "..LuaFolder().."\\internal\\console")
+for addon in f:lines() do
+	local array = explode(".", addon)
+	name = array[1]
+	if file_exists(LuaFolder().."/internal/console/"..name.."/main.lua") then
+		require(LuaFolder().."/internal/console/"..name.."/main")
+	else
+		print("Command\""..name.."\" not loaded.")
+	end
 end
-console.RegisterCommand("lua", "Runs a Lua command", console.lua)
