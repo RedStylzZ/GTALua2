@@ -114,19 +114,6 @@ static int lCmem_type(lua_State *L) {
 	return(1);
 }
 
-// Removes the C Memory (for the garbage collector)
-static int lCmem_del(lua_State *L) {
-	intptr_t *cu;
-
-	cu = (intptr_t *)luaL_checkudata(L, 1, "Cmem");
-	if (cu != NULL)
-		free(cu);
-
-	printf("Cmem taken by the garbage collector.\n");
-
-	return(0);
-}
-
 // Register C Memory as a Lua class
 //-------------------------------------
 
@@ -156,7 +143,6 @@ static const struct luaL_Reg lCmem_methods[] = {
 	{ "setFloat",	lCmem_setFloat },
 	{ "addr",		lCmem_addr },
 	{ "type",		lCmem_type },
-	{ "__gc",		lCmem_del },
 	{ NULL,			NULL }
 };
 

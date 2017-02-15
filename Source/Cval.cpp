@@ -107,19 +107,6 @@ static int lCval_type(lua_State *L) {
 	return(1);
 }
 
-// Removes the C Value (for the garbage collector)
-static int lCval_del(lua_State *L) {
-	intptr_t *cu;
-
-	cu = (intptr_t *)luaL_checkudata(L, 1, "Cval");
-	if (cu != NULL)
-		free(cu);
-
-	printf("Cval taken by the garbage collector.\n");
-
-	return(0);
-}
-
 // Register C Value as a Lua class
 //-------------------------------------
 
@@ -149,7 +136,6 @@ static const struct luaL_Reg lCval_methods[] = {
 	{ "setFloat",	lCval_setFloat	},
 	{ "addr",		lCval_addr		},
 	{ "type",		lCval_type		},
-	{ "__gc",		lCval_del		},
 	{ NULL,			NULL			}
 };
 

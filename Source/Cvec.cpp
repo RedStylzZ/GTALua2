@@ -82,19 +82,6 @@ static int lCvec_type(lua_State *L) {
 	return(1);
 }
 
-// Removes the C Vector (for the garbage collector)
-static int lCvec_del(lua_State *L) {
-	intptr_t *cu;
-
-	cu = (intptr_t *)luaL_checkudata(L, 1, "Cvec");
-	if (cu != NULL)
-		free(cu);
-
-	printf("Cvec taken by the garbage collector.\n");
-
-	return(0);
-}
-
 // Register C Vector as a Lua class
 //-------------------------------------
 
@@ -116,7 +103,6 @@ static const struct luaL_Reg lCvec_methods[] = {
 	{ "set",	lCvec_set },
 	{ "addr",	lCvec_addr },
 	{ "type",	lCvec_type },
-	{ "__gc",	lCvec_del },
 	{ NULL,		NULL }
 };
 
