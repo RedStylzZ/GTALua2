@@ -16,19 +16,17 @@ end
 -- Delete
 function Vehicle:Delete()
 	self:_CheckExists()
-	local c_handle = CMemoryBlock(4)
-	c_handle:WriteDWORD32(0, self.ID)
+	local c_handle = Cvar:new()
+	c_handle:setInt(self.ID)
 	natives.VEHICLE.DELETE_VEHICLE(c_handle)
-	c_handle:Release()
 end
 
 --Set not needed
 function Vehicle:SetNotNeeded()
 	self:_CheckExists()
-	local c_vehicle_handle = CMemoryBlock(4)
-	c_vehicle_handle:WriteDWORD32(0, self.ID)
-	natives.ENTITY.SET_VEHICLE_AS_NO_LONGER_NEEDED(c_vehicle_handle)
-	c_vehicle_handle:Release()
+	local c_handle = Cvar:new()
+	c_handle:setInt(self.ID)
+	natives.ENTITY.SET_VEHICLE_AS_NO_LONGER_NEEDED(c_handle)
 end
 
 -- Is vehicle stuck on roof (returns true/false)
@@ -246,27 +244,19 @@ end
 -- Get vehicle's colours
 function Vehicle:GetColours()
 	self:_CheckExists()
-	local m_p = CMemoryBlock(4)
-	local m_s = CMemoryBlock(4)
-	natives.VEHICLE.GET_VEHICLE_COLOURS(self.ID, m_p, m_s)
-	local p = m_p:ReadDWORD32(0)
-	local s = m_s:ReadDWORD32(0)
-	m_p:Release()
-	m_s:Release()
-	return p, s
+	local p = Cvar:new()
+	local s = Cvar:new()
+	natives.VEHICLE.GET_VEHICLE_COLOURS(self.ID, p, s)
+	return p:getInt(), s:getInt()
 end
 
 -- Get vehicle's extra colours
 function Vehicle:GetExtraColours()
 	self:_CheckExists()
-	local m_p = CMemoryBlock(4)
-	local m_s = CMemoryBlock(4)
-	natives.VEHICLE.GET_VEHICLE_EXTRA_COLOURS(self.ID, m_p, m_s)
-	local p = m_p:ReadDWORD32(0)
-	local s = m_s:ReadDWORD32(0)
-	m_p:Release()
-	m_s:Release()
-	return p, s
+	local p = Cvar:new()
+	local s = Cvar:new()
+	natives.VEHICLE.GET_VEHICLE_EXTRA_COLOURS(self.ID, p, s)
+	return p:getInt(), s:getInt()
 end
 
 -- Get vehicle's window tint
@@ -284,11 +274,9 @@ end
 -- Get vehicle's Accent color
 function Vehicle:GetAccentColor()
 	self:_CheckExists()
-	local m_c = CMemoryBlock(4)
-	natives.VEHICLE._GET_VEHICLE_ACCENT_COLOR(self.ID, m_c)
-	local c = m_c:ReadDWORD32(0)
-	m_c:Release()
-	return c
+	local c = Cvar:new()
+	natives.VEHICLE._GET_VEHICLE_ACCENT_COLOR(self.ID, c)
+	return c:getInt()
 end
 
 -- Set vehicle's Accent color
@@ -300,11 +288,9 @@ end
 -- Get vehicle's Trim color
 function Vehicle:GetTrimColor()
 	self:_CheckExists()
-	local m_c = CMemoryBlock(4)
-	natives.VEHICLE._GET_VEHICLE_TRIM_COLOR(self.ID, m_c)
-	local c = m_c:ReadDWORD32(0)
-	m_c:Release()
-	return c
+	local c = Cvar:new()
+	natives.VEHICLE._GET_VEHICLE_TRIM_COLOR(self.ID, c)
+	return c:getInt()
 end
 
 -- Set vehicle's Trim color

@@ -82,7 +82,7 @@ end
 
 -- Aimed Entity
 function Player:GetAimedEntity()
-	local c_handle = Cval:new()
+	local c_handle = Cvar:new()
 	if not natives.PLAYER.GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(self.PlayerID, c_handle) then
 		return nil
 	end

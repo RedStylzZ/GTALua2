@@ -174,6 +174,9 @@ COLOR_PURPLE_50	= {r=255, g=0,   b=255, a=128}
 COLOR_WHITE	= {r=255, g=255, b=255, a=255}
 COLOR_WHITE_50	= {r=255, g=255, b=255, a=128}
 COLOR_BLACK_50	= {r=0,   g=0,   b=0,   a=128}
+BLINK = true
+NOBLINK = false
+
 
 -- Console colors
 console_Black = 0

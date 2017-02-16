@@ -8,6 +8,13 @@ local namespaces = 0
 local nativecount = 0
 local namespace = ""
 
+function RegisterNative(namespace, native, hash, nargs, takes, returns)
+	nativecount = nativecount + 1
+	nativeDescription[namespace][native] = {["hash"]=hash, ["nargs"]=nargs, ["takes"]=takes, ["returns"]=returns}
+	x = load("natives."..namespace.."."..native.." = function(...) return CallNative(\""..namespace.."\", \""..native.."\", ...) end")
+	x()
+end
+
 if file_exists(nativesH) then
 	print("Loading native methods from natives.h ...")
 	file = io.open(nativesH, "r")
@@ -44,16 +51,24 @@ if file_exists(nativesH) then
 				end
 				takes = trim(table.concat(array9,","))
 			end
-			nativecount = nativecount + 1
-			nativeDescription[namespace][native] = {["hash"]=hash, ["nargs"]=nargs, ["takes"]=takes, ["returns"]=returns}
-			x = load("natives."..namespace.."."..native.." = function(...) return CallNative(\""..namespace.."\", \""..native.."\", ...) end")
-			x()
+			RegisterNative(namespace, native, hash, nargs, takes, returns)
 		end
 	end
 --	print_r(natives)
 	file:close()
 	print("Detected "..namespaces.." namespaces.")
 	print("Loaded "..nativecount.." natives.")
+	
+-- This is for adding natives that are not present on natives.h
+-- These may need to be manually changed when the game version advances
+	print("Adding custom natives ...")
+	nativecount = 0 
+	RegisterNative("VEHICLE", "_GET_VEHICLE_ACCENT_COLOR", 0xB7635E80A5C31BFF, 2, "int,int*", "void")
+	RegisterNative("VEHICLE", "_SET_VEHICLE_ACCENT_COLOR", 0x6089CDF6A57F326C, 2, "int,int", "void")
+	RegisterNative("VEHICLE", "_GET_VEHICLE_TRIM_COLOR", 0x7D1464D472D32136, 2, "int,int*", "void")
+	RegisterNative("VEHICLE", "_SET_VEHICLE_TRIM_COLOR", 0xF40DD601A65F7F19, 2, "int,int", "void")
+	print("Added "..nativecount.." custom natives.")
+
 else
 	error("File natives.h not found. Cannot continue.")
 end

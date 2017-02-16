@@ -16,7 +16,7 @@ end
 -- Delete
 function Object:Delete()
 	self:_CheckExists()
-	local c_handle = Cval:new()
+	local c_handle = Cvar:new()
 	c_handle:setInt(self.ID)
 	natives.OBJECT.DELETE_OBJECT(c_handle)
 end
@@ -24,7 +24,7 @@ end
 --Set not needed
 function Object:SetNotNeeded()
 	self:_CheckExists()
-	local c_handle = Cval:new()
+	local c_handle = Cvar:new()
 	c_handle:setInt(self.ID)
 	natives.ENTITY.SET_OBJECT_AS_NO_LONGER_NEEDED(c_handle)
 end

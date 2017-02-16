@@ -52,7 +52,7 @@ end
 -- Delete/Remove
 function Entity:Delete()
 	self:_CheckExists()
-	local c_handle = Cval:new()
+	local c_handle = Cvar:new()
 	c_handle:setInt(self.ID)
 	natives.ENTITY.DELETE_ENTITY(c_handle)
 end
@@ -62,7 +62,7 @@ Entity.Remove = function(s) return s:Delete() end
 --Set not needed
 function Entity:SetNotNeeded()
 	self:_CheckExists()
-	local c_handle = Cval:new()
+	local c_handle = Cvar:new()
 	c_handle:setInt(self.ID)
 	natives.ENTITY.SET_ENTITY_AS_NO_LONGER_NEEDED(c_handle)
 end

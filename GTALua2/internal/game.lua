@@ -1,6 +1,19 @@
 -- Game specific functions
 game = {}
 
+-- Create Vehicle 
+function game.CreateVehicle(model_hash, vec, heading)
+	if not streaming.HasModelLoaded(model_hash) then
+		error("You need to load the model before creating a Vehicle! Call streaming.RequestModel prior to calling game.CreateVehicle!")
+	end
+	
+	if heading == nil then
+		heading = 0
+	end
+	local veh_handle = natives.VEHICLE.CREATE_VEHICLE(model_hash, vec.x, vec.y, vec.z, heading, true, true)
+	return Vehicle:new(veh_handle)
+end
+
 -- IsPaused
 function game.IsPaused()
 	return natives.UI.IS_PAUSE_MENU_ACTIVE()
@@ -61,10 +74,10 @@ function game.GetRaycastTarget(distance, flags, entity, intersect, p1, p2)
 	local p1 = p1 or natives.CAM.GET_GAMEPLAY_CAM_COORD()
 	local p2 = p2 or game.GetCoordsInFrontOfCam(distance)
 	local ray = natives.WORLDPROBE._START_SHAPE_TEST_RAY(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z, flags, entity, intersect)
-	local hit = Cval:new()
+	local hit = Cvar:new()
 	local endCoords = Cvec:new()
 	local surfaceNormal = Cvec:new()
-	local entityHit = Cval:new()
+	local entityHit = Cvar:new()
 	local enum = natives.WORLDPROBE.GET_SHAPE_TEST_RESULT(ray, hit, endCoords, surfaceNormal, entityHit)
 	local ent, pointHit
 	if hit:getBool() then
@@ -85,8 +98,8 @@ end
 
 -- Convert World to Screen coordinates
 function game.WorldToScreen(p)
-	local screenX = Cval:new()
-	local screenY = Cval:new()
+	local screenX = Cvar:new()
+	local screenY = Cvar:new()
 	local result
 	if natives.GRAPHICS.GET_SCREEN_COORD_FROM_WORLD_COORD(p.x, p.y, p.z, screenX, screenY) then
 		result = {x=screenX:getFloat(), y=screenY:getFloat()}

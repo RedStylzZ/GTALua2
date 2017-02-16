@@ -15,6 +15,7 @@ require (LuaFolder () .. "/internal/callnative")
 require (LuaFolder () .. "/internal/console")
 require (LuaFolder () .. "/internal/game")
 require (LuaFolder () .. "/internal/loadnatives")
+require (LuaFolder () .. "/internal/streaming")
 require (LuaFolder () .. "/internal/ui")
 
 -- Load game object classes

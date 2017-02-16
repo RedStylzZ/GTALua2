@@ -16,7 +16,7 @@ end
 -- Delete
 function Ped:Delete()
 	self:_CheckExists()
-	local c_handle = Cval:new()
+	local c_handle = Cvar:new()
 	c_handle:setInt(self.ID)
 	natives.PED.DELETE_PED(c_handle)
 end
@@ -24,7 +24,7 @@ end
 --Set not needed
 function Ped:SetNotNeeded()
 	self:_CheckExists()
-	local c_handle = Cval:new()
+	local c_handle = Cvar:new()
 	c_handle:setInt(self.ID)
 	natives.ENTITY.SET_PED_AS_NO_LONGER_NEEDED(c_handle)
 end

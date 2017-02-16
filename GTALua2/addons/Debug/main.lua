@@ -11,7 +11,7 @@ Debug.ScriptInfo = {
 	Version = "1.0"
 }
 
--- Variables for measuring framerate
+-- Variables for Debug control
 local ToggleKey = KEY_F9
 local ShowDebug = false
 
@@ -21,7 +21,6 @@ local _IntersectValue = 7
 local _RayDistance = 5000
 local _FontSize = .4
 local _DebugFontSize = .2
-
 
 -- Functions must match module folder name
 -- Init function is called once from the main Lua
