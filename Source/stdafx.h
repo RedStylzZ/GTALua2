@@ -45,6 +45,6 @@
 #include "MemDump.h"
 
 #include "lua\lua.hpp"
-#include "Cval.h"
+#include "Cvar.h"
 #include "Cvec.h"
 #include "Cmem.h"

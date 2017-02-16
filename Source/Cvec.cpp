@@ -1,8 +1,5 @@
-#ifndef __CVEC_H__
-#define __CVEC_H__
-
 #include "stdafx.h"
-// Cvec.h - v1.0
+// Cvec - v1.0
 //
 // Implements C Vector (x,y,z) as a Lua Class (metatable)
 // (c)2017 by Mockba the Borg
@@ -118,5 +115,3 @@ int register_Cvec(lua_State *L) {
 
 	return(1);
 }
-
-#endif /* __CVEC_H__ */

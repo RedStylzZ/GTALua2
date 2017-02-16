@@ -1,7 +1,7 @@
 #pragma once
 
 #define APP "GTALua2"
-#define VERSION "1.1"
+#define VERSION "1.2"
 #define BUILD __DATE__ "-" __TIME__
 
 #define GAME_VERSION "1.0.944.2"

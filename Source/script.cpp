@@ -210,7 +210,7 @@ void init() {
 	lua_register(L, "Wait", LuaWait);
 
 	register_Cmem(L);
-	register_Cval(L);
+	register_Cvar(L);
 	register_Cvec(L);
 
 	printf("Lua version is %s\n", LUA_VERSION_MAJOR "." LUA_VERSION_MINOR "." LUA_VERSION_RELEASE);

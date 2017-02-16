@@ -95,7 +95,7 @@
   <ItemGroup>
     <ClInclude Include="Cmem.h" />
     <ClInclude Include="CrossMapping.h" />
-    <ClInclude Include="Cval.h" />
+    <ClInclude Include="Cvar.h" />
     <ClInclude Include="Cvec.h" />
     <ClInclude Include="enums.h" />
     <ClInclude Include="Hooking.h" />
@@ -148,7 +148,7 @@
     <ClCompile Include="Cmem.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="CrossMapping.cpp" />
-    <ClCompile Include="Cval.cpp" />
+    <ClCompile Include="Cvar.cpp" />
     <ClCompile Include="Cvec.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>

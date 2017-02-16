@@ -1,8 +1,5 @@
-#ifndef __CMEM_H__
-#define __CMEM_H__
-
 #include "stdafx.h"
-// Cmem.h - v1.0
+// Cmem - v1.0
 //
 // Implements C Memory as a Lua Class (metatable)
 // (c)2017 by Mockba the Borg
@@ -158,5 +155,3 @@ int register_Cmem(lua_State *L) {
 
 	return(1);
 }
-
-#endif /* __CMEM_H__ */
