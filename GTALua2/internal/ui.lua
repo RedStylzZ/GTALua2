@@ -100,3 +100,25 @@ function ui.Draw3DLine(p1, p2, color, blink)
 	end
 end
 
+-- Draws a 3D polygon
+function ui.Draw3DPoly(p1, p2, p3, color, blink)
+	color = color or COLOR_WHITE
+	local draw = not blink
+	if math.floor(game.GetSeconds()/10)%2 == 0 or draw then
+		natives.GRAPHICS.DRAW_POLY(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z, p3.x, p3.y, p3.z, color.r, color.g, color.b, color.a)
+	end
+end
+
+-- Draws a 3D box (solid)
+function ui.Draw3DBox(p1, p2, color, blink)
+	color = color or COLOR_WHITE
+	local draw = not blink
+	if math.floor(game.GetSeconds()/10)%2 == 0 or draw then
+		natives.GRAPHICS.DRAW_BOX(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z, color.r, color.g, color.b, color.a)
+	end
+end
+
+-- Shows a HUD component this frame
+function ui.ShowHudComponent(component)
+	natives.UI.SHOW_HUD_COMPONENT_THIS_FRAME(component)
+end

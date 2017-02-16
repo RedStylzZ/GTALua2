@@ -15,10 +15,27 @@ Debug.ScriptInfo = {
 local ToggleKey = KEY_F9
 local ShowDebug = false
 
+-- Variables for ray casting
+local _IntersectFlags = -1	-- Flags for casting rays
+local _IntersectValue = 7
+local _RayDistance = 5000
+local _FontSize = .4
+local _DebugFontSize = .2
+
+
 -- Functions must match module folder name
 -- Init function is called once from the main Lua
 function Debug:Init()
 	print("Debug v1.0 - by Mockba the Borg")
+end
+
+-- Extra functions
+function Debug:DecorInt(veh, decor, decorType)
+	if natives.DECORATOR.DECOR_EXIST_ON(veh.ID, decor) then
+		return natives.DECORATOR.DECOR_GET_INT(veh.ID, decor)
+	else
+		return "no exist"
+	end
 end
 
 -- Run function is called multiple times from the main Lua
@@ -48,8 +65,80 @@ function Debug:Run()
 			ui.DrawTextBlock("Vehicle mode")
 		end
 
+		local entityHit,pointHit = game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue)
+		if not pointHit then
+			pointHit = game.GetCoordsInFrontOfCam(_RayDistance)
+		end
+		if pointHit then
+			ui.Draw3DLine(MyPos, pointHit, COLOR_PURPLE)
+			if not _CheatMode then
+				ui.Draw3DPoint(pointHit, .05, COLOR_RED)
+			end
+		end
+
+		if entityHit then
+			local entPos = entityHit:GetPosition()
+			if entPos.x ~= 0 then
+				local textPos = game.WorldToScreen(pointHit)
+				if textPos then
+					local text = entityHit._type..": "..entityHit.ID
+					if entityHit:IsVehicle() then
+						text = text.." ("..natives.NETWORK.VEH_TO_NET(entityHit.ID)..")"
+					end
+					text = text.."  "..entityHit:GetHealth().."/"..entityHit:GetMaxHealth()
+					if entityHit:IsDead() then
+						text = text.." (Dead)"
+					end
+					ui.DrawTextBlock(text, textPos.x, textPos.y-.20, FontChaletLondon, _DebugFontSize, COLOR_WHITE, NOBLINK)
+					if entityHit:IsPed() or entityHit:IsObject() then
+						ui.DrawTextBlock("Model: 0x"..string.format("%04x", entityHit:GetModel()))
+					end
+					if entityHit:IsVehicle() then
+						local modelName = entityHit:GetModelName()
+						if not natives.VEHICLE.IS_VEHICLE_DRIVEABLE(entityHit.ID, true) then
+							modelName = modelName.." (Undriveable)"
+						end
+						if natives.VEHICLE.IS_VEHICLE_STOLEN(entityHit.ID) then
+							modelName = modelName.." (Stolen)"
+						end
+						ui.DrawTextBlock(modelName)
+						local nPass = entityHit:GetNumberOfPassengers()
+						if entityHit:GetPedInSeat(VehicleSeatDriver) then
+							nPass = nPass+1
+						end
+						ui.DrawTextBlock(nPass > 0 and "Driver + "..(nPass-1) or "Empty")
+						ui.DrawTextBlock("Player_Vehicle: "..Debug:DecorInt(entityHit,"Player_Vehicle", 3))
+						ui.DrawTextBlock("PV_Slot: "..Debug:DecorInt(entityHit,"PV_Slot", 3))
+						ui.DrawTextBlock("Previous_Owner: "..Debug:DecorInt(entityHit,"Previous_Owner", 3))
+						ui.DrawTextBlock("MPBitset: "..Debug:DecorInt(entityHit,"MPBitset", 3))
+						ui.DrawTextBlock("Modded_By: "..Debug:DecorInt(entityHit,"Veh_Modded_By_Player", 3))
+--						ui.DrawTextBlock("NotAllowSavedVeh: "..Debug:DecorInt(entityHit,"Not_Allow_As_Saved_Veh", 3))
+--						ui.DrawTextBlock("MissionType: "..Debug:DecorInt(entityHit,"MissionType", 3))
+--						ui.DrawTextBlock("RespawnVeh: "..Debug:DecorInt(entityHit,"RespawnVeh", 3))
+--						ui.DrawTextBlock("DeLuxeVeh: "..Debug:DecorInt(entityHit,"LUXE_VEH_INSTANCE_ID", 3))
+						ui.DrawTextBlock("Stolen: "..(natives.VEHICLE.IS_VEHICLE_STOLEN(entityHit.ID) and "Yes" or "No"))
+					end
+					if entityHit:IsMissionEntity() then
+						ui.DrawTextBlock("Mission Entity")
+					end
+					local pos = entityHit:GetPosition()
+					local hdg = entityHit:GetHeading()
+					if entityHit:IsPed() then
+						local pedType = natives.PED.GET_PED_TYPE(entityHit.ID)
+						ui.DrawTextBlock("Type: "..pedType)
+						local bonePos = entityHit:GetBonePosition(entityHit:GetBoneIndex("BONETAG_HEAD"))
+						local size = .12
+						local zoffset = .07
+						ui.Draw3DBox({ x=bonePos.x-size, y=bonePos.y-size, z=bonePos.z-size+zoffset },
+									{ x=bonePos.x+size, y=bonePos.y+size, z=bonePos.z+size+zoffset }, COLOR_YELLOW_50, false, hdg)
+					end
+					ui.DrawTextBlock(string.format("x:%4.2f y:%4.2f z:%4.2f h:%4.2f",pos.x,pos.y,pos.z,hdg))
+				end
+			end
+		end
 		-- Shows Debug Handlers
 		ui.Draw3DPoint(MyPos, 1)
+		ui.ShowHudComponent(HudComponentReticle)
 	end
 	if IsKeyJustDown(ToggleKey) then
 		ShowDebug = not ShowDebug

@@ -7,6 +7,7 @@
 require (LuaFolder () .. "/globals/colors")
 require (LuaFolder () .. "/globals/enums")
 require (LuaFolder () .. "/globals/keycodes")
+require (LuaFolder () .. "/globals/vehicles")
 
 -- Load internal modules
 require (LuaFolder () .. "/internal/functions") -- extra functions must be first
@@ -18,12 +19,14 @@ require (LuaFolder () .. "/internal/ui")
 
 -- Load game object classes
 require (LuaFolder () .. "/classes/entity")
+require (LuaFolder () .. "/classes/object")
 require (LuaFolder () .. "/classes/ped")
 require (LuaFolder () .. "/classes/player")
+require (LuaFolder () .. "/classes/vehicle")
 
 -- Main code starts here
 
-ClrScr ()
+ClrScr()
 FGColor(console_Aqua)
 print ("GTALua2 v" .. GameVersion () .. " loaded.")
 print ("Online module for v" .. OnlineVersion () .. " loaded.")
