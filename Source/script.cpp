@@ -256,11 +256,20 @@ void main() {
 	}
 }
 
+long long *getGlobalAddress(int index) {
+	long long **GlobalPointer = (long long**)Hooking::getGlobalPtr();
+	return &GlobalPointer[index >> 18][index & 0x3FFFF];
+}
+
 // Main script code
 void ScriptMain() {
 	srand(GetTickCount());
 
 	char *version;
+
+	printf(ENABLE_MP_VEHS);
+	*getGlobalAddress(MP_VEHICLE_GLOBAL) = 1;
+	printf(OK);
 
 	system("cls");
 	printf(DASH);

@@ -3,6 +3,8 @@
 #define LUAFOLDER "GTALUA2"
 #define LUAMAIN LUAFOLDER "\\main.lua"
 
+#define MP_VEHICLE_GLOBAL 0x279476
+
 enum TextColor
 {
 	Black,

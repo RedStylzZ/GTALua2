@@ -8,6 +8,7 @@ HANDLE mainFiber, scriptFiber;
 DWORD wakeAt;
 eGameState* 												m_gameState;
 uint64_t													m_worldPtr;
+uint64_t													m_globalPtr;
 BlipList*													m_blipList;
 Hooking::NativeRegistration**								m_registrationTable;
 HMODULE 													Hooking::_hmoduleDLL;
@@ -169,6 +170,7 @@ void Hooking::FindPatterns()
 	auto p_modelSpawn =					pattern("48 8B C8 FF 52 30 84 C0 74 05 48");
 	auto p_nativeTable =				pattern("76 61 49 8B 7A 40 48 8D 0D");
 	auto p_worldPtr =					pattern("48 8B 05 ? ? ? ? 45 ? ? ? ? 48 8B 48 08 48 85 C9 74 07");
+	auto p_globalPtr =					pattern("4C 8D 05 ? ? ? ? 4D 8B 08 4D 85 C9 74 11");
 
 	char * c_location = nullptr;
 	void * v_location = nullptr;
@@ -219,6 +221,12 @@ void Hooking::FindPatterns()
 	printf(GET_WORLD_POINTER);
 	c_location = p_worldPtr.count(1).get(0).get<char>(0);
 	c_location == nullptr ? FailPatterns("world Pointer") : m_worldPtr = reinterpret_cast<uint64_t>(c_location) + *reinterpret_cast<int*>(reinterpret_cast<uint64_t>(c_location) + 3) + 7;
+	printf(OK);
+
+	// Get global pointer
+	printf(GET_GLOBAL_POINTER);
+	c_location = p_globalPtr.count(1).get(0).get<char>(0);
+	c_location == nullptr ? FailPatterns("global Pointter") : m_globalPtr = reinterpret_cast<uint64_t>(c_location) + *reinterpret_cast<int*>(reinterpret_cast<uint64_t>(c_location) + 3) + 7;
 	printf(OK);
 
 	// Get blip list
@@ -304,9 +312,12 @@ BlipList* Hooking::GetBlipList()
 	return m_blipList;
 }
 
-uint64_t Hooking::getWorldPtr()
-{
+uint64_t Hooking::getWorldPtr() {
 	return m_worldPtr;
+}
+
+uint64_t Hooking::getGlobalPtr() {
+	return m_globalPtr;
 }
 
 void WAIT(DWORD ms)

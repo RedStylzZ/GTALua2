@@ -32,6 +32,7 @@ static const char* texts[] = {
 	"Get Vector3 fixer ... ",
 	"Natives registration table ... ",
 	"Get world pointer ... ",
+	"Get globals pointer ... ",
 	"Get blip list ... ",
 	"Bypass online model request block ... ",
 	"Bypass player model spawning checks ... ",
@@ -41,6 +42,7 @@ static const char* texts[] = {
 	"Grand Theft Auto V - " APP,
 	"Failed to find new hash for 0x%016llx\n",
 	"Error %s executing native 0x%016llx at address %p.\n",
+	"Enabling MP DLC vehicles ... ",
 	"Done.\n"
 };
 
@@ -66,13 +68,15 @@ static const char* texts[] = {
 #define VECTOR3_FIXER			texts[19]
 #define NATIVES_REGTABLE		texts[20]
 #define GET_WORLD_POINTER		texts[21]
-#define GET_BLIP_LIST			texts[22]
-#define BYPASS_ONLINE_MODEL		texts[23]
-#define BYPASS_PLAYER_MODEL		texts[24]
-#define GET_SCRIPT_THREAD		texts[25]
-#define INIT_NATIVE_HASHMAP		texts[26]
-#define WAIT_GAME_READY			texts[27]
-#define CONSOLE_TITLE			texts[28]
-#define NO_NEW_HASH				texts[29]
-#define ERROR_EXECUTING_NATIVE	texts[30]
-#define DONE					texts[31]
+#define GET_GLOBAL_POINTER		texts[22]
+#define GET_BLIP_LIST			texts[23]
+#define BYPASS_ONLINE_MODEL		texts[24]
+#define BYPASS_PLAYER_MODEL		texts[25]
+#define GET_SCRIPT_THREAD		texts[26]
+#define INIT_NATIVE_HASHMAP		texts[27]
+#define WAIT_GAME_READY			texts[28]
+#define CONSOLE_TITLE			texts[29]
+#define NO_NEW_HASH				texts[30]
+#define ERROR_EXECUTING_NATIVE	texts[31]
+#define ENABLE_MP_VEHS			texts[32]
+#define DONE					texts[33]
