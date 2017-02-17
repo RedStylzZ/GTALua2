@@ -8,6 +8,7 @@ require (LuaFolder () .. "/globals/colors")
 require (LuaFolder () .. "/globals/enums")
 require (LuaFolder () .. "/globals/keycodes")
 require (LuaFolder () .. "/globals/vehicles")
+require (LuaFolder () .. "/globals/weapons")
 
 -- Load internal modules
 require (LuaFolder () .. "/internal/functions") -- extra functions must be first

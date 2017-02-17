@@ -417,6 +417,7 @@ end
 
 -- Run function is called multiple times from the main Lua
 function VehicleMod:Run()
+	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropAmmo, true) -- Prevents dropping ammo
 	if _VehicleMode then
 		VehicleMod:Process()
 	end

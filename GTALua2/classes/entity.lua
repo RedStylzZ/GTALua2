@@ -191,13 +191,13 @@ function Entity:AttachBlip()
 	if current_blip then
 		return current_blip
 	end
-	return Blip(natives.UI.ADD_BLIP_FOR_ENTITY(self.ID))
+	return Blip:new(natives.UI.ADD_BLIP_FOR_ENTITY(self.ID))
 end
 function Entity:GetBlip()
 	self:_CheckExists()
 	local blip_id = natives.UI.GET_BLIP_FROM_ENTITY(self.ID)
 	if blip_id > 0 then
-		local blip = Blip(blip_id)
+		local blip = Blip:new(blip_id)
 		if blip:Exists() then
 			return blip
 		end

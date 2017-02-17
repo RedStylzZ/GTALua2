@@ -39,6 +39,7 @@ end
 
 -- Run function is called multiple times from the main Lua
 function Debug:Run()
+	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropWeapon, true) -- Prevents dropping weapon
 	if ShowDebug then
 		-- Shows Debug Info
 		local Myself = LocalPlayer()
@@ -137,7 +138,6 @@ function Debug:Run()
 		end
 		-- Shows Debug Handlers
 		ui.Draw3DPoint(MyPos, 1)
-		ui.ShowHudComponent(HudComponentReticle)
 	end
 	if IsKeyJustDown(ToggleKey) then
 		ShowDebug = not ShowDebug

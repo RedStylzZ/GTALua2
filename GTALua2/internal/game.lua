@@ -54,6 +54,15 @@ function game.GetTimerB()
 	return natives.SYSTEM.TIMERB()
 end
 
+-- Waits for n milliseconds
+function game.WaitMS(n)
+	n = n or 1000
+	t = natives.GAMEPLAY.GET_GAME_TIMER() + n
+	while natives.GAMEPLAY.GET_GAME_TIMER() < t do
+		Wait(0)
+	end
+end
+
 -- Get coordinate in front of cam
 function game.GetCoordsInFrontOfCam(distance)
 	distance = distance or 5000
@@ -94,6 +103,27 @@ function game.GetRaycastTarget(distance, flags, entity, intersect, p1, p2)
 		pointHit = endCoords:get()
 	end
 	return ent, pointHit
+end
+
+-- Request weapon asset (pass weapon hash)
+function game.RequestWeaponAsset(weaponAsset)
+	if not natives.WEAPON.HAS_WEAPON_ASSET_LOADED(weaponAsset) then
+		natives.WEAPON.REQUEST_WEAPON_ASSET(weaponAsset, 1, 1)
+		-- Wait
+		while not natives.WEAPON.HAS_WEAPON_ASSET_LOADED(weaponAsset) do
+			Wait(10)
+		end
+	end
+end
+
+-- Shoot a bullet between two coordinates
+function game.ShootBulletBetweenCoords(org, tgt, weapon, damage, speed, owner)
+	weapon = weapon or WeaponPistol
+	damage = damage or 200
+	speed = speed or 200
+	owner = owner or -1
+	game.RequestWeaponAsset(weapon)
+	natives.GAMEPLAY.SHOOT_SINGLE_BULLET_BETWEEN_COORDS(org.x, org.y, org.z, tgt.x, tgt.y, tgt.z, damage, true, weapon, owner, true, true, speed)
 end
 
 -- Convert World to Screen coordinates
