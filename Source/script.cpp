@@ -15,8 +15,6 @@
 
 lua_State *L;
 
-char BuildTimestamp[26];
-
 // Functions to export to Lua
 static int LuaFolder(lua_State *L) {
 	lua_pushstring(L, LUAFOLDER);
