@@ -54,5 +54,10 @@ function Frames:Run()
 	end
 end
 
+-- Run when an addon if (properly) unloaded
+function Frames:Unload()
+
+end
+
 -- This line must match the module folder name
 export = Frames

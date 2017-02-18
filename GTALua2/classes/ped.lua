@@ -38,7 +38,7 @@ function Ped:AllowWeaponSwitching(b)
 end
 
 -- Weapon
-function Ped:DelayedGiveWeapon(wep, ammo)
+function Ped:GiveDelayedWeapon(wep, ammo)
 	self:_CheckExists()
 	if type(wep) == "string" then
 		wep = natives.GAMEPLAY.GET_HASH_KEY(wep)

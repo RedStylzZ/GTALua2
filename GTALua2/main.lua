@@ -40,15 +40,23 @@ print("-----------------------------")
 addons = {}
 addonCount = 0
 
+function LoadMod(name)
+		require(LuaFolder().."/addons/"..name.."/main")
+		addons[name] = export
+		addonCount = addonCount + 1
+end
+
 local f = io.popen("dir /b /a:d "..LuaFolder().."\\addons")
 for addon in f:lines() do
 	local array = explode(".", addon)
 	name = array[1]
 	if file_exists(LuaFolder().."/addons/"..name.."/main.lua") then
-		require(LuaFolder().."/addons/"..name.."/main")
-		addons[name] = export
-		addonCount = addonCount + 1
-		print("  Loaded: "..name..".")
+		success, err = xpcall (LoadMod, debug.traceback, name)
+		if success then
+			print("  Loaded: "..name..".")
+		else
+			print ("Error: " .. err .. " - Addon not loaded.")
+		end
 	else
 		print("  Not loaded: "..name..".")
 	end

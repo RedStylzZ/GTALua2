@@ -53,14 +53,18 @@ console.RegisterCommand("list", "Lists all registered addons", console.list)
 
 -- Loads an addon
 function console.load(name)
-	print("Loading "..name.." ...")
 	if file_exists(LuaFolder().."/addons/"..name.."/main.lua") then
-		require(LuaFolder().."/addons/"..name.."/main")
-		addons[name] = export
-		success, err = xpcall (addons[name].Init, debug.traceback)
-		if success == false then
-			print ("Error: " .. err .. " - Addon removed.")
-			addons[name] = nil
+		package.loaded[LuaFolder().."/addons/"..name.."/main"] = nil
+		success, err = xpcall (LoadMod, debug.traceback, name)
+		if success then
+			print("  Loaded: "..name..".")
+			success, err = xpcall (addons[name].Init, debug.traceback)
+			if success == false then
+				print ("Error: " .. err .. " - Addon removed.")
+				addons[name] = nil
+			end
+		else
+			print ("Error: " .. err .. " - Addon not loaded.")
 		end
 	else
 		print("Addon folder or main file doesn't exist.")
@@ -92,6 +96,7 @@ console.RegisterCommand("reloadall", "Reloads all addons", console.reloadall)
 function console.unload(name)
 	if addons[name] then
 		print("Unloading "..name.." ...")
+		success, err = xpcall (addons[name].Unload, debug.traceback)
 		package.loaded[LuaFolder().."/addons/"..name.."/main"] = nil
 		addons[name] = nil
 	else

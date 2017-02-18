@@ -39,8 +39,8 @@ end
 
 -- Run function is called multiple times from the main Lua
 function Debug:Run()
-	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropWeapon, true) -- Prevents dropping weapon
 	if ShowDebug then
+		natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropWeapon, true) -- Prevents dropping weapon
 		-- Shows Debug Info
 		local Myself = LocalPlayer()
 		local MyPos = Myself:GetPosition()
@@ -147,6 +147,11 @@ function Debug:Run()
 			ui.MapMessage("Debug info disabled.")
 		end
 	end
+end
+
+-- Run when an addon if (properly) unloaded
+function Debug:Unload()
+
 end
 
 -- This line must match the module folder name

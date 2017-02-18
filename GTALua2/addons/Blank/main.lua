@@ -25,5 +25,10 @@ function Blank:Run()
 
 end
 
+-- Run when an addon if (properly) unloaded
+function Blank:Unload()
+
+end
+
 -- This line must match the module folder name
 export = Blank

@@ -105,6 +105,21 @@ function game.GetRaycastTarget(distance, flags, entity, intersect, p1, p2)
 	return ent, pointHit
 end
 
+-- Get the Ped or Vehicle driver as target (Uses Raycast)
+function game.GetTargetPed(distance, flags, entity)
+	local ent = select(1, game.GetRaycastTarget(distance, flags, entity))
+	if ent then
+		if ent:IsVehicle() then
+			ent = ent:GetPedInSeat(VehicleSeatDriver)
+		else
+			if not ent:IsPed() then
+				ent = nil
+			end
+		end
+	end
+	return ent
+end
+
 -- Request weapon asset (pass weapon hash)
 function game.RequestWeaponAsset(weaponAsset)
 	if not natives.WEAPON.HAS_WEAPON_ASSET_LOADED(weaponAsset) then
@@ -139,3 +154,19 @@ function game.WorldToScreen(p)
 	return result
 end
 
+-- Computes the distance between two 3D coordinatess
+function game.Distance(p1, p2)
+	return natives.SYSTEM.VDIST(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z)
+end
+
+-- Get the new point n units from p1 going towards p2
+function game.MovePoint(p1, p2, n)
+	local distance = natives.SYSTEM.VDIST(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z)
+	if distance < n*2 then
+		distance = n*2
+	end		
+	local newX = p1.x+((n/distance)*(p2.x-p1.x))
+	local newY = p1.y+((n/distance)*(p2.y-p1.y))
+	local newZ = p1.z+((n/distance)*(p2.z-p1.z))
+	return {x=newX, y=newY, z=newZ}
+end

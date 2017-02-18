@@ -15,7 +15,7 @@ CheatMod.ScriptInfo = {
 _CheatMode = false
 
 -- Variables for Cheating
-local ToggleKey = KEY_F11
+local ToggleKey = KEY_F10
 
 local _KeyDeleteGun = KEY_SUBTRACT
 local _KeyTakeCar = KEY_DECIMAL
@@ -25,6 +25,51 @@ local _IntersectFlags = -1	-- Flags for casting rays
 local _IntersectValue = 7
 local _RayDistance = 5000
 
+-- Select weapons to top-up
+local _Weapons = {
+["GADGET_PARACHUTE"]                     =  0xFBAB5776,
+["WEAPON_ADVANCEDRIFLE"]                 =  0xAF113F99,
+["WEAPON_ASSAULTRIFLE"]                  =  0xBFEFFF6D,
+["WEAPON_ASSAULTSHOTGUN"]                =  0xE284C527,
+["WEAPON_ASSAULTSMG"]                    =  0xEFE7E2DF,
+["WEAPON_CARBINERIFLE"]                  =  0x83BF0278,
+["WEAPON_COMBATMG"]                      =  0x7FD62962,
+["WEAPON_COMBATPDW"]                     =  0x0A3D4D34,
+["WEAPON_COMBATPISTOL"]                  =  0x5EF9FEC4,
+["WEAPON_COMPACTRIFLE"]                  =  0x624FE830,
+["WEAPON_FIREWORK"]                      =  0x7F7497E5,
+["WEAPON_FLAREGUN"]                      =  0x47757124,
+["WEAPON_FLASHLIGHT"]                    =  0x8BB05FD7,
+["WEAPON_GRENADE"]                       =  0x93E220BD,
+["WEAPON_GRENADELAUNCHER"]               =  0xA284510B,
+["WEAPON_HEAVYPISTOL"]                   =  0xD205520E,
+["WEAPON_HEAVYREVOLVER"]                 =  0xC1B3C3D1,
+["WEAPON_HEAVYSHOTGUN"]                  =  0x3AABBBAA,
+["WEAPON_HEAVYSNIPER"]                   =  0x0C472FE2,
+["WEAPON_HOMINGLAUNCHER"]                =  0x63AB0442,
+["WEAPON_MACHETE"]                       =  0xDD5DF8D9,
+["WEAPON_MACHINEPISTOL"]                 =  0xDB1AA450,
+["WEAPON_MARKSMANPISTOL"]                =  0xDC4DB296,
+["WEAPON_MARKSMANRIFLE"]                 =  0xC734385A,
+["WEAPON_MG"]                            =  0x9D07F764,
+["WEAPON_MICROSMG"]                      =  0x13532244,
+["WEAPON_MINIGUN"]                       =  0x42BF8A85,
+["WEAPON_MOLOTOV"]                       =  0x24B17070,
+["WEAPON_PISTOL"]                        =  0x1B06D571,
+["WEAPON_PISTOL50"]                      =  0x99AEEB3B,
+["WEAPON_PROXMINE"]                      =  0xAB564B93,
+["WEAPON_RAILGUN"]                       =  0x6D544C99,
+["WEAPON_REVOLVER"]                      =  0xC1B3C3D1,
+["WEAPON_RPG"]                           =  0xB1CA77B1,
+["WEAPON_SMG"]                           =  0x2BE6766B,
+["WEAPON_SNIPERRIFLE"]                   =  0x05FC3C11,
+["WEAPON_SNSPISTOL"]                     =  0xBFD21232,
+["WEAPON_SPECIALCARBINE"]                =  0xC0A3098D,
+["WEAPON_STICKYBOMB"]                    =  0x2C3731D9,
+["WEAPON_STUNGUN"]                       =  0x3656C8C1,
+["WEAPON_PIPEBOMB"]                      =  0xBA45E8B8,
+["WEAPON_MINISMG"]                       =  0xBD248B55,
+}
 -- Functions must match module folder name
 
 -- Init function is called once from the main Lua
@@ -36,6 +81,7 @@ end
 function CheatMod:Run()
 	-- Runtime code goes here
 	if _CheatMode then
+		natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropAmmo, true) -- Prevents dropping ammo
 		CheatMod:Process()
 	end
 	if IsKeyJustDown(ToggleKey) then
@@ -239,6 +285,25 @@ function CheatMod:Process()
 		print("done.")
 	end
 
+-- Top me Up (give many weapons/ammo)
+	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlLookBehind, true)
+	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlLookBehind) then
+		LocalPlayer():RemoveAllWeapons()
+		for k, v in pairs(_Weapons) do
+			LocalPlayer():GiveDelayedWeapon(v, 900)
+		end
+	end
+
+-- Heart attack gun
+	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlVehicleDuck, true)
+	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlVehicleDuck) then
+		local ped = game.GetTargetPed(_RayDistance, _IntersectFlags, LocalPlayer().ID)
+		if ped then
+			ped:SetNotNeeded()
+			natives.PED.APPLY_DAMAGE_TO_PED(ped.ID, 1000, false)
+		end
+	end
+
 -- Drone strike gun
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlThrowGrenade, true)
 	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlThrowGrenade) then
@@ -267,5 +332,11 @@ function CheatMod:Process()
 	end
 
 end
+
+-- Run when an addon if (properly) unloaded
+function CheatMod:Unload()
+
+end
+
 -- This line must match the module folder name
 export = CheatMod

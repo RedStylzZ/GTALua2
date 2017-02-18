@@ -15,7 +15,7 @@ VehicleMod.ScriptInfo = {
 _VehicleMode = false
 
 -- Variables for Vehicle Modification
-local ToggleKey = KEY_F10
+local ToggleKey = KEY_F11
 local _FontSize = .4
 local _KeyAddVehicle = KEY_ADD
 local _KeyUpgradeVehicle = KEY_NUMPAD5
@@ -417,7 +417,6 @@ end
 
 -- Run function is called multiple times from the main Lua
 function VehicleMod:Run()
-	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropAmmo, true) -- Prevents dropping ammo
 	if _VehicleMode then
 		VehicleMod:Process()
 	end
@@ -540,7 +539,7 @@ function VehicleMod:Process()
 		   _VehicleModID ==	_Mod_WHL_COLOR or
 		   _VehicleModID ==	_Mod_ACT_COLOR or
 		   _VehicleModID ==	_Mod_TRM_COLOR then
-			modTypeName = _ModColorNames[_VehicleModValue+1]
+			modTypeName = _ModColorNames[_VehicleModValue+1] or "**Undef**"
 		else
 			modTypeName = (_ModType[_VehicleModID] and _ModType[_VehicleModID][_VehicleModValue])
 			if not modTypeName then
@@ -663,14 +662,14 @@ function VehicleMod:Process()
 			print("_0x53409B5163D5B846", natives.VEHICLE._0x53409B5163D5B846(veh:GetModel()))
 			print("_0xC6AD107DDC9054CC", natives.VEHICLE._0xC6AD107DDC9054CC(veh:GetModel()))
 			print("_0x5AA3F878A178C4FC", natives.VEHICLE._0x5AA3F878A178C4FC(veh:GetModel()))
-			local soundID = natives.AUDIO.GET_SOUND_ID()
-			local netID = natives.AUDIO.GET_NETWORK_ID_FROM_SOUND_ID(soundID)
-			local pos = LocalPlayer():GetPosition()
-			natives.NETWORK.SET_NETWORK_ID_EXISTS_ON_ALL_MACHINES(netID, true)
+--			local soundID = natives.AUDIO.GET_SOUND_ID()
+--			local netID = natives.AUDIO.GET_NETWORK_ID_FROM_SOUND_ID(soundID)
+--			local pos = LocalPlayer():GetPosition()
+--			natives.NETWORK.SET_NETWORK_ID_EXISTS_ON_ALL_MACHINES(netID, true)
 --			natives.AUDIO.PLAY_SOUND_FROM_ENTITY(soundID, "Crate_Beeps", veh.ID, "MP_CRATE_DROP_SOUNDS", false, 0)
 --			natives.AUDIO.PLAY_SOUND_FROM_COORD(soundID, "Crate_Beeps", pos.x,pos.y,pos.z, "MP_CRATE_DROP_SOUNDS", false, 0, false)
 --			natives.AUDIO.PLAY_SOUND(soundID, "Crate_Beeps", "MP_CRATE_DROP_SOUNDS", true, 127, true)
-			natives.AUDIO.RELEASE_SOUND_ID(soundID)
+--			natives.AUDIO.RELEASE_SOUND_ID(soundID)
 		end
 -- Lists all available mods for a vehicle
 		if IsKeyJustDown(_KeyVehicleMods, true) then
@@ -814,6 +813,11 @@ function VehicleMod:Process()
 			end
 		end
 	end
+end
+
+-- Run when an addon if (properly) unloaded
+function VehicleMod:Unload()
+
 end
 
 -- This line must match the module folder name
