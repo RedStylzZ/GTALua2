@@ -42,7 +42,7 @@ static int lCmem_setBool(lua_State *L) {
 
 	cu = (bool *)luaL_checkudata(L, 1, "Cmem");
 	int offset = (int)luaL_checkinteger(L, 2);
-	*(cu + offset) = luaL_checkinteger(L, 2) != 0;
+	*(cu + offset) = luaL_checkinteger(L, 3) != 0;
 
 	return(0);
 }
@@ -64,7 +64,7 @@ static int lCmem_setInt(lua_State *L) {
 
 	cu = (intptr_t *)luaL_checkudata(L, 1, "Cmem");
 	int offset = (int)luaL_checkinteger(L, 2);
-	*(cu + offset) = luaL_checkinteger(L, 2);
+	*(cu + offset) = luaL_checkinteger(L, 3);
 
 	return(0);
 }
@@ -86,7 +86,7 @@ static int lCmem_setFloat(lua_State *L) {
 
 	cu = (float *)luaL_checkudata(L, 1, "Cmem");
 	int offset = (int)luaL_checkinteger(L, 2);
-	*(cu + offset) = (float)luaL_checknumber(L, 2);
+	*(cu + offset) = (float)luaL_checknumber(L, 3);
 
 	return(0);
 }

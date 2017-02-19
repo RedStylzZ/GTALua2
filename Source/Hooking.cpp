@@ -220,13 +220,13 @@ void Hooking::FindPatterns()
 	// Get world pointer
 	printf(GET_WORLD_POINTER);
 	c_location = p_worldPtr.count(1).get(0).get<char>(0);
-	c_location == nullptr ? FailPatterns("world Pointer") : m_worldPtr = reinterpret_cast<uint64_t>(c_location) + *reinterpret_cast<int*>(reinterpret_cast<uint64_t>(c_location) + 3) + 7;
+	c_location == nullptr ? FailPatterns("World Pointer") : m_worldPtr = reinterpret_cast<uint64_t>(c_location) + *reinterpret_cast<int*>(reinterpret_cast<uint64_t>(c_location) + 3) + 7;
 	printf(OK);
 
 	// Get global pointer
 	printf(GET_GLOBAL_POINTER);
 	c_location = p_globalPtr.count(1).get(0).get<char>(0);
-	c_location == nullptr ? FailPatterns("global Pointter") : m_globalPtr = reinterpret_cast<uint64_t>(c_location) + *reinterpret_cast<int*>(reinterpret_cast<uint64_t>(c_location) + 3) + 7;
+	c_location == nullptr ? FailPatterns("Global Pointer") : m_globalPtr = reinterpret_cast<uint64_t>(c_location) + *reinterpret_cast<int*>(reinterpret_cast<uint64_t>(c_location) + 3) + 7;
 	printf(OK);
 
 	// Get blip list

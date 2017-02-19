@@ -183,6 +183,9 @@
     <ClInclude Include="Cvar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Cptr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -339,6 +342,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cvar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cptr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

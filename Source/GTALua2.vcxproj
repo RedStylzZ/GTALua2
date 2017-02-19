@@ -94,6 +94,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Cmem.h" />
+    <ClInclude Include="Cptr.h" />
     <ClInclude Include="CrossMapping.h" />
     <ClInclude Include="Cvar.h" />
     <ClInclude Include="Cvec.h" />
@@ -147,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="Cmem.cpp" />
     <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Cptr.cpp" />
     <ClCompile Include="CrossMapping.cpp" />
     <ClCompile Include="Cvar.cpp" />
     <ClCompile Include="Cvec.cpp" />

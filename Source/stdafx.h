@@ -48,3 +48,4 @@
 #include "Cvar.h"
 #include "Cvec.h"
 #include "Cmem.h"
+#include "Cptr.h"

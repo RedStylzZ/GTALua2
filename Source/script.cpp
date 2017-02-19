@@ -178,6 +178,36 @@ static int LuaWait(lua_State *L) {
 	return 0;
 }
 
+long long *getGlobalPointer(int index) {
+	long long **GlobalPointer = (long long**)Hooking::getGlobalPtr();
+	return &GlobalPointer[index >> 18][index & 0x3FFFF];
+}
+
+static int LuaWorldBase(lua_State *L) {
+	uint64_t address = Hooking::getWorldPtr();
+
+	lua_pushinteger(L, address);
+
+	return 1;
+}
+
+static int LuaGlobalsBase(lua_State *L) {
+	uint64_t address = Hooking::getGlobalPtr();
+
+	lua_pushinteger(L, address);
+
+	return 1;
+}
+
+static int LuaGlobalPointer(lua_State *L) {
+	int index = (int)luaL_checkinteger(L, 1);
+	long long **GlobalPointer = (long long**)Hooking::getGlobalPtr();
+
+	lua_pushinteger(L, (uint64_t)getGlobalPointer(index));
+
+	return 1;
+}
+
 // End program execution
 void die(const char *why) {
 	printf("%s", why);
@@ -206,10 +236,14 @@ void init() {
 	lua_register(L, "BGColor", LuaBGColor);
 	lua_register(L, "CurPos", LuaCurPos);
 	lua_register(L, "Wait", LuaWait);
+	lua_register(L, "WorldBase", LuaWorldBase);
+	lua_register(L, "GlobalsBase", LuaGlobalsBase);
+	lua_register(L, "GlobalPointer", LuaGlobalPointer);
 
 	register_Cmem(L);
 	register_Cvar(L);
 	register_Cvec(L);
+	register_Cptr(L);
 
 	printf("Lua version is %s\n", LUA_VERSION_MAJOR "." LUA_VERSION_MINOR "." LUA_VERSION_RELEASE);
 
@@ -254,20 +288,11 @@ void main() {
 	}
 }
 
-long long *getGlobalAddress(int index) {
-	long long **GlobalPointer = (long long**)Hooking::getGlobalPtr();
-	return &GlobalPointer[index >> 18][index & 0x3FFFF];
-}
-
 // Main script code
 void ScriptMain() {
 	srand(GetTickCount());
 
 	char *version;
-
-	printf(ENABLE_MP_VEHS);
-	*getGlobalAddress(MP_VEHICLE_GLOBAL) = 1;
-	printf(OK);
 
 	system("cls");
 	printf(DASH);
