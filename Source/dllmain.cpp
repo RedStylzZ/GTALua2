@@ -4,6 +4,33 @@
 HINSTANCE mHinstDLL = 0;
 extern "C" UINT_PTR mProcs[277] = { 0 };
 
+// ShowWindow hooking
+typedef bool(__stdcall* ShowWindow_t)(HWND hWnd, int nCmdShow);
+static ShowWindow_t pShowWindow = NULL;
+bool ShowWindow_Hook(HWND hWnd, int nCmdShow) {
+	if (hWnd == GetConsoleWindow() && nCmdShow == 0) {
+		// Prevent hiding the console window
+		return true;
+	}
+
+	// Otherwise just run the original
+	return pShowWindow(hWnd, nCmdShow);
+}
+
+// GetVolumeInformationA hooking
+typedef bool(__stdcall* GetVolume_t)(LPCTSTR lpRootPathName, LPTSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber, LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPTSTR lpFileSystemNameBuffer, DWORD nFileSystemNameSize);
+static GetVolume_t pGetVolume = NULL;
+bool GetVolume_hook(LPCTSTR lpRootPathName, LPTSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber, LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPTSTR lpFileSystemNameBuffer, DWORD nFileSystemNameSize) {
+
+	srand((unsigned)time(0));
+	DWORD random = (rand()<<16)+rand();
+
+	bool result = pGetVolume(lpRootPathName, lpVolumeNameBuffer, nVolumeNameSize, lpVolumeSerialNumber, lpMaximumComponentLength, lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
+	// Randomize VSN
+	*lpVolumeSerialNumber = random;
+	return result;
+}
+
 DWORD WINAPI MyThread(LPVOID lpParam)
 {
 	Hooking::Start((HMODULE)lpParam);
@@ -20,6 +47,24 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 	{
 	case DLL_PROCESS_ATTACH:
 
+		// Attach a debug console
+		ConsoleAttach();
+		printf(DASH);
+		printf(MODULE_TITLE);
+		printf(DASH);
+
+		printf(INIT_MINHOOK);
+		if (MH_Initialize() != MH_OK) {
+			printf(FAILED_INIT_MINHOOK);
+			return(FALSE);
+		}
+		printf(OK);
+
+		// Prevents GTA from closing the console window
+		Hooking::HookLibraryFunction("user32.dll", "ShowWindow", &ShowWindow_Hook, (void**)&pShowWindow);
+		Hooking::HookLibraryFunction("kernel32.dll", "GetVolumeInformationA", &GetVolume_hook, (void**)&pGetVolume);
+
+		printf(REMAP_EXPORTS);
 		// Find original dll
 		char syspath[MAX_PATH];
 		GetSystemDirectory(syspath, MAX_PATH);
@@ -36,10 +81,14 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 		for (int i = 0; i < 277; i++)
 			mProcs[i] = (UINT_PTR)GetProcAddress(mHinstDLL, mExportNames[i]);
 
+		printf(OK);
+
 		// Do whatever you want from this point on
 		// Arbitrary code starts here
 
+		printf(CREATE_THREAD);
 		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MyThread, hModule, NULL, NULL);
+		printf(OK);
 		break;
 	case DLL_THREAD_ATTACH:
 		break;

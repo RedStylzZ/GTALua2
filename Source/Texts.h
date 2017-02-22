@@ -43,6 +43,10 @@ static const char* texts[] = {
 	"Failed to find new hash for 0x%016llx\n",
 	"Error %s executing native 0x%016llx at address %p.\n",
 	"Enabling MP DLC vehicles ... ",
+	"Initializing MinHook ... ",
+	"Remapping DLL exports ... ",
+	"Creating Mod thread ... ",
+	"Waiting for the game window ... ",
 	"Done.\n"
 };
 
@@ -79,4 +83,8 @@ static const char* texts[] = {
 #define NO_NEW_HASH				texts[30]
 #define ERROR_EXECUTING_NATIVE	texts[31]
 #define ENABLE_MP_VEHS			texts[32]
-#define DONE					texts[33]
+#define INIT_MINHOOK			texts[33]
+#define REMAP_EXPORTS			texts[34]
+#define CREATE_THREAD			texts[35]
+#define WAIT_WINDOW				texts[36]
+#define DONE					texts[37]

@@ -84,6 +84,8 @@ public:
 	static bool HookNatives();
 	static HWND getWindow() { return hWindow; }
 	static HMODULE getModule() { return _hmoduleDLL; }
+	static bool HookFunction(DWORD64 pAddress, void* pDetour, void** ppOriginal);
+	static bool HookLibraryFunction(char* sLibrary, char* sName, void* pDetour, void** ppOriginal);
 
 	// Native function handler type
 	typedef void(__cdecl * NativeHandler)(scrNativeCallContext * context);

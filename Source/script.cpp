@@ -178,11 +178,6 @@ static int LuaWait(lua_State *L) {
 	return 0;
 }
 
-long long *getGlobalPointer(int index) {
-	long long **GlobalPointer = (long long**)Hooking::getGlobalPtr();
-	return &GlobalPointer[index >> 18][index & 0x3FFFF];
-}
-
 static int LuaWorldBase(lua_State *L) {
 	uint64_t address = Hooking::getWorldPtr();
 
@@ -201,9 +196,9 @@ static int LuaGlobalsBase(lua_State *L) {
 
 static int LuaGlobalPointer(lua_State *L) {
 	int index = (int)luaL_checkinteger(L, 1);
-	long long **GlobalPointer = (long long**)Hooking::getGlobalPtr();
 
-	lua_pushinteger(L, (uint64_t)getGlobalPointer(index));
+	long long **GlobalPointer = (long long**)Hooking::getGlobalPtr();
+	lua_pushinteger(L, (uint64_t)&GlobalPointer[index >> 18][index & 0x3FFFF]);
 
 	return 1;
 }

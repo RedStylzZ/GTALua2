@@ -23,16 +23,12 @@ void Hooking::Start(HMODULE hmoduleDLL)
 	_hmoduleDLL = hmoduleDLL;
 	// Don't do anything until you see the game window
 
+	printf(WAIT_WINDOW);
 	while (!hWindow) {
 		hWindow = FindWindow("grcWindow", NULL);
 	}
+	printf(OK);
 
-
-	// Attach a debug console
-	ConsoleAttach();
-	printf(DASH);
-	printf(MODULE_TITLE);
-	printf(DASH);
 	FindPatterns();
 	if (!InitializeHooks()) {
 		Cleanup();
@@ -47,12 +43,6 @@ void Hooking::Start(HMODULE hmoduleDLL)
 BOOL Hooking::InitializeHooks()
 {
 	printf(INIT_HOOKS);
-
-	// Init input hook
-	if (MH_Initialize() != MH_OK) {
-		printf(FAILED_INIT_MINHOOK);
-		return FALSE;
-	}
 
 	// Init input hook
 	if (!iHook.Initialize(hWindow)) {
@@ -352,4 +342,42 @@ void Hooking::Cleanup()
 		Sleep(1000); FreeLibraryAndExitThread(_hmoduleDLL, 0);
 		return 0;
 	}, NULL, NULL, NULL);
+}
+
+bool Hooking::HookFunction(DWORD64 pAddress, void* pDetour, void** ppOriginal) {
+	// Create Hook
+	int iResult = MH_CreateHook((void*)pAddress, pDetour, ppOriginal);
+	if (iResult != MH_OK) {
+		printf("[Memory::HookFunction] MH_CreateHook failed: %p [Error %i]\n", (void *)pAddress, iResult);
+		return false;
+	}
+
+	// Enable Hook
+	iResult = MH_EnableHook((void*)pAddress);
+	if (iResult != MH_OK) {
+		printf("[Memory::HookFunction] MH_EnableHook failed: %p [Error %i]\n", (void *)pAddress, iResult);
+		return false;
+	}
+
+	// Success
+	return true;
+}
+
+bool Hooking::HookLibraryFunction(char* sLibrary, char* sName, void* pDetour, void** ppOriginal) {
+	// Module
+	HMODULE hModule = GetModuleHandle(sLibrary);
+	if (hModule == NULL) {
+		printf("[Memory::HookLibraryFunction] Module %s not (yet) loaded!\n", sLibrary);
+		return false;
+	}
+
+	// Proc
+	void* pProc = GetProcAddress(hModule, sName);
+	if (pProc == NULL) {
+		printf("[Memory::HookLibraryFunction] Module %s has no exported function %s!\n", sLibrary, sName);
+		return false;
+	}
+
+	// Hook
+	return Hooking::HookFunction((DWORD64)pProc, pDetour, ppOriginal);
 }
