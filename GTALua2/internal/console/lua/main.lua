@@ -3,7 +3,10 @@ function console.lua(...)
 	local str = table.concat({...}, " ")
 	local func = load(str)
 	if func then
-		func()
+		success, err = xpcall (func, debug.traceback)
+		if not success then
+			print ("Error: " .. err .. ".")
+		end
 	else
 		print("Invalid Lua call.")
 	end
