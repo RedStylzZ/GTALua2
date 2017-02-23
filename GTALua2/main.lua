@@ -79,7 +79,7 @@ function Run ()
 	-- Disable cheat code key to be used as console key
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlEnterCheatCode, true)
 	if IsKeyJustDown(VK_OEM_3) then -- cheat code key was pressed
-		console.Process(ui.OnscreenKeyboard("Console Command", 50))
+		console.Process(ui.OnscreenKeyboard("Console Command", 200))
 	end
 
 	-- Execute existing addons
