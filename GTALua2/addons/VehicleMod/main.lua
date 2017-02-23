@@ -427,9 +427,9 @@ function VehicleMod:Run()
 		_VehicleModValue = nil
 		_VehicleWType = nil
 		if _VehicleMode then
-			ui.MapMessage("Vehicle mode enabled.")
+			ui.MapMessage("~g~Vehicle mode enabled.")
 		else
-			ui.MapMessage("Vehicle mode disabled.")
+			ui.MapMessage("~r~Vehicle mode disabled.")
 		end
 	end
 end
@@ -631,6 +631,7 @@ function VehicleMod:Process()
 			
 			natives.VEHICLE.SET_VEHICLE_FRICTION_OVERRIDE(veh.ID, 2)
 
+			ui.MapMessage("~b~Vehicle fully upgraded.")
 			return
 		end
 -- Lists some of information about the vehicle
@@ -807,6 +808,7 @@ function VehicleMod:Process()
 					LocalPlayer():SetIntoVehicle(ent.ID, VehicleSeatDriver)
 					ent:SetRadioStationName("OFF")
 					ent:SetNotNeeded()
+					ui.MapMessage("~b~"..string.upper(name).." spawned.")
 				else
 					print("Vehicle does not exist.")
 				end

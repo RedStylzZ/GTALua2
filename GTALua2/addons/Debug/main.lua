@@ -142,9 +142,9 @@ function Debug:Run()
 	if IsKeyJustDown(ToggleKey) then
 		ShowDebug = not ShowDebug
 		if ShowDebug then
-			ui.MapMessage("Debug info enabled.")
+			ui.MapMessage("~g~Debug info enabled.")
 		else
-			ui.MapMessage("Debug info disabled.")
+			ui.MapMessage("~r~Debug info disabled.")
 		end
 	end
 end

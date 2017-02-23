@@ -827,6 +827,7 @@ function Parking:Unload()
 	for i = 1,_NGarages do
 		Parking:DeleteBlip(_GarageBlips[i])
 	end
+	ui.MapMessage("~r~Public Parking disabled.")
 end
 
 -- This line must match the module folder name
