@@ -35,21 +35,17 @@ local _Weapons = {
 ["WEAPON_CARBINERIFLE"]                  =  0x83BF0278,
 ["WEAPON_COMBATMG"]                      =  0x7FD62962,
 ["WEAPON_COMBATPDW"]                     =  0x0A3D4D34,
-["WEAPON_COMBATPISTOL"]                  =  0x5EF9FEC4,
 ["WEAPON_COMPACTRIFLE"]                  =  0x624FE830,
 ["WEAPON_FIREWORK"]                      =  0x7F7497E5,
 ["WEAPON_FLAREGUN"]                      =  0x47757124,
 ["WEAPON_FLASHLIGHT"]                    =  0x8BB05FD7,
 ["WEAPON_GRENADE"]                       =  0x93E220BD,
 ["WEAPON_GRENADELAUNCHER"]               =  0xA284510B,
-["WEAPON_HEAVYPISTOL"]                   =  0xD205520E,
-["WEAPON_HEAVYREVOLVER"]                 =  0xC1B3C3D1,
 ["WEAPON_HEAVYSHOTGUN"]                  =  0x3AABBBAA,
 ["WEAPON_HEAVYSNIPER"]                   =  0x0C472FE2,
 ["WEAPON_HOMINGLAUNCHER"]                =  0x63AB0442,
 ["WEAPON_MACHETE"]                       =  0xDD5DF8D9,
 ["WEAPON_MACHINEPISTOL"]                 =  0xDB1AA450,
-["WEAPON_MARKSMANPISTOL"]                =  0xDC4DB296,
 ["WEAPON_MARKSMANRIFLE"]                 =  0xC734385A,
 ["WEAPON_MG"]                            =  0x9D07F764,
 ["WEAPON_MICROSMG"]                      =  0x13532244,
@@ -58,17 +54,15 @@ local _Weapons = {
 ["WEAPON_PISTOL"]                        =  0x1B06D571,
 ["WEAPON_PISTOL50"]                      =  0x99AEEB3B,
 ["WEAPON_PROXMINE"]                      =  0xAB564B93,
-["WEAPON_RAILGUN"]                       =  0x6D544C99,
 ["WEAPON_REVOLVER"]                      =  0xC1B3C3D1,
 ["WEAPON_RPG"]                           =  0xB1CA77B1,
 ["WEAPON_SMG"]                           =  0x2BE6766B,
 ["WEAPON_SNIPERRIFLE"]                   =  0x05FC3C11,
-["WEAPON_SNSPISTOL"]                     =  0xBFD21232,
 ["WEAPON_SPECIALCARBINE"]                =  0xC0A3098D,
 ["WEAPON_STICKYBOMB"]                    =  0x2C3731D9,
 ["WEAPON_STUNGUN"]                       =  0x3656C8C1,
 ["WEAPON_PIPEBOMB"]                      =  0xBA45E8B8,
-["WEAPON_MINISMG"]                       =  0xBD248B55,
+["WEAPON_MINISMG"]                       =  0xBD248B55
 }
 -- Functions must match module folder name
 
@@ -87,9 +81,9 @@ function CheatMod:Run()
 	if IsKeyJustDown(ToggleKey) then
 		_CheatMode = not _CheatMode
 		if _CheatMode then
-			ui.MapMessage("Cheat mode enabled.")
+			ui.MapMessage("~g~Cheat mode enabled.")
 		else
-			ui.MapMessage("Cheat mode disabled.")
+			ui.MapMessage("~r~Cheat mode disabled.")
 		end
 	end
 end
@@ -97,6 +91,21 @@ end
 function CheatMod:Process()
 
 	ui.ShowHudComponent(HudComponentReticle)	
+
+-- Owner of bullet (if Aiming = player)
+	local bulletOwner, bulletPower, bulletWeapon
+	if natives.CONTROLS.IS_CONTROL_PRESSED(0, ControlAim) then
+		bulletOwner = LocalPlayer().ID
+		bulletPower = 50
+		bulletWeapon = natives.WEAPON.GET_SELECTED_PED_WEAPON(LocalPlayer().ID)
+		if bulletWeapon == WEAPON_UNARMED then
+			bulletWeapon = WEAPON_PISTOL50
+		end
+	else
+		bulletOwner = -1
+		bulletPower = 50
+		bulletWeapon = WEAPON_SMG
+	end
 
 -- Take car
 	if IsKeyJustDown(_KeyTakeCar, true) then
@@ -175,6 +184,7 @@ function CheatMod:Process()
 				LocalPlayer():SetIntoVehicle(ent.ID, -1)
 				ent:SetNotNeeded()
 				ent:SetMissionEntity()
+				ui.MapMessage("~r~Vehicle has been stolen.")
 			else
 				print("Not a vehicle.")
 			end
@@ -290,7 +300,7 @@ function CheatMod:Process()
 	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlLookBehind) then
 		LocalPlayer():RemoveAllWeapons()
 		for k, v in pairs(_Weapons) do
-			LocalPlayer():GiveDelayedWeapon(v, 900)
+			LocalPlayer():GiveDelayedWeapon(v, 600)
 		end
 	end
 
