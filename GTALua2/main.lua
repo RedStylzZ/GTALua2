@@ -25,6 +25,7 @@ require (LuaFolder () .. "/classes/object")
 require (LuaFolder () .. "/classes/ped")
 require (LuaFolder () .. "/classes/player")
 require (LuaFolder () .. "/classes/vehicle")
+require (LuaFolder () .. "/classes/blip")
 
 -- Main code starts here
 
@@ -39,8 +40,8 @@ local MPVehPtr = Cptr:new(GlobalPointer(2593910))
 MPVehPtr:setInt(0, 1)
 
 -- Load external addons
-print("Loading all addons ...")
-print("-----------------------------")
+print("\nLoading all addons ...")
+print("----------------------------------------------")
 addons = {}
 addonCount = 0
 
@@ -66,6 +67,8 @@ for addon in f:lines() do
 	end
 end
 
+print("\nInitializing all addons ...")
+print("----------------------------------------------")
 for k, v in pairs(addons) do
 	success, err = xpcall (v.Init, debug.traceback)
 	if success == false then

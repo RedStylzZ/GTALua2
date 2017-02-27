@@ -98,6 +98,7 @@ local playerPlayerID
 local playerID
 local playerPos
 local playerVehicle
+local playerDead = false
 
 -- Debug printing conditioned to _Debug = true
 function Parking:DebugPrint(...)
@@ -186,6 +187,9 @@ function Parking:SaveVehicleFile(garage, spot)
 	f:write("neonR:"..(vehicle.neonR or -1).."\n")
 	f:write("neonG:"..(vehicle.neonG or -1).."\n")
 	f:write("neonB:"..(vehicle.neonB or -1).."\n")
+	for i=1,12 do
+		f:write("extra"..i..":"..(vehicle["extra"..i] or -1).."\n")
+	end
 	for i=0,48 do
 		f:write(i..":"..(vehicle[i] or -1).."\n")
 	end
@@ -442,6 +446,13 @@ function Parking:VehicleToArray(vehID)
 	vehicle.plttype = natives.VEHICLE.GET_VEHICLE_NUMBER_PLATE_TEXT_INDEX(vehID)	-- Plate Type
 	vehicle.plttext = natives.VEHICLE.GET_VEHICLE_NUMBER_PLATE_TEXT(vehID)		-- Plate Text
 	vehicle.whltype = natives.VEHICLE.GET_VEHICLE_WHEEL_TYPE(vehID)			-- Wheel Type
+	for extra=1,12 do								-- Extras
+		if natives.VEHICLE.IS_VEHICLE_EXTRA_TURNED_ON(vehID, extra) then
+			vehicle["extra"..extra] = 1
+		else
+			vehicle["extra"..extra] = 0
+		end
+	end
 	natives.VEHICLE.SET_VEHICLE_MOD_KIT(vehID, 0)					-- Mods
 	for mod=0,48 do
 		if mod==18 or mod==20 or mod==21 or mod==22 then
@@ -726,8 +737,17 @@ function Parking:Init()
 		natives.UI.SET_BLIP_SCALE(_GarageBlips[i], .7)
 		natives.UI.SET_BLIP_COLOUR(_GarageBlips[i], 9)
 	end
-	print("Initialization complete.")
+	print("Public Parking initialization complete.")
 	print("----------------------------------------------")
+end
+
+-- Cleans up garage info when a player dies
+function Parking:DeadReset()
+	_InsideGarage = false
+	_InDoorEnabled = true
+	_GarageInUse = _DefaultGarage
+	Parking:DeleteOut()
+	print("Parking dead-reset.")
 end
 
 -- Run function is called multiple times from the main Lua
@@ -737,6 +757,15 @@ function Parking:Run()
 	playerPos = natives.ENTITY.GET_ENTITY_COORDS(playerID, false)
 
 	Parking:ShowDebugData()
+	
+	if natives.PLAYER.IS_PLAYER_DEAD(LocalPlayer().PlayerID) then
+		if not playerDead then
+			playerDead = true
+			Parking:DeadReset()
+		end
+	else
+		playerDead = false
+	end
 
 	-- Draw HUD and Map accordingly
 	if _InsideGarage then
@@ -749,7 +778,7 @@ function Parking:Run()
 			-- Are we at the Garage Entrance area?
 			for n=1,_NGarages do
 				if game.Distance(playerPos, _GarageInDoor[n]) < _DoorRadius then
-					Parking:DebugPrint("----------------------------------")
+					Parking:DebugPrint("----------------------------------------------")
 					Parking:DebugPrint("Touched Garage",n,"enter trigger ...")
 					_GarageInUse = n
 					Parking:EnterGarage()
@@ -762,7 +791,7 @@ function Parking:Run()
 	if _InsideGarage then
 		-- Are we at the Garage Exit area?
 		if game.Distance(playerPos, _GarageOutDoor) < _DoorRadius then
-			Parking:DebugPrint("----------------------------------")
+			Parking:DebugPrint("----------------------------------------------")
 			Parking:DebugPrint("Touched Garage", _GarageInUse, "exit trigger ...")
 			Parking:ExitGarage()
 		end
@@ -770,7 +799,7 @@ function Parking:Run()
 	-- Are we leaving the garage in a car?
 		if Parking:IsInVehicle() then
 			if natives.ENTITY.GET_ENTITY_SPEED(playerVehicle) > 1 then
-				Parking:DebugPrint("----------------------------------")
+				Parking:DebugPrint("----------------------------------------------")
 				Parking:DebugPrint("Moving vehicle trigger ...")
 				Parking:ExitGarage()
 			end
@@ -779,7 +808,7 @@ function Parking:Run()
 
 	-- Are we pressing the Garage key?
 	if IsKeyJustDown(_TeleportKey, true) then
-		Parking:DebugPrint("----------------------------------")
+		Parking:DebugPrint("----------------------------------------------")
 		Parking:DebugPrint("Touched garage teleport key ...")
 		if _InsideGarage then
 			Parking:DebugPrint("    Teleporting out ...")
@@ -806,7 +835,7 @@ function Parking:Run()
 	-- Are we pressing the Redraw key?
 	if IsKeyJustDown(_RedrawKey, true) then
 		if _InsideGarage then
-			Parking:DebugPrint("----------------------------------")
+			Parking:DebugPrint("----------------------------------------------")
 			Parking:DebugPrint("Cleaning...")
 			Parking:ClearGarage()
 			Parking:DebugPrint("Loading...")

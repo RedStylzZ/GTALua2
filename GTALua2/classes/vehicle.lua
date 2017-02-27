@@ -297,5 +297,24 @@ end
 function Vehicle:SetTrimColor(c)
 	self:_CheckExists()
 	natives.VEHICLE._SET_VEHICLE_TRIM_COLOR(self.ID, c)
-end	
+end
 
+-- Vehicle's Extras
+function Vehicle:HasExtra(extraId)
+	self:_CheckExists()
+	return(natives.VEHICLE.DOES_EXTRA_EXIST(self.ID, extraId))
+end
+function Vehicle:IsExtraOn(extraId)
+	self:_CheckExists()
+	return(natives.VEHICLE.IS_VEHICLE_EXTRA_TURNED_ON(self.ID, extraId))
+end
+function Vehicle:SetExtra(extraId)
+	self:_CheckExists()
+	natives.VEHICLE.SET_VEHICLE_EXTRA(self.ID, extraId, false)
+end
+function Vehicle:ClearExtra(extraId)
+	self:_CheckExists()
+	if natives.VEHICLE.IS_VEHICLE_EXTRA_TURNED_ON(self.ID, extraId) then
+		natives.VEHICLE.SET_VEHICLE_EXTRA(self.ID, extraId, true)
+	end
+end

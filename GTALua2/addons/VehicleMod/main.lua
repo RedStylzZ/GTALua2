@@ -26,6 +26,8 @@ local _KeyModTypeDown = KEY_NUMPAD2
 local _KeyModTypeUp = KEY_NUMPAD8
 local _KeyModWheelRight = KEY_NUMPAD9
 local _KeyModWheelLeft = KEY_NUMPAD7
+local _KeyModExtraRight = KEY_NUMPAD9
+local _KeyModExtraLeft = KEY_NUMPAD7
 local _KeyModValueRight = KEY_NUMPAD6
 local _KeyModValueLeft = KEY_NUMPAD4
 local _KeyTakeCar = KEY_DECIMAL
@@ -35,15 +37,16 @@ local _ModX = .01
 local _ModY = .12
 -- All boolean mods must be defined here
 -- Enums for custom mods
-local _Mod_PRI_COLOR = -9
-local _Mod_SEC_COLOR = -8
-local _Mod_PRL_COLOR = -7
-local _Mod_WHL_COLOR = -6
-local _Mod_ACT_COLOR = -5
-local _Mod_TRM_COLOR = -4
-local _Mod_Livery = -3
-local _Mod_WND_TINT  = -2
-local _Mod_PLT_TYPE  = -1
+local _Mod_PRI_COLOR = -10
+local _Mod_SEC_COLOR = -9
+local _Mod_PRL_COLOR = -8
+local _Mod_WHL_COLOR = -7
+local _Mod_ACT_COLOR = -6
+local _Mod_TRM_COLOR = -5
+local _Mod_Livery    = -4
+local _Mod_WND_TINT  = -3
+local _Mod_PLT_TYPE  = -2
+local _Mod_VEH_EXTRA = -1
 -- Mod name table
 local _Mod = {}
 _Mod[_Mod_PRI_COLOR] = "Primary color"
@@ -55,6 +58,7 @@ _Mod[_Mod_TRM_COLOR] = "Trim color"
 _Mod[_Mod_Livery] = "Livery"
 _Mod[_Mod_WND_TINT] = "Window tint"
 _Mod[_Mod_PLT_TYPE] = "Plate type"
+_Mod[_Mod_VEH_EXTRA] = "Vehicle Extra"
 _Mod[11] = "Engine"
 _Mod[12] = "Brakes"
 _Mod[13] = "Transmission"
@@ -73,6 +77,7 @@ _ModLimits[_Mod_ACT_COLOR] = {vtype="value", vmin=0, vmax=159}
 _ModLimits[_Mod_TRM_COLOR] = {vtype="value", vmin=0, vmax=159}
 _ModLimits[_Mod_WND_TINT] = {vtype="value", vmin=-1, vmax=6}
 _ModLimits[_Mod_PLT_TYPE] = {vtype="value", vmin=0, vmax=5}
+_ModLimits[_Mod_VEH_EXTRA] = {vtype="boolean", vmin=0, vmax=1}
 -- All boolean mods must be defined here
 _Mod[18] = "Turbo"
 _Mod[20] = "Tire smoke"
@@ -181,6 +186,9 @@ local _MinVehicleModValue = 0
 local _MaxVehicleModValue = 0
 local _VehicleModValue = nil
 local _VehicleWType = nil
+local _VehicleExtra = 1
+local _MinVehicleExtras = 1
+local _MaxVehicleExtras = 12
 
 -- Default full upgrade values
 local _UpgradeHorn = 10
@@ -466,10 +474,14 @@ function VehicleMod:Process()
 		if natives.UI._GET_LABEL_TEXT(modSlotName) ~= "NULL" then
 			modSlotName = natives.UI._GET_LABEL_TEXT(modSlotName)
 		end
-		local str = "Mod: "..modSlotName.." (".._VehicleModID..")"
+		local str = "Mod #".._VehicleModID.." : "..modSlotName
 		if _VehicleModID == VehicleModFrontWheels or _VehicleModID == VehicleModBackWheels then
 			str = str.." ("..(_ModW[_VehicleWType] or _VehicleWType)..")"
 		end
+		if _VehicleModID == _Mod_VEH_EXTRA then
+			str = str.." (".._VehicleExtra..")"
+		end
+		
 		ui.DrawTextBlock(str, _ModX)
 -- Mod limits
 		if _ModLimits[_VehicleModID] then
@@ -502,8 +514,14 @@ function VehicleMod:Process()
 			else
 				if _ModLimits[_VehicleModID].vtype == "boolean" then
 					_VehicleModValue = 0
-					if natives.VEHICLE.IS_TOGGLE_MOD_ON(veh.ID, _VehicleModID) then
-						_VehicleModValue = 1
+					if _VehicleModID == _Mod_VEH_EXTRA then
+						if veh:IsExtraOn(_VehicleExtra) then
+							_VehicleModValue = 1
+						end
+					else
+						if natives.VEHICLE.IS_TOGGLE_MOD_ON(veh.ID, _VehicleModID) then
+							_VehicleModValue = 1
+						end
 					end
 					if not  _ModType[_VehicleModID] then
 						_ModType[_VehicleModID] = {}
@@ -728,6 +746,25 @@ function VehicleMod:Process()
 				natives.VEHICLE.SET_VEHICLE_WHEEL_TYPE(veh.ID, _VehicleWType)
 			end
 		end
+-- Select Extra type
+		if _VehicleModID == _Mod_VEH_EXTRA then
+			if IsKeyJustDown(_KeyModExtraRight, true) then
+				_VehicleExtra = _VehicleExtra+1
+				if _VehicleExtra > _MaxVehicleExtras then
+					_VehicleExtra = _MinVehicleExtras
+				end
+			end
+			if IsKeyJustDown(_KeyModExtraLeft, true) then
+				_VehicleExtra = _VehicleExtra-1
+				if _VehicleExtra < _MinVehicleExtras then
+					_VehicleExtra = _MaxVehicleExtras
+				end
+			end
+			_VehicleModValue = 0
+			if veh:IsExtraOn(_VehicleExtra) then
+				_VehicleModValue = 1
+			end
+		end
 -- Select Mod value
 		if IsKeyJustDown(_KeyModValueRight, true) then
 			_VehicleModValue = _VehicleModValue+1
@@ -753,12 +790,20 @@ function VehicleMod:Process()
 				end
 			else
 				if _ModLimits[_VehicleModID].vtype == "boolean" then
-					natives.VEHICLE.TOGGLE_VEHICLE_MOD(veh.ID, _VehicleModID, _VehicleModValue==1)
-					if _VehicleModID == 21 then
+					if _VehicleModID == _Mod_VEH_EXTRA then
 						if _VehicleModValue==1 then
-							VehicleMod:ApplyNeons(veh.ID)
+							veh:SetExtra(_VehicleExtra)
 						else
-							VehicleMod:RemoveNeons(veh.ID)
+							veh:ClearExtra(_VehicleExtra)
+						end
+					else
+						natives.VEHICLE.TOGGLE_VEHICLE_MOD(veh.ID, _VehicleModID, _VehicleModValue==1)
+						if _VehicleModID == 21 then
+							if _VehicleModValue==1 then
+								VehicleMod:ApplyNeons(veh.ID)
+							else
+								VehicleMod:RemoveNeons(veh.ID)
+							end
 						end
 					end
 				else

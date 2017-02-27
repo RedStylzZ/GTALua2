@@ -340,7 +340,6 @@ function CheatMod:Process()
 			game.ShootBulletBetweenCoords(org, tgt, VEHICLE_WEAPON_PLAYER_LAZER, 100, 500, bulletOwner)
 		end
 	end
-
 end
 
 -- Run when an addon if (properly) unloaded
