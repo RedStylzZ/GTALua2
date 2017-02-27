@@ -1,6 +1,6 @@
 #pragma once
 
-// Generated 14 Feb 2017
+// Generated 26 Feb 2017
 
 #include "types.h"
 #include "nativeCaller.h"
@@ -203,7 +203,7 @@ namespace PLAYER
 	static BOOL HAS_PLAYER_BEEN_SPOTTED_IN_STOLEN_VEHICLE(Player player) { return invoke<BOOL>(0xD705740BB0A1CF4C, player); } // 0xD705740BB0A1CF4C 0x4A01B76A
 	static BOOL _0x38D28DA81E4E9BF9(Player player) { return invoke<BOOL>(0x38D28DA81E4E9BF9, player); } // 0x38D28DA81E4E9BF9 0x013B4F72
 	static BOOL _0xBC0753C9CA14B506(Player player, int p1, BOOL p2) { return invoke<BOOL>(0xBC0753C9CA14B506, player, p1, p2); } // 0xBC0753C9CA14B506 0x9DF75B2A
-	static void _WORLD_BOUNDS_LIMIT(float x, float y, float z) { invoke<Void>(0x5006D96C995A5827, x, y, z); } // 0x5006D96C995A5827
+	static void _SET_WORLD_BOUNDS_LIMIT(float x, float y, float z) { invoke<Void>(0x5006D96C995A5827, x, y, z); } // 0x5006D96C995A5827
 	static BOOL IS_PLAYER_RIDING_TRAIN(Player player) { return invoke<BOOL>(0x4EC12697209F2196, player); } // 0x4EC12697209F2196 0x9765E71D
 	static BOOL HAS_PLAYER_LEFT_THE_WORLD(Player player) { return invoke<BOOL>(0xD55DDFB47991A294, player); } // 0xD55DDFB47991A294 0xFEA40B6C
 	static void _0xFF300C7649724A0B(Player player, BOOL p1) { invoke<Void>(0xFF300C7649724A0B, player, p1); } // 0xFF300C7649724A0B 0xAD8383FA
@@ -377,7 +377,7 @@ namespace ENTITY
 	static void REMOVE_MODEL_HIDE(Any p0, Any p1, Any p2, Any p3, Any p4, Any p5) { invoke<Void>(0xD9E3006FB3CBD765, p0, p1, p2, p3, p4, p5); } // 0xD9E3006FB3CBD765 0x993DBC10
 	static void CREATE_FORCED_OBJECT(float x, float y, float z, Any p3, Hash modelHash, BOOL p5) { invoke<Void>(0x150E808B375A385A, x, y, z, p3, modelHash, p5); } // 0x150E808B375A385A 0x335190A2
 	static void REMOVE_FORCED_OBJECT(Any p0, Any p1, Any p2, Any p3, Any p4) { invoke<Void>(0x61B6775E83C0DB6F, p0, p1, p2, p3, p4); } // 0x61B6775E83C0DB6F 0xAED73ADD
-	static void SET_ENTITY_NO_COLLISION_ENTITY(Entity entity1, Entity entity2, BOOL collision) { invoke<Void>(0xA53ED5520C07654A, entity1, entity2, collision); } // 0xA53ED5520C07654A 0x1E11BFE9
+	static void SET_ENTITY_NO_COLLISION_ENTITY(Entity entity1, Entity entity2, BOOL unknown) { invoke<Void>(0xA53ED5520C07654A, entity1, entity2, unknown); } // 0xA53ED5520C07654A 0x1E11BFE9
 	static void SET_ENTITY_MOTION_BLUR(Entity entity, BOOL toggle) { invoke<Void>(0x295D82A8559F9150, entity, toggle); } // 0x295D82A8559F9150 0xE90005B8
 	static void _0xE12ABE5E3A389A6C(Entity entity, BOOL p1) { invoke<Void>(0xE12ABE5E3A389A6C, entity, p1); } // 0xE12ABE5E3A389A6C 0x44767B31
 	static void _0xA80AE305E0A3044F(Entity entity, BOOL p1) { invoke<Void>(0xA80AE305E0A3044F, entity, p1); } // 0xA80AE305E0A3044F 0xE224A6A5
@@ -501,7 +501,7 @@ namespace PED
 	static BOOL IS_PED_IN_ANY_TAXI(Ped ped) { return invoke<BOOL>(0x6E575D6A898AB852, ped); } // 0x6E575D6A898AB852 0x16FD386C
 	static void SET_PED_ID_RANGE(Ped ped, float value) { invoke<Void>(0xF107E836A70DCE05, ped, value); } // 0xF107E836A70DCE05 0xEF3B4ED9
 	static void _0x52D59AB61DDC05DD(Ped ped, BOOL p1) { invoke<Void>(0x52D59AB61DDC05DD, ped, p1); } // 0x52D59AB61DDC05DD 0x9A2180FF
-	static void _0xEC4B4B3B9908052A(Any p0, float p1) { invoke<Void>(0xEC4B4B3B9908052A, p0, p1); } // 0xEC4B4B3B9908052A 0xF30658D2
+	static void _0xEC4B4B3B9908052A(Ped ped, float unk) { invoke<Void>(0xEC4B4B3B9908052A, ped, unk); } // 0xEC4B4B3B9908052A 0xF30658D2
 	static void _0x733C87D4CE22BEA2(Any p0) { invoke<Void>(0x733C87D4CE22BEA2, p0); } // 0x733C87D4CE22BEA2 0x43709044
 	static void SET_PED_SEEING_RANGE(Ped ped, float value) { invoke<Void>(0xF29CF591C4BF6CEE, ped, value); } // 0xF29CF591C4BF6CEE 0x4BD72FE8
 	static void SET_PED_HEARING_RANGE(Ped ped, float value) { invoke<Void>(0x33A8F7F7D5F7F33C, ped, value); } // 0x33A8F7F7D5F7F33C 0xB32087E0
@@ -668,15 +668,15 @@ namespace PED
 	static int _0xEA9960D07DADCF10(Any p0) { return invoke<int>(0xEA9960D07DADCF10, p0); } // 0xEA9960D07DADCF10
 	static BOOL _0x3E802F11FBE27674(Any p0) { return invoke<BOOL>(0x3E802F11FBE27674, p0); } // 0x3E802F11FBE27674
 	static BOOL _0xF41B5D290C99A3D6(Any p0) { return invoke<BOOL>(0xF41B5D290C99A3D6, p0); } // 0xF41B5D290C99A3D6
-	static BOOL _IS_A_VALID_HAIR_COLOR(int colorID) { return invoke<BOOL>(0xE0D36E5D9E99CC21, colorID); } // 0xE0D36E5D9E99CC21
+	static BOOL _IS_PED_HAIR_COLOR_VALID(int colorID) { return invoke<BOOL>(0xE0D36E5D9E99CC21, colorID); } // 0xE0D36E5D9E99CC21
 	static Any _0xAAA6A3698A69E048(Any p0) { return invoke<Any>(0xAAA6A3698A69E048, p0); } // 0xAAA6A3698A69E048
-	static BOOL _IS_A_VALID_LIPSTICK_COLOR(int colorID) { return invoke<BOOL>(0x0525A2C2562F3CD4, colorID); } // 0x0525A2C2562F3CD4
-	static BOOL _IS_A_VALID_BLUSH_COLOR(int colorID) { return invoke<BOOL>(0x604E810189EE3A59, colorID); } // 0x604E810189EE3A59
+	static BOOL _IS_PED_LIPSTICK_COLOR_VALID(int colorID) { return invoke<BOOL>(0x0525A2C2562F3CD4, colorID); } // 0x0525A2C2562F3CD4
+	static BOOL _IS_PED_BLUSH_COLOR_VALID(int colorID) { return invoke<BOOL>(0x604E810189EE3A59, colorID); } // 0x604E810189EE3A59
 	static Any _0xC56FBF2F228E1DAC(Any p0, Any p1, Any p2) { return invoke<Any>(0xC56FBF2F228E1DAC, p0, p1, p2); } // 0xC56FBF2F228E1DAC
 	static void _SET_PED_FACE_FEATURE(Ped ped, int index, float scale) { invoke<Void>(0x71A5C1DBA060049E, ped, index, scale); } // 0x71A5C1DBA060049E
 	static BOOL HAS_PED_HEAD_BLEND_FINISHED(Ped ped) { return invoke<BOOL>(0x654CD0A825161131, ped); } // 0x654CD0A825161131 0x2B1BD9C5
 	static void _0x4668D80430D6C299(Ped ped) { invoke<Void>(0x4668D80430D6C299, ped); } // 0x4668D80430D6C299 0x894314A4
-	static void _0xCC9682B8951C5229(Any p0, Any p1, Any p2, Any p3, Any p4) { invoke<Void>(0xCC9682B8951C5229, p0, p1, p2, p3, p4); } // 0xCC9682B8951C5229 0x57E5B3F9
+	static void _0xCC9682B8951C5229(Ped ped, int r, int g, int b, int p4) { invoke<Void>(0xCC9682B8951C5229, ped, r, g, b, p4); } // 0xCC9682B8951C5229 0x57E5B3F9
 	static void _0xA21C118553BBDF02(Any p0) { invoke<Void>(0xA21C118553BBDF02, p0); } // 0xA21C118553BBDF02 0xC6F36292
 	static int _GET_FIRST_PARENT_ID_FOR_PED_TYPE(int type) { return invoke<int>(0x68D353AB88B97E0C, type); } // 0x68D353AB88B97E0C 0x211DEFEC
 	static int _GET_NUM_PARENT_PEDS_OF_TYPE(int type) { return invoke<int>(0x5EF37013A6539C9D, type); } // 0x5EF37013A6539C9D 0x095D3BD8
@@ -1006,10 +1006,10 @@ namespace VEHICLE
 	static void EXPLODE_VEHICLE(Vehicle vehicle, BOOL isAudible, BOOL isInvisible) { invoke<Void>(0xBA71116ADF5B514C, vehicle, isAudible, isInvisible); } // 0xBA71116ADF5B514C 0xBEDEACEB
 	static void SET_VEHICLE_OUT_OF_CONTROL(Vehicle vehicle, BOOL killDriver, BOOL explodeOnImpact) { invoke<Void>(0xF19D095E42D430CC, vehicle, killDriver, explodeOnImpact); } // 0xF19D095E42D430CC 0x3764D734
 	static void SET_VEHICLE_TIMED_EXPLOSION(Vehicle vehicle, Ped ped, BOOL toggle) { invoke<Void>(0x2E0A74E1002380B1, vehicle, ped, toggle); } // 0x2E0A74E1002380B1 0xDB8CB8E2
-	static void _0x99AD4CCCB128CBC9(Any p0) { invoke<Void>(0x99AD4CCCB128CBC9, p0); } // 0x99AD4CCCB128CBC9 0x811373DE
+	static void _0x99AD4CCCB128CBC9(Vehicle vehicle) { invoke<Void>(0x99AD4CCCB128CBC9, vehicle); } // 0x99AD4CCCB128CBC9 0x811373DE
 	static Any _0x6ADAABD3068C5235() { return invoke<Any>(0x6ADAABD3068C5235); } // 0x6ADAABD3068C5235 0xA4E69134
 	static void _0xEF49CF0270307CBE() { invoke<Void>(0xEF49CF0270307CBE); } // 0xEF49CF0270307CBE 0x65255524
-	static BOOL _0xAE3FEE8709B39DCB(Any p0) { return invoke<BOOL>(0xAE3FEE8709B39DCB, p0); } // 0xAE3FEE8709B39DCB 0xE39DAF36
+	static BOOL _0xAE3FEE8709B39DCB(Vehicle vehicle) { return invoke<BOOL>(0xAE3FEE8709B39DCB, vehicle); } // 0xAE3FEE8709B39DCB 0xE39DAF36
 	static void SET_TAXI_LIGHTS(Vehicle vehicle, BOOL state) { invoke<Void>(0x598803E85E8448D9, vehicle, state); } // 0x598803E85E8448D9 0x68639D85
 	static BOOL IS_TAXI_LIGHT_ON(Vehicle vehicle) { return invoke<BOOL>(0x7504C0F113AB50FC, vehicle); } // 0x7504C0F113AB50FC 0x6FC4924A
 	static BOOL IS_VEHICLE_IN_GARAGE_AREA(char* garageName, Vehicle vehicle) { return invoke<BOOL>(0xCEE4490CD57BB3C2, garageName, vehicle); } // 0xCEE4490CD57BB3C2 0xA90EC257
@@ -1052,8 +1052,8 @@ namespace VEHICLE
 	static BOOL SET_PED_ENABLED_BIKE_RINGTONE(Vehicle vehicle, Entity entity) { return invoke<BOOL>(0x57715966069157AD, vehicle, entity); } // 0x57715966069157AD 0x7FB25568
 	static BOOL _0x62CA17B74C435651(Vehicle vehicle) { return invoke<BOOL>(0x62CA17B74C435651, vehicle); } // 0x62CA17B74C435651 0x593143B9
 	static Vehicle _GET_VEHICLE_ATTACHED_TO_ENTITY(Object object) { return invoke<Vehicle>(0x375E7FC44F21C8AB, object); } // 0x375E7FC44F21C8AB 0x70DD5E25
-	static BOOL _0x89D630CF5EA96D23(Vehicle vehicle, Any p1) { return invoke<BOOL>(0x89D630CF5EA96D23, vehicle, p1); } // 0x89D630CF5EA96D23 0xFBF5536A
-	static void _0x6A98C2ECF57FA5D4(Vehicle vehicle, Any p1) { invoke<Void>(0x6A98C2ECF57FA5D4, vehicle, p1); } // 0x6A98C2ECF57FA5D4 0x20AB5783
+	static BOOL _0x89D630CF5EA96D23(Vehicle vehicle, Entity entity) { return invoke<BOOL>(0x89D630CF5EA96D23, vehicle, entity); } // 0x89D630CF5EA96D23 0xFBF5536A
+	static void _0x6A98C2ECF57FA5D4(Vehicle vehicle, Entity entity) { invoke<Void>(0x6A98C2ECF57FA5D4, vehicle, entity); } // 0x6A98C2ECF57FA5D4 0x20AB5783
 	static void _0x7C0043FDFF6436BC(Vehicle vehicle) { invoke<Void>(0x7C0043FDFF6436BC, vehicle); } // 0x7C0043FDFF6436BC 0x0F11D01F
 	static void _0x8AA9180DE2FEDD45(Vehicle vehicle, BOOL p1) { invoke<Void>(0x8AA9180DE2FEDD45, vehicle, p1); } // 0x8AA9180DE2FEDD45 0xAE040377
 	static void _0x0A6A279F3AA4FD70(Vehicle vehicle, BOOL p1) { invoke<Void>(0x0A6A279F3AA4FD70, vehicle, p1); } // 0x0A6A279F3AA4FD70 0x4C0E4031
@@ -1086,8 +1086,8 @@ namespace VEHICLE
 	static void _0x374706271354CB18(Vehicle vehicle, Entity p1, float p2) { invoke<Void>(0x374706271354CB18, vehicle, p1, p2); } // 0x374706271354CB18 0x40C4763F
 	static void DETACH_VEHICLE_FROM_TRAILER(Vehicle vehicle) { invoke<Void>(0x90532EDF0D2BDD86, vehicle); } // 0x90532EDF0D2BDD86 0xB5DBF91D
 	static BOOL IS_VEHICLE_ATTACHED_TO_TRAILER(Vehicle vehicle) { return invoke<BOOL>(0xE7CF3C4F9F489F0C, vehicle); } // 0xE7CF3C4F9F489F0C 0xE142BBCC
-	static void _0x2A8F319B392E7B3F(Any p0, float p1) { invoke<Void>(0x2A8F319B392E7B3F, p0, p1); } // 0x2A8F319B392E7B3F 0xE74E85CE
-	static void _0x95CF53B3D687F9FA(Any p0) { invoke<Void>(0x95CF53B3D687F9FA, p0); } // 0x95CF53B3D687F9FA 0x06C47A6F
+	static void _0x2A8F319B392E7B3F(Vehicle vehicle, float p1) { invoke<Void>(0x2A8F319B392E7B3F, vehicle, p1); } // 0x2A8F319B392E7B3F 0xE74E85CE
+	static void _0x95CF53B3D687F9FA(Vehicle vehicle) { invoke<Void>(0x95CF53B3D687F9FA, vehicle); } // 0x95CF53B3D687F9FA 0x06C47A6F
 	static void SET_VEHICLE_TYRE_FIXED(Vehicle vehicle, int tyreIndex) { invoke<Void>(0x6E13FC662B882D1D, vehicle, tyreIndex); } // 0x6E13FC662B882D1D 0xA42EFA6B
 	static void SET_VEHICLE_NUMBER_PLATE_TEXT(Vehicle vehicle, char* plateText) { invoke<Void>(0x95A88F0B409CDA47, vehicle, plateText); } // 0x95A88F0B409CDA47 0x400F9556
 	static char* GET_VEHICLE_NUMBER_PLATE_TEXT(Vehicle vehicle) { return invoke<char*>(0x7CE1CCB9B293020E, vehicle); } // 0x7CE1CCB9B293020E 0xE8522D58
@@ -1183,7 +1183,7 @@ namespace VEHICLE
 	static void SET_VEHICLE_COLOUR_COMBINATION(Vehicle vehicle, int colorCombination) { invoke<Void>(0x33E8CD3322E2FE31, vehicle, colorCombination); } // 0x33E8CD3322E2FE31 0xA557AEAD
 	static int GET_VEHICLE_COLOUR_COMBINATION(Vehicle vehicle) { return invoke<int>(0x6A842D197F845D56, vehicle); } // 0x6A842D197F845D56 0x77AC1B4C
 	static void SET_VEHICLE_IS_CONSIDERED_BY_PLAYER(Vehicle vehicle, BOOL toggle) { invoke<Void>(0x31B927BBC44156CD, vehicle, toggle); } // 0x31B927BBC44156CD 0x14413319
-	static void _0xBE5C1255A1830FF5(Vehicle vehicle, BOOL p1) { invoke<Void>(0xBE5C1255A1830FF5, vehicle, p1); } // 0xBE5C1255A1830FF5 0xA6D8D7A5
+	static void _0xBE5C1255A1830FF5(Vehicle vehicle, BOOL toggle) { invoke<Void>(0xBE5C1255A1830FF5, vehicle, toggle); } // 0xBE5C1255A1830FF5 0xA6D8D7A5
 	static void _0x9BECD4B9FEF3F8A6(Vehicle vehicle, BOOL p1) { invoke<Void>(0x9BECD4B9FEF3F8A6, vehicle, p1); } // 0x9BECD4B9FEF3F8A6 0xACAB8FF3
 	static void _0x88BC673CA9E0AE99(Vehicle vehicle, BOOL p1) { invoke<Void>(0x88BC673CA9E0AE99, vehicle, p1); } // 0x88BC673CA9E0AE99 0xF0E5C41D
 	static void _0xE851E480B814D4BA(Vehicle vehicle, BOOL p1) { invoke<Void>(0xE851E480B814D4BA, vehicle, p1); } // 0xE851E480B814D4BA 0x2F98B4B7
@@ -1285,7 +1285,7 @@ namespace VEHICLE
 	static void SET_VEHICLE_BRAKE_LIGHTS(Vehicle vehicle, BOOL toggle) { invoke<Void>(0x92B35082E0B42F66, vehicle, toggle); } // 0x92B35082E0B42F66 0x6D9BA11E
 	static void SET_VEHICLE_HANDBRAKE(Vehicle vehicle, BOOL toggle) { invoke<Void>(0x684785568EF26A22, vehicle, toggle); } // 0x684785568EF26A22 0xBA729A25
 	static void _0x48ADC8A773564670() { invoke<Void>(0x48ADC8A773564670); } // 0x48ADC8A773564670 0x37BC6ACB
-	static Any _0x91D6DD290888CBAB() { return invoke<Any>(0x91D6DD290888CBAB); } // 0x91D6DD290888CBAB 0x71D898EF
+	static BOOL _0x91D6DD290888CBAB() { return invoke<BOOL>(0x91D6DD290888CBAB); } // 0x91D6DD290888CBAB 0x71D898EF
 	static void _0x51DB102F4A3BA5E0(BOOL p0) { invoke<Void>(0x51DB102F4A3BA5E0, p0); } // 0x51DB102F4A3BA5E0 0x0B0523B0
 	static BOOL GET_VEHICLE_TRAILER_VEHICLE(Vehicle vehicle, Vehicle* trailer) { return invoke<BOOL>(0x1CDD6BADC297830D, vehicle, trailer); } // 0x1CDD6BADC297830D 0xAE84D758
 	static void _0xCAC66558B944DA67(Vehicle vehicle, BOOL p1) { invoke<Void>(0xCAC66558B944DA67, vehicle, p1); } // 0xCAC66558B944DA67 0x0B200CE2
@@ -1295,7 +1295,7 @@ namespace VEHICLE
 	static float GET_VEHICLE_MAX_BRAKING(Vehicle vehicle) { return invoke<float>(0xAD7E85FC227197C4, vehicle); } // 0xAD7E85FC227197C4 0x03B926F6
 	static float GET_VEHICLE_MAX_TRACTION(Vehicle vehicle) { return invoke<float>(0xA132FB5370554DB0, vehicle); } // 0xA132FB5370554DB0 0x7E5A1587
 	static float GET_VEHICLE_ACCELERATION(Vehicle vehicle) { return invoke<float>(0x5DD35C8D074E57AE, vehicle); } // 0x5DD35C8D074E57AE 0x00478321
-	static float _GET_VEHICLE_MAX_SPEED(Hash modelHash) { return invoke<float>(0xF417C2502FFFED43, modelHash); } // 0xF417C2502FFFED43 0x8F291C4A
+	static float _GET_VEHICLE_MODEL_MAX_SPEED(Hash modelHash) { return invoke<float>(0xF417C2502FFFED43, modelHash); } // 0xF417C2502FFFED43 0x8F291C4A
 	static float GET_VEHICLE_MODEL_MAX_BRAKING(Hash modelHash) { return invoke<float>(0xDC53FD41B4ED944C, modelHash); } // 0xDC53FD41B4ED944C 0x7EF02883
 	static float _0xBFBA3BA79CFF7EBF(Hash modelHash) { return invoke<float>(0xBFBA3BA79CFF7EBF, modelHash); } // 0xBFBA3BA79CFF7EBF 0xF3A7293F
 	static float GET_VEHICLE_MODEL_MAX_TRACTION(Hash modelHash) { return invoke<float>(0x539DE94D44FDFD0D, modelHash); } // 0x539DE94D44FDFD0D 0x7F985597
@@ -1314,7 +1314,7 @@ namespace VEHICLE
 	static void CLOSE_BOMB_BAY_DOORS(Vehicle vehicle) { invoke<Void>(0x3556041742A0DC74, vehicle); } // 0x3556041742A0DC74 0xF8EC5751
 	static BOOL IS_VEHICLE_SEARCHLIGHT_ON(Vehicle vehicle) { return invoke<BOOL>(0xC0F97FCE55094987, vehicle); } // 0xC0F97FCE55094987 0xADAF3513
 	static void SET_VEHICLE_SEARCHLIGHT(Vehicle heli, BOOL toggle, BOOL canBeUsedByAI) { invoke<Void>(0x14E85C5EE7A4D542, heli, toggle, canBeUsedByAI); } // 0x14E85C5EE7A4D542 0xE2C0DD8A
-	static BOOL _0x639431E895B9AA57(Any p0, Any p1, Any p2, BOOL p3, BOOL p4) { return invoke<BOOL>(0x639431E895B9AA57, p0, p1, p2, p3, p4); } // 0x639431E895B9AA57 0xAB0E79EB
+	static BOOL _0x639431E895B9AA57(Ped ped, Vehicle vehicle, BOOL p2, BOOL p3, BOOL p4) { return invoke<BOOL>(0x639431E895B9AA57, ped, vehicle, p2, p3, p4); } // 0x639431E895B9AA57 0xAB0E79EB
 	static BOOL CAN_SHUFFLE_SEAT(Vehicle vehicle, Any p1) { return invoke<BOOL>(0x30785D90C956BF35, vehicle, p1); } // 0x30785D90C956BF35 0xB3EB01ED
 	static int GET_NUM_MOD_KITS(Vehicle vehicle) { return invoke<int>(0x33F2E3FE70EAAE1D, vehicle); } // 0x33F2E3FE70EAAE1D 0xE4903AA0
 	static void SET_VEHICLE_MOD_KIT(Vehicle vehicle, int modKit) { invoke<Void>(0x1F2AA07F00B3217A, vehicle, modKit); } // 0x1F2AA07F00B3217A 0xB8132158
@@ -1357,7 +1357,7 @@ namespace VEHICLE
 	static BOOL GET_IS_RIGHT_VEHICLE_HEADLIGHT_DAMAGED(Vehicle vehicle) { return invoke<BOOL>(0xA7ECB73355EB2F20, vehicle); } // 0xA7ECB73355EB2F20 0xF178390B
 	static void _SET_VEHICLE_ENGINE_POWER_MULTIPLIER(Vehicle vehicle, float value) { invoke<Void>(0x93A3996368C94158, vehicle, value); } // 0x93A3996368C94158 0xE943B09C
 	static void _0x1CF38D529D7441D9(Vehicle vehicle, BOOL toggle) { invoke<Void>(0x1CF38D529D7441D9, vehicle, toggle); } // 0x1CF38D529D7441D9 0xDF594D8D
-	static void _0x1F9FB66F3A3842D2(Any p0, BOOL p1) { invoke<Void>(0x1F9FB66F3A3842D2, p0, p1); } // 0x1F9FB66F3A3842D2 0x4D840FC4
+	static void _0x1F9FB66F3A3842D2(Vehicle vehicle, BOOL p1) { invoke<Void>(0x1F9FB66F3A3842D2, vehicle, p1); } // 0x1F9FB66F3A3842D2 0x4D840FC4
 	static Any _0x54B0F614960F4A5F(float p0, float p1, float p2, float p3, float p4, float p5, float p6) { return invoke<Any>(0x54B0F614960F4A5F, p0, p1, p2, p3, p4, p5, p6); } // 0x54B0F614960F4A5F 0x5AB26C2B
 	static void _0xE30524E1871F481D(Any p0) { invoke<Void>(0xE30524E1871F481D, p0); } // 0xE30524E1871F481D 0xEF05F807
 	static BOOL _ANY_PASSENGERS_RAPPELING(Vehicle vehicle) { return invoke<BOOL>(0x291E373D483E7EE7, vehicle); } // 0x291E373D483E7EE7 0xD656E7E5
@@ -1390,7 +1390,7 @@ namespace VEHICLE
 	static void _0xBC3CCA5844452B06(float p0) { invoke<Void>(0xBC3CCA5844452B06, p0); } // 0xBC3CCA5844452B06 0x929801C6
 	static void SET_VEHICLE_SHOOT_AT_TARGET(Ped driver, Entity entity, float xTarget, float yTarget, float zTarget) { invoke<Void>(0x74CD9A9327A282EA, driver, entity, xTarget, yTarget, zTarget); } // 0x74CD9A9327A282EA 0x2343FFDF
 	static BOOL _GET_VEHICLE_OWNER(Vehicle vehicle, Entity* entity) { return invoke<BOOL>(0x8F5EBAB1F260CFCE, vehicle, entity); } // 0x8F5EBAB1F260CFCE 0x4A557117
-	static void SET_FORCE_HD_VEHICLE(Vehicle vehicle, BOOL p1) { invoke<Void>(0x97CE68CB032583F0, vehicle, p1); } // 0x97CE68CB032583F0 0xE0FC6A32
+	static void SET_FORCE_HD_VEHICLE(Vehicle vehicle, BOOL toggle) { invoke<Void>(0x97CE68CB032583F0, vehicle, toggle); } // 0x97CE68CB032583F0 0xE0FC6A32
 	static void _0x182F266C2D9E2BEB(Vehicle vehicle, float p1) { invoke<Void>(0x182F266C2D9E2BEB, vehicle, p1); } // 0x182F266C2D9E2BEB 0x7D0DE7EA
 	static int GET_VEHICLE_PLATE_TYPE(Vehicle vehicle) { return invoke<int>(0x9CCC9525BF2408E0, vehicle); } // 0x9CCC9525BF2408E0 0x65CA9286
 	static void TRACK_VEHICLE_VISIBILITY(Vehicle vehicle) { invoke<Void>(0x64473AEFDCF47DCA, vehicle); } // 0x64473AEFDCF47DCA 0x78122DC1
@@ -1406,10 +1406,10 @@ namespace VEHICLE
 	static void _0xF87D9F2301F7D206(Any p0) { invoke<Void>(0xF87D9F2301F7D206, p0); } // 0xF87D9F2301F7D206 0x450AD03A
 	static BOOL _VEHICLE_HAS_LANDING_GEAR(BOOL p0) { return invoke<BOOL>(0x4198AB0022B15F87, p0); } // 0x4198AB0022B15F87 0xBD085DCA
 	static BOOL _ARE_PROPELLERS_UNDAMAGED(Vehicle vehicle) { return invoke<BOOL>(0x755D6D5267CBBD7E, vehicle); } // 0x755D6D5267CBBD7E 0xABBDD5C6
-	static void _0x0CDDA42F9E360CA6(Any p0, BOOL p1) { invoke<Void>(0x0CDDA42F9E360CA6, p0, p1); } // 0x0CDDA42F9E360CA6 0x9B581DE7
+	static void _0x0CDDA42F9E360CA6(Vehicle vehicle, BOOL p1) { invoke<Void>(0x0CDDA42F9E360CA6, vehicle, p1); } // 0x0CDDA42F9E360CA6 0x9B581DE7
 	static BOOL IS_VEHICLE_STOLEN(Vehicle vehicle) { return invoke<BOOL>(0x4AF9BD80EEBEB453, vehicle); } // 0x4AF9BD80EEBEB453 0x20B61DDE
 	static void SET_VEHICLE_IS_STOLEN(Vehicle vehicle, BOOL isStolen) { invoke<Void>(0x67B2C79AA7FF5738, vehicle, isStolen); } // 0x67B2C79AA7FF5738 0x70912E42
-	static void _0xAD2D28A1AFDFF131(Any p0, float p1) { invoke<Void>(0xAD2D28A1AFDFF131, p0, p1); } // 0xAD2D28A1AFDFF131 0xED159AE6
+	static void _0xAD2D28A1AFDFF131(Vehicle vehicle, float p1) { invoke<Void>(0xAD2D28A1AFDFF131, vehicle, p1); } // 0xAD2D28A1AFDFF131 0xED159AE6
 	static BOOL ADD_A_MARKER_OVER_VEHICLE(Any p0) { return invoke<BOOL>(0x5991A01434CE9677, p0); } // 0x5991A01434CE9677 0xAF8CB3DF
 	static void _0xB264C4D2F2B0A78B(Vehicle vehicle) { invoke<Void>(0xB264C4D2F2B0A78B, vehicle); } // 0xB264C4D2F2B0A78B 0x45F72495
 	static void DETACH_VEHICLE_FROM_CARGOBOB(Vehicle vehicle, Vehicle cargobob) { invoke<Void>(0x0E21D3DF1051399D, vehicle, cargobob); } // 0x0E21D3DF1051399D 0x83D3D331
@@ -1417,7 +1417,7 @@ namespace VEHICLE
 	static BOOL IS_VEHICLE_ATTACHED_TO_CARGOBOB(Vehicle cargobob, Vehicle vehicleAttached) { return invoke<BOOL>(0xD40148F22E81A1D9, cargobob, vehicleAttached); } // 0xD40148F22E81A1D9 0x5DEEC76C
 	static Vehicle GET_VEHICLE_ATTACHED_TO_CARGOBOB(Vehicle cargobob) { return invoke<Vehicle>(0x873B82D42AC2B9E5, cargobob); } // 0x873B82D42AC2B9E5 0x301A1D24
 	static void ATTACH_VEHICLE_TO_CARGOBOB(Vehicle vehicle, Vehicle cargobob, int p2, float x, float y, float z) { invoke<Void>(0x4127F1D84E347769, vehicle, cargobob, p2, x, y, z); } // 0x4127F1D84E347769 0x607DC9D5
-	static void _0x571FEB383F629926(Any p0, BOOL p1) { invoke<Void>(0x571FEB383F629926, p0, p1); } // 0x571FEB383F629926
+	static void _0x571FEB383F629926(Vehicle cargobob, BOOL p1) { invoke<Void>(0x571FEB383F629926, cargobob, p1); } // 0x571FEB383F629926
 	static Vector3 _GET_CARGOBOB_HOOK_POSITION(Vehicle cargobob) { return invoke<Vector3>(0xCBDB9B923CACC92D, cargobob); } // 0xCBDB9B923CACC92D
 	static BOOL _IS_CARGOBOB_HOOK_ACTIVE(Vehicle cargobob) { return invoke<BOOL>(0x1821D91AD4B56108, cargobob); } // 0x1821D91AD4B56108 0xAF769B81
 	static void _ENABLE_CARGOBOB_HOOK(Vehicle cargobob, int state) { invoke<Void>(0x7BEB0C7A235F6F3B, cargobob, state); } // 0x7BEB0C7A235F6F3B 0x4D3C9A99
@@ -1641,8 +1641,8 @@ namespace AI
 	static void SET_PED_PATH_AVOID_FIRE(Ped ped, BOOL avoidFire) { invoke<Void>(0x4455517B28441E60, ped, avoidFire); } // 0x4455517B28441E60 0xDCC5B934
 	static void SET_GLOBAL_MIN_BIRD_FLIGHT_HEIGHT(float height) { invoke<Void>(0x6C6B148586F934F7, height); } // 0x6C6B148586F934F7 0x2AFB14B8
 	static Any GET_NAVMESH_ROUTE_DISTANCE_REMAINING(Ped ped, Any* p1, Any* p2) { return invoke<Any>(0xC6F5C0BCDC74D62D, ped, p1, p2); } // 0xC6F5C0BCDC74D62D 0xD9281778
-	static Any GET_NAVMESH_ROUTE_RESULT(Any p0) { return invoke<Any>(0x632E831F382A0FA8, p0); } // 0x632E831F382A0FA8 0x96491602
-	static BOOL _0x3E38E28A1D80DDF6(Any p0) { return invoke<BOOL>(0x3E38E28A1D80DDF6, p0); } // 0x3E38E28A1D80DDF6
+	static int GET_NAVMESH_ROUTE_RESULT(Ped ped) { return invoke<int>(0x632E831F382A0FA8, ped); } // 0x632E831F382A0FA8 0x96491602
+	static BOOL _0x3E38E28A1D80DDF6(Ped ped) { return invoke<BOOL>(0x3E38E28A1D80DDF6, ped); } // 0x3E38E28A1D80DDF6
 	static void TASK_GO_TO_COORD_ANY_MEANS(Ped ped, float x, float y, float z, float speed, Any p5, BOOL p6, int walkingStyle, float p8) { invoke<Void>(0x5BC448CB78FA3E88, ped, x, y, z, speed, p5, p6, walkingStyle, p8); } // 0x5BC448CB78FA3E88 0xF91DF93B
 	static void TASK_GO_TO_COORD_ANY_MEANS_EXTRA_PARAMS(Ped ped, float x, float y, float z, float speed, Any p5, BOOL p6, int walkingStyle, float p8, Any p9, Any p10, Any p11) { invoke<Void>(0x1DD45F9ECFDB1BC9, ped, x, y, z, speed, p5, p6, walkingStyle, p8, p9, p10, p11); } // 0x1DD45F9ECFDB1BC9 0x094B75EF
 	static void TASK_GO_TO_COORD_ANY_MEANS_EXTRA_PARAMS_WITH_CRUISE_SPEED(Ped ped, float x, float y, float z, float speed, Any p5, BOOL p6, int walkingStyle, float p8, Any p9, Any p10, Any p11, Any p12) { invoke<Void>(0xB8ECD61F531A7B02, ped, x, y, z, speed, p5, p6, walkingStyle, p8, p9, p10, p11, p12); } // 0xB8ECD61F531A7B02 0x86DC03F9
@@ -1912,7 +1912,7 @@ namespace GAMEPLAY
 	static void SET_RANDOM_WEATHER_TYPE() { invoke<Void>(0x8B05F884CF7E8020); } // 0x8B05F884CF7E8020 0xE7AA1BC9
 	static void CLEAR_WEATHER_TYPE_PERSIST() { invoke<Void>(0xCCC39339BEF76CF5); } // 0xCCC39339BEF76CF5 0x6AB757D8
 	static void _GET_WEATHER_TYPE_TRANSITION(Any* p0, Any* p1, float* progress_or_time) { invoke<Void>(0xF3BBE884A14BB413, p0, p1, progress_or_time); } // 0xF3BBE884A14BB413 0x9A5C1D56
-	static void _SET_WEATHER_TYPE_TRANSITION(Hash sourceWeather, Hash targetWeather, float transitionTime) { invoke<Void>(0x578C752848ECFA0C, sourceWeather, targetWeather, transitionTime); } // 0x578C752848ECFA0C 0x5CA74040
+	static void _SET_WEATHER_TYPE_TRANSITION(Hash weatherType1, Hash weatherType2, float percentWeather2) { invoke<Void>(0x578C752848ECFA0C, weatherType1, weatherType2, percentWeather2); } // 0x578C752848ECFA0C 0x5CA74040
 	static void SET_OVERRIDE_WEATHER(char* weatherType) { invoke<Void>(0xA43D5C6FE51ADBEF, weatherType); } // 0xA43D5C6FE51ADBEF 0xD9082BB5
 	static void CLEAR_OVERRIDE_WEATHER() { invoke<Void>(0x338D2E3477711050); } // 0x338D2E3477711050 0x7740EA4E
 	static void _0xB8F87EAD7533B176(float p0) { invoke<Void>(0xB8F87EAD7533B176, p0); } // 0xB8F87EAD7533B176 0x625181DC
@@ -2175,7 +2175,7 @@ namespace GAMEPLAY
 	static void _0xC79AE21974B01FB2() { invoke<Void>(0xC79AE21974B01FB2); } // 0xC79AE21974B01FB2
 	static BOOL _0x684A41975F077262() { return invoke<BOOL>(0x684A41975F077262); } // 0x684A41975F077262
 	static Any _0xABB2FA71C83A1B72() { return invoke<Any>(0xABB2FA71C83A1B72); } // 0xABB2FA71C83A1B72
-	static void _0x4EBB7E87AA0DBED4(BOOL p0) { invoke<Void>(0x4EBB7E87AA0DBED4, p0); } // 0x4EBB7E87AA0DBED4
+	static void _SHOW_PED_IN_PAUSE_MENU(BOOL toggle) { invoke<Void>(0x4EBB7E87AA0DBED4, toggle); } // 0x4EBB7E87AA0DBED4
 	static BOOL _0x9689123E3F213AA5() { return invoke<BOOL>(0x9689123E3F213AA5); } // 0x9689123E3F213AA5
 	static void _0x9D8D44ADBBA61EF2(BOOL p0) { invoke<Void>(0x9D8D44ADBBA61EF2, p0); } // 0x9D8D44ADBBA61EF2
 	static void _0x23227DF0B2115469() { invoke<Void>(0x23227DF0B2115469); } // 0x23227DF0B2115469
@@ -2534,7 +2534,7 @@ namespace CAM
 	static float GET_CAM_NEAR_CLIP(Cam cam) { return invoke<float>(0xC520A34DAFBF24B1, cam); } // 0xC520A34DAFBF24B1 0xCFCD35EE
 	static float GET_CAM_FAR_CLIP(Cam cam) { return invoke<float>(0xB60A9CFEB21CA6AA, cam); } // 0xB60A9CFEB21CA6AA 0x09F119B8
 	static float GET_CAM_FAR_DOF(Cam cam) { return invoke<float>(0x255F8DAFD540D397, cam); } // 0x255F8DAFD540D397 0x98C5CCE9
-	static void SET_CAM_PARAMS(Cam cam, float p1, float p2, float p3, float p4, float p5, float p6, float p7, Any p8, Any p9, Any p10, Any p11) { invoke<Void>(0xBFD8727AEA3CCEBA, cam, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11); } // 0xBFD8727AEA3CCEBA 0x2167CEBF
+	static void SET_CAM_PARAMS(Cam cam, float posX, float posY, float posZ, float rotX, float rotY, float rotZ, float fieldOfView, Any p8, int p9, int p10, int p11) { invoke<Void>(0xBFD8727AEA3CCEBA, cam, posX, posY, posZ, rotX, rotY, rotZ, fieldOfView, p8, p9, p10, p11); } // 0xBFD8727AEA3CCEBA 0x2167CEBF
 	static void SET_CAM_COORD(Cam cam, float posX, float posY, float posZ) { invoke<Void>(0x4D41783FB745E42E, cam, posX, posY, posZ); } // 0x4D41783FB745E42E 0x7A8053AF
 	static void SET_CAM_ROT(Cam cam, float rotX, float rotY, float rotZ, int p4) { invoke<Void>(0x85973643155D0B07, cam, rotX, rotY, rotZ, p4); } // 0x85973643155D0B07 0xEE38B3C1
 	static void SET_CAM_FOV(Cam cam, float fieldOfView) { invoke<Void>(0xB13C14F66A00D047, cam, fieldOfView); } // 0xB13C14F66A00D047 0xD3D5D74F
@@ -2566,7 +2566,7 @@ namespace CAM
 	static void _0xA2767257A320FC82(Any p0, BOOL p1) { invoke<Void>(0xA2767257A320FC82, p0, p1); } // 0xA2767257A320FC82
 	static void _0x271017B9BA825366(Any p0, BOOL p1) { invoke<Void>(0x271017B9BA825366, p0, p1); } // 0x271017B9BA825366 0x43220969
 	static void SET_CAM_DEBUG_NAME(Cam camera, char* name) { invoke<Void>(0x1B93E0107865DD40, camera, name); } // 0x1B93E0107865DD40 0x9B00DF3F
-	static void ADD_CAM_SPLINE_NODE(int camera, float x, float y, float z, float xRot, float yRot, float zRot, int length, int p8, int p9) { invoke<Void>(0x8609C75EC438FB3B, camera, x, y, z, xRot, yRot, zRot, length, p8, p9); } // 0x8609C75EC438FB3B 0xAD3C7EAA
+	static void ADD_CAM_SPLINE_NODE(Cam camera, float x, float y, float z, float xRot, float yRot, float zRot, int length, int p8, int p9) { invoke<Void>(0x8609C75EC438FB3B, camera, x, y, z, xRot, yRot, zRot, length, p8, p9); } // 0x8609C75EC438FB3B 0xAD3C7EAA
 	static void _0x0A9F2A468B328E74(Any p0, Any p1, Any p2, Any p3) { invoke<Void>(0x0A9F2A468B328E74, p0, p1, p2, p3); } // 0x0A9F2A468B328E74 0x30510511
 	static void _0x0FB82563989CF4FB(Any p0, Any p1, Any p2, Any p3) { invoke<Void>(0x0FB82563989CF4FB, p0, p1, p2, p3); } // 0x0FB82563989CF4FB 0xBA6C085B
 	static void _0x609278246A29CA34(Any p0, Any p1, Any p2) { invoke<Void>(0x609278246A29CA34, p0, p1, p2); } // 0x609278246A29CA34 0xB4737F03
@@ -2662,7 +2662,7 @@ namespace CAM
 	static void _0x2A2173E46DAECD12(Any p0, Any p1) { invoke<Void>(0x2A2173E46DAECD12, p0, p1); } // 0x2A2173E46DAECD12 0x1DEBCB45
 	static Any _0x19CAFA3C87F7C2FF() { return invoke<Any>(0x19CAFA3C87F7C2FF); } // 0x19CAFA3C87F7C2FF
 	static BOOL IS_AIM_CAM_ACTIVE() { return invoke<BOOL>(0x68EDDA28A5976D07); } // 0x68EDDA28A5976D07 0xC24B4F6F
-	static Any _0x74BD83EA840F6BC9() { return invoke<Any>(0x74BD83EA840F6BC9); } // 0x74BD83EA840F6BC9 0x8F320DE4
+	static BOOL _0x74BD83EA840F6BC9() { return invoke<BOOL>(0x74BD83EA840F6BC9); } // 0x74BD83EA840F6BC9 0x8F320DE4
 	static BOOL IS_FIRST_PERSON_AIM_CAM_ACTIVE() { return invoke<BOOL>(0x5E346D934122613F); } // 0x5E346D934122613F 0xD6280468
 	static void DISABLE_AIM_CAM_THIS_UPDATE() { invoke<Void>(0x1A31FE0049E542F6); } // 0x1A31FE0049E542F6 0x1BAA7182
 	static float _GET_GAMEPLAY_CAM_ZOOM() { return invoke<float>(0x7EC52CC40597D170); } // 0x7EC52CC40597D170 0x33951005
@@ -2923,7 +2923,7 @@ namespace STREAMING
 	static void _SWITCH_OUT_PLAYER(Ped ped, int flags, int unknown) { invoke<Void>(0xAAB3200ED59016BC, ped, flags, unknown); } // 0xAAB3200ED59016BC 0xFB4D062D
 	static void _0xD8295AF639FD9CB8(Any p0) { invoke<Void>(0xD8295AF639FD9CB8, p0); } // 0xD8295AF639FD9CB8 0x2349373B
 	static Any _0x933BBEEB8C61B5F4() { return invoke<Any>(0x933BBEEB8C61B5F4); } // 0x933BBEEB8C61B5F4 0x74C16879
-	static Any SET_PLAYER_INVERTED_UP() { return invoke<Any>(0x08C2D6C52A3104BB); } // 0x08C2D6C52A3104BB 0x569847E3
+	static int SET_PLAYER_INVERTED_UP() { return invoke<int>(0x08C2D6C52A3104BB); } // 0x08C2D6C52A3104BB 0x569847E3
 	static Any _0x5B48A06DD0E792A5() { return invoke<Any>(0x5B48A06DD0E792A5); } // 0x5B48A06DD0E792A5 0xC7A3D279
 	static Any DESTROY_PLAYER_IN_PAUSE_MENU() { return invoke<Any>(0x5B74EA8CFD5E3E7E); } // 0x5B74EA8CFD5E3E7E 0x90F64284
 	static void _0x1E9057A74FD73E23() { invoke<Void>(0x1E9057A74FD73E23); } // 0x1E9057A74FD73E23
@@ -2968,19 +2968,19 @@ namespace SCRIPT
 	static BOOL _DOES_SCRIPT_WITH_NAME_HASH_EXIST(Hash scriptHash) { return invoke<BOOL>(0xF86AA3C56BA31381, scriptHash); } // 0xF86AA3C56BA31381
 	static void TERMINATE_THREAD(int threadId) { invoke<Void>(0xC8B189ED9138BCD4, threadId); } // 0xC8B189ED9138BCD4 0x253FD520
 	static BOOL IS_THREAD_ACTIVE(int threadId) { return invoke<BOOL>(0x46E9AE36D8FA6417, threadId); } // 0x46E9AE36D8FA6417 0x78D7A5A0
-	static char* _GET_THREAD_NAME(int threadId) { return invoke<char*>(0x05A42BA9FC8DA96B, threadId); } // 0x05A42BA9FC8DA96B 0xBE7ACD89
+	static char* _GET_NAME_OF_THREAD(int threadId) { return invoke<char*>(0x05A42BA9FC8DA96B, threadId); } // 0x05A42BA9FC8DA96B 0xBE7ACD89
 	static void _BEGIN_ENUMERATING_THREADS() { invoke<Void>(0xDADFADA5A20143A8); } // 0xDADFADA5A20143A8 0xBB4E2F66
 	static int _GET_ID_OF_NEXT_THREAD_IN_ENUMERATION() { return invoke<int>(0x30B4FA1C82DD4B9F); } // 0x30B4FA1C82DD4B9F 0x1E28B28F
 	static int GET_ID_OF_THIS_THREAD() { return invoke<int>(0xC30338E8088E2E21); } // 0xC30338E8088E2E21 0xDE524830
 	static void TERMINATE_THIS_THREAD() { invoke<Void>(0x1090044AD1DA76FA); } // 0x1090044AD1DA76FA 0x3CD9CBB7
-	static int _GET_NUM_OF_INSTANCES_OF_SCRIPT_WITH_NAME_HASH(Hash scriptHash) { return invoke<int>(0x2C83A9DA6BFFC4F9, scriptHash); } // 0x2C83A9DA6BFFC4F9 0x029D3841
+	static int _GET_NUMBER_OF_INSTANCES_OF_SCRIPT_WITH_NAME_HASH(Hash scriptHash) { return invoke<int>(0x2C83A9DA6BFFC4F9, scriptHash); } // 0x2C83A9DA6BFFC4F9 0x029D3841
 	static char* GET_THIS_SCRIPT_NAME() { return invoke<char*>(0x442E0A7EDE4A738A); } // 0x442E0A7EDE4A738A 0xA40FD5D9
-	static Hash _GET_THIS_SCRIPT_NAME_HASH() { return invoke<Hash>(0x8A1C8B1738FFE87E); } // 0x8A1C8B1738FFE87E 0x2BEE1F45
-	static int GET_NUMBER_OF_EVENTS(int p0) { return invoke<int>(0x5F92A689A06620AA, p0); } // 0x5F92A689A06620AA 0xA3525D60
-	static BOOL GET_EVENT_EXISTS(int p0, int eventIndex) { return invoke<BOOL>(0x936E6168A9BCEDB5, p0, eventIndex); } // 0x936E6168A9BCEDB5 0xA1B447B5
-	static int GET_EVENT_AT_INDEX(int p0, int eventIndex) { return invoke<int>(0xD8F66A3A60C62153, p0, eventIndex); } // 0xD8F66A3A60C62153 0xB49C1442
-	static BOOL GET_EVENT_DATA(int p0, int eventIndex, int* eventData, int p3) { return invoke<BOOL>(0x2902843FCD2B2D79, p0, eventIndex, eventData, p3); } // 0x2902843FCD2B2D79 0x4280F92F
-	static void TRIGGER_SCRIPT_EVENT(int p0, Any* argsStruct, int argsStructCount, int bitset) { invoke<Void>(0x5AE99C571D5BBE5D, p0, argsStruct, argsStructCount, bitset); } // 0x5AE99C571D5BBE5D 0x54763B35
+	static Hash GET_HASH_OF_THIS_SCRIPT_NAME() { return invoke<Hash>(0x8A1C8B1738FFE87E); } // 0x8A1C8B1738FFE87E 0x2BEE1F45
+	static int GET_NUMBER_OF_EVENTS(BOOL p0) { return invoke<int>(0x5F92A689A06620AA, p0); } // 0x5F92A689A06620AA 0xA3525D60
+	static BOOL GET_EVENT_EXISTS(BOOL p0, int eventID) { return invoke<BOOL>(0x936E6168A9BCEDB5, p0, eventID); } // 0x936E6168A9BCEDB5 0xA1B447B5
+	static int GET_EVENT_AT_INDEX(BOOL p0, int index) { return invoke<int>(0xD8F66A3A60C62153, p0, index); } // 0xD8F66A3A60C62153 0xB49C1442
+	static BOOL GET_EVENT_DATA(BOOL p0, int eventIndex, Any* argsOut, int argsCount) { return invoke<BOOL>(0x2902843FCD2B2D79, p0, eventIndex, argsOut, argsCount); } // 0x2902843FCD2B2D79 0x4280F92F
+	static void TRIGGER_SCRIPT_EVENT(BOOL p0, Any* args, int argCount, int bitset) { invoke<Void>(0x5AE99C571D5BBE5D, p0, args, argCount, bitset); } // 0x5AE99C571D5BBE5D 0x54763B35
 	static void SHUTDOWN_LOADING_SCREEN() { invoke<Void>(0x078EBE9809CCD637); } // 0x078EBE9809CCD637 0xA2826D17
 	static void SET_NO_LOADING_SCREEN(BOOL toggle) { invoke<Void>(0x5262CC1995D07E09, toggle); } // 0x5262CC1995D07E09 0xC8055034
 	static BOOL _GET_NO_LOADING_SCREEN() { return invoke<BOOL>(0x18C1270EA7F199BC); } // 0x18C1270EA7F199BC
@@ -3048,30 +3048,30 @@ namespace UI
 	static Any _0xDD6CB2CCE7C2735C(int type, char* button, char* text) { return invoke<Any>(0xDD6CB2CCE7C2735C, type, button, text); } // 0xDD6CB2CCE7C2735C
 	static void BEGIN_TEXT_COMMAND_PRINT(char* GxtEntry) { invoke<Void>(0xB87A37EEB7FAA67D, GxtEntry); } // 0xB87A37EEB7FAA67D 0xF42C43C7
 	static void END_TEXT_COMMAND_PRINT(int duration, BOOL drawImmediately) { invoke<Void>(0x9D77056A530643F6, duration, drawImmediately); } // 0x9D77056A530643F6 0x38F82261
-	static void _SET_TEXT_ENTRY_CONDITIONAL(char* text) { invoke<Void>(0x853648FD1063A213, text); } // 0x853648FD1063A213 0xDD524A11
-	static BOOL _IS_CONDITIONAL_TEXT_ENTRY_DISPLAYED() { return invoke<BOOL>(0x8A9BA1AB3E237613); } // 0x8A9BA1AB3E237613 0x672EFB45
+	static void BEGIN_TEXT_COMMAND_IS_MESSAGE_DISPLAYED(char* text) { invoke<Void>(0x853648FD1063A213, text); } // 0x853648FD1063A213 0xDD524A11
+	static BOOL END_TEXT_COMMAND_IS_MESSAGE_DISPLAYED() { return invoke<BOOL>(0x8A9BA1AB3E237613); } // 0x8A9BA1AB3E237613 0x672EFB45
 	static void BEGIN_TEXT_COMMAND_DISPLAY_TEXT(char* text) { invoke<Void>(0x25FBB336DF1804CB, text); } // 0x25FBB336DF1804CB 0x3E35563E
 	static void END_TEXT_COMMAND_DISPLAY_TEXT(float x, float y) { invoke<Void>(0xCD015E5BB0D96A57, x, y); } // 0xCD015E5BB0D96A57 0x6F8350CE
 	static void _SET_TEXT_ENTRY_FOR_WIDTH(char* text) { invoke<Void>(0x54CE8AC98E120CAB, text); } // 0x54CE8AC98E120CAB 0x51E7A037
-	static float _GET_TEXT_SCREEN_WIDTH(BOOL p0) { return invoke<float>(0x85F061DA64ED2F67, p0); } // 0x85F061DA64ED2F67 0xD12A643A
-	static void _SET_TEXT_GXT_ENTRY(char* entry) { invoke<Void>(0x521FB041D93DD0E4, entry); } // 0x521FB041D93DD0E4 0x94B82066
+	static float _GET_TEXT_SCREEN_WIDTH(int font) { return invoke<float>(0x85F061DA64ED2F67, font); } // 0x85F061DA64ED2F67 0xD12A643A
+	static void _SET_TEXT_ENTRY_FOR_LINE_COUNT(char* entry) { invoke<Void>(0x521FB041D93DD0E4, entry); } // 0x521FB041D93DD0E4 0x94B82066
 	static int _GET_TEXT_SCREEN_LINE_COUNT(float x, float y) { return invoke<int>(0x9040DFB09BE75706, x, y); } // 0x9040DFB09BE75706 0xAA318785
 	static void BEGIN_TEXT_COMMAND_DISPLAY_HELP(char* inputType) { invoke<Void>(0x8509B634FBE7DA11, inputType); } // 0x8509B634FBE7DA11 0xB245FC10
 	static void END_TEXT_COMMAND_DISPLAY_HELP(Any p0, BOOL loop, BOOL beep, int shape) { invoke<Void>(0x238FFE5C7B0498A6, p0, loop, beep, shape); } // 0x238FFE5C7B0498A6 0xB59B530D
-	static void BEGIN_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED(char* p0) { invoke<Void>(0x0A24DA3A41B718F5, p0); } // 0x0A24DA3A41B718F5 0x00E20F2D
+	static void BEGIN_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED(char* labelName) { invoke<Void>(0x0A24DA3A41B718F5, labelName); } // 0x0A24DA3A41B718F5 0x00E20F2D
 	static BOOL END_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED(int p0) { return invoke<BOOL>(0x10BDDBFC529428DD, p0); } // 0x10BDDBFC529428DD 0xF63A13EC
 	static void BEGIN_TEXT_COMMAND_SET_BLIP_NAME(char* gxtentry) { invoke<Void>(0xF9113A30DE5C6670, gxtentry); } // 0xF9113A30DE5C6670 0xF4C211F6
 	static void END_TEXT_COMMAND_SET_BLIP_NAME(Blip blip) { invoke<Void>(0xBC38B49BCB83BC9B, blip); } // 0xBC38B49BCB83BC9B 0xE8E59820
-	static void _0x23D69E0465570028(char* p0) { invoke<Void>(0x23D69E0465570028, p0); } // 0x23D69E0465570028 0x0E103475
-	static void _0xCFDBDF5AE59BA0F4(BOOL p0) { invoke<Void>(0xCFDBDF5AE59BA0F4, p0); } // 0xCFDBDF5AE59BA0F4 0x2944A6C5
-	static void _BEGIN_TEXT_COMMAND_UNK(char* p0) { invoke<Void>(0xE124FA80A759019C, p0); } // 0xE124FA80A759019C 0x550665AE
-	static void _END_TEXT_COMMAND_UNK() { invoke<Void>(0xFCC75460ABA29378); } // 0xFCC75460ABA29378 0x67785AF2
+	static void _BEGIN_TEXT_COMMAND_OBJECTIVE(char* p0) { invoke<Void>(0x23D69E0465570028, p0); } // 0x23D69E0465570028 0x0E103475
+	static void _END_TEXT_COMMAND_OBJECTIVE(BOOL p0) { invoke<Void>(0xCFDBDF5AE59BA0F4, p0); } // 0xCFDBDF5AE59BA0F4 0x2944A6C5
+	static void _BEGIN_TEXT_COMMAND_CONTEXT(char* text) { invoke<Void>(0xE124FA80A759019C, text); } // 0xE124FA80A759019C 0x550665AE
+	static void _END_TEXT_COMMAND_CONTEXT() { invoke<Void>(0xFCC75460ABA29378); } // 0xFCC75460ABA29378 0x67785AF2
 	static void _BEGIN_TEXT_COMMAND_TIMER(char* p0) { invoke<Void>(0x8F9EE5687F8EECCD, p0); } // 0x8F9EE5687F8EECCD 0xBF855650
 	static void _END_TEXT_COMMAND_TIMER(BOOL p0) { invoke<Void>(0xA86911979638106F, p0); } // 0xA86911979638106F 0x6E7FDA1C
-	static void ADD_TEXT_COMPONENT_INTEGER(Any value) { invoke<Void>(0x03B504CF259931BC, value); } // 0x03B504CF259931BC 0xFE272A57
+	static void ADD_TEXT_COMPONENT_INTEGER(int value) { invoke<Void>(0x03B504CF259931BC, value); } // 0x03B504CF259931BC 0xFE272A57
 	static void ADD_TEXT_COMPONENT_FLOAT(float value, int decimalPlaces) { invoke<Void>(0xE7DCB5B874BCD96E, value, decimalPlaces); } // 0xE7DCB5B874BCD96E 0x24D78013
 	static void ADD_TEXT_COMPONENT_SUBSTRING_TEXT_LABEL(char* labelName) { invoke<Void>(0xC63CD5D2920ACBE7, labelName); } // 0xC63CD5D2920ACBE7 0xDCE05406
-	static void _ADD_TEXT_COMPONENT_SUBSTRING_LOCALIZED(Hash gxtEntryHash) { invoke<Void>(0x17299B63C7683A2B, gxtEntryHash); } // 0x17299B63C7683A2B 0x150E03B6
+	static void ADD_TEXT_COMPONENT_SUBSTRING_TEXT_LABEL_HASH_KEY(Hash gxtEntryHash) { invoke<Void>(0x17299B63C7683A2B, gxtEntryHash); } // 0x17299B63C7683A2B 0x150E03B6
 	static void ADD_TEXT_COMPONENT_SUBSTRING_BLIP_NAME(Blip blip) { invoke<Void>(0x80EAD8E2E1D5D52E, blip); } // 0x80EAD8E2E1D5D52E 0x5DE98F0A
 	static void ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(char* text) { invoke<Void>(0x6C188BE134E074AA, text); } // 0x6C188BE134E074AA 0x27A244D8
 	static void ADD_TEXT_COMPONENT_SUBSTRING_TIME(int timestamp, int flags) { invoke<Void>(0x1115F16B8AB9E8BF, timestamp, flags); } // 0x1115F16B8AB9E8BF 0x135B3CD0
@@ -3100,7 +3100,7 @@ namespace UI
 	static BOOL DOES_TEXT_LABEL_EXIST(char* gxt) { return invoke<BOOL>(0xAC09CA973C564252, gxt); } // 0xAC09CA973C564252 0x6ECAE560
 	static int GET_LENGTH_OF_STRING_WITH_THIS_TEXT_LABEL(char* gxt) { return invoke<int>(0x801BD273D3A23F74, gxt); } // 0x801BD273D3A23F74 0xA4CA7BE5
 	static int GET_LENGTH_OF_LITERAL_STRING(char* string) { return invoke<int>(0xF030907CCBB8A9FD, string); } // 0xF030907CCBB8A9FD 0x99379D55
-	static int _0x43E4111189E54F0E(char* p0) { return invoke<int>(0x43E4111189E54F0E, p0); } // 0x43E4111189E54F0E 0x7DBC0764
+	static int _GET_LENGTH_OF_STRING(char* p0) { return invoke<int>(0x43E4111189E54F0E, p0); } // 0x43E4111189E54F0E 0x7DBC0764
 	static char* GET_STREET_NAME_FROM_HASH_KEY(Hash hash) { return invoke<char*>(0xD0EF8A959B8A4CB9, hash); } // 0xD0EF8A959B8A4CB9 0x1E8E310C
 	static BOOL IS_HUD_PREFERENCE_SWITCHED_ON() { return invoke<BOOL>(0x1930DFA731813EC4); } // 0x1930DFA731813EC4 0xC3BC1B4F
 	static BOOL IS_RADAR_PREFERENCE_SWITCHED_ON() { return invoke<BOOL>(0x9EB6522EA68F22FE); } // 0x9EB6522EA68F22FE 0x14AEAA28
@@ -3126,7 +3126,7 @@ namespace UI
 	static void _0x16A304E6CB2BFAB9(int r, int g, int b, int a) { invoke<Void>(0x16A304E6CB2BFAB9, r, g, b, a); } // 0x16A304E6CB2BFAB9 0x6BE3ACA8
 	static void _SET_HUD_COLOURS_SWITCH(int hudColorIndex, int hudColorIndex2) { invoke<Void>(0x1CCC708F0F850613, hudColorIndex, hudColorIndex2); } // 0x1CCC708F0F850613 0x3B216749
 	static void _SET_HUD_COLOUR(int hudColorIndex, int r, int g, int b, int a) { invoke<Void>(0xF314CF4F0211894E, hudColorIndex, r, g, b, a); } // 0xF314CF4F0211894E 0xF6E7E92B
-	static void FLASH_ABILITY_BAR(Any p0) { invoke<Void>(0x02CFBA0C9E9275CE, p0); } // 0x02CFBA0C9E9275CE 0x3648960D
+	static void FLASH_ABILITY_BAR(BOOL toggle) { invoke<Void>(0x02CFBA0C9E9275CE, toggle); } // 0x02CFBA0C9E9275CE 0x3648960D
 	static void SET_ABILITY_BAR_VALUE(float p0, float p1) { invoke<Void>(0x9969599CCFF5D85E, p0, p1); } // 0x9969599CCFF5D85E 0x24E53FD8
 	static void FLASH_WANTED_DISPLAY(BOOL p0) { invoke<Void>(0xA18AFB39081B6A1F, p0); } // 0xA18AFB39081B6A1F 0x629F866B
 	static void _0xBA8D65C1C65702E5(BOOL p0) { invoke<Void>(0xBA8D65C1C65702E5, p0); } // 0xBA8D65C1C65702E5
@@ -3215,7 +3215,7 @@ namespace UI
 	static void HIDE_NUMBER_ON_BLIP(Blip blip) { invoke<Void>(0x532CFF637EF80148, blip); } // 0x532CFF637EF80148 0x0B6D610D
 	static void _0x75A16C3DA34F1245(Any p0, BOOL p1) { invoke<Void>(0x75A16C3DA34F1245, p0, p1); } // 0x75A16C3DA34F1245 0x1D99F676
 	static void _SET_BLIP_CHECKED(Blip blip, BOOL toggle) { invoke<Void>(0x74513EA3E505181E, blip, toggle); } // 0x74513EA3E505181E 0x3DCF0092
-	static void _SET_BLIP_SHOW_HEADING_INDICATOR(Blip blip, BOOL toggle) { invoke<Void>(0x5FBCA48327B914DF, blip, toggle); } // 0x5FBCA48327B914DF 0xD1C3D71B
+	static void SHOW_HEADING_INDICATOR_ON_BLIP(Blip blip, BOOL toggle) { invoke<Void>(0x5FBCA48327B914DF, blip, toggle); } // 0x5FBCA48327B914DF 0xD1C3D71B
 	static void _SET_BLIP_FRIENDLY(Blip blip, BOOL toggle) { invoke<Void>(0xB81656BC81FE24D1, blip, toggle); } // 0xB81656BC81FE24D1 0x8DE82C15
 	static void _SET_BLIP_FRIEND(Blip blip, BOOL toggle) { invoke<Void>(0x23C3EB807312F01A, blip, toggle); } // 0x23C3EB807312F01A 0x4C8F02B4
 	static void _0xDCFB5D4DB8BF367E(Any p0, BOOL p1) { invoke<Void>(0xDCFB5D4DB8BF367E, p0, p1); } // 0xDCFB5D4DB8BF367E 0xABBE1E45
@@ -3328,18 +3328,18 @@ namespace UI
 	static void _0xB094BC1DB4018240(Any p0, Any p1, float p2, float p3) { invoke<Void>(0xB094BC1DB4018240, p0, p1, p2, p3); } // 0xB094BC1DB4018240 0x18B012B7
 	static void _0x788E7FD431BD67F1(Any p0, Any p1, Any p2, Any p3, Any p4, Any p5) { invoke<Void>(0x788E7FD431BD67F1, p0, p1, p2, p3, p4, p5); } // 0x788E7FD431BD67F1 0x97852A82
 	static void CLEAR_FLOATING_HELP(Any p0, BOOL p1) { invoke<Void>(0x50085246ABD3FEFA, p0, p1); } // 0x50085246ABD3FEFA 0xB181F88F
-	static void _0x6DD05E9D83EFA4C9(int headDisplayId, char* username, BOOL pointedClanTag, BOOL isRockstarClan, char* clanTag, Any p5, Any p6, Any p7, Any p8) { invoke<Void>(0x6DD05E9D83EFA4C9, headDisplayId, username, pointedClanTag, isRockstarClan, clanTag, p5, p6, p7, p8); } // 0x6DD05E9D83EFA4C9 0xC969F2D0
+	static void _0x6DD05E9D83EFA4C9(int headDisplayId, char* username, BOOL pointedClanTag, BOOL isRockstarClan, char* clanTag, Any p5, int r, int g, int b) { invoke<Void>(0x6DD05E9D83EFA4C9, headDisplayId, username, pointedClanTag, isRockstarClan, clanTag, p5, r, g, b); } // 0x6DD05E9D83EFA4C9 0xC969F2D0
 	static BOOL _0x6E0EB3EB47C8D7AA() { return invoke<BOOL>(0x6E0EB3EB47C8D7AA); } // 0x6E0EB3EB47C8D7AA 0xEFD2564A
 	static int _CREATE_HEAD_DISPLAY(Ped ped, char* username, BOOL pointedClanTag, BOOL isRockstarClan, char* clanTag, Any p5) { return invoke<int>(0xBFEFE3321A3F5015, ped, username, pointedClanTag, isRockstarClan, clanTag, p5); } // 0xBFEFE3321A3F5015 0xF5CD2AA4
-	static void _0x31698AA80E0223F8(int headDisplayId) { invoke<Void>(0x31698AA80E0223F8, headDisplayId); } // 0x31698AA80E0223F8 0x3D081FE4
+	static void _DESTROY_HEAD_DISPLAY(int headDisplayId) { invoke<Void>(0x31698AA80E0223F8, headDisplayId); } // 0x31698AA80E0223F8 0x3D081FE4
 	static BOOL _HAS_HEAD_DISPLAY_LOADED(int headDisplayId) { return invoke<BOOL>(0x4E929E7A5796FD26, headDisplayId); } // 0x4E929E7A5796FD26 0x60118951
 	static BOOL ADD_TREVOR_RANDOM_MODIFIER(int headDisplayId) { return invoke<BOOL>(0x595B5178E412E199, headDisplayId); } // 0x595B5178E412E199 0x63959059
-	static void _SET_HEAD_DISPLAY_FLAG(int headDisplayId, int sprite, BOOL toggle) { invoke<Void>(0x63BB75ABEDC1F6A0, headDisplayId, sprite, toggle); } // 0x63BB75ABEDC1F6A0 0xD41DF479
+	static void _SET_HEAD_DISPLAY_FLAG(int headDisplayId, int flag, BOOL toggle) { invoke<Void>(0x63BB75ABEDC1F6A0, headDisplayId, flag, toggle); } // 0x63BB75ABEDC1F6A0 0xD41DF479
 	static void _0xEE76FF7E6A0166B0(int headDisplayId, BOOL p1) { invoke<Void>(0xEE76FF7E6A0166B0, headDisplayId, p1); } // 0xEE76FF7E6A0166B0 0x767DED29
 	static void _0xA67F9C46D612B6F1(int headDisplayId, BOOL p1) { invoke<Void>(0xA67F9C46D612B6F1, headDisplayId, p1); } // 0xA67F9C46D612B6F1 0xB01A5434
-	static void _0x613ED644950626AE(int headDisplayId, Any p1, int flag) { invoke<Void>(0x613ED644950626AE, headDisplayId, p1, flag); } // 0x613ED644950626AE 0x7E3AA40A
-	static void _0x3158C77A7E888AB4(int headDisplayId, Any p1) { invoke<Void>(0x3158C77A7E888AB4, headDisplayId, p1); } // 0x3158C77A7E888AB4 0x5777EC77
-	static void _0xD48FE545CD46F857(int headDisplayId, Any p1, Any p2) { invoke<Void>(0xD48FE545CD46F857, headDisplayId, p1, p2); } // 0xD48FE545CD46F857 0xF4418611
+	static void _SET_HEAD_DISPLAY_FLAG_COLOR(int headDisplayId, int flag, int color) { invoke<Void>(0x613ED644950626AE, headDisplayId, flag, color); } // 0x613ED644950626AE 0x7E3AA40A
+	static void _SET_HEAD_DISPLAY_HEALTH_BAR_COLOR(int headDisplayId, int color) { invoke<Void>(0x3158C77A7E888AB4, headDisplayId, color); } // 0x3158C77A7E888AB4 0x5777EC77
+	static void _SET_HEAD_DISPLAY_FLAG_ALPHA(int headDisplayId, int flag, int alpha) { invoke<Void>(0xD48FE545CD46F857, headDisplayId, flag, alpha); } // 0xD48FE545CD46F857 0xF4418611
 	static void _SET_HEAD_DISPLAY_WANTED(int headDisplayId, int wantedlvl) { invoke<Void>(0xCF228E2AA03099C3, headDisplayId, wantedlvl); } // 0xCF228E2AA03099C3 0x0EBB003F
 	static void _SET_HEAD_DISPLAY_STRING(int headDisplayId, char* string) { invoke<Void>(0xDEA2B8283BAA3944, headDisplayId, string); } // 0xDEA2B8283BAA3944 0x627A559B
 	static BOOL _0xEB709A36958ABE0D(int headDisplayId) { return invoke<BOOL>(0xEB709A36958ABE0D, headDisplayId); } // 0xEB709A36958ABE0D 0xF11414C4
@@ -3357,7 +3357,7 @@ namespace UI
 	static void _0x6EF54AB721DC6242() { invoke<Void>(0x6EF54AB721DC6242); } // 0x6EF54AB721DC6242
 	static BOOL IS_WARNING_MESSAGE_ACTIVE() { return invoke<BOOL>(0xE18B138FABC53103); } // 0xE18B138FABC53103 0x94C834AD
 	static void _0x7792424AA0EAC32E() { invoke<Void>(0x7792424AA0EAC32E); } // 0x7792424AA0EAC32E 0x2F9A309C
-	static void _0x5354C5BA2EA868A4(BOOL p0) { invoke<Void>(0x5354C5BA2EA868A4, p0); } // 0x5354C5BA2EA868A4 0xE4FD20D8
+	static void _SET_MAP_FULL_SCREEN(BOOL toggle) { invoke<Void>(0x5354C5BA2EA868A4, toggle); } // 0x5354C5BA2EA868A4 0xE4FD20D8
 	static void _0x1EAE6DD17B7A5EFA(Any p0) { invoke<Void>(0x1EAE6DD17B7A5EFA, p0); } // 0x1EAE6DD17B7A5EFA 0x13E7A5A9
 	static Any _0x551DF99658DB6EE8(float p0, float p1, float p2) { return invoke<Any>(0x551DF99658DB6EE8, p0, p1, p2); } // 0x551DF99658DB6EE8 0x786CA0A2
 	static void _0x2708FC083123F9FF() { invoke<Void>(0x2708FC083123F9FF); } // 0x2708FC083123F9FF 0xCBEC9369
@@ -3438,7 +3438,7 @@ namespace UI
 	static Blip _0x56176892826A4FE8(Ped ped) { return invoke<Blip>(0x56176892826A4FE8, ped); } // 0x56176892826A4FE8 0xCA52CF43
 	static Any _0xA277800A9EAE340E() { return invoke<Any>(0xA277800A9EAE340E); } // 0xA277800A9EAE340E
 	static void _0x2632482FD6B9AB87() { invoke<Void>(0x2632482FD6B9AB87); } // 0x2632482FD6B9AB87
-	static void _0x808519373FD336A3(BOOL p0) { invoke<Void>(0x808519373FD336A3, p0); } // 0x808519373FD336A3
+	static void _SET_DIRECTOR_MODE(BOOL toggle) { invoke<Void>(0x808519373FD336A3, toggle); } // 0x808519373FD336A3
 	static void _0x04655F9D075D0AE5(BOOL p0) { invoke<Void>(0x04655F9D075D0AE5, p0); } // 0x04655F9D075D0AE5
 }
 
@@ -3511,7 +3511,7 @@ namespace GRAPHICS
 	static void _SCREEN_DRAW_POSITION_RATIO(float x, float y, float p2, float p3) { invoke<Void>(0xF5A2C681787E579D, x, y, p2, p3); } // 0xF5A2C681787E579D 0x76C641E4
 	static void _0x6DD8F5AA635EB4B2(float p0, float p1, Any* p2, Any* p3) { invoke<Void>(0x6DD8F5AA635EB4B2, p0, p1, p2, p3); } // 0x6DD8F5AA635EB4B2
 	static float GET_SAFE_ZONE_SIZE() { return invoke<float>(0xBAF107B6BB2C97F0); } // 0xBAF107B6BB2C97F0 0x3F0D1A6F
-	static void DRAW_SPRITE(char* textureDict, char* textureName, float screenX, float screenY, float scaleX, float scaleY, float heading, int red, int green, int blue, int alpha) { invoke<Void>(0xE7FFAE5EBF23D890, textureDict, textureName, screenX, screenY, scaleX, scaleY, heading, red, green, blue, alpha); } // 0xE7FFAE5EBF23D890 0x1FEC16B0
+	static void DRAW_SPRITE(char* textureDict, char* textureName, float screenX, float screenY, float width, float height, float heading, int red, int green, int blue, int alpha) { invoke<Void>(0xE7FFAE5EBF23D890, textureDict, textureName, screenX, screenY, width, height, heading, red, green, blue, alpha); } // 0xE7FFAE5EBF23D890 0x1FEC16B0
 	static Any ADD_ENTITY_ICON(Entity entity, char* icon) { return invoke<Any>(0x9CD43EEE12BF4DD0, entity, icon); } // 0x9CD43EEE12BF4DD0 0xF3027D21
 	static void SET_ENTITY_ICON_VISIBILITY(Entity entity, BOOL toggle) { invoke<Void>(0xE0E8BEECCA96BA31, entity, toggle); } // 0xE0E8BEECCA96BA31 0xD1D2FD52
 	static void SET_ENTITY_ICON_COLOR(Entity entity, int red, int green, int blue, int alpha) { invoke<Void>(0x1D5F595CCAE2E238, entity, red, green, blue, alpha); } // 0x1D5F595CCAE2E238 0x6EE1E946
@@ -3523,8 +3523,8 @@ namespace GRAPHICS
 	static void RELEASE_MOVIE_MESH_SET(int movieMeshSet) { invoke<Void>(0xEB119AA014E89183, movieMeshSet); } // 0xEB119AA014E89183 0x4FA5501D
 	static Any _0x9B6E70C5CEEF4EEB(Any p0) { return invoke<Any>(0x9B6E70C5CEEF4EEB, p0); } // 0x9B6E70C5CEEF4EEB 0x9D5D9B38
 	static void GET_SCREEN_RESOLUTION(int* x, int* y) { invoke<Void>(0x888D57E407E63624, x, y); } // 0x888D57E407E63624 0x29F3572F
-	static void _GET_SCREEN_ACTIVE_RESOLUTION(int* x, int* y) { invoke<Void>(0x873C9F3104101DD3, x, y); } // 0x873C9F3104101DD3
-	static float _GET_SCREEN_ASPECT_RATIO(BOOL b) { return invoke<float>(0xF1307EF624A80D87, b); } // 0xF1307EF624A80D87
+	static void _GET_ACTIVE_SCREEN_RESOLUTION(int* x, int* y) { invoke<Void>(0x873C9F3104101DD3, x, y); } // 0x873C9F3104101DD3
+	static float _GET_ASPECT_RATIO(BOOL b) { return invoke<float>(0xF1307EF624A80D87, b); } // 0xF1307EF624A80D87
 	static Any _0xB2EBE8CBC58B90E9() { return invoke<Any>(0xB2EBE8CBC58B90E9); } // 0xB2EBE8CBC58B90E9
 	static BOOL GET_IS_WIDESCREEN() { return invoke<BOOL>(0x30CF4BDA4FCB1905); } // 0x30CF4BDA4FCB1905 0xEC717AEF
 	static BOOL GET_IS_HIDEF() { return invoke<BOOL>(0x84ED31191CC5D2C9); } // 0x84ED31191CC5D2C9 0x1C340359
@@ -3594,7 +3594,7 @@ namespace GRAPHICS
 	static float IS_PARTICLE_FX_DELAYED_BLINK() { return invoke<float>(0x5CCABFFCA31DDE33); } // 0x5CCABFFCA31DDE33 0xEA432A94
 	static Any _0x7B226C785A52A0A9() { return invoke<Any>(0x7B226C785A52A0A9); } // 0x7B226C785A52A0A9 0x926B8734
 	static void _SET_FROZEN_RENDERING_DISABLED(BOOL enabled) { invoke<Void>(0xDFC252D8A3E15AB7, enabled); } // 0xDFC252D8A3E15AB7 0x30ADE541
-	static Any _0xEB3DAC2C86001E5E() { return invoke<Any>(0xEB3DAC2C86001E5E); } // 0xEB3DAC2C86001E5E
+	static BOOL _0xEB3DAC2C86001E5E() { return invoke<BOOL>(0xEB3DAC2C86001E5E); } // 0xEB3DAC2C86001E5E
 	static void _0xE1C8709406F2C41C() { invoke<Void>(0xE1C8709406F2C41C); } // 0xE1C8709406F2C41C 0x0113EAE4
 	static void _0x851CD923176EBA7C() { invoke<Void>(0x851CD923176EBA7C); } // 0x851CD923176EBA7C 0xDCBA251B
 	static void _0xBA3D65906822BED5(BOOL p0, BOOL p1, float p2, float p3, float p4, float p5) { invoke<Void>(0xBA3D65906822BED5, p0, p1, p2, p3, p4, p5); } // 0xBA3D65906822BED5 0x513D444B
@@ -3639,9 +3639,9 @@ namespace GRAPHICS
 	static void _0x54E22EA2C1956A8D(float p0) { invoke<Void>(0x54E22EA2C1956A8D, p0); } // 0x54E22EA2C1956A8D
 	static void _0x949F397A288B28B3(float p0) { invoke<Void>(0x949F397A288B28B3, p0); } // 0x949F397A288B28B3
 	static void _0x9B079E5221D984D3(BOOL p0) { invoke<Void>(0x9B079E5221D984D3, p0); } // 0x9B079E5221D984D3
-	static void _SET_PTFX_ASSET_NEXT_CALL(char* name) { invoke<Void>(0x6C38AF3693A69A91, name); } // 0x6C38AF3693A69A91 0x9C720B61
-	static void _SET_PTFX_ASSET_OLD_TO_NEW(char* oldAsset, char* newAsset) { invoke<Void>(0xEA1E2D93F6F75ED9, oldAsset, newAsset); } // 0xEA1E2D93F6F75ED9
-	static void _0x89C8553DD3274AAE(char* name) { invoke<Void>(0x89C8553DD3274AAE, name); } // 0x89C8553DD3274AAE
+	static void _USE_PARTICLE_FX_ASSET_NEXT_CALL(char* name) { invoke<Void>(0x6C38AF3693A69A91, name); } // 0x6C38AF3693A69A91 0x9C720B61
+	static void _SET_PARTICLE_FX_ASSET_OLD_TO_NEW(char* oldAsset, char* newAsset) { invoke<Void>(0xEA1E2D93F6F75ED9, oldAsset, newAsset); } // 0xEA1E2D93F6F75ED9
+	static void _RESET_PARTICLE_FX_ASSET_OLD_TO_NEW(char* name) { invoke<Void>(0x89C8553DD3274AAE, name); } // 0x89C8553DD3274AAE
 	static void _0xA46B73FAA3460AE1(BOOL p0) { invoke<Void>(0xA46B73FAA3460AE1, p0); } // 0xA46B73FAA3460AE1
 	static void _0xF78B803082D4386F(float p0) { invoke<Void>(0xF78B803082D4386F, p0); } // 0xF78B803082D4386F
 	static void WASH_DECALS_IN_RANGE(Any p0, Any p1, Any p2, Any p3, Any p4) { invoke<Void>(0x9C30613D50A6ADEF, p0, p1, p2, p3, p4); } // 0x9C30613D50A6ADEF 0xDEECBC57
@@ -3651,7 +3651,7 @@ namespace GRAPHICS
 	static void REMOVE_DECALS_FROM_OBJECT(Object obj) { invoke<Void>(0xCCF71CBDDF5B6CB9, obj); } // 0xCCF71CBDDF5B6CB9 0x8B67DCA7
 	static void REMOVE_DECALS_FROM_OBJECT_FACING(Object obj, float x, float y, float z) { invoke<Void>(0xA6F6F70FDC6D144C, obj, x, y, z); } // 0xA6F6F70FDC6D144C 0xF4999A55
 	static void REMOVE_DECALS_FROM_VEHICLE(Vehicle vehicle) { invoke<Void>(0xE91F1B65F2B48D57, vehicle); } // 0xE91F1B65F2B48D57 0x831D06CA
-	static int ADD_DECAL(Any p0, float p1, float p2, float p3, float p4, float p5, float p6, float p7, float p8, float p9, float p10, float p11, float p12, float p13, float p14, float p15, float p16, BOOL p17, BOOL p18, BOOL p19) { return invoke<int>(0xB302244A1839BDAD, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19); } // 0xB302244A1839BDAD 0xEAD0C412
+	static int ADD_DECAL(int decalType, float posX, float posY, float posZ, float p4, float p5, float p6, float p7, float p8, float p9, float width, float height, float rCoef, float gCoef, float bCoef, float opacity, float timeout, BOOL p17, BOOL p18, BOOL p19) { return invoke<int>(0xB302244A1839BDAD, decalType, posX, posY, posZ, p4, p5, p6, p7, p8, p9, width, height, rCoef, gCoef, bCoef, opacity, timeout, p17, p18, p19); } // 0xB302244A1839BDAD 0xEAD0C412
 	static Any ADD_PETROL_DECAL(float x, float y, float z, float groundLvl, float width, float transparency) { return invoke<Any>(0x4F5212C7AD880DF8, x, y, z, groundLvl, width, transparency); } // 0x4F5212C7AD880DF8 0x1259DF42
 	static void _0x99AC7F0D8B9C893D(float p0) { invoke<Void>(0x99AC7F0D8B9C893D, p0); } // 0x99AC7F0D8B9C893D 0xE3938B0B
 	static void _0x967278682CB6967A(Any p0, Any p1, Any p2, Any p3) { invoke<Void>(0x967278682CB6967A, p0, p1, p2, p3); } // 0x967278682CB6967A 0xBAEC6ADD
@@ -3704,7 +3704,7 @@ namespace GRAPHICS
 	static void _0x2BF72AD5B41AA739() { invoke<Void>(0x2BF72AD5B41AA739); } // 0x2BF72AD5B41AA739
 	static int REQUEST_SCALEFORM_MOVIE(char* scaleformName) { return invoke<int>(0x11FE353CF9733E6F, scaleformName); } // 0x11FE353CF9733E6F 0xC67E3DCB
 	static int REQUEST_SCALEFORM_MOVIE_INSTANCE(char* scaleformName) { return invoke<int>(0xC514489CFB8AF806, scaleformName); } // 0xC514489CFB8AF806 0x7CC8057D
-	static int _REQUEST_SCALEFORM_MOVIE3(char* scaleformName) { return invoke<int>(0xBD06C611BB9048C2, scaleformName); } // 0xBD06C611BB9048C2
+	static int _REQUEST_SCALEFORM_MOVIE_INTERACTIVE(char* scaleformName) { return invoke<int>(0xBD06C611BB9048C2, scaleformName); } // 0xBD06C611BB9048C2
 	static BOOL HAS_SCALEFORM_MOVIE_LOADED(int scaleformHandle) { return invoke<BOOL>(0x85F01B8D5B90570E, scaleformHandle); } // 0x85F01B8D5B90570E 0xDDFB6448
 	static BOOL _HAS_NAMED_SCALEFORM_MOVIE_LOADED(char* scaleformName) { return invoke<BOOL>(0x0C1C5D756FB5F337, scaleformName); } // 0x0C1C5D756FB5F337
 	static BOOL HAS_SCALEFORM_CONTAINER_MOVIE_LOADED_INTO_PARENT(int scaleformHandle) { return invoke<BOOL>(0x8217150E1217EBFD, scaleformHandle); } // 0x8217150E1217EBFD 0x1DFE8D8A
@@ -3748,7 +3748,7 @@ namespace GRAPHICS
 	static float GET_TV_VOLUME() { return invoke<float>(0x2170813D3DD8661B); } // 0x2170813D3DD8661B 0x39555CF0
 	static void DRAW_TV_CHANNEL(float xPos, float yPos, float xScale, float yScale, float rotation, int red, int green, int blue, int alpha) { invoke<Void>(0xFDDC2B4ED3C69DF0, xPos, yPos, xScale, yScale, rotation, red, green, blue, alpha); } // 0xFDDC2B4ED3C69DF0 0x8129EF89
 	static void _0xF7B38B8305F1FE8B(int p0, char* p1, BOOL p2) { invoke<Void>(0xF7B38B8305F1FE8B, p0, p1, p2); } // 0xF7B38B8305F1FE8B 0xB262DE67
-	static void _0x2201C576FACAEBE8(Any p0, Any* p1, Any p2) { invoke<Void>(0x2201C576FACAEBE8, p0, p1, p2); } // 0x2201C576FACAEBE8 0x78C4DCBE
+	static void _0x2201C576FACAEBE8(Any p0, char* p1, Any p2) { invoke<Void>(0x2201C576FACAEBE8, p0, p1, p2); } // 0x2201C576FACAEBE8 0x78C4DCBE
 	static void _0xBEB3D46BB7F043C0(Any p0) { invoke<Void>(0xBEB3D46BB7F043C0, p0); } // 0xBEB3D46BB7F043C0 0xCBE7068F
 	static BOOL _LOAD_TV_CHANNEL(Hash tvChannel) { return invoke<BOOL>(0x0AD973CA1E077B60, tvChannel); } // 0x0AD973CA1E077B60 0x4D1EB0FB
 	static void _0x74C180030FDE4B69(BOOL p0) { invoke<Void>(0x74C180030FDE4B69, p0); } // 0x74C180030FDE4B69 0x796DE696
@@ -4473,8 +4473,8 @@ namespace NETWORK
 	static Any NETWORK_IS_TRANSITION_HOST() { return invoke<Any>(0x0B824797C9BF2159); } // 0x0B824797C9BF2159 0x0C0900BC
 	static BOOL NETWORK_IS_TRANSITION_HOST_FROM_HANDLE(int* networkHandle) { return invoke<BOOL>(0x6B5C83BA3EFE6A10, networkHandle); } // 0x6B5C83BA3EFE6A10 0x0E2854C4
 	static BOOL NETWORK_GET_TRANSITION_HOST(int* networkHandle) { return invoke<BOOL>(0x65042B9774C4435E, networkHandle); } // 0x65042B9774C4435E 0x73098D40
-	static Any NETWORK_IS_IN_TRANSITION() { return invoke<Any>(0x68049AEFF83D8F0A); } // 0x68049AEFF83D8F0A 0xC3CDB626
-	static Any NETWORK_IS_TRANSITION_STARTED() { return invoke<Any>(0x53FA83401D9C07FE); } // 0x53FA83401D9C07FE 0x7917E111
+	static BOOL NETWORK_IS_IN_TRANSITION() { return invoke<BOOL>(0x68049AEFF83D8F0A); } // 0x68049AEFF83D8F0A 0xC3CDB626
+	static BOOL NETWORK_IS_TRANSITION_STARTED() { return invoke<BOOL>(0x53FA83401D9C07FE); } // 0x53FA83401D9C07FE 0x7917E111
 	static Any NETWORK_IS_TRANSITION_BUSY() { return invoke<Any>(0x520F3282A53D26B7); } // 0x520F3282A53D26B7 0xA357A2C6
 	static Any NETWORK_IS_TRANSITION_MATCHMAKING() { return invoke<Any>(0x292564C735375EDF); } // 0x292564C735375EDF 0x8262C70E
 	static Any _0xC571D0E77D8BBC29() { return invoke<Any>(0xC571D0E77D8BBC29); } // 0xC571D0E77D8BBC29
@@ -4491,7 +4491,7 @@ namespace NETWORK
 	static BOOL NETWORK_JOIN_TRANSITION(Player player) { return invoke<BOOL>(0x9D060B08CD63321A, player); } // 0x9D060B08CD63321A 0xB054EC4B
 	static BOOL NETWORK_HAS_INVITED_GAMER_TO_TRANSITION(Any* p0) { return invoke<BOOL>(0x7284A47B3540E6CF, p0); } // 0x7284A47B3540E6CF 0x4F41DF6B
 	static BOOL _0x3F9990BF5F22759C(Any* p0) { return invoke<BOOL>(0x3F9990BF5F22759C, p0); } // 0x3F9990BF5F22759C
-	static Any NETWORK_IS_ACTIVITY_SESSION() { return invoke<Any>(0x05095437424397FA); } // 0x05095437424397FA 0x577DAA8A
+	static BOOL NETWORK_IS_ACTIVITY_SESSION() { return invoke<BOOL>(0x05095437424397FA); } // 0x05095437424397FA 0x577DAA8A
 	static void _0x4A9FDE3A5A6D0437(Any p0) { invoke<Void>(0x4A9FDE3A5A6D0437, p0); } // 0x4A9FDE3A5A6D0437 0x18F03AFD
 	static BOOL _NETWORK_SEND_PRESENCE_INVITE(int* networkHandle, Any* p1, Any p2, Any p3) { return invoke<BOOL>(0xC3C7A6AFDB244624, networkHandle, p1, p2, p3); } // 0xC3C7A6AFDB244624 0x8B99B72B
 	static BOOL _NETWORK_SEND_PRESENCE_TRANSITION_INVITE(Any* p0, Any* p1, Any p2, Any p3) { return invoke<BOOL>(0xC116FF9B4D488291, p0, p1, p2, p3); } // 0xC116FF9B4D488291 0x877C0E1C
@@ -4523,7 +4523,7 @@ namespace NETWORK
 	static void _0x66F010A4B031A331(Any* p0) { invoke<Void>(0x66F010A4B031A331, p0); } // 0x66F010A4B031A331
 	static BOOL _0x44B37CDCAE765AAE(Any p0, Any* p1) { return invoke<BOOL>(0x44B37CDCAE765AAE, p0, p1); } // 0x44B37CDCAE765AAE
 	static void _0x0D77A82DC2D0DA59(Any* p0, Any* p1) { invoke<Void>(0x0D77A82DC2D0DA59, p0, p1); } // 0x0D77A82DC2D0DA59 0x0808D4CC
-	static BOOL FILLOUT_PM_PLAYER_LIST(Any* p0, Any p1, Any p2) { return invoke<BOOL>(0xCBBD7C4991B64809, p0, p1, p2); } // 0xCBBD7C4991B64809 0xCE40F423
+	static BOOL FILLOUT_PM_PLAYER_LIST(int* networkHandle, Any p1, Any p2) { return invoke<BOOL>(0xCBBD7C4991B64809, networkHandle, p1, p2); } // 0xCBBD7C4991B64809 0xCE40F423
 	static BOOL FILLOUT_PM_PLAYER_LIST_WITH_NAMES(Any* p0, Any* p1, Any p2, Any p3) { return invoke<BOOL>(0x716B6DB9D1886106, p0, p1, p2, p3); } // 0x716B6DB9D1886106 0xB8DF604E
 	static BOOL USING_NETWORK_WEAPONTYPE(Any p0) { return invoke<BOOL>(0xE26CCFF8094D8C74, p0); } // 0xE26CCFF8094D8C74 0xF49C1533
 	static BOOL _0x796A87B3B68D1F3D(Any* p0) { return invoke<BOOL>(0x796A87B3B68D1F3D, p0); } // 0x796A87B3B68D1F3D
@@ -4560,7 +4560,7 @@ namespace NETWORK
 	static BOOL _0x5D10B3795F3FC886() { return invoke<BOOL>(0x5D10B3795F3FC886); } // 0x5D10B3795F3FC886 0x0B739F53
 	static int NETWORK_GET_PLAYER_INDEX(Player player) { return invoke<int>(0x24FB80D107371267, player); } // 0x24FB80D107371267 0xBE1C1506
 	static int NETWORK_GET_PARTICIPANT_INDEX(int index) { return invoke<int>(0x1B84DF6AF2A46938, index); } // 0x1B84DF6AF2A46938 0xC4D91094
-	static Player _NETWORK_GET_PED_PLAYER(Ped ped) { return invoke<Player>(0x6C0E2E0125610278, ped); } // 0x6C0E2E0125610278 0x40DBF464
+	static Player NETWORK_GET_PLAYER_INDEX_FROM_PED(Ped ped) { return invoke<Player>(0x6C0E2E0125610278, ped); } // 0x6C0E2E0125610278 0x40DBF464
 	static int NETWORK_GET_NUM_CONNECTED_PLAYERS() { return invoke<int>(0xA4A79DD2D9600654); } // 0xA4A79DD2D9600654 0xF7952E62
 	static BOOL NETWORK_IS_PLAYER_CONNECTED(Player player) { return invoke<BOOL>(0x93DC1BE4E1ABE9D1, player); } // 0x93DC1BE4E1ABE9D1 0x168EE2C2
 	static int _0xCF61D4B4702EE9EB() { return invoke<int>(0xCF61D4B4702EE9EB); } // 0xCF61D4B4702EE9EB 0xF4F13B06
@@ -4582,7 +4582,7 @@ namespace NETWORK
 	static int NETWORK_GET_DESTROYER_OF_NETWORK_ID(int netId, Hash* weaponHash) { return invoke<int>(0x7A1ADEEF01740A24, netId, weaponHash); } // 0x7A1ADEEF01740A24 0x4FCA6436
 	static BOOL _NETWORK_GET_DESROYER_OF_ENTITY(Any p0, Any p1, Hash* p2) { return invoke<BOOL>(0x4CACA84440FA26F6, p0, p1, p2); } // 0x4CACA84440FA26F6 0x28A45454
 	static Entity NETWORK_GET_ENTITY_KILLER_OF_PLAYER(Player player, Hash* weaponHash) { return invoke<Entity>(0x42B2DAA6B596F5F8, player, weaponHash); } // 0x42B2DAA6B596F5F8 0xA7E7E04F
-	static void NETWORK_RESURRECT_LOCAL_PLAYER(float x, float y, float z, float heading, Any p4, Any p5) { invoke<Void>(0xEA23C49EAA83ACFB, x, y, z, heading, p4, p5); } // 0xEA23C49EAA83ACFB 0xF1F9D4B4
+	static void NETWORK_RESURRECT_LOCAL_PLAYER(float x, float y, float z, float heading, BOOL unk, BOOL changetime) { invoke<Void>(0xEA23C49EAA83ACFB, x, y, z, heading, unk, changetime); } // 0xEA23C49EAA83ACFB 0xF1F9D4B4
 	static void NETWORK_SET_LOCAL_PLAYER_INVINCIBLE_TIME(int time) { invoke<Void>(0x2D95C7E2D7E07307, time); } // 0x2D95C7E2D7E07307 0xFEA9B85C
 	static BOOL NETWORK_IS_LOCAL_PLAYER_INVINCIBLE() { return invoke<BOOL>(0x8A8694B48715B000); } // 0x8A8694B48715B000 0x8DE13B36
 	static void NETWORK_DISABLE_INVINCIBLE_FLASHING(int player, BOOL p1) { invoke<Void>(0x9DD368BF06983221, player, p1); } // 0x9DD368BF06983221 0x8D27280E
@@ -4592,7 +4592,7 @@ namespace NETWORK
 	static Entity NETWORK_GET_ENTITY_FROM_NETWORK_ID(int netId) { return invoke<Entity>(0xCE4E5D9B0A4FF560, netId); } // 0xCE4E5D9B0A4FF560 0x5B912C3F
 	static BOOL NETWORK_GET_ENTITY_IS_NETWORKED(Entity entity) { return invoke<BOOL>(0xC7827959479DCC78, entity); } // 0xC7827959479DCC78 0xD7F934F4
 	static BOOL NETWORK_GET_ENTITY_IS_LOCAL(Entity entity) { return invoke<BOOL>(0x0991549DE4D64762, entity); } // 0x0991549DE4D64762 0x813353ED
-	static void _NETWORK_REGISTER_NETWORKED_ENTITY(Entity entity) { invoke<Void>(0x06FAACD625D80CAA, entity); } // 0x06FAACD625D80CAA 0x31A630A4
+	static void NETWORK_REGISTER_ENTITY_AS_NETWORKED(Entity entity) { invoke<Void>(0x06FAACD625D80CAA, entity); } // 0x06FAACD625D80CAA 0x31A630A4
 	static void NETWORK_UNREGISTER_NETWORKED_ENTITY(Entity entity) { invoke<Void>(0x7368E683BB9038D6, entity); } // 0x7368E683BB9038D6 0x5C645F64
 	static BOOL NETWORK_DOES_NETWORK_ID_EXIST(int netID) { return invoke<BOOL>(0x38CE16C96BD11344, netID); } // 0x38CE16C96BD11344 0xB8D2C99E
 	static BOOL NETWORK_DOES_ENTITY_EXIST_WITH_NETWORK_ID(Entity entity) { return invoke<BOOL>(0x18A47D074708FD68, entity); } // 0x18A47D074708FD68 0x1E2E3177
@@ -4615,7 +4615,7 @@ namespace NETWORK
 	static void NETWORK_HANDLE_FROM_USER_ID(char* userId, int* networkHandle, int bufferSize) { invoke<Void>(0xDCD51DD8F87AEC5C, userId, networkHandle, bufferSize); } // 0xDCD51DD8F87AEC5C 0x74C2C1B7
 	static void NETWORK_HANDLE_FROM_MEMBER_ID(char* memberId, int* networkHandle, int bufferSize) { invoke<Void>(0xA0FD21BED61E5C4C, memberId, networkHandle, bufferSize); } // 0xA0FD21BED61E5C4C 0x9BFC9FE2
 	static void NETWORK_HANDLE_FROM_PLAYER(Player player, int* networkHandle, int bufferSize) { invoke<Void>(0x388EB2B86C73B6B3, player, networkHandle, bufferSize); } // 0x388EB2B86C73B6B3 0xD3498917
-	static int _0xBC1D768F2F5D6C05(Player player) { return invoke<int>(0xBC1D768F2F5D6C05, player); } // 0xBC1D768F2F5D6C05
+	static Hash _NETWORK_HASH_FROM_PLAYER_HANDLE(Player player) { return invoke<Hash>(0xBC1D768F2F5D6C05, player); } // 0xBC1D768F2F5D6C05
 	static Hash _NETWORK_HASH_FROM_GAMER_HANDLE(int* networkHandle) { return invoke<Hash>(0x58575AC3CF2CA8EC, networkHandle); } // 0x58575AC3CF2CA8EC
 	static void NETWORK_HANDLE_FROM_FRIEND(Player friendIndex, int* networkHandle, int bufferSize) { invoke<Void>(0xD45CB817D7E177D2, friendIndex, networkHandle, bufferSize); } // 0xD45CB817D7E177D2 0x3B0BB3A3
 	static BOOL NETWORK_GAMERTAG_FROM_HANDLE_START(int* networkHandle) { return invoke<BOOL>(0x9F0C0A981D73FA56, networkHandle); } // 0x9F0C0A981D73FA56 0xEBA00C2A
@@ -4686,10 +4686,10 @@ namespace NETWORK
 	static void _0x9D7AFCBF21C51712(BOOL p0) { invoke<Void>(0x9D7AFCBF21C51712, p0); } // 0x9D7AFCBF21C51712
 	static void _0xF46A1E03E8755980(BOOL p0) { invoke<Void>(0xF46A1E03E8755980, p0); } // 0xF46A1E03E8755980 0xD33AFF79
 	static void _0x6A5D89D7769A40D8(BOOL p0) { invoke<Void>(0x6A5D89D7769A40D8, p0); } // 0x6A5D89D7769A40D8 0x4FFEFE43
-	static void NETWORK_OVERRIDE_CHAT_RESTRICTIONS(Any p0, BOOL p1) { invoke<Void>(0x3039AE5AD2C9C0C4, p0, p1); } // 0x3039AE5AD2C9C0C4 0x74EE2D8B
-	static void _0x97DD4C5944CC2E6A(Any p0, Any p1) { invoke<Void>(0x97DD4C5944CC2E6A, p0, p1); } // 0x97DD4C5944CC2E6A
+	static void NETWORK_OVERRIDE_CHAT_RESTRICTIONS(Player player, BOOL toggle) { invoke<Void>(0x3039AE5AD2C9C0C4, player, toggle); } // 0x3039AE5AD2C9C0C4 0x74EE2D8B
+	static void _0x97DD4C5944CC2E6A(Player player, Any toggle) { invoke<Void>(0x97DD4C5944CC2E6A, player, toggle); } // 0x97DD4C5944CC2E6A
 	static void _0x57B192B4D4AD23D5(BOOL p0) { invoke<Void>(0x57B192B4D4AD23D5, p0); } // 0x57B192B4D4AD23D5 0x2F98B405
-	static void NETWORK_OVERRIDE_RECEIVE_RESTRICTIONS(Any p0, Any p1) { invoke<Void>(0xDDF73E2B1FEC5AB4, p0, p1); } // 0xDDF73E2B1FEC5AB4 0x95F1C60D
+	static void NETWORK_OVERRIDE_RECEIVE_RESTRICTIONS(Player player, BOOL toggle) { invoke<Void>(0xDDF73E2B1FEC5AB4, player, toggle); } // 0xDDF73E2B1FEC5AB4 0x95F1C60D
 	static void _0x0FF2862B61A58AF9(BOOL p0) { invoke<Void>(0x0FF2862B61A58AF9, p0); } // 0x0FF2862B61A58AF9 0x1BCD3DDF
 	static void NETWORK_SET_VOICE_CHANNEL(Any p0) { invoke<Void>(0xEF6212C2EFEF1A23, p0); } // 0xEF6212C2EFEF1A23 0x3974879F
 	static void NETWORK_CLEAR_VOICE_CHANNEL() { invoke<Void>(0xE036A705F989E049); } // 0xE036A705F989E049 0x9ECF722A
@@ -4772,9 +4772,9 @@ namespace NETWORK
 	static int GET_NUM_RESERVED_MISSION_OBJECTS(BOOL p0) { return invoke<int>(0xAA81B5F10BC43AC2, p0); } // 0xAA81B5F10BC43AC2 0x16A80CD6
 	static int GET_NUM_RESERVED_MISSION_PEDS(BOOL p0) { return invoke<int>(0x1F13D5AE5CB17E17, p0); } // 0x1F13D5AE5CB17E17 0x6C25975C
 	static int GET_NUM_RESERVED_MISSION_VEHICLES(BOOL p0) { return invoke<int>(0xCF3A965906452031, p0); } // 0xCF3A965906452031 0xA9A308F3
-	static Any _0x12B6281B6C6706C0(BOOL p0) { return invoke<Any>(0x12B6281B6C6706C0, p0); } // 0x12B6281B6C6706C0 0x603FA104
-	static char* _0xCB215C4B56A7FAE7(char* rankStatus) { return invoke<char*>(0xCB215C4B56A7FAE7, rankStatus); } // 0xCB215C4B56A7FAE7 0xD8FEC4F8
-	static Any _0x0CD9AB83489430EA(BOOL p0) { return invoke<Any>(0x0CD9AB83489430EA, p0); } // 0x0CD9AB83489430EA 0x20527695
+	static int _0x12B6281B6C6706C0(BOOL p0) { return invoke<int>(0x12B6281B6C6706C0, p0); } // 0x12B6281B6C6706C0 0x603FA104
+	static int _0xCB215C4B56A7FAE7(BOOL p0) { return invoke<int>(0xCB215C4B56A7FAE7, p0); } // 0xCB215C4B56A7FAE7 0xD8FEC4F8
+	static int _0x0CD9AB83489430EA(BOOL p0) { return invoke<int>(0x0CD9AB83489430EA, p0); } // 0x0CD9AB83489430EA 0x20527695
 	static Any _0xC7BE335216B5EC7C() { return invoke<Any>(0xC7BE335216B5EC7C); } // 0xC7BE335216B5EC7C 0x8687E285
 	static Any _0x0C1F7D49C39D2289() { return invoke<Any>(0x0C1F7D49C39D2289); } // 0x0C1F7D49C39D2289 0x744AC008
 	static Any _0x0AFCE529F69B21FF() { return invoke<Any>(0x0AFCE529F69B21FF); } // 0x0AFCE529F69B21FF 0xC3A12135
@@ -4787,7 +4787,7 @@ namespace NETWORK
 	static BOOL IS_TIME_MORE_THAN(int timeA, int timeB) { return invoke<BOOL>(0xDE350F8651E4346C, timeA, timeB); } // 0xDE350F8651E4346C 0xBBB6DF61
 	static BOOL IS_TIME_EQUAL_TO(int timeA, int timeB) { return invoke<BOOL>(0xF5BC95857BD6D512, timeA, timeB); } // 0xF5BC95857BD6D512 0x8B4D1C06
 	static int GET_TIME_DIFFERENCE(int timeA, int timeB) { return invoke<int>(0xA2C6FC031D46FFF0, timeA, timeB); } // 0xA2C6FC031D46FFF0 0x5666A837
-	static char* _FORMAT_TIME(int time) { return invoke<char*>(0x9E23B1777A927DAD, time); } // 0x9E23B1777A927DAD 0x8218944E
+	static char* GET_TIME_AS_STRING(int time) { return invoke<char*>(0x9E23B1777A927DAD, time); } // 0x9E23B1777A927DAD 0x8218944E
 	static int _GET_POSIX_TIME() { return invoke<int>(0x9A73240B49945C76); } // 0x9A73240B49945C76 0xF2FDF2E0
 	static void _GET_DATE_AND_TIME_FROM_UNIX_EPOCH(int unixEpoch, Any* timeStructure) { invoke<Void>(0xAC97AF97FA68E5D5, unixEpoch, timeStructure); } // 0xAC97AF97FA68E5D5 0xBB7CCE49
 	static void NETWORK_SET_IN_SPECTATOR_MODE(BOOL toggle, Ped playerPed) { invoke<Void>(0x423DE3854BB50894, toggle, playerPed); } // 0x423DE3854BB50894 0x5C4C8458
@@ -4840,9 +4840,9 @@ namespace NETWORK
 	static BOOL _0x4DF7CFFF471A7FB1(Any p0) { return invoke<BOOL>(0x4DF7CFFF471A7FB1, p0); } // 0x4DF7CFFF471A7FB1 0xCB1CD6D3
 	static BOOL _0x4A2D4E8BF4265B0F(Any p0) { return invoke<BOOL>(0x4A2D4E8BF4265B0F, p0); } // 0x4A2D4E8BF4265B0F 0xC6D53AA0
 	static void _0x2B1813ABA29016C5(Any p0, BOOL p1) { invoke<Void>(0x2B1813ABA29016C5, p0, p1); } // 0x2B1813ABA29016C5 0x155465EE
-	static BOOL _DOWNLOAD_BG_SCRIPT_RPF() { return invoke<BOOL>(0x924426BFFD82E915); } // 0x924426BFFD82E915 0x29532731
+	static BOOL _NETWORK_REQUEST_CLOUD_BACKGROUND_SCRIPTS() { return invoke<BOOL>(0x924426BFFD82E915); } // 0x924426BFFD82E915 0x29532731
 	static BOOL _HAS_BG_SCRIPT_BEEN_DOWNLOADED() { return invoke<BOOL>(0x8132C0EB8B2B3293); } // 0x8132C0EB8B2B3293
-	static void _DOWNLOAD_TUNABLES() { invoke<Void>(0x42FB3B532D526E6C); } // 0x42FB3B532D526E6C 0xD760CAD5
+	static void NETWORK_REQUEST_CLOUD_TUNABLES() { invoke<Void>(0x42FB3B532D526E6C); } // 0x42FB3B532D526E6C 0xD760CAD5
 	static BOOL _HAS_TUNABLES_BEEN_DOWNLOADED() { return invoke<BOOL>(0x0467C11ED88B7D28); } // 0x0467C11ED88B7D28
 	static Any _0x10BD227A753B0D84() { return invoke<Any>(0x10BD227A753B0D84); } // 0x10BD227A753B0D84 0x231CFD12
 	static BOOL NETWORK_DOES_TUNABLE_EXIST(char* tunableContext, char* tunableName) { return invoke<BOOL>(0x85E5F8B9B898B20A, tunableContext, tunableName); } // 0x85E5F8B9B898B20A 0x9FCE9C9A
@@ -5032,7 +5032,7 @@ namespace NETWORKCASH
 	static BOOL NETWORK_MONEY_CAN_BET(Any p0, BOOL p1, BOOL p2) { return invoke<BOOL>(0x81404F3DC124FE5B, p0, p1, p2); } // 0x81404F3DC124FE5B 0x8474E6F0
 	static BOOL NETWORK_CAN_BET(Any p0) { return invoke<BOOL>(0x3A54E33660DED67F, p0); } // 0x3A54E33660DED67F 0xE3802533
 	static void NETWORK_EARN_FROM_PICKUP(int amount) { invoke<Void>(0xED1517D3AF17C698, amount); } // 0xED1517D3AF17C698 0x70A0ED62
-	static void _0xA03D4ACE0A3284CE(int amount) { invoke<Void>(0xA03D4ACE0A3284CE, amount); } // 0xA03D4ACE0A3284CE 0x33C20BC4
+	static void _NETWORK_EARN_FROM_GANG_PICKUP(int amount) { invoke<Void>(0xA03D4ACE0A3284CE, amount); } // 0xA03D4ACE0A3284CE 0x33C20BC4
 	static void _NETWORK_EARN_FROM_ARMOUR_TRUCK(int amount) { invoke<Void>(0xF514621E8EA463D0, amount); } // 0xF514621E8EA463D0 0x30B3EC0A
 	static void _NETWORK_EARN_FROM_CRATE_DROP(int amount) { invoke<Void>(0xB1CC1B9EC3007A2A, amount); } // 0xB1CC1B9EC3007A2A 0xEAF04923
 	static void NETWORK_EARN_FROM_BETTING(int amount, char* p1) { invoke<Void>(0x827A5BA1A44ACA6D, amount, p1); } // 0x827A5BA1A44ACA6D 0xA0F7F07C
@@ -5048,9 +5048,9 @@ namespace NETWORKCASH
 	static void NETWORK_EARN_FROM_ROCKSTAR(int amount) { invoke<Void>(0x02CE1D6AC0FC73EA, amount); } // 0x02CE1D6AC0FC73EA 0x5A3733CC
 	static void NETWORK_EARN_FROM_VEHICLE(Any p0, Any p1, Any p2, Any p3, Any p4, Any p5, Any p6, Any p7) { invoke<Void>(0xB539BD8A4C1EECF8, p0, p1, p2, p3, p4, p5, p6, p7); } // 0xB539BD8A4C1EECF8 0xF803589D
 	static void NETWORK_EARN_FROM_PERSONAL_VEHICLE(Any p0, Any p1, Any p2, Any p3, Any p4, Any p5, Any p6, Any p7, Any p8) { invoke<Void>(0x3F4D00167E41E0AD, p0, p1, p2, p3, p4, p5, p6, p7, p8); } // 0x3F4D00167E41E0AD 0x96B8BEE8
-	static void _0x6EA318C91C1A8786(int p0, char* p1, int p2) { invoke<Void>(0x6EA318C91C1A8786, p0, p1, p2); } // 0x6EA318C91C1A8786
-	static void _0xFB6DB092FBAE29E6(int p0, char* p1, Any* p2) { invoke<Void>(0xFB6DB092FBAE29E6, p0, p1, p2); } // 0xFB6DB092FBAE29E6
-	static void _0x6816FB4416760775(Any p0, Any* p1, Any* p2) { invoke<Void>(0x6816FB4416760775, p0, p1, p2); } // 0x6816FB4416760775
+	static void _NETWORK_EARN_FROM_DAILY_OBJECTIVE(int p0, char* p1, int p2) { invoke<Void>(0x6EA318C91C1A8786, p0, p1, p2); } // 0x6EA318C91C1A8786
+	static void _NETWORK_EARN_FROM_AMBIENT_JOB(int p0, char* p1, Any* p2) { invoke<Void>(0xFB6DB092FBAE29E6, p0, p1, p2); } // 0xFB6DB092FBAE29E6
+	static void _NETWORK_EARN_FROM_JOB_BONUS(Any p0, Any* p1, Any* p2) { invoke<Void>(0x6816FB4416760775, p0, p1, p2); } // 0x6816FB4416760775
 	static BOOL NETWORK_CAN_SPEND_MONEY(Any p0, BOOL p1, BOOL p2, BOOL p3, Any p4) { return invoke<BOOL>(0xAB3CAA6B422164DA, p0, p1, p2, p3, p4); } // 0xAB3CAA6B422164DA 0x5AA379D9
 	static BOOL _0x7303E27CC6532080(Any p0, BOOL p1, BOOL p2, BOOL p3, Any* p4, Any p5) { return invoke<BOOL>(0x7303E27CC6532080, p0, p1, p2, p3, p4, p5); } // 0x7303E27CC6532080
 	static void NETWORK_BUY_ITEM(Ped player, Hash item, Any p2, Any p3, BOOL p4, char* item_name, Any p6, Any p7, Any p8, BOOL p9) { invoke<Void>(0xF0077C797F66A355, player, item, p2, p3, p4, item_name, p6, p7, p8, p9); } // 0xF0077C797F66A355 0xA07B6368
@@ -5091,13 +5091,13 @@ namespace NETWORKCASH
 	static void NETWORK_SPENT_PLAYER_HEALTHCARE(Any p0, Any p1, BOOL p2, BOOL p3) { invoke<Void>(0x7C99101F7FCE2EE5, p0, p1, p2, p3); } // 0x7C99101F7FCE2EE5 0x3D96A21C
 	static void NETWORK_SPENT_NO_COPS(Any p0, BOOL p1, BOOL p2) { invoke<Void>(0xD5BB406F4E04019F, p0, p1, p2); } // 0xD5BB406F4E04019F 0x2E51C61C
 	static void NETWORK_SPENT_REQUEST_JOB(Any p0, BOOL p1, BOOL p2) { invoke<Void>(0x8204DA7934DF3155, p0, p1, p2); } // 0x8204DA7934DF3155 0xD57A5125
-	static void _0x9D26502BB97BFE62(Any p0, BOOL p1, BOOL p2) { invoke<Void>(0x9D26502BB97BFE62, p0, p1, p2); } // 0x9D26502BB97BFE62
-	static void _NETWORK_SPENT_BUY_FERRISWHEEL_OR_ROLLERCOASTER(int amountSpent, Any p1, BOOL p2, BOOL p3) { invoke<Void>(0x8A7B3952DD64D2B5, amountSpent, p1, p2, p3); } // 0x8A7B3952DD64D2B5 0xD9622D64
+	static void _NETWORK_SPENT_REQUEST_BEND(Any p0, BOOL p1, BOOL p2) { invoke<Void>(0x9D26502BB97BFE62, p0, p1, p2); } // 0x9D26502BB97BFE62
+	static void _NETWORK_SPENT_BUY_FAIRGROUND_RIDE(int amountSpent, Any p1, BOOL p2, BOOL p3) { invoke<Void>(0x8A7B3952DD64D2B5, amountSpent, p1, p2, p3); } // 0x8A7B3952DD64D2B5 0xD9622D64
 	static BOOL _0x7C4FCCD2E4DEB394() { return invoke<BOOL>(0x7C4FCCD2E4DEB394); } // 0x7C4FCCD2E4DEB394
 	static int NETWORK_GET_VC_BANK_BALANCE() { return invoke<int>(0x76EF28DA05EA395A); } // 0x76EF28DA05EA395A 0x16184FB5
-	static int NETWORK_GET_VC_WALLET_BALANCE(int p0) { return invoke<int>(0xA40F9C2623F6A8B5, p0); } // 0xA40F9C2623F6A8B5 0x4F5B781C
+	static int NETWORK_GET_VC_WALLET_BALANCE(int character) { return invoke<int>(0xA40F9C2623F6A8B5, character); } // 0xA40F9C2623F6A8B5 0x4F5B781C
 	static int NETWORK_GET_VC_BALANCE() { return invoke<int>(0x5CBAD97E059E1B94); } // 0x5CBAD97E059E1B94 0xADF8F882
-	static Any _0xA6FA3979BED01B81() { return invoke<Any>(0xA6FA3979BED01B81); } // 0xA6FA3979BED01B81
+	static char* _NETWORK_GET_BANK_BALANCE_STRING() { return invoke<char*>(0xA6FA3979BED01B81); } // 0xA6FA3979BED01B81
 	static BOOL _0xDC18531D7019A535(Any p0, Any p1) { return invoke<BOOL>(0xDC18531D7019A535, p0, p1); } // 0xDC18531D7019A535
 	static BOOL NETWORK_CAN_RECEIVE_PLAYER_CASH(Any p0, Any p1, Any p2, Any p3) { return invoke<BOOL>(0x5D17BE59D2123284, p0, p1, p2, p3); } // 0x5D17BE59D2123284 0x41F5F10E
 	static Any _0xF70EFA14FE091429(Any p0) { return invoke<Any>(0xF70EFA14FE091429, p0); } // 0xF70EFA14FE091429 0x8B755993
@@ -5108,7 +5108,7 @@ namespace NETWORKCASH
 
 namespace DLC1
 {
-	static int _0x278F76C3B0A8F109(int character) { return invoke<int>(0x278F76C3B0A8F109, character); } // 0x278F76C3B0A8F109 0x71D0CF3E
+	static int _GET_NUM_DECORATIONS(int character) { return invoke<int>(0x278F76C3B0A8F109, character); } // 0x278F76C3B0A8F109 0x71D0CF3E
 	static BOOL _0xFF56381874F82086(int p0, int p1, int* outComponent) { return invoke<BOOL>(0xFF56381874F82086, p0, p1, outComponent); } // 0xFF56381874F82086 0x2E9D628C
 	static void INIT_SHOP_PED_COMPONENT(int* outComponent) { invoke<Void>(0x1E8C308FD312C036, outComponent); } // 0x1E8C308FD312C036 0xB818C7FC
 	static void INIT_SHOP_PED_PROP(int* outProp) { invoke<Void>(0xEB0A2B758F7B850F, outProp); } // 0xEB0A2B758F7B850F 0xF5659E50
@@ -5278,7 +5278,7 @@ namespace UNK
 	static BOOL _IS_UI_LOADING_MULTIPLAYER() { return invoke<BOOL>(0xC6DC823253FBB366); } // 0xC6DC823253FBB366 0x734CFEDA
 	static void _0xC7E7181C09F33B69(BOOL p0) { invoke<Void>(0xC7E7181C09F33B69, p0); } // 0xC7E7181C09F33B69 0x8C227332
 	static void _0xFA1E0E893D915215(BOOL p0) { invoke<Void>(0xFA1E0E893D915215, p0); } // 0xFA1E0E893D915215 0x5C350D78
-	static int _GET_UI_LANGUAGE_ID() { return invoke<int>(0x2BDD44CC428A7EAE); } // 0x2BDD44CC428A7EAE
+	static int _GET_CURRENT_LANGUAGE_ID() { return invoke<int>(0x2BDD44CC428A7EAE); } // 0x2BDD44CC428A7EAE
 	static int _GET_USER_LANGUAGE_ID() { return invoke<int>(0xA8AE43AEC1A61314); } // 0xA8AE43AEC1A61314
 }
 
@@ -5339,13 +5339,13 @@ namespace UNK3
 	static Any _NETWORK_SHOP_BASKET_IS_FULL() { return invoke<Any>(0x27F76CC6C55AD30E); } // 0x27F76CC6C55AD30E
 	static BOOL _NETWORK_SHOP_BASKET_APPLY_SERVER_DATA(Any p0, Any* p1) { return invoke<BOOL>(0xE1A0450ED46A7812, p0, p1); } // 0xE1A0450ED46A7812
 	static BOOL _NETWORK_SHOP_CHECKOUT_START(Any p0) { return invoke<BOOL>(0x39BE7CEA8D9CC8E6, p0); } // 0x39BE7CEA8D9CC8E6
-	static BOOL _NETWORK_SHOP_BEGIN_SERVICE(int* serviceIDOut, Any p1, Any p2, Any p3, int amount, Any p5) { return invoke<BOOL>(0x3C5FD37B5499582E, serviceIDOut, p1, p2, p3, amount, p5); } // 0x3C5FD37B5499582E
+	static BOOL _NETWORK_SHOP_BEGIN_SERVICE(Any* p0, Any p1, Any p2, Any p3, Any p4, Any p5) { return invoke<BOOL>(0x3C5FD37B5499582E, p0, p1, p2, p3, p4, p5); } // 0x3C5FD37B5499582E
 	static BOOL _NETWORK_SHOP_END_SERVICE(Any p0) { return invoke<BOOL>(0xE2A99A9B524BEFFF, p0); } // 0xE2A99A9B524BEFFF
 	static BOOL _0x51F1A8E48C3D2F6D(Any p0, BOOL p1, Any p2) { return invoke<BOOL>(0x51F1A8E48C3D2F6D, p0, p1, p2); } // 0x51F1A8E48C3D2F6D
 	static Any _0x0A6D923DFFC9BD89() { return invoke<Any>(0x0A6D923DFFC9BD89); } // 0x0A6D923DFFC9BD89
 	static Any _NETWORK_SHOP_DELETE_SET_TELEMETRY_NONCE_SEED() { return invoke<Any>(0x112CEF1615A1139F); } // 0x112CEF1615A1139F
-	static BOOL _0xD47A2C1BA117471D(Any p0, Any p1) { return invoke<BOOL>(0xD47A2C1BA117471D, p0, p1); } // 0xD47A2C1BA117471D
-	static BOOL _0xC2F7FE5309181C7D(Any p0, Any p1) { return invoke<BOOL>(0xC2F7FE5309181C7D, p0, p1); } // 0xC2F7FE5309181C7D
+	static BOOL _NETWORK_TRANSFER_BANK_TO_WALLET(int charStatInt, int amount) { return invoke<BOOL>(0xD47A2C1BA117471D, charStatInt, amount); } // 0xD47A2C1BA117471D
+	static BOOL _NETWORK_TRANSFER_WALLET_TO_BANK(int charStatInt, int amount) { return invoke<BOOL>(0xC2F7FE5309181C7D, charStatInt, amount); } // 0xC2F7FE5309181C7D
 	static Any _0x23789E777D14CE44() { return invoke<Any>(0x23789E777D14CE44); } // 0x23789E777D14CE44
 	static Any _0x350AA5EBC03D3BD2() { return invoke<Any>(0x350AA5EBC03D3BD2); } // 0x350AA5EBC03D3BD2
 	static Any _NETWORK_SHOP_CASH_TRANSFER_SET_TELEMETRY_NONCE_SEED() { return invoke<Any>(0x498C1E05CE5F7877); } // 0x498C1E05CE5F7877
