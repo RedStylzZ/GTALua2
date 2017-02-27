@@ -294,9 +294,9 @@ void ScriptMain() {
 	printf(APP " - v" VERSION " - build: " BUILD "\n");
 	printf(DASH);
 
-	printf("Checking online version...");
+	printf("Checking online version ... ");
 	version = UNK3::_GET_ONLINE_VERSION();
-	printf("[%s]...", version);
+	printf("[%s] ... ", version);
 	if (strcmp(version, ONLINE_VERSION) == 0) {
 		printf("supported.\n");
 	} else {

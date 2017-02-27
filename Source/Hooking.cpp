@@ -78,14 +78,11 @@ bool Native(DWORD64 hash, LPVOID hookFunction, T** trampoline)
 }
 
 Hooking::NativeHandler ORIG_WAIT = NULL;
-void* __cdecl MY_WAIT(NativeContext *cxt)
-{
+void* __cdecl MY_WAIT(NativeContext *cxt) {
 	ScriptThread* pThread = GetActiveThread();
 
-	if (pThread->m_ctx.ScriptHash == 0x5700179c)
-	{
-		if (pThread->m_ctx.State == ThreadStateRunning)
-		{
+	if (pThread->m_ctx.ScriptHash == 0x5700179c) {
+		if (pThread->m_ctx.State == ThreadStateRunning) {
 			Hooking::scriptRun();
 		}
 	}
@@ -98,7 +95,7 @@ bool Hooking::HookNatives()
 {
 	return true
 	// native hooks	
-		&& Native(CrossMapping::MapNative(0x4EDE34FBADD967A6), &MY_WAIT, &ORIG_WAIT)
+		&& Native(0x4EDE34FBADD967A6, &MY_WAIT, &ORIG_WAIT)
 ;
 }
 
