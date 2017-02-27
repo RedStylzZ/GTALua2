@@ -1,4 +1,4 @@
-LIBRARY iphlpapi.dll
+LIBRARY proxy.dll
 EXPORTS
 	AddIPAddress=AddIPAddress_wrapper @1
 	AllocateAndGetInterfaceInfoFromStack=AllocateAndGetInterfaceInfoFromStack_wrapper @2
