@@ -56,7 +56,7 @@ function Debug:Run()
 			debugtext = debugtext.." (Invis.)"
 		end
 		ui.DrawTextBlock(debugtext, .01, .01, FontChaletComprimeCologne, _FontSize, COLOR_RED, BLINK)
-		ui.DrawTextBlock("Decor ID: "..natives.NETWORK._0xBC1D768F2F5D6C05(Myself.PlayerID),nil,nil,nil,nil,COLOR_WHITE,NOBLINK)
+		ui.DrawTextBlock("Decor ID: "..natives.NETWORK._NETWORK_HASH_FROM_PLAYER_HANDLE(Myself.PlayerID),nil,nil,nil,nil,COLOR_WHITE,NOBLINK)
 		ui.DrawTextBlock(string.format("x:%4.2f y:%4.2f z:%4.2f h:%3.2f",MyPos.x,MyPos.y,MyPos.z,MyHdg))
 		if _CheatMode then
 			ui.DrawTextBlock("Cheat mode")

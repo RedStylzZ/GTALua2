@@ -479,7 +479,11 @@ function VehicleMod:Process()
 			str = str.." ("..(_ModW[_VehicleWType] or _VehicleWType)..")"
 		end
 		if _VehicleModID == _Mod_VEH_EXTRA then
-			str = str.." (".._VehicleExtra..")"
+			str = str.." (".._VehicleExtra
+			if veh:HasExtra(_VehicleExtra) then
+				str = str.."*"
+			end
+			str = str..")"
 		end
 		
 		ui.DrawTextBlock(str, _ModX)

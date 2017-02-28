@@ -162,7 +162,7 @@ function CheatMod:Process()
 				natives.DECORATOR.DECOR_REMOVE(ent.ID, "MPBitset")
 				natives.DECORATOR.DECOR_REMOVE(ent.ID, "Veh_Modded_By_Player")
 
-				natives.DECORATOR.DECOR_SET_INT(ent.ID, "Player_Vehicle", natives.NETWORK._0xBC1D768F2F5D6C05(PlayerID))
+				natives.DECORATOR.DECOR_SET_INT(ent.ID, "Player_Vehicle", natives.NETWORK._NETWORK_HASH_FROM_PLAYER_HANDLE(PlayerID))
 				natives.DECORATOR.DECOR_SET_INT(ent.ID, "MPBitset", _MPBitset)
 				if not natives.DECORATOR.DECOR_EXIST_ON(ent.ID, "PV_Slot") then
 					natives.DECORATOR.DECOR_SET_INT(ent.ID, "PV_Slot", 0)
