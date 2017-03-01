@@ -15,10 +15,10 @@ Parking.ScriptInfo = {
 local _Version = "1.0"
 
 -- Global variables
-local _Debug = false
-local _DrawAsMissionEntity = true
+_Debug = false
 
 -- Garage global variables
+local _DrawAsMissionEntity = true
 local _NGarages = 12
 local _DefaultGarage = 1
 local _GarageSpots = {}

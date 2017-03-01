@@ -11,6 +11,9 @@ Debug.ScriptInfo = {
 	Version = "1.0"
 }
 
+-- Global to override other modules Debug functionality
+_Debug = false
+
 -- Variables for Debug control
 local ToggleKey = KEY_F9
 local ShowDebug = false
@@ -143,8 +146,10 @@ function Debug:Run()
 		ShowDebug = not ShowDebug
 		if ShowDebug then
 			ui.MapMessage("~g~Debug info enabled.")
+			_Debug = true
 		else
 			ui.MapMessage("~r~Debug info disabled.")
+			_Debug = false
 		end
 	end
 end

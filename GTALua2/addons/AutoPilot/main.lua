@@ -46,13 +46,13 @@ function AutoPilot:Run()
 		local plr = LocalPlayer()
 		if plr:IsDead() then
 			AutoPilotMode = AP_Off
-			ui.message("~r~Autopilot Reset")
+			ui.MapMessage("~r~Autopilot Reset")
 			return
 		end
 		local veh = plr:GetVehicle()
 		if not veh then
 			AutoPilotMode = AP_Off
-			ui.message("~r~Autopilot Reset")
+			ui.MapMessage("~r~Autopilot Reset")
 			return
 		end		
 		local playerPos = plr:GetPosition()
