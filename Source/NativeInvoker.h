@@ -94,11 +94,11 @@ public:
 		memcpy( m_TempStack, tempValues, sizeof( m_TempStack ) );
 	}
 
-	template <typename T>
-	inline T GetResult() {
-
-		return *reinterpret_cast<T*>( m_TempStack );
-	}
+//	template <typename T>
+//	inline T GetResult() {
+//
+//		return *reinterpret_cast<T*>( m_TempStack );
+//	}
 };
 
 struct pass {

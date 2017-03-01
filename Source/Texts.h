@@ -47,6 +47,9 @@ static const char* texts[] = {
 	"Remapping DLL exports ... ",
 	"Creating Mod thread ... ",
 	"Waiting for the game window ... ",
+	"On Vehicle created ... ",
+	"On Ped created ... ",
+	"Build time: " __TIMESTAMP__ "\n",
 	"Done.\n"
 };
 
@@ -87,4 +90,7 @@ static const char* texts[] = {
 #define REMAP_EXPORTS			texts[34]
 #define CREATE_THREAD			texts[35]
 #define WAIT_WINDOW				texts[36]
-#define DONE					texts[37]
+#define ON_VEHICLE_CREATED		texts[37]
+#define ON_PED_CREATED			texts[38]
+#define BUILT_ON				texts[39]
+#define DONE					texts[40]

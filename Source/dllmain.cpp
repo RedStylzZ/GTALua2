@@ -52,6 +52,7 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 		printf(DASH);
 		printf(MODULE_TITLE);
 		printf(DASH);
+		printf(BUILT_ON);
 
 		printf(INIT_MINHOOK);
 		if (MH_Initialize() != MH_OK) {

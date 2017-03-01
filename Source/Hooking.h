@@ -104,4 +104,5 @@ private:
 	static void FailPatterns(const char* name);
 	static HMODULE _hmoduleDLL;
 	static HWND hWindow;
-};	void WAIT(DWORD ms);
+};	
+	void WAIT(DWORD ms);
