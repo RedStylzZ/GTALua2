@@ -27,43 +27,46 @@ local _RayDistance = 5000
 
 -- Select weapons to top-up
 local _Weapons = {
-["GADGET_PARACHUTE"]                     =  0xFBAB5776,
-["WEAPON_ADVANCEDRIFLE"]                 =  0xAF113F99,
-["WEAPON_ASSAULTRIFLE"]                  =  0xBFEFFF6D,
-["WEAPON_ASSAULTSHOTGUN"]                =  0xE284C527,
-["WEAPON_ASSAULTSMG"]                    =  0xEFE7E2DF,
-["WEAPON_CARBINERIFLE"]                  =  0x83BF0278,
-["WEAPON_COMBATMG"]                      =  0x7FD62962,
-["WEAPON_COMBATPDW"]                     =  0x0A3D4D34,
-["WEAPON_COMPACTRIFLE"]                  =  0x624FE830,
-["WEAPON_FIREWORK"]                      =  0x7F7497E5,
-["WEAPON_FLAREGUN"]                      =  0x47757124,
-["WEAPON_FLASHLIGHT"]                    =  0x8BB05FD7,
-["WEAPON_GRENADE"]                       =  0x93E220BD,
-["WEAPON_GRENADELAUNCHER"]               =  0xA284510B,
-["WEAPON_HEAVYSHOTGUN"]                  =  0x3AABBBAA,
-["WEAPON_HEAVYSNIPER"]                   =  0x0C472FE2,
-["WEAPON_HOMINGLAUNCHER"]                =  0x63AB0442,
-["WEAPON_MACHETE"]                       =  0xDD5DF8D9,
-["WEAPON_MACHINEPISTOL"]                 =  0xDB1AA450,
-["WEAPON_MARKSMANRIFLE"]                 =  0xC734385A,
-["WEAPON_MG"]                            =  0x9D07F764,
-["WEAPON_MICROSMG"]                      =  0x13532244,
-["WEAPON_MINIGUN"]                       =  0x42BF8A85,
-["WEAPON_MOLOTOV"]                       =  0x24B17070,
-["WEAPON_PISTOL"]                        =  0x1B06D571,
-["WEAPON_PISTOL50"]                      =  0x99AEEB3B,
-["WEAPON_PROXMINE"]                      =  0xAB564B93,
-["WEAPON_REVOLVER"]                      =  0xC1B3C3D1,
-["WEAPON_RPG"]                           =  0xB1CA77B1,
-["WEAPON_SMG"]                           =  0x2BE6766B,
-["WEAPON_SNIPERRIFLE"]                   =  0x05FC3C11,
-["WEAPON_SPECIALCARBINE"]                =  0xC0A3098D,
-["WEAPON_STICKYBOMB"]                    =  0x2C3731D9,
-["WEAPON_STUNGUN"]                       =  0x3656C8C1,
-["WEAPON_PIPEBOMB"]                      =  0xBA45E8B8,
-["WEAPON_MINISMG"]                       =  0xBD248B55
+-- Pistol
+	[0x1b06d571] = {0xed265a1c},
+-- Combat Pistol
+	[0x5ef9fec4] = {0xd67b4f2d},
+-- AP Pistol
+	[0x22d8fe39] = {0x249a17d5},
+-- Micro SMG
+	[0x13532244] = {0x10e6ba2b, 0x9d2fbf29},
+-- Assault Shotgun
+	[0xe284c527] = {0x86bd7f72, 0x0c164f53},
+-- Heavy Shotgun
+	[0x3aabbbaa] = {0x971cf6fd, 0x0c164f53, 0x88c7da53},
+-- Carbine Rifle
+	[0x83bf0278] = {0x91109691, 0x0c164f53, 0xba62e935},
+-- Advanced Rifle
+	[0xaf113f99] = {0x8ec1c979, 0xaa2c45b4},
+-- Advanced Carbine
+	[0xc0a3098d] = {0x7c8bd10e, 0xa0d89c42, 0x0c164f53, 0x6b59aeaa},
+-- Sniper Rifle
+	[0x05fc3c11] = {0xa73d4664, 0xbc54da77},
+-- Heavy Sniper
+	[0x0c472fe2] = {0xd2443ddc, 0xbc54da77},
+-- Machine Gun
+	[0x7fd62962] = {0xd6c59cd6, 0x0c164f53, 0xa0d89c42},
+-- Parachute
+	[0xFBAB5776] = {},
+-- Grenade
+	[0x93E220BD] = {},
+-- Homing Launcher
+	[0x63AB0442] = {},
+-- Minigun
+	[0x42BF8A85] = {},
+-- Proximity Mine
+	[0xAB564B93] = {},
+-- RPG
+	[0xB1CA77B1] = {},
+-- Sticky Bomb
+	[0x2C3731D9] = {}
 }
+
 -- Functions must match module folder name
 
 -- Init function is called once from the main Lua
@@ -295,12 +298,20 @@ function CheatMod:Process()
 		print("done.")
 	end
 
--- Top me Up (give many weapons/ammo)
+-- Top me Up (give less suspicious weapons/ammo) (Shift to remove all)
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlLookBehind, true)
 	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlLookBehind) then
-		LocalPlayer():RemoveAllWeapons()
-		for k, v in pairs(_Weapons) do
-			LocalPlayer():GiveDelayedWeapon(v, 600)
+		local plr = LocalPlayer()
+		plr:RemoveAllWeapons()
+		local ammo = Cvar:new()
+		if not IsKeyDown(KEY_SHIFT) then
+			for k, _Components in pairs(_Weapons) do
+				natives.WEAPON.GET_MAX_AMMO(plr.ID, k, ammo)
+				plr:GiveWeapon(k, ammo:getInt())
+				for k2, comp in pairs(_Components) do
+					plr:GiveWeaponComponent(k, comp)
+				end
+			end
 		end
 	end
 

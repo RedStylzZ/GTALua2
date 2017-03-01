@@ -38,12 +38,20 @@ function Ped:AllowWeaponSwitching(b)
 end
 
 -- Weapon
-function Ped:GiveDelayedWeapon(wep, ammo)
+function Ped:GiveWeapon(wep, ammo)
 	self:_CheckExists()
 	if type(wep) == "string" then
 		wep = natives.GAMEPLAY.GET_HASH_KEY(wep)
 	end
-	natives.WEAPON.GIVE_DELAYED_WEAPON_TO_PED(self.ID, wep, ammo, false)
+	natives.WEAPON.GIVE_WEAPON_TO_PED(self.ID, wep, ammo, 0, false)
+end
+
+function Ped:GiveDelayedWeapon(wep)
+	self:_CheckExists()
+	if type(wep) == "string" then
+		wep = natives.GAMEPLAY.GET_HASH_KEY(wep)
+	end
+	natives.WEAPON.GIVE_DELAYED_WEAPON_TO_PED(self.ID, wep, 600, false)
 end
 
 function Ped:RemoveWeapon(wep)
@@ -55,7 +63,19 @@ function Ped:RemoveWeapon(wep)
 end
 
 function Ped:RemoveAllWeapons()
+	self:_CheckExists()
 	natives.WEAPON.REMOVE_ALL_PED_WEAPONS(self.ID, true)
+end
+
+function Ped:GiveWeaponComponent(wep, comp)
+	self:_CheckExists()
+	if type(wep) == "string" then
+		wep = natives.GAMEPLAY.GET_HASH_KEY(wep)
+	end
+	if type(comp) == "string" then
+		comp = natives.GAMEPLAY.GET_HASH_KEY(comp)
+	end
+	natives.WEAPON.GIVE_WEAPON_COMPONENT_TO_PED(self.ID, wep, comp)
 end
 
 -- Group Member
