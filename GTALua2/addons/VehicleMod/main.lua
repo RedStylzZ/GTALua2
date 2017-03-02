@@ -191,6 +191,7 @@ local _MinVehicleExtras = 1
 local _MaxVehicleExtras = 12
 
 -- Default full upgrade values
+local _FullUpgrade = 0
 local _UpgradeHorn = 10
 local _UpgradePlateText = "THE BORG"
 local _UpgradePlateType = 1
@@ -198,6 +199,12 @@ local _UpgradeWindowTint = 1
 local _UpgradeWheelType = 7
 local _UpgradeCarWheelNumber = 6
 local _UpgradeBikeWheelNumber = 5
+local _UpgradePriColor = 12
+local _UpgradeSecColor = 12
+local _UpgradePrlColor = 38
+local _UpgradeWhlColor = 12
+local _UpgradeTrmColor = 38
+local _UpgradeAccColor = 38
 local _MPBitset = 8
 
 -- Wheel types
@@ -602,6 +609,12 @@ function VehicleMod:Process()
 		end
 -- Fully upgrade vehicle
 		if IsKeyJustDown(_KeyUpgradeVehicle, true) then
+			_FullUpgrade = 1
+		end
+		if IsKeyJustDown(KEY_CLEAR) then
+			_FullUpgrade = 2
+		end
+		if _FullUpgrade > 0 then
 			for i=0,48,1 do
 				if _ModLimits[i] then
 					if _ModLimits[i].vtype == "boolean" then
@@ -613,9 +626,17 @@ function VehicleMod:Process()
 				end
 			end
 			VehicleMod:ApplyNeons(veh.ID)
-			natives.VEHICLE.SET_VEHICLE_MOD(veh.ID, 14, _UpgradeHorn, true)
-			veh:SetPlateText(_UpgradePlateText)
-			veh:SetPlateType(_UpgradePlateType)
+			if _FullUpgrade > 1 then
+				if veh:IsCar() or veh:IsBike() then
+					natives.VEHICLE.SET_VEHICLE_MOD(veh.ID, 14, _UpgradeHorn, true)
+					veh:SetPlateText(_UpgradePlateText)
+					veh:SetPlateType(_UpgradePlateType)
+				end
+				veh:SetColours(_UpgradePriColor, _UpgradeSecColor)
+				veh:SetExtraColours(_UpgradePrlColor, _UpgradeWhlColor)
+				veh:SetAccentColor(_UpdateAccColor)
+				veh:SetTrimColor(_UpdateTrmColor)
+			end
 			if veh:IsCar() then
 				veh:SetWindowTint(_UpgradeWindowTint)
 				natives.VEHICLE.SET_VEHICLE_WHEEL_TYPE(veh.ID, _UpgradeWheelType)
@@ -654,6 +675,7 @@ function VehicleMod:Process()
 			natives.VEHICLE.SET_VEHICLE_FRICTION_OVERRIDE(veh.ID, 2)
 
 			ui.MapMessage("~b~Vehicle fully upgraded.")
+			_FullUpgrade = 0
 			return
 		end
 -- Lists some of information about the vehicle

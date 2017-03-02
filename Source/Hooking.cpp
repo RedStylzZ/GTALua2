@@ -21,8 +21,8 @@ enum RunningState { state_running, state_closing, }; RunningState mod_state = st
 void Hooking::Start(HMODULE hmoduleDLL)
 {
 	_hmoduleDLL = hmoduleDLL;
-	// Don't do anything until you see the game window
 
+	// Don't do anything until you see the game window
 	printf(WAIT_WINDOW);
 	while (!hWindow) {
 		hWindow = FindWindow("grcWindow", NULL);
