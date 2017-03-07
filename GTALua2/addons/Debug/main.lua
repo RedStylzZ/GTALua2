@@ -36,7 +36,7 @@ function Debug:DecorInt(veh, decor, decorType)
 	if natives.DECORATOR.DECOR_EXIST_ON(veh.ID, decor) then
 		return natives.DECORATOR.DECOR_GET_INT(veh.ID, decor)
 	else
-		return "no exist"
+		return -1
 	end
 end
 
@@ -59,8 +59,8 @@ function Debug:Run()
 			debugtext = debugtext.." (Invis.)"
 		end
 		ui.DrawTextBlock(debugtext, .01, .01, FontChaletComprimeCologne, _FontSize, COLOR_RED, BLINK)
-		ui.DrawTextBlock("Decor ID: "..natives.NETWORK._NETWORK_HASH_FROM_PLAYER_HANDLE(Myself.PlayerID),nil,nil,nil,nil,COLOR_WHITE,NOBLINK)
-		ui.DrawTextBlock(string.format("x:%4.2f y:%4.2f z:%4.2f h:%3.2f",MyPos.x,MyPos.y,MyPos.z,MyHdg))
+		ui.DrawTextBlock("Plr ID: 0x"..natives.NETWORK._NETWORK_HASH_FROM_PLAYER_HANDLE(Myself.PlayerID),nil,nil,nil,nil,COLOR_WHITE,NOBLINK)
+		ui.DrawTextBlock(string.format("x:%04.2f y:%04.2f z:%04.2f h:%03.2f",MyPos.x,MyPos.y,MyPos.z,MyHdg))
 		if _CheatMode then
 			ui.DrawTextBlock("Cheat mode")
 		end
