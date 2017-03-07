@@ -110,6 +110,19 @@ function CheatMod:Process()
 		bulletWeapon = WEAPON_SMG
 	end
 
+-- Shows aiming players
+	for i=0,31 do
+		local playername = natives.PLAYER.GET_PLAYER_NAME(i)
+		if playername ~= "**Invalid**" then
+			local other = Player:new(i)
+			local playerPos = LocalPlayer():GetPosition()
+			if natives.PLAYER.IS_PLAYER_FREE_AIMING_AT_ENTITY(i, LocalPlayer().ID) then
+				ui.Draw3DLine(playerPos, other:GetPosition(), COLOR_RED)
+			end
+		end
+	end
+
+
 -- Take car
 	if IsKeyJustDown(_KeyTakeCar, true) then
 		local ent = select(1, game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue))
@@ -315,6 +328,28 @@ function CheatMod:Process()
 		end
 	end
 
+-- Find Hacker
+	if IsKeyJustDown(KEY_F4) then
+		for i=0,31 do
+			local ped = natives.PLAYER.GET_PLAYER_PED(i)
+			if ped > 0 then
+				local name = natives.PLAYER.GET_PLAYER_NAME(i)
+				local hasIt = natives.WEAPON.HAS_PED_GOT_WEAPON(ped, 0x42BF8A85, false)
+				if hasIt then
+					print(name)
+				end
+			end
+		end
+	end
+-- Teleport few meters ahead
+	if IsKeyJustDown(KEY_E) then
+		local plr = LocalPlayer()
+		if not plr:IsInVehicle() then
+			local newpos = game.GetCoordsInFrontOfCam(10)
+			plr:SetPosition(newpos.x, newpos.y, newpos.z)
+		end
+	end
+
 -- Heart attack gun
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlVehicleDuck, true)
 	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlVehicleDuck) then
@@ -328,19 +363,22 @@ function CheatMod:Process()
 -- Drone strike gun
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlThrowGrenade, true)
 	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlThrowGrenade) then
-		local tgt = select(2, game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue))
-		if tgt then
-			local org = {}
-			org.x = tgt.x+.02
-			org.y = tgt.y
-			org.z = tgt.z+50
-			game.ShootBulletBetweenCoords(org, tgt, WEAPON_AIRSTRIKE_ROCKET, 100, 500, bulletOwner)
+		if IsKeyDown(KEY_SHIFT) then
+			local tgt = select(2, game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue))
+			if tgt then
+				local org = {}
+				org.x = tgt.x+.02
+				org.y = tgt.y
+				org.z = tgt.z+50
+				game.ShootBulletBetweenCoords(org, tgt, WEAPON_AIRSTRIKE_ROCKET, 100, 500, bulletOwner)
+			end
 		end
 	end
 
 -- AC-130 strike gun
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlNextCamera, true)
 	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlNextCamera) then
+		if IsKeyDown(KEY_SHIFT) then
 		local tgt = select(2, game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue))
 		if tgt then
 			local org = {}
