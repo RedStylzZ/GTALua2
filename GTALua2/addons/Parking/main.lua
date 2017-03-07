@@ -19,7 +19,7 @@ _Debug = false
 
 -- Garage global variables
 local _DrawAsMissionEntity = true
-local _NGarages = 12
+local _NGarages = 13
 local _DefaultGarage = 1
 local _GarageSpots = {}
 local _Spots = {}
@@ -58,7 +58,8 @@ local	_GarageOutSpawn = {}
 	_GarageOutSpawn[9] = {x=-765.82, y=236.13, z=75.10, h=189.27}
 	_GarageOutSpawn[10] = {x=-1551.65, y=-553.38, z=27.03, h=36.05}
 	_GarageOutSpawn[11] = {x=-955.82, y=-1287.30, z=4.55, h=316.3}
-	_GarageOutSpawn[12] = {x=-819.19, y=-732.53, z=27.34, h=96.11}
+	_GarageOutSpawn[12] = {x=-619.19, y=-732.53, z=27.34, h=96.11}
+	_GarageOutSpawn[13] = {x=499.43, y=-104.8, z=61.43, h=249.5}
 local	_GarageInDoor = {}
 	_GarageInDoor[1] = {x=-717.8, y=-58.6, z=37}
 	_GarageInDoor[2] = {x=-888.4, y=-147.7, z=37}
@@ -71,7 +72,8 @@ local	_GarageInDoor = {}
 	_GarageInDoor[9] = {x=-765.82, y=236.13, z=75.10}
 	_GarageInDoor[10] = {x=-1554.91, y=-556.67, z=26.75}
 	_GarageInDoor[11] = {x=-963.43, y=-1283.47, z=4.65}
-	_GarageInDoor[12] = {x=-617.38, y=-738.06, z=268.62}
+	_GarageInDoor[12] = {x=-617.38, y=-738.06, z=27.34}
+	_GarageInDoor[13] = {x=501.19, y=-98.40, z=61.43}
 local _InDoorEnabled = true
 local _GarageOutDoor = {x=405.45, y=-978.83, z=_GarageZ}
 local _InsideGarage = false
@@ -596,6 +598,7 @@ function Parking:ShowDebugData()
 		if _InDoorEnabled then
 			for n=1,_NGarages do
 				ui.Draw3DPoint(_GarageInDoor[n], .5)
+				ui.Draw3DPoint(_GarageOutSpawn[n], .5)
 			end
 			for n=1,_NGarages do
 				local distance = game.Distance(playerPos, _GarageInDoor[n])
