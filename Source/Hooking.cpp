@@ -279,14 +279,15 @@ static Hooking::NativeHandler _Handler(uint64_t origHash) {
 
 Hooking::NativeHandler Hooking::GetNativeHandler(uint64_t origHash)
 {
-	auto& handler = m_handlerCache[origHash];
-
-	if (handler == nullptr)
-	{
-		handler = _Handler(origHash);
-	}
-
-	return handler;
+//	auto& handler = m_handlerCache[origHash];
+//
+//	if (handler == nullptr)
+//	{
+//		handler = _Handler(origHash);
+//	}
+//
+//	return handler;
+	return _Handler(origHash);
 }
 
 eGameState Hooking::GetGameState()
