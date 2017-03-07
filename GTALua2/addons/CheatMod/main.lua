@@ -379,14 +379,15 @@ function CheatMod:Process()
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlNextCamera, true)
 	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlNextCamera) then
 		if IsKeyDown(KEY_SHIFT) then
-		local tgt = select(2, game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue))
-		if tgt then
-			local org = {}
-			org.x = tgt.x+.02
-			org.y = tgt.y
-			org.z = tgt.z+50
-			game.ShootBulletBetweenCoords(org, tgt, VEHICLE_WEAPON_PLAYER_BULLET, 100, 500, bulletOwner)
-			game.ShootBulletBetweenCoords(org, tgt, VEHICLE_WEAPON_PLAYER_LAZER, 100, 500, bulletOwner)
+			local tgt = select(2, game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue))
+			if tgt then
+				local org = {}
+				org.x = tgt.x+.02
+				org.y = tgt.y
+				org.z = tgt.z+50
+				game.ShootBulletBetweenCoords(org, tgt, VEHICLE_WEAPON_PLAYER_BULLET, 100, 500, bulletOwner)
+				game.ShootBulletBetweenCoords(org, tgt, VEHICLE_WEAPON_PLAYER_LAZER, 100, 500, bulletOwner)
+			end
 		end
 	end
 end
