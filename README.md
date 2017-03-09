@@ -15,7 +15,7 @@ If you use this mod online, be aware that you do it at your own risk, there's al
 GTALua2 is not a virus, it will not steal your password, your credit card number or anything. It will not get your wife pregnant, if it happens then maybe it is because you are playing too much GTA.
 All the source code is here, go through it. If you cannot understand it, then you shouldn't be using it anyways.
 
-Hafe fun, report bugs and suggest improvements.
+Have fun, report bugs and suggest improvements. GTALua2 builds on VS2017.
 
 Discord channel: https://discord.gg/CjcstmA
 
