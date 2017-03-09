@@ -47,8 +47,8 @@ static const char* texts[] = {
 	"Remapping DLL exports ... ",
 	"Creating Mod thread ... ",
 	"Waiting for the game window ... ",
-	"On Vehicle created ... ",
-	"On Ped created ... ",
+	"Hooking OnVehicleCreated ... ",
+	"Hooking OnPedCreated ... ",
 	"Build time: " __TIMESTAMP__ "\n",
 	"Done.\n"
 };

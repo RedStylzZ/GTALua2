@@ -28,6 +28,7 @@
 #include <MinHook.h>
 #include <timeapi.h>
 #include <time.h>
+#include <intrin.h>
 
 // Additional Header Files:
 #include "Memory.h"

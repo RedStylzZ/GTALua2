@@ -15,18 +15,20 @@
 
 lua_State *L;
 
+// -----------------------------------------------------------------------------------
+
 // Functions to export to Lua
 static int LuaFolder(lua_State *L) {
 	lua_pushstring(L, LUAFOLDER);
 	return 1;
 }
 
-static int GameVersion(lua_State *L) {
+static int LuaGameVersion(lua_State *L) {
 	lua_pushstring(L, GAME_VERSION);
 	return 1;
 }
 
-static int OnlineVersion(lua_State *L) {
+static int LuaOnlineVersion(lua_State *L) {
 	lua_pushstring(L, ONLINE_VERSION);
 	return 1;
 }
@@ -114,7 +116,7 @@ static int LuaNativeCall(lua_State *L) {
 	return count;
 }
 
-static int IsKeyDown(lua_State *L) {
+static int LuaIsKeyDown(lua_State *L) {
 	int key = (int)luaL_checkinteger(L, 1);
 
 	lua_pushboolean(L, KeyDown(key));
@@ -122,7 +124,7 @@ static int IsKeyDown(lua_State *L) {
 	return 1;
 }
 
-static int IsKeyJustDown(lua_State *L) {
+static int LuaIsKeyJustDown(lua_State *L) {
 	int key = (int)luaL_checkinteger(L, 1);
 
 	lua_pushboolean(L, KeyJustDown(key));
@@ -130,7 +132,7 @@ static int IsKeyJustDown(lua_State *L) {
 	return 1;
 }
 
-static int IsKeyJustUp(lua_State *L) {
+static int LuaIsKeyJustUp(lua_State *L) {
 	int key = (int)luaL_checkinteger(L, 1);
 
 	lua_pushboolean(L, KeyJustUp(key));
@@ -203,6 +205,16 @@ static int LuaGlobalPointer(lua_State *L) {
 	return 1;
 }
 
+static int LuaJoaat(lua_State *L) {
+	const char *arg = luaL_checkstring(L, 1);
+
+	lua_pushinteger(L, (int32_t)GAMEPLAY::GET_HASH_KEY((char *)arg));
+
+	return 1;
+}
+
+// -----------------------------------------------------------------------------------
+
 // End program execution
 void die(const char *why) {
 	printf("%s", why);
@@ -210,22 +222,54 @@ void die(const char *why) {
 	exit(1);
 }
 
+// Get EntityId from veh/ped creation pointers
+typedef DWORD32(__fastcall* GetEntityID_t)(__int64* pEntity);
+GetEntityID_t orig_GetEntityID = NULL;
+
+int my_GetEntityID(__int64* pEntity) {
+	if (pEntity == NULL || orig_GetEntityID == NULL)
+		return 0;
+
+	return orig_GetEntityID(pEntity);
+}
+
+// Vehicle creation hooking for OnVehicleCreated event
+typedef __int64*(__thiscall* CreateVeh_t)(__int64* pThis, __int64* a2, __int64 a3, __int64 a4, __int64 a5, __int64* a6, bool a7, bool a8);
+CreateVeh_t orig_CreateVeh = NULL;
+
+__int64* __fastcall my_CreateVeh(__int64* pThis, __int64* a2, __int64 a3, __int64 a4, __int64 a5, __int64* a6, bool a7, bool a8) {
+	__int64 *pVehEntity = orig_CreateVeh(pThis, a2, a3, a4, a5, a6, a7, a8);
+	return pVehEntity;
+}
+
+// Ped creation hooking for OnPedCreated event
+typedef __int64*(__thiscall* CreatePed_t)(__int64* pThis, __int64* a2, __int64 a3, __int64 a4, __int64 a5, __int64* a6, bool a7);
+CreatePed_t orig_CreatePed = NULL;
+
+__int64* __fastcall my_CreatePed(__int64* pThis, __int64* a2, __int64 a3, __int64 a4, __int64 a5, __int64* a6, bool a7) {
+	__int64 *pPedEntity = orig_CreatePed(pThis, a2, a3, a4, a5, a6, a7);
+	return pPedEntity;
+}
+
+// -----------------------------------------------------------------------------------
+
 // Initializer function - runs once
 void init() {
+
 	L = luaL_newstate();
 	luaL_openlibs(L);
 
 	lua_register(L, "LuaFolder", LuaFolder);
-	lua_register(L, "GameVersion", GameVersion);
-	lua_register(L, "OnlineVersion", OnlineVersion);
+	lua_register(L, "GameVersion", LuaGameVersion);
+	lua_register(L, "OnlineVersion", LuaOnlineVersion);
 	lua_register(L, "nativeInit", LuaNativeInit);
 	lua_register(L, "nativePushInt", LuaNativePushInt);
 	lua_register(L, "nativePushFloat", LuaNativePushFloat);
 	lua_register(L, "nativePushStr", LuaNativePushStr);
 	lua_register(L, "nativeCall", LuaNativeCall);
-	lua_register(L, "IsKeyDown", IsKeyDown);
-	lua_register(L, "IsKeyJustDown", IsKeyJustDown);
-	lua_register(L, "IsKeyJustUp", IsKeyJustUp);
+	lua_register(L, "IsKeyDown", LuaIsKeyDown);
+	lua_register(L, "IsKeyJustDown", LuaIsKeyJustDown);
+	lua_register(L, "IsKeyJustUp", LuaIsKeyJustUp);
 	lua_register(L, "ClrScr", LuaClrScr);
 	lua_register(L, "FGColor", LuaFGColor);
 	lua_register(L, "BGColor", LuaBGColor);
@@ -234,6 +278,7 @@ void init() {
 	lua_register(L, "WorldBase", LuaWorldBase);
 	lua_register(L, "GlobalsBase", LuaGlobalsBase);
 	lua_register(L, "GlobalPointer", LuaGlobalPointer);
+	lua_register(L, "joaat", LuaJoaat);
 
 	register_Cmem(L);
 	register_Cvar(L);
@@ -253,6 +298,22 @@ void init() {
 		printf("Error!\nFailed to execute main file: %s\n", lua_tostring(L, -1));
 		die(PRESS_ENTER);
 	}
+
+	auto pat_GetEntityID = Memory::pattern("48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 20 8B 15 ? ? ? ? 48 8B F9 48 83 C1 10 33 DB");
+	void *pGetEntityID = pat_GetEntityID.count(1).get(0).get<void>(0);
+	Hooking::HookFunction((DWORD64)pGetEntityID, &my_GetEntityID, (void**)&orig_GetEntityID);
+
+	printf(ON_VEHICLE_CREATED);
+	auto pat_CreateVeh = Memory::pattern("48 8B C4 48 89 58 08 48 89 70 18 48 89 78 20 55 41 54 41 55 41 56 41 57 48 8D 68 B9");
+	void *pCreateVeh = pat_CreateVeh.count(2).get(1).get<void>(0);
+	Hooking::HookFunction((DWORD64)pCreateVeh, &my_CreateVeh, (void**)&orig_CreateVeh);
+	printf(OK);
+
+	printf(ON_PED_CREATED);
+	auto pat_CreatePed = Memory::pattern("48 8B C4 48 89 58 08 48 89 68 10 48 89 78 18 41 55");
+	void *pCreatePed = pat_CreatePed.count(1).get(0).get<void>(0);
+	Hooking::HookFunction((DWORD64)pCreatePed, &my_CreatePed, (void**)&orig_CreatePed);
+	printf(OK);
 }
 
 // Updater function - runs every frame
