@@ -122,7 +122,6 @@ function CheatMod:Process()
 		end
 	end
 
-
 -- Take car
 	if IsKeyJustDown(_KeyTakeCar, true) then
 		local ent = select(1, game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue))
