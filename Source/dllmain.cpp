@@ -31,6 +31,15 @@ bool GetVolume_hook(LPCTSTR lpRootPathName, LPTSTR lpVolumeNameBuffer, DWORD nVo
 	return result;
 }
 
+// RegOpenKeyExW hooking
+typedef long(__stdcall* RegOpen_t)(HKEY hKey, LPCTSTR lpSubKey, DWORD ulOptions, REGSAM samDesired, PHKEY phkResult);
+static RegOpen_t pRegOpen = NULL;
+long RegOpen_hook(HKEY hKey, LPCTSTR lpSubKey, DWORD ulOptions, REGSAM samDesired, PHKEY phkResult) {
+//	wprintf(L"RegOpenKey called with %s\n", (wchar_t *)lpSubKey);
+	long result = pRegOpen(hKey, lpSubKey, ulOptions, samDesired, phkResult);
+	return result;
+}
+
 DWORD WINAPI MyThread(LPVOID lpParam)
 {
 	Hooking::Start((HMODULE)lpParam);
@@ -64,6 +73,7 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 		// Prevents GTA from closing the console window
 		Hooking::HookLibraryFunction("user32.dll", "ShowWindow", &ShowWindow_Hook, (void**)&pShowWindow);
 		Hooking::HookLibraryFunction("kernel32.dll", "GetVolumeInformationA", &GetVolume_hook, (void**)&pGetVolume);
+		Hooking::HookLibraryFunction("advapi32.dll", "RegOpenKeyExW", &RegOpen_hook, (void**)&pRegOpen);
 
 		printf(REMAP_EXPORTS);
 		// Find original dll
