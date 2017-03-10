@@ -94,13 +94,12 @@ function AutoPilot:Run()
 				end	
 			else
 				ui.MapMessage("Could not keep Ground Avoidance.")
-				AutoPilotMode = AP_Altitude
 			end
 		end
 		-- Hover mode (heli only)
 		if AutoPilotMode == AP_Hover then
-			local minForce = .01
-			local maxForce = .08
+			local minForce = .08
+			local maxForce = .2
 			local divisor = 4
 			local slack = 1
 			if natives.SYSTEM.VDIST(posX, posY, posZ, _PositionX, _PositionY, _Altitude) > slack then

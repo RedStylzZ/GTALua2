@@ -2,6 +2,7 @@
 function console.lua(...)
 	local str = table.concat({...}, " ")
 	local func = load(str)
+	print("lua> "..str)
 	if func then
 		success, err = xpcall (func, debug.traceback)
 		if not success then

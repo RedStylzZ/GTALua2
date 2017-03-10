@@ -200,7 +200,7 @@ static int LuaGlobalPointer(lua_State *L) {
 	int index = (int)luaL_checkinteger(L, 1);
 
 	long long **GlobalPointer = (long long**)Hooking::getGlobalPtr();
-	lua_pushinteger(L, (uint64_t)&GlobalPointer[index >> 18][index & 0x3FFFF]);
+	lua_pushinteger(L, (uint64_t)&GlobalPointer[index >> 18 & 0x3F][index & 0x3FFFF]);
 
 	return 1;
 }

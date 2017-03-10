@@ -165,7 +165,13 @@ end
 -- Get vehicle class
 function Vehicle:GetClass()
 	self:_CheckExists()
-	return VEHICLES[self:GetModel()].Class
+	return natives.VEHICLE.GET_VEHICLE_CLASS(self.ID)
+end
+
+function Vehicle:GetClassName()
+	self:_CheckExists()
+	local class = "VEH_CLASS_"..natives.VEHICLE.GET_VEHICLE_CLASS(self.ID)
+	return natives.UI._GET_LABEL_TEXT(class)
 end
 
 -- Get vehicle maker

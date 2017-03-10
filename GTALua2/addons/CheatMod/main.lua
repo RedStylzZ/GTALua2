@@ -188,7 +188,7 @@ function CheatMod:Process()
 				natives.VEHICLE._0x3441CAD2F2231923(ent.ID, false)
 				natives.VEHICLE._0xDBC631F109350B8C(ent.ID, false)
 				natives.VEHICLE._0x2311DD7159F00582(ent.ID, false)
---	
+--
 				natives.DECORATOR.DECOR_REMOVE(ent.ID, "Player_Vehicle")
 				natives.DECORATOR.DECOR_REMOVE(ent.ID, "MPBitset")
 				natives.DECORATOR.DECOR_REMOVE(ent.ID, "Veh_Modded_By_Player")
@@ -349,60 +349,35 @@ function CheatMod:Process()
 			local ped = natives.PLAYER.GET_PLAYER_PED(i)
 			if ped > 0 then
 				local name = natives.PLAYER.GET_PLAYER_NAME(i)
-				local hasIt = natives.WEAPON.HAS_PED_GOT_WEAPON(ped, 0x42BF8A85, false)
-				if hasIt then
-					print(name)
+				if natives.WEAPON.HAS_PED_GOT_WEAPON(ped, 0x42BF8A85, false) then
+					print(name.." has the Minigun")
+				end
+				if natives.WEAPON.HAS_PED_GOT_WEAPON(ped, 0x6D544C99, false) then
+					print(name.." has the Railgun")
 				end
 			end
 		end
 	end
 
--- List Stats info
-	if IsKeyJustDown(KEY_F5) then
-		print("---------------------------")
-		for k, name in pairs({
-			"mp0_char_name",
-			"mp0_biggest_victim_name",
-			"mp0_archenemy_name",
-			"mp0_gb_office_name" }) do
-			print(name, StatGetString(name))
-		end
-		for k, name in pairs({
-			"mpply_repeat_offender_1_time",
-			"mpply_repeat_offender_2_time" }) do
-			print(name, StatGetDate(name))
-		end
-		for k, name in pairs({
-			"mp0_total_playing_time",
-			"mp0_dist_driving_car",
-			"mp0_dist_driving_plane",
-			"mp0_dist_driving_heli",
-			"mp0_dist_driving_bike",
-			"mp0_longest_drive_nocrash",
-			"mp0_pistol_in_possession",
-			"mp0_mg_in_possession",
-			"mpply_seasontoclear",
-			"mpply_currentvehsalesseason",
-			"mpply_currentvehsalestuseason",
-			"mpply_num_cars_sold_today",
-			"mpply_char_exploit_level",
-			"mpply_char_peak_exploit_level",
-			"mpply_last_time_thresh_cross",
-			"mpply_became_cheater_num",
-			"mpply_prevseasonexploitlevel",
-			"mpply_prevseason2exploitlevel",
-			"mpply_prevseason3exploitlevel",
-			"mpply_prevseason4exploitlevel" }) do
-			print(name, StatGetInt(name))
+-- Teleport few meters ahead
+	if IsKeyJustDown(KEY_E) then
+		if IsKeyDown(KEY_SHIFT) then
+			local plr = LocalPlayer()
+			if not plr:IsInVehicle() then
+				local newpos = game.GetCoordsInFrontOfCam(10)
+				plr:SetPosition(newpos.x, newpos.y, newpos.z)
+			end
 		end
 	end
 
--- Teleport few meters ahead
-	if IsKeyJustDown(KEY_E) then
-		local plr = LocalPlayer()
-		if not plr:IsInVehicle() then
-			local newpos = game.GetCoordsInFrontOfCam(10)
-			plr:SetPosition(newpos.x, newpos.y, newpos.z)
+-- Go Off-Radar
+	if IsKeyJustDown(KEY_O) then
+		if IsKeyDown(KEY_SHIFT) then
+			local plr = LocalPlayer()
+			local offradar = Cptr:new(GlobalPointer(2421621)+(8+(plr.PlayerID*358*8))+(203*8))
+			local timer = Cptr:new(GlobalPointer(2433082)+(69*8))
+			offradar:setInt(0, 1)
+			timer:setInt(0, natives.NETWORK.GET_NETWORK_TIME())
 		end
 	end
 

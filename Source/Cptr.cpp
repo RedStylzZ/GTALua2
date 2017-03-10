@@ -49,6 +49,30 @@ static int lCptr_setBool(lua_State *L) {
 	return(0);
 }
 
+// Reads the C Pointer as Char
+static int lCptr_getChar(lua_State *L) {
+	intptr_t *cu, *addr;
+
+	cu = (intptr_t *)luaL_checkudata(L, 1, "Cptr");
+	addr = (intptr_t *)*cu;
+	intptr_t offset = (intptr_t)luaL_checkinteger(L, 2);
+	lua_pushinteger(L, (char)*(addr + offset));
+
+	return(1);
+}
+
+// Writes the C Pointer as Char
+static int lCptr_setChar(lua_State *L) {
+	intptr_t *cu, *addr;
+
+	cu = (intptr_t *)luaL_checkudata(L, 1, "Cptr");
+	addr = (intptr_t *)*cu;
+	intptr_t offset = (intptr_t)luaL_checkinteger(L, 2);
+	*(addr + offset) = (char)luaL_checkinteger(L, 3);
+
+	return(0);
+}
+
 // Reads the C Pointer as Integer
 static int lCptr_getInt(lua_State *L) {
 	intptr_t *cu, *addr;
@@ -69,6 +93,30 @@ static int lCptr_setInt(lua_State *L) {
 	addr = (intptr_t *)*cu;
 	intptr_t offset = (intptr_t)luaL_checkinteger(L, 2);
 	*(addr + offset) = luaL_checkinteger(L, 3);
+
+	return(0);
+}
+
+// Reads the C Pointer as 32 bit Integer
+static int lCptr_getInt32(lua_State *L) {
+	intptr_t *cu, *addr;
+
+	cu = (intptr_t *)luaL_checkudata(L, 1, "Cptr");
+	addr = (intptr_t *)*cu;
+	intptr_t offset = (intptr_t)luaL_checkinteger(L, 2);
+	lua_pushinteger(L, (int32_t)*(addr + offset));
+
+	return(1);
+}
+
+// Writes the C Pointer as 32 bit Integer
+static int lCptr_setInt32(lua_State *L) {
+	intptr_t *cu, *addr;
+
+	cu = (intptr_t *)luaL_checkudata(L, 1, "Cptr");
+	addr = (intptr_t *)*cu;
+	intptr_t offset = (intptr_t)luaL_checkinteger(L, 2);
+	*(addr + offset) = (int32_t)luaL_checkinteger(L, 3);
 
 	return(0);
 }
@@ -103,8 +151,7 @@ static int lCptr_addr(lua_State *L) {
 	intptr_t *cu;
 
 	cu = (intptr_t *)luaL_checkudata(L, 1, "Cptr");
-	intptr_t addr = *cu;
-	lua_pushinteger(L, (lua_Integer)addr);
+	lua_pushinteger(L, (lua_Integer)*cu);
 
 	return(1);
 }
@@ -142,8 +189,12 @@ static const struct luaL_Reg lCptr_functions[] = {
 // Implements:
 //	Cptr:getBool()
 //	Cptr:setBool(value)
+//	Cptr:getChar()
+//	Cptr:setChar(value)
 //	Cptr:getInt()
 //	Cptr:setInt(value)
+//	Cptr:getInt32()
+//	Cptr:setInt32(value)
 //	Cptr:getFlt()
 //	Cptr:setFlt(value)
 //	Cptr:addr()
@@ -153,8 +204,12 @@ static const struct luaL_Reg lCptr_functions[] = {
 static const struct luaL_Reg lCptr_methods[] = {
 	{ "getBool",	lCptr_getBool },
 	{ "setBool",	lCptr_setBool },
+	{ "getChar",	lCptr_getChar },
+	{ "setChar",	lCptr_setChar },
 	{ "getInt",		lCptr_getInt },
 	{ "setInt",		lCptr_setInt },
+	{ "getInt32",	lCptr_getInt32 },
+	{ "setInt32",	lCptr_setInt32 },
 	{ "getFloat",	lCptr_getFloat },
 	{ "setFloat",	lCptr_setFloat },
 	{ "addr",		lCptr_addr },

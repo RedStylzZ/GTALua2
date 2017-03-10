@@ -8,7 +8,7 @@ VehicleMod.__index = VehicleMod
 VehicleMod.ScriptInfo = {
 	Name = "VehicleMod",	-- Must match the module folder name
 	Author = "Mockba the Borg",
-	Version = "1.0"
+	Version = "1.0a"
 }
 
 -- Global variable to signal Debug that we're enabled
@@ -396,7 +396,7 @@ local _ModColorTypes = {
 -- Init function is called once from the main Lua
 function VehicleMod:Init()
 	-- Initialization code goes here
-	print("VehicleMod v1.0 - by Mockba the Borg")
+	print("VehicleMod v1.0a - by Mockba the Borg")
 end
 
 function VehicleMod:ApplyNeons(vehID, color)
@@ -462,8 +462,8 @@ function VehicleMod:Process()
 			natives.VEHICLE.SET_VEHICLE_MOD_KIT(veh.ID, 0)
 			_VehicleModKit = 0
 		end
-		ui.DrawTextBlock("Modding", _ModX, _ModY, FontChaletComprimeCologne, _FontSize, COLOR_GREEN, NOBLINK)
-		ui.DrawTextBlock(veh:GetMaker().." "..veh:GetFullName()..", "..veh:GetClass(), _ModX+.040, _ModY, nil, nil, COLOR_WHITE)
+		ui.DrawTextBlock("Modding : ", _ModX, _ModY, FontChaletComprimeCologne, _FontSize, COLOR_GREEN, NOBLINK)
+		ui.DrawTextBlock(veh:GetMaker().." "..veh:GetFullName()..", "..veh:GetClassName(), _ModX+.047, _ModY, nil, nil, COLOR_WHITE)
 -- Current wheel type
 		if _VehicleModID == VehicleModFrontWheels or _VehicleModID == VehicleModBackWheels then
 			if not _VehicleWType then
@@ -493,7 +493,6 @@ function VehicleMod:Process()
 			str = str..")"
 		end
 		
-		ui.DrawTextBlock(str, _ModX)
 -- Mod limits
 		if _ModLimits[_VehicleModID] then
 			_MinVehicleModValue = _ModLimits[_VehicleModID].vmin
@@ -509,7 +508,7 @@ function VehicleMod:Process()
 			end
 		end
 		local nvar = _MaxVehicleModValue - _MinVehicleModValue + 1
-		str = nvar.." type"
+		str = str.." : "..nvar.." type"
 		if nvar ~= 1 then
 			str = str.."s"
 		end

@@ -55,11 +55,11 @@ function Debug:Run()
 		if natives.NETWORK.NETWORK_IS_HOST() then
 			debugtext = debugtext.." (Host)"
 		end
-		if _Invisible then
-			debugtext = debugtext.." (Invis.)"
-		end
 		ui.DrawTextBlock(debugtext, .01, .01, FontChaletComprimeCologne, _FontSize, COLOR_RED, BLINK)
-		ui.DrawTextBlock("Plr ID: 0x"..natives.NETWORK._NETWORK_HASH_FROM_PLAYER_HANDLE(Myself.PlayerID),nil,nil,nil,nil,COLOR_WHITE,NOBLINK)
+		ui.DrawTextBlock("Plr ID: "..Myself.PlayerID.."/"..natives.NETWORK._NETWORK_HASH_FROM_PLAYER_HANDLE(Myself.PlayerID),nil,nil,nil,nil,COLOR_WHITE,NOBLINK)
+		local offradar = Cptr:new(GlobalPointer(2421621)+(8+(Myself.PlayerID*358*8))+(203*8))
+		local timer = Cptr:new(GlobalPointer(2433082)+(69*8))
+		ui.DrawTextBlock("OffRadar: "..offradar:getInt(0).."  Timer: "..(natives.NETWORK.GET_NETWORK_TIME()-timer:getInt(0)))
 		ui.DrawTextBlock(string.format("x:%04.2f y:%04.2f z:%04.2f h:%03.2f",MyPos.x,MyPos.y,MyPos.z,MyHdg))
 		if _CheatMode then
 			ui.DrawTextBlock("Cheat mode")
@@ -97,7 +97,8 @@ function Debug:Run()
 						ui.DrawTextBlock("Model: 0x"..string.format("%04x", entityHit:GetModel()))
 					end
 					if entityHit:IsVehicle() then
-						local modelName = entityHit:GetModelName()
+						local modelName = entityHit:GetMaker().." "..entityHit:GetFullName()..", "..entityHit:GetClassName()
+						modelName = modelName.."  ("..entityHit:GetModelName()..")"
 						if not natives.VEHICLE.IS_VEHICLE_DRIVEABLE(entityHit.ID, true) then
 							modelName = modelName.." (Undriveable)"
 						end
