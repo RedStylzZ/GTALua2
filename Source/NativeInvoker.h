@@ -16,28 +16,30 @@ public:
 
 	template<typename T>
 	inline T GetArgument( int idx ) {
-
 		intptr_t * arguments = (intptr_t*)m_pArgs;
 		return *(T*)&arguments[idx];
 	}
 
 	template<typename T>
-	inline void SetResult( int idx, T value ) {
+	inline void SetArgument(int idx, T value) {
+		intptr_t * arguments = (intptr_t*)m_pArgs;
+		*(T*)&arguments[idx] = value;
+	}
 
+	template<typename T>
+	inline T GetResult(int idx) {
+		intptr_t * returnValues = (intptr_t*)m_pReturn;
+		return *(T*)&returnValues[idx];
+	}
+
+	template<typename T>
+	inline void SetResult( int idx, T value ) {
 		intptr_t * returnValues = (intptr_t*)m_pReturn;
 		*(T*)&returnValues[idx] = value;
 	}
 
 	inline int GetArgumentCount() {
-
 		return m_nArgCount;
-	}
-
-	template<typename T>
-	inline T GetResult( int idx ) {
-
-		intptr_t * returnValues = (intptr_t*)m_pReturn;
-		return *(T*)&returnValues[idx];
 	}
 
 	static void(*SetVectorResults)(scrNativeCallContext*);

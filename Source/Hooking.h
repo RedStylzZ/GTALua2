@@ -79,7 +79,7 @@ public:
 	static eGameState GetGameState();
 	static BlipList* GetBlipList();
 	static uint64_t getWorldPtr();
-	static uint64_t getGlobalPtr();
+	static __int64** getGlobalPtr();
 	static void scriptRun();
 	static bool HookNatives();
 	static HWND getWindow() { return hWindow; }

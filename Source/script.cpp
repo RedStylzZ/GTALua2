@@ -189,7 +189,7 @@ static int LuaWorldBase(lua_State *L) {
 }
 
 static int LuaGlobalsBase(lua_State *L) {
-	uint64_t address = Hooking::getGlobalPtr();
+	uint64_t address = (uint64_t)Hooking::getGlobalPtr();
 
 	lua_pushinteger(L, address);
 
@@ -239,6 +239,18 @@ CreateVeh_t orig_CreateVeh = NULL;
 
 __int64* __fastcall my_CreateVeh(__int64* pThis, __int64* a2, __int64 a3, __int64 a4, __int64 a5, __int64* a6, bool a7, bool a8) {
 	__int64 *pVehEntity = orig_CreateVeh(pThis, a2, a3, a4, a5, a6, a7, a8);
+	int status;
+	status = lua_getglobal(L, "OnVehSpawn");
+	if (!status) {
+		printf("Failed to fetch Lua OnVehSpawn function: %d - %s\n", status, lua_tostring(L, -1));
+		die(PRESS_ENTER);
+	}
+	lua_pushinteger(L, my_GetEntityID(pVehEntity));
+	status = lua_pcall(L, 1, 0, 0);
+	if (status) {
+		printf("Failed to execute Lua OnVehSpawn function: %d - %s\n", status, lua_tostring(L, -1));
+		die(PRESS_ENTER);
+	}
 	return pVehEntity;
 }
 
@@ -248,6 +260,18 @@ CreatePed_t orig_CreatePed = NULL;
 
 __int64* __fastcall my_CreatePed(__int64* pThis, __int64* a2, __int64 a3, __int64 a4, __int64 a5, __int64* a6, bool a7) {
 	__int64 *pPedEntity = orig_CreatePed(pThis, a2, a3, a4, a5, a6, a7);
+	int status;
+	status = lua_getglobal(L, "OnPedSpawn");
+	if (!status) {
+		printf("Failed to fetch Lua OnPedSpawn function: %d - %s\n", status, lua_tostring(L, -1));
+		die(PRESS_ENTER);
+	}
+	lua_pushinteger(L, my_GetEntityID(pPedEntity));
+	status = lua_pcall(L, 1, 0, 0);
+	if (status) {
+		printf("Failed to execute Lua OnPedSpawn function: %d - %s\n", status, lua_tostring(L, -1));
+		die(PRESS_ENTER);
+	}
 	return pPedEntity;
 }
 
@@ -351,9 +375,11 @@ void ScriptMain() {
 	char *version;
 
 	system("cls");
+	SetTextFGColor(3);
 	printf(DASH);
 	printf(APP " - v" VERSION " - build: " BUILD "\n");
 	printf(DASH);
+	SetTextFGColor(7);
 
 	printf("Checking online version ... ");
 	version = UNK3::_GET_ONLINE_VERSION();

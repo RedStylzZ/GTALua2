@@ -8,7 +8,7 @@ HANDLE mainFiber, scriptFiber;
 DWORD wakeAt;
 eGameState* 												m_gameState;
 uint64_t													m_worldPtr;
-uint64_t													m_globalPtr;
+__int64**													m_globalPtr;
 BlipList*													m_blipList;
 Hooking::NativeRegistration**								m_registrationTable;
 HMODULE 													Hooking::_hmoduleDLL;
@@ -96,7 +96,7 @@ bool Hooking::HookNatives()
 	return true
 	// native hooks	
 		&& Native(0x4EDE34FBADD967A6, &MY_WAIT, &ORIG_WAIT)
-;
+		;
 }
 
 void __stdcall ScriptFunction(LPVOID lpParameter)
@@ -213,7 +213,9 @@ void Hooking::FindPatterns()
 	// Get global pointer
 	printf(GET_GLOBAL_POINTER);
 	c_location = p_globalPtr.count(1).get(0).get<char>(0);
-	c_location == nullptr ? FailPatterns("Global Pointer") : m_globalPtr = reinterpret_cast<uint64_t>(c_location) + *reinterpret_cast<int*>(reinterpret_cast<uint64_t>(c_location) + 3) + 7;
+	__int64 patternAddr = NULL;
+	c_location == nullptr ? FailPatterns("GLobal Pointer") : patternAddr = reinterpret_cast<decltype(patternAddr)>(c_location);
+	m_globalPtr = (__int64**)(patternAddr + *(int*)(patternAddr + 3) + 7);
 	printf(OK);
 
 	// Get blip list
@@ -304,7 +306,7 @@ uint64_t Hooking::getWorldPtr() {
 	return m_worldPtr;
 }
 
-uint64_t Hooking::getGlobalPtr() {
+__int64** Hooking::getGlobalPtr() {
 	return m_globalPtr;
 }
 

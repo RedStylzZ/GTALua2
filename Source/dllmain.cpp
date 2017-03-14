@@ -58,9 +58,11 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 
 		// Attach a debug console
 		ConsoleAttach();
+		SetTextFGColor(3);
 		printf(DASH);
 		printf(MODULE_TITLE);
 		printf(DASH);
+		SetTextFGColor(7);
 		printf(BUILT_ON);
 
 		printf(INIT_MINHOOK);
