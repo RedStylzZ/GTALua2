@@ -34,7 +34,7 @@ local _KeyTakeCar = KEY_DECIMAL
 
 -- Variables for the Vehicle modification module
 local _ModX = .01
-local _ModY = .12
+local _ModY = .13
 -- All boolean mods must be defined here
 -- Enums for custom mods
 local _Mod_PRI_COLOR = -10
@@ -463,7 +463,7 @@ function VehicleMod:Process()
 			_VehicleModKit = 0
 		end
 		ui.DrawTextBlock("Modding : ", _ModX, _ModY, FontChaletComprimeCologne, _FontSize, COLOR_GREEN, NOBLINK)
-		ui.DrawTextBlock(veh:GetMaker().." "..veh:GetFullName()..", "..veh:GetClassName(), _ModX+.047, _ModY, nil, nil, COLOR_WHITE)
+		ui.DrawTextBlock(veh:GetMaker().." "..veh:GetFullName()..", "..veh:GetClassName(), _ModX+.038, _ModY, nil, nil, COLOR_WHITE)
 -- Current wheel type
 		if _VehicleModID == VehicleModFrontWheels or _VehicleModID == VehicleModBackWheels then
 			if not _VehicleWType then
@@ -663,7 +663,7 @@ function VehicleMod:Process()
 			natives.VEHICLE.SET_VEHICLE_TYRES_CAN_BURST(veh.ID, false)
 			natives.VEHICLE.SET_VEHICLE_WHEELS_CAN_BREAK(veh.ID, false)
 			natives.VEHICLE.SET_VEHICLE_ENGINE_CAN_DEGRADE(veh.ID, false)
-			natives.VEHICLE.SET_VEHICLE_IS_STOLEN(veh.ID, false)
+			natives.VEHICLE.SET_VEHICLE_IS_STOLEN(veh.ID, true)
 			natives.VEHICLE.ADD_VEHICLE_UPSIDEDOWN_CHECK(veh.ID)
 
 			local multiplier = 50

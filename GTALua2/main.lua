@@ -77,9 +77,18 @@ for k, v in pairs(addons) do
 	end
 end
 
-local Command = nil
+-- This function is called every time a Vehicle is spawned
+function OnVehSpawn(VehId)
+
+end
+
+-- This function is called every time a Ped is spawned
+function OnPedSpawn(PedID)
+	
+end
+
 function Run ()
-	-- Disable cheat code key to be used as console key
+	-- Disable cheat code key so it can be used as console key
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlEnterCheatCode, true)
 	if IsKeyJustDown(VK_OEM_3) then -- cheat code key was pressed
 		console.Process(ui.OnscreenKeyboard("Console Command", 200))
