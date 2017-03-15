@@ -36,7 +36,9 @@ print ("Online module for v" .. OnlineVersion () .. " loaded.")
 FGColor(console_White)
 
 -- Set MPVehsOnSP Global to 1 (for v1.944.0.1)
-local MPVehPtr = Cptr:new(GlobalPointer(2593910))
+--local MPVehPtr = Cptr:new(GlobalPointer(2593910))
+-- Set MPVehsOnSP Global to 1 (for v1.1011.0.1)
+local MPVehPtr = Cptr:new(GlobalPointer(2593970))
 MPVehPtr:setInt(0, 1)
 
 -- Load external addons
