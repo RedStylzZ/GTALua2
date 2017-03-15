@@ -4,8 +4,8 @@
 #define VERSION "1.2"
 #define BUILD __DATE__ "-" __TIME__
 
-#define GAME_VERSION "1.0.944.2"
-#define ONLINE_VERSION "1.37"
+#define GAME_VERSION "1.0.1011.1"
+#define ONLINE_VERSION "1.38"
 
 #define DLLNAME "iphlpapi.dll"
 
