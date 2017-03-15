@@ -374,8 +374,8 @@ function CheatMod:Process()
 	if IsKeyJustDown(KEY_O) then
 		if IsKeyDown(KEY_SHIFT) then
 			local plr = LocalPlayer()
-			local offradar = Cptr:new(GlobalPointer(2421621)+(8+(plr.PlayerID*358*8))+(203*8))
-			local timer = Cptr:new(GlobalPointer(2433082)+(69*8))
+			local offradar = Cptr:new(GlobalPointer(2421664)+(8+(plr.PlayerID*358*8))+(203*8))
+			local timer = Cptr:new(GlobalPointer(2433125)+(69*8))
 			offradar:setInt(0, 1)
 			timer:setInt(0, natives.NETWORK.GET_NETWORK_TIME())
 		end
