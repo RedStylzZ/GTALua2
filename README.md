@@ -1,8 +1,5 @@
 # GTALua2 - Implementation of Lua 5.3.x onto the GTA V game
 
-This code is still in beta status and will definitely have bugs.
-I bear no responsibility if you attempt to use this online. Online modding is not safe, and it will probably get you banned.
-
 To add this mod to the game just copy the GTALua2 distribution folder to the game's folder, and place the proxy.dll file there, renaming it to iphlpapi.dll.
 GTALua2 is not a very sociable mod, so it needs to be alone by itself on the game's folder. It cannot be combined with dinput8.dll based mods.
 It will not load extra mods with .asi, .ev1 or .whatever extensions. Once you have GTALua2, you have GTALua2 alone.
@@ -16,6 +13,7 @@ GTALua2 is not a virus, it will not steal your password, your credit card number
 All the source code is here, go through it. If you cannot understand it, then you shouldn't be using it anyways.
 
 Have fun, report bugs and suggest improvements. GTALua2 builds on VS2017.
+I bear no responsibility if you attempt to use this online. Online modding is not safe, and it will probably get you banned.
 
 Discord channel: https://discord.gg/CjcstmA
 
