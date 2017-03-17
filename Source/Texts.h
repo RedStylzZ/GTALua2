@@ -50,6 +50,7 @@ static const char* texts[] = {
 	"Hooking OnVehicleCreated ... ",
 	"Hooking OnPedCreated ... ",
 	"Build time: " __TIMESTAMP__ "\n",
+	"Loading OpenIV.asi ... ",
 	"Done.\n"
 };
 
@@ -93,4 +94,5 @@ static const char* texts[] = {
 #define ON_VEHICLE_CREATED		texts[37]
 #define ON_PED_CREATED			texts[38]
 #define BUILT_ON				texts[39]
-#define DONE					texts[40]
+#define LOADING_OPENIV			texts[40]
+#define DONE					texts[41]

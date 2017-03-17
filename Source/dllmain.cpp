@@ -51,7 +51,9 @@ LPCSTR mExportNames[] = {"AddIPAddress", "AllocateAndGetInterfaceInfoFromStack",
 
 BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved )
 {
-
+#ifdef OpenIV
+	HMODULE hOpenIV;
+#endif
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
@@ -71,6 +73,17 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 			return(FALSE);
 		}
 		printf(OK);
+
+#ifdef OpenIV
+		// Opens OpenIV.ASI to allow for modded .RPF files
+		printf(LOADING_OPENIV);
+		hOpenIV = LoadLibraryA("OpenIV.asi");
+		if (hOpenIV == NULL) {
+			printf("Error loading OpenIV.asi\n");
+			return(FALSE);
+		}
+		printf(OK);
+#endif
 
 		// Prevents GTA from closing the console window
 		Hooking::HookLibraryFunction("user32.dll", "ShowWindow", &ShowWindow_Hook, (void**)&pShowWindow);
