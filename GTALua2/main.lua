@@ -35,9 +35,11 @@ print ("GTALua2 v" .. GameVersion () .. " loaded.")
 print ("Online module for v" .. OnlineVersion () .. " loaded.")
 FGColor(console_White)
 
--- Set MPVehsOnSP Global to 1 (for v1.944.0.1)
+-- Set MPVehsOnSP Global to 1 (for v1.0.877.1)
+--local MPVehPtr = Cptr:new(GlobalPointer(2576573))
+-- Set MPVehsOnSP Global to 1 (for v1.0.944.2)
 --local MPVehPtr = Cptr:new(GlobalPointer(2593910))
--- Set MPVehsOnSP Global to 1 (for v1.1011.0.1)
+-- Set MPVehsOnSP Global to 1 (for v1.0.1011.1)
 local MPVehPtr = Cptr:new(GlobalPointer(2593970))
 MPVehPtr:setInt(0, 1)
 

@@ -1,6 +1,10 @@
 -- Simple ui implementation
 ui = {}
 
+-- Array for making unique messages
+cUnique = { "~r~", "~b~", "~d~", "~g~", "~y~", "~q~", "~p~", "~c~", "~m~", "~u~" }
+cUniqueN = 1
+
 -- Variables for tracking text position of DrawTextBlock
 ui.TextBlockInfo = {
 	TextX = 0,				-- X coordinate for tracking DrawTextBlock
@@ -50,11 +54,15 @@ function ui.DrawTextBlock(text, x, y, font, scale, color, blink, increment)
 end
 
 -- Prints a message above the game map
-function ui.MapMessage(text)
+function ui.MapMessage(text, blink)
 	natives.UI.SET_TEXT_OUTLINE()
 	natives.UI._SET_NOTIFICATION_TEXT_ENTRY("STRING")
-	natives.UI.ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(string.format("%s",text))
-	natives.UI._DRAW_NOTIFICATION(false, false)
+	natives.UI.ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(string.format("%s",text)..cUnique[cUniqueN])
+	natives.UI._DRAW_NOTIFICATION(blink, true)
+	cUniqueN = cUniqueN + 1
+	if cUniqueN > 10 then
+		cUniqueN = 1
+	end
 end
 
 -- Reads a line from the onscreen keyboard
