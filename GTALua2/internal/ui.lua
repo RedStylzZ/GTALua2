@@ -58,7 +58,7 @@ function ui.MapMessage(text, blink)
 	natives.UI.SET_TEXT_OUTLINE()
 	natives.UI._SET_NOTIFICATION_TEXT_ENTRY("STRING")
 	natives.UI.ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(string.format("%s",text)..cUnique[cUniqueN])
-	natives.UI._DRAW_NOTIFICATION(blink, true)
+	natives.UI._DRAW_NOTIFICATION(blink, false)
 	cUniqueN = cUniqueN + 1
 	if cUniqueN > 10 then
 		cUniqueN = 1

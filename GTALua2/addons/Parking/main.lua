@@ -500,7 +500,7 @@ end
 -- Enters a garage, either by boot or on a vehicle
 function Parking:EnterGarage()
 --	ClearGarage()
-	ui.MapMessage("Entering Garage", _GarageInUse, "...")
+	ui.MapMessage("Entering Garage ".._GarageInUse.."...")
 
 	local InVehicle = false
 	local FreeSpot, entID, entPos, PreviousGarage, PreviousSpot
@@ -628,7 +628,7 @@ end
 
 -- Exits a garage, either by foot or on a vehicle
 function Parking:ExitGarage()
-	ui.MapMessage("Exiting Garage", _GarageInUse, "...")
+	ui.MapMessage("Exiting Garage ".._GarageInUse.."...")
 	_InDoorEnabled = false
 
 	local Spot, entID, entPos
