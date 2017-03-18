@@ -346,7 +346,8 @@ function CheatMod:Process()
 -- Find Hacker
 	if IsKeyJustDown(KEY_F4) then
 		for i=0,31 do
-			local ped = natives.PLAYER.GET_PLAYER_PED(i)
+--			local ped = natives.PLAYER.GET_PLAYER_PED(i)
+			local ped = natives.PLAYER.GET_PLAYER_PED_SCRIPT_INDEX(i)
 			if ped > 0 then
 				local name = natives.PLAYER.GET_PLAYER_NAME(i)
 				if natives.WEAPON.HAS_PED_GOT_WEAPON(ped, 0x42BF8A85, false) then

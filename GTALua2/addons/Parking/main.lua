@@ -758,7 +758,8 @@ end
 -- Run function is called multiple times from the main Lua
 function Parking:Run()
 	playerPlayerID = natives.PLAYER.GET_PLAYER_INDEX()
-	playerID = natives.PLAYER.GET_PLAYER_PED(playerPlayerID)
+--	playerID = natives.PLAYER.GET_PLAYER_PED(playerPlayerID)
+	playerID = natives.PLAYER.GET_PLAYER_PED_SCRIPT_INDEX(playerPlayerID)
 	playerPos = natives.ENTITY.GET_ENTITY_COORDS(playerID, false)
 
 	Parking:ShowDebugData()

@@ -6,7 +6,8 @@ Player_mt = { __index = Player }
 function Player:new (id)
 	local new_inst = {}
 	new_inst.PlayerID = id or natives.PLAYER.PLAYER_ID()
-	new_inst.ID = natives.PLAYER.GET_PLAYER_PED(id)
+--	new_inst.ID = natives.PLAYER.GET_PLAYER_PED(id)
+	new_inst.ID = natives.PLAYER.GET_PLAYER_PED_SCRIPT_INDEX(id)
 	new_inst._type = "Player"
 	setmetatable( new_inst, Player_mt )
 	return new_inst
