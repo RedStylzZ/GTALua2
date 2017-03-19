@@ -76,7 +76,7 @@ print("----------------------------------------------")
 for k, v in pairs(addons) do
 	success, err = xpcall (v.Init, debug.traceback)
 	if success == false then
-		print ("Error: " .. err .. " - Addon removed.")
+		print ("Error: " .. err .. " - Addon \"" .. k .. "\" removed.")
 		addons[k] = nil
 	end
 end
@@ -102,7 +102,8 @@ function Run ()
 	for k, v in pairs(addons) do
 		success, err = xpcall (v.Run, debug.traceback)
 		if success == false then
-			print ("Error: " .. err .. " - Addon removed.")
+			xpcall (v.Unload, debug.traceback)
+			print ("Error: " .. err .. " - Addon \"" .. k .. "\" removed.")
 			addons[k] = nil
 		end
 	end
