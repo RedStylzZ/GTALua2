@@ -14,7 +14,8 @@ GTALua2 is not a virus, it will not steal your password, your credit card number
 All the source code is here, go through it. If you cannot understand it, then you shouldn't be using it anyways.
 
 Have fun, report bugs and suggest improvements. GTALua2 builds on VS2017.
-I bear no responsibility if you attempt to use this online. 
+I bear no responsibility if you attempt to use this online.
+
 Again: Online modding is not safe, and it will probably get you banned.
 
 Discord channel: https://discord.gg/CjcstmA
