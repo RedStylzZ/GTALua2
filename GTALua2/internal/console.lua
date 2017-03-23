@@ -58,6 +58,7 @@ function console.load(name)
 		success, err = xpcall (LoadMod, debug.traceback, name)
 		if success then
 			print("  Loaded: "..name..".")
+			ui.MapMessage("Addon "..name.." loaded")
 			success, err = xpcall (addons[name].Init, debug.traceback)
 			if success == false then
 				print ("Error: " .. err .. " - Addon removed.")
@@ -99,6 +100,7 @@ function console.unload(name)
 		success, err = xpcall (addons[name].Unload, debug.traceback)
 		package.loaded[LuaFolder().."/addons/"..name.."/main"] = nil
 		addons[name] = nil
+		ui.MapMessage("Addon "..name.." unloaded")
 	else
 		print("Can't find loaded addon "..name..".")
 	end	

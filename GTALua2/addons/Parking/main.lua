@@ -91,7 +91,7 @@ local _VehicleBlip
 local _VehicleOut
 
 -- Garage vehicles values
-local _MPBitset = 8
+local _MPBitset = 16777224
 
 -- Garage camera and interior
 local _GarageCam

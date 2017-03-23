@@ -56,10 +56,7 @@ function Debug:Run()
 			debugtext = debugtext.." (Host)"
 		end
 		ui.DrawTextBlock(debugtext, .01, .01, FontChaletComprimeCologne, _FontSize, COLOR_RED, BLINK)
-		ui.DrawTextBlock("Plr ID: "..Myself.PlayerID.."/"..natives.NETWORK._NETWORK_HASH_FROM_PLAYER_HANDLE(Myself.PlayerID),nil,nil,nil,nil,COLOR_WHITE,NOBLINK)
-		local offradar = Cptr:new(GlobalPointer(2421621)+(8+(Myself.PlayerID*358*8))+(203*8))
-		local timer = Cptr:new(GlobalPointer(2433082)+(69*8))
-		ui.DrawTextBlock("OffRadar: "..offradar:getInt(0).."  Timer: "..(natives.NETWORK.GET_NETWORK_TIME()-timer:getInt(0)))
+		ui.DrawTextBlock("Plr ID: "..Myself.PlayerID.."/"..Network_NetworkHashFromPlayerHandle(Myself.PlayerID),nil,nil,nil,nil,COLOR_WHITE,NOBLINK)
 		ui.DrawTextBlock(string.format("x:%04.2f y:%04.2f z:%04.2f h:%03.2f",MyPos.x,MyPos.y,MyPos.z,MyHdg))
 		if _CheatMode then
 			ui.DrawTextBlock("Cheat mode")

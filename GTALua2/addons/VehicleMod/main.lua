@@ -205,7 +205,7 @@ local _UpgradePrlColor = 38
 local _UpgradeWhlColor = 12
 local _UpgradeTrmColor = 38
 local _UpgradeAccColor = 38
-local _MPBitset = 8
+local _MPBitset = 16777224
 
 -- Wheel types
 local _ModW = {}
@@ -453,6 +453,7 @@ function VehicleMod:Process()
 	if LocalPlayer():IsInVehicle() then
 		if natives.ENTITY.GET_ENTITY_SPEED(LocalPlayer():GetVehicle().ID) > 10 then
 			_VehicleMode = false
+			ui.MapMessage("~r~Moving... Vehicle mode deactivated.")
 		end
 -- Mod kit and vehicle
 		local hasmod = false
@@ -624,7 +625,6 @@ function VehicleMod:Process()
 					natives.VEHICLE.SET_VEHICLE_MOD(veh.ID, i, _MaxVehicleModValue-1, true)
 				end
 			end
-			VehicleMod:ApplyNeons(veh.ID)
 			if _FullUpgrade > 1 then
 				if veh:IsCar() or veh:IsBike() then
 					natives.VEHICLE.SET_VEHICLE_MOD(veh.ID, 14, _UpgradeHorn, true)
@@ -640,6 +640,7 @@ function VehicleMod:Process()
 				veh:SetWindowTint(_UpgradeWindowTint)
 				natives.VEHICLE.SET_VEHICLE_WHEEL_TYPE(veh.ID, _UpgradeWheelType)
 				natives.VEHICLE.SET_VEHICLE_MOD(veh.ID, 23, _UpgradeCarWheelNumber, true)
+				VehicleMod:ApplyNeons(veh.ID)
 			end
 			if veh:IsBike() then
 				natives.VEHICLE.SET_VEHICLE_WHEEL_TYPE(veh.ID, 6)
@@ -663,7 +664,7 @@ function VehicleMod:Process()
 			natives.VEHICLE.SET_VEHICLE_TYRES_CAN_BURST(veh.ID, false)
 			natives.VEHICLE.SET_VEHICLE_WHEELS_CAN_BREAK(veh.ID, false)
 			natives.VEHICLE.SET_VEHICLE_ENGINE_CAN_DEGRADE(veh.ID, false)
-			natives.VEHICLE.SET_VEHICLE_IS_STOLEN(veh.ID, true)
+			natives.VEHICLE.SET_VEHICLE_IS_STOLEN(veh.ID, false)
 			natives.VEHICLE.ADD_VEHICLE_UPSIDEDOWN_CHECK(veh.ID)
 
 			local multiplier = 50
@@ -673,7 +674,11 @@ function VehicleMod:Process()
 			
 			natives.VEHICLE.SET_VEHICLE_FRICTION_OVERRIDE(veh.ID, 2)
 
-			ui.MapMessage("~b~Vehicle fully upgraded.")
+			if _FullUpgrade == 1 then
+				ui.MapMessage("~b~Vehicle upgraded.")
+			else
+				ui.MapMessage("~b~Vehicle fully upgraded.")
+			end
 			_FullUpgrade = 0
 			return
 		end
@@ -875,9 +880,11 @@ function VehicleMod:Process()
 					streaming.RequestModel(hash)
 					local ent = game.CreateVehicle(hash, position, heading)
 					natives.DECORATOR.DECOR_SET_INT(ent.ID, "MPBitset", _MPBitset)
+					natives.DECORATOR.DECOR_SET_INT(ent.ID, "Previous_Owner", 0)
+					natives.DECORATOR.DECOR_SET_INT(ent.ID, "PV_Slot", 0)
 					LocalPlayer():SetIntoVehicle(ent.ID, VehicleSeatDriver)
 					ent:SetRadioStationName("OFF")
-					ent:SetNotNeeded()
+--					ent:SetNotNeeded()
 					ui.MapMessage("~b~"..string.upper(name).." spawned.")
 				else
 					print("Vehicle does not exist.")
