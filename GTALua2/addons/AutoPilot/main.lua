@@ -169,7 +169,7 @@ function AutoPilot:Run()
 					if AutoPilotMode == AP_Avoidance then
 						local m_groundZ = Cvar:new()
 						if natives.GAMEPLAY.GET_GROUND_Z_FOR_3D_COORD(posX, posY, posZ, m_groundZ, true) then
-							groundZ = m_groundZ:getFloat()
+							local groundZ = m_groundZ:getFloat()
 							if groundZ < 0 then
 								groundZ = 0
 							end

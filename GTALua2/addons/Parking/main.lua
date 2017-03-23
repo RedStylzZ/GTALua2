@@ -62,13 +62,13 @@ local	_GarageOutSpawn = {}
 	_GarageOutSpawn[13] = {x=499.43, y=-104.8, z=61.43, h=249.5}
 	_GarageOutSpawn[14] = {x=-13.66, y=-840.66, z=30, h=260.68}
 local	_GarageInDoor = {}
-	_GarageInDoor[1] = {x=-717.8, y=-58.6, z=37}
-	_GarageInDoor[2] = {x=-888.4, y=-147.7, z=37}
+	_GarageInDoor[1] = {x=-717.8, y=-58.6, z=36.8}
+	_GarageInDoor[2] = {x=-888.4, y=-147.7, z=36.8}
 	_GarageInDoor[3] = {x=-357.67, y=-437.65, z=26.34}
-	_GarageInDoor[4] = {x=-224.04, y=-271.48, z=48.42}
+	_GarageInDoor[4] = {x=-224.04, y=-271.48, z=48.53}
 	_GarageInDoor[5] = {x=-306.58, y=-710.79, z=28.20}
 	_GarageInDoor[6] = {x=135.51, y=-1050.29, z=28.66}
-	_GarageInDoor[7] = {x=-1417.67, y=-478.95, z=33.14}
+	_GarageInDoor[7] = {x=-1417.67, y=-478.95, z=33.15}
 	_GarageInDoor[8] = {x=-270.79, y=285.52, z=89.92}
 	_GarageInDoor[9] = {x=-765.82, y=236.13, z=75.10}
 	_GarageInDoor[10] = {x=-1554.91, y=-556.67, z=26.75}
@@ -77,7 +77,7 @@ local	_GarageInDoor = {}
 	_GarageInDoor[13] = {x=501.19, y=-98.40, z=61.43}
 	_GarageInDoor[14] = {x=-7.22, y=-827.21, z=30.3}
 local _InDoorEnabled = true
-local _GarageOutDoor = {x=405.45, y=-978.83, z=_GarageZ}
+local _GarageOutDoor = {x=405.44, y=-978.8, z=_GarageZ}
 local _InsideGarage = false
 local _DoorRadius = 3
 local _WaitTime = 3000
@@ -715,6 +715,17 @@ function Parking:EnableEntrance()
 	end
 end
 
+-- Draws a maker on entry/exit doors
+function Parking:DrawMarker(pos)
+	local m_groundZ = Cvar:new()
+	natives.GAMEPLAY.GET_GROUND_Z_FOR_3D_COORD(pos.x, pos.y, pos.z, m_groundZ, true)
+	local newz = m_groundZ:getFloat()
+	if newz ~= 0 then
+		natives.GRAPHICS.DRAW_MARKER(1, pos.x, pos.y, newz, 0, 0, 0, 0, 0, 0, .5, .5, .5, 0, 255, 200, 70, false, false, 2, false, 0, 0, false)
+
+	end
+end
+
 function Parking:Init()
 	print("----------------------------------------------")
 	print("Public Parking Addon initializing ...")
@@ -779,12 +790,15 @@ function Parking:Run()
 		for spot=1,_GarageSize do
 			local pos = _GaragePos[spot]
 			natives.GRAPHICS._DRAW_LIGHT_WITH_RANGE_AND_SHADOW( pos.x, pos.y, pos.z+2.5, 255, 255, 255, 10, 10, 10)
-			natives.GRAPHICS.DRAW_MARKER(1, 405.45, -978.83, _GarageZ-.5, 0, 0, 0, 0, 0, 0, .5, .5, .5, 0, 255, 200, 20, false, false, 2, false, 0, 0, false)
 		end
+		Parking:DrawMarker(_GarageOutDoor)
 	end
 
 	-- Are we outside the garage?
 	if not _InsideGarage then
+		for n=1,_NGarages do
+			Parking:DrawMarker(_GarageInDoor[n])
+		end
 		if _InDoorEnabled then
 			-- Are we at the Garage Entrance area?
 			for n=1,_NGarages do
