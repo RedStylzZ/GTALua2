@@ -43,7 +43,7 @@ function Ped:GiveWeapon(wep, ammo)
 	if type(wep) == "string" then
 		wep = natives.GAMEPLAY.GET_HASH_KEY(wep)
 	end
-	natives.WEAPON.GIVE_WEAPON_TO_PED(self.ID, wep, ammo, 0, false)
+	natives.WEAPON.GIVE_WEAPON_TO_PED(self.ID, wep, ammo, false, false)
 end
 
 function Ped:GiveDelayedWeapon(wep)
