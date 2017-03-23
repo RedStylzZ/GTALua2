@@ -8,6 +8,7 @@
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 
 //#define OpenIV	// Define OpenIV to load OpenIV.asi and allow GTALua2 to work on modded .RPF files.
+#define NoLoader	// Define NoLoader to bypass the requirement to the SC loader
 
 // Windows Library Files:
 #pragma comment(lib, "ws2_32.lib")

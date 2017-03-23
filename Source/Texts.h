@@ -51,6 +51,7 @@ static const char* texts[] = {
 	"Hooking OnPedCreated ... ",
 	"Build time: " __TIMESTAMP__ "\n",
 	"Loading OpenIV.asi ... ",
+	"Waiting for the game to unpack ... ",
 	"Done.\n"
 };
 
@@ -95,4 +96,5 @@ static const char* texts[] = {
 #define ON_PED_CREATED			texts[38]
 #define BUILT_ON				texts[39]
 #define LOADING_OPENIV			texts[40]
-#define DONE					texts[41]
+#define WAIT_FOR_UNPACK			texts[41]
+#define DONE					texts[42]

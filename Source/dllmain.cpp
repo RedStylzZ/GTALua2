@@ -1,7 +1,7 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
 
-HINSTANCE mHinstDLL = 0;
+HINSTANCE mHinstDLL;
 extern "C" UINT_PTR mProcs[277] = { 0 };
 
 // ShowWindow hooking
@@ -28,15 +28,6 @@ bool GetVolume_hook(LPCTSTR lpRootPathName, LPTSTR lpVolumeNameBuffer, DWORD nVo
 	bool result = pGetVolume(lpRootPathName, lpVolumeNameBuffer, nVolumeNameSize, lpVolumeSerialNumber, lpMaximumComponentLength, lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
 	// Randomize VSN
 	*lpVolumeSerialNumber = random;
-	return result;
-}
-
-// RegOpenKeyExW hooking
-typedef long(__stdcall* RegOpen_t)(HKEY hKey, LPCTSTR lpSubKey, DWORD ulOptions, REGSAM samDesired, PHKEY phkResult);
-static RegOpen_t pRegOpen = NULL;
-long RegOpen_hook(HKEY hKey, LPCTSTR lpSubKey, DWORD ulOptions, REGSAM samDesired, PHKEY phkResult) {
-//	wprintf(L"RegOpenKey called with %s\n", (wchar_t *)lpSubKey);
-	long result = pRegOpen(hKey, lpSubKey, ulOptions, samDesired, phkResult);
 	return result;
 }
 
@@ -87,8 +78,8 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 
 		// Prevents GTA from closing the console window
 		Hooking::HookLibraryFunction("user32.dll", "ShowWindow", &ShowWindow_Hook, (void**)&pShowWindow);
+		// Hooks the GetVolumeInformation to randomize VolumeId
 		Hooking::HookLibraryFunction("kernel32.dll", "GetVolumeInformationA", &GetVolume_hook, (void**)&pGetVolume);
-		Hooking::HookLibraryFunction("advapi32.dll", "RegOpenKeyExW", &RegOpen_hook, (void**)&pRegOpen);
 
 		printf(REMAP_EXPORTS);
 		// Find original dll

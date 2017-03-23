@@ -22,7 +22,16 @@ void Hooking::Start(HMODULE hmoduleDLL)
 {
 	_hmoduleDLL = hmoduleDLL;
 
-	// Don't do anything until you see the game window
+	printf(WAIT_FOR_UNPACK);
+	uint64_t *address;
+	do {
+		address = Memory::pattern("E8 ? ? ? ? 84 C0 75 0C B2 01 B9 ? ? ? ?").count(1).get(0).get<uint64_t>(0);
+	} while (address == 0);
+#ifdef NoLoader
+	*address = 0xEB90909090909090;
+#endif
+	printf(OK);
+	// Don't do anything else until you see the game window
 	printf(WAIT_WINDOW);
 	while (!hWindow) {
 		hWindow = FindWindow("grcWindow", NULL);
@@ -159,8 +168,8 @@ void Hooking::FindPatterns()
 	auto p_worldPtr =					pattern("48 8B 05 ? ? ? ? 45 ? ? ? ? 48 8B 48 08 48 85 C9 74 07");
 	auto p_globalPtr =					pattern("4C 8D 05 ? ? ? ? 4D 8B 08 4D 85 C9 74 11");
 
-	char * c_location = nullptr;
-	void * v_location = nullptr;
+	char *c_location = nullptr;
+	void *v_location = nullptr;
 
 	// Executable Base Address
 	printf(BASE_ADDR, (long long)get_base());
