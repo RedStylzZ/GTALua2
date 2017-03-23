@@ -7,6 +7,8 @@ GTALua2 can though load OpenIV.asi, to allow modding while using modded .RPF fil
 
 GTALua2 is based on Infamous Team's code base and on the awesome GTALua by Freeaky. Due credit where credit is due.
 
+Kudos to Force67 for a lot of testing and pattern research.
+
 GTALua2 is distributed under the DWTFYWALAYGPC license: Do Whatever The -beep- You Want with it As Long As You Give Proper Credit.
 
 If you use this mod online, be aware that you do it at your own risk, there's always a chance that you will be banned, and when you do, blame anything but GTALua2, blame Santa, blame Trump, blame Putin, whatever. Just don't come blaming me, your message will be silently removed.
