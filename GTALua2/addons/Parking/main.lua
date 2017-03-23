@@ -773,9 +773,14 @@ function Parking:Run()
 		playerDead = false
 	end
 
-	-- Draw HUD and Map accordingly
+	-- Draw exit marker, HUD and Map accordingly
 	if _InsideGarage then
 		natives.UI.SET_RADAR_AS_INTERIOR_THIS_FRAME(natives.GAMEPLAY.GET_HASH_KEY("v_winningroom"), 405.45, -955.75, 0, 10)
+		for spot=1,_GarageSize do
+			local pos = _GaragePos[spot]
+			natives.GRAPHICS._DRAW_LIGHT_WITH_RANGE_AND_SHADOW( pos.x, pos.y, pos.z+2.5, 255, 255, 255, 10, 10, 10)
+			natives.GRAPHICS.DRAW_MARKER(1, 405.45, -978.83, _GarageZ-.5, 0, 0, 0, 0, 0, 0, .5, .5, .5, 0, 255, 200, 20, false, false, 2, false, 0, 0, false)
+		end
 	end
 
 	-- Are we outside the garage?
