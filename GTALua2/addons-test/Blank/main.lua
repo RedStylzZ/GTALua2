@@ -11,6 +11,9 @@ Blank.ScriptInfo = {
 	Version = "1.0"
 }
 
+-- Global variables
+Blank.Active = false
+
 -- Functions must match module folder name
 
 -- Init function is called once from the main Lua

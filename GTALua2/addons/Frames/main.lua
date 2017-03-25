@@ -17,7 +17,7 @@ local _FrameSum = 0
 local _FrameTime = 0
 
 local ToggleKey = KEY_F8
-local ShowFrames = false
+Frames.Active = false
 
 -- Functions must match module folder name
 -- Init function is called once from the main Lua
@@ -27,7 +27,7 @@ end
 
 -- Run function is called multiple times from the main Lua
 function Frames:Run()
-	if ShowFrames then
+	if Frames.Active then
 		-- Shows FrameRate
 		local fTime = 1.0 / natives.GAMEPLAY._0xE599A503B3837E1B()
 		_FrameSum = _FrameSum + fTime
@@ -45,8 +45,8 @@ function Frames:Run()
 		end
 	end
 	if IsKeyJustDown(ToggleKey) then
-		ShowFrames = not ShowFrames
-		if ShowFrames then
+		Frames.Active = not Frames.Active
+		if Frames.Active then
 			ui.MapMessage("~g~FPS display enabled.")
 		else
 			ui.MapMessage("~r~FPS display disabled.")

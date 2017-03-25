@@ -12,7 +12,7 @@ VehicleMod.ScriptInfo = {
 }
 
 -- Global variable to signal Debug that we're enabled
-_VehicleMode = false
+VehicleMod.Active = false
 
 -- Variables for Vehicle Modification
 local ToggleKey = KEY_F11
@@ -432,16 +432,16 @@ end
 
 -- Run function is called multiple times from the main Lua
 function VehicleMod:Run()
-	if _VehicleMode then
+	if VehicleMod.Active then
 		VehicleMod:Process()
 	end
 	if IsKeyJustDown(ToggleKey) then
-		_VehicleMode = not _VehicleMode
+		VehicleMod.Active = not VehicleMod.Active
 		_VehicleModKit = nil
 		_VehicleModID = _MinVehicleModID
 		_VehicleModValue = nil
 		_VehicleWType = nil
-		if _VehicleMode then
+		if VehicleMod.Active then
 			ui.MapMessage("~g~Vehicle mode enabled.")
 		else
 			ui.MapMessage("~r~Vehicle mode disabled.")
@@ -452,7 +452,7 @@ end
 function VehicleMod:Process()
 	if LocalPlayer():IsInVehicle() then
 		if natives.ENTITY.GET_ENTITY_SPEED(LocalPlayer():GetVehicle().ID) > 10 then
-			_VehicleMode = false
+			VehicleMod.Active = false
 			ui.MapMessage("~r~Moving... Vehicle mode deactivated.")
 		end
 -- Mod kit and vehicle

@@ -12,11 +12,10 @@ Debug.ScriptInfo = {
 }
 
 -- Global to override other modules Debug functionality
-_Debug = false
+Debug.IsActive = false
 
 -- Variables for Debug control
 local ToggleKey = KEY_F9
-local ShowDebug = false
 
 -- Variables for ray casting
 local _IntersectFlags = -1	-- Flags for casting rays
@@ -42,8 +41,8 @@ end
 
 -- Run function is called multiple times from the main Lua
 function Debug:Run()
-	if ShowDebug then
-		natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropWeapon, true) -- Prevents dropping weapon
+	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropWeapon, true) -- Prevents dropping weapon
+	if Debug.IsActive then
 		-- Shows Debug Info
 		local Myself = LocalPlayer()
 		local MyPos = Myself:GetPosition()
@@ -58,10 +57,10 @@ function Debug:Run()
 		ui.DrawTextBlock(debugtext, .01, .01, FontChaletComprimeCologne, _FontSize, COLOR_RED, BLINK)
 		ui.DrawTextBlock("Plr ID: "..Myself.PlayerID.."/"..Network_NetworkHashFromPlayerHandle(Myself.PlayerID),nil,nil,nil,nil,COLOR_WHITE,NOBLINK)
 		ui.DrawTextBlock(string.format("x:%04.2f y:%04.2f z:%04.2f h:%03.2f",MyPos.x,MyPos.y,MyPos.z,MyHdg))
-		if _CheatMode then
+		if CheatMod.Active then
 			ui.DrawTextBlock("Cheat mode")
 		end
-		if _VehicleMode then
+		if VehicleMod.Active then
 			ui.DrawTextBlock("Vehicle mode")
 		end
 
@@ -130,8 +129,7 @@ function Debug:Run()
 						local bonePos = entityHit:GetBonePosition(entityHit:GetBoneIndex("BONETAG_HEAD"))
 						local size = .12
 						local zoffset = .07
-						ui.Draw3DBox({ x=bonePos.x-size, y=bonePos.y-size, z=bonePos.z-size+zoffset },
-									{ x=bonePos.x+size, y=bonePos.y+size, z=bonePos.z+size+zoffset }, COLOR_YELLOW_50, false, hdg)
+						natives.GRAPHICS.DRAW_MARKER(1, bonePos.x, bonePos.y, bonePos.z, 0, 0, 0, 0, 0, 0, .3, .3, .3, 255, 255, 0, 70, false, false, 2, false, 0, 0, false)
 					end
 					ui.DrawTextBlock(string.format("x:%4.2f y:%4.2f z:%4.2f h:%4.2f",pos.x,pos.y,pos.z,hdg))
 				end
@@ -141,8 +139,8 @@ function Debug:Run()
 		ui.Draw3DPoint(MyPos, 1)
 	end
 	if IsKeyJustDown(ToggleKey) then
-		ShowDebug = not ShowDebug
-		if ShowDebug then
+		Debug.IsActive = not Debug.IsActive
+		if Debug.IsActive then
 			ui.MapMessage("~g~Debug info enabled.")
 			_Debug = true
 		else

@@ -15,11 +15,11 @@ Parking.ScriptInfo = {
 local _Version = "1.0"
 
 -- Global variables
-_Debug = false
+Parking.Debug = false
 
 -- Garage global variables
 local _DrawAsMissionEntity = true
-local _NGarages = 14
+local _NGarages = 15
 local _DefaultGarage = 1
 local _GarageSpots = {}
 local _Spots = {}
@@ -61,6 +61,7 @@ local	_GarageOutSpawn = {}
 	_GarageOutSpawn[12] = {x=-619.19, y=-732.53, z=27.34, h=96.11}
 	_GarageOutSpawn[13] = {x=499.43, y=-104.8, z=61.43, h=249.5}
 	_GarageOutSpawn[14] = {x=-13.66, y=-840.66, z=30, h=260.68}
+	_GarageOutSpawn[15] = {x=197.61, y=-268.77, z=50, h=247.31}
 local	_GarageInDoor = {}
 	_GarageInDoor[1] = {x=-717.8, y=-58.6, z=36.8}
 	_GarageInDoor[2] = {x=-888.4, y=-147.7, z=36.8}
@@ -76,6 +77,7 @@ local	_GarageInDoor = {}
 	_GarageInDoor[12] = {x=-617.38, y=-738.06, z=27.34}
 	_GarageInDoor[13] = {x=501.19, y=-98.40, z=61.43}
 	_GarageInDoor[14] = {x=-7.22, y=-827.21, z=30.3}
+	_GarageInDoor[15] = {x=197.61, y=-268.77, z=50}
 local _InDoorEnabled = true
 local _GarageOutDoor = {x=405.44, y=-978.8, z=_GarageZ}
 local _InsideGarage = false
@@ -107,7 +109,7 @@ local playerDead = false
 -- Debug printing conditioned to _Debug = true
 function Parking:DebugPrint(...)
 	local res = ""
-	if _Debug then
+	if Parking.Debug then
 		for i,v in ipairs({...}) do
 			res = res .. tostring(v) .. " "
 		end
@@ -582,8 +584,6 @@ function Parking:EnterGarage()
 		Parking:SaveVehicleFile(_GarageInUse, FreeSpot)
 		natives.AI.TASK_LEAVE_ANY_VEHICLE(playerID, 0, 0)
 		_Spots[FreeSpot] = entID
-
-		Parking:SetNotNeeded(entID)
 	end
 
 	natives.CAM.SET_GAMEPLAY_CAM_RELATIVE_HEADING(0)
@@ -596,7 +596,7 @@ end
 
 -- Shows markers depicting the various garage points
 function Parking:ShowDebugData()
-	if _Debug then
+	if Parking.Debug then
 		if _InDoorEnabled then
 			for n=1,_NGarages do
 				ui.Draw3DPoint(_GarageInDoor[n], .5)

@@ -12,7 +12,7 @@ CheatMod.ScriptInfo = {
 }
 
 -- Global variable to signal Debug that we're enabled
-_CheatMode = false
+CheatMod.Active = false
 
 -- Variables for Cheating
 local ToggleKey = KEY_F10
@@ -76,14 +76,14 @@ end
 
 -- Run function is called multiple times from the main Lua
 function CheatMod:Run()
-	-- Runtime code goes here
-	if _CheatMode then
 		natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropAmmo, true) -- Prevents dropping ammo
+	-- Runtime code goes here
+	if CheatMod.Active then
 		CheatMod:Process()
 	end
 	if IsKeyJustDown(ToggleKey) then
-		_CheatMode = not _CheatMode
-		if _CheatMode then
+		CheatMod.Active = not CheatMod.Active
+		if CheatMod.Active then
 			ui.MapMessage("~g~Cheat mode enabled.")
 		else
 			ui.MapMessage("~r~Cheat mode disabled.")
