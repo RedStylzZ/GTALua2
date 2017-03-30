@@ -1,4 +1,5 @@
 -- Lists information about the game
+
 function console.info(...)
 	print("Game info...")
 end

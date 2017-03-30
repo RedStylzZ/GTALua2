@@ -1,36 +1,32 @@
 -- Basic mod to show game's debugging information
-
 -- These two lines must match the module folder name
 Debug = {}
 Debug.__index = Debug
-
 -- ScriptInfo table must exist and define Name, Author and Version
 Debug.ScriptInfo = {
 	Name = "Debug",	-- Must match the module name
 	Author = "Mockba the Borg",
 	Version = "1.0"
 }
-
 -- Global to override other modules Debug functionality
 Debug.IsActive = false
-
 -- Variables for Debug control
 local ToggleKey = KEY_F9
-
 -- Variables for ray casting
 local _IntersectFlags = -1	-- Flags for casting rays
 local _IntersectValue = 7
 local _RayDistance = 5000
 local _FontSize = .4
 local _DebugFontSize = .2
-
 -- Functions must match module folder name
 -- Init function is called once from the main Lua
+
 function Debug:Init()
 	print("Debug v1.0 - by Mockba the Borg")
 end
 
 -- Extra functions
+
 function Debug:DecorInt(veh, decor, decorType)
 	if natives.DECORATOR.DECOR_EXIST_ON(veh.ID, decor) then
 		return natives.DECORATOR.DECOR_GET_INT(veh.ID, decor)
@@ -40,30 +36,41 @@ function Debug:DecorInt(veh, decor, decorType)
 end
 
 -- Run function is called multiple times from the main Lua
+
 function Debug:Run()
+	if ui.ChatActive() then
+		return
+	end
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropWeapon, true) -- Prevents dropping weapon
 	if Debug.IsActive then
 		-- Shows Debug Info
 		local Myself = LocalPlayer()
 		local MyPos = Myself:GetPosition()
 		local MyHdg = Myself:GetHeading()
-		local debugtext = "Debugging"
-		if natives.NETWORK.NETWORK_IS_SESSION_STARTED() then
-			debugtext = debugtext.." Online"
+		if not natives.UI.IS_HELP_MESSAGE_BEING_DISPLAYED() then
+			local debugtext = "Debugging"
+			if natives.NETWORK.NETWORK_IS_SESSION_STARTED() then
+				debugtext = debugtext.." Online"
+			end
+			if natives.NETWORK.NETWORK_IS_HOST() then
+				debugtext = debugtext.." (Host)"
+			end
+			ui.DrawTextBlock(debugtext, .01, .01, FontChaletComprimeCologne, _FontSize, COLOR_RED, BLINK)
+			ui.DrawTextBlock("Plr ID: "..Myself.PlayerID.."/"..Network_NetworkHashFromPlayerHandle(Myself.PlayerID),nil,nil,nil,nil,COLOR_WHITE,NOBLINK)
+			ui.DrawTextBlock(string.format("x:%7.2f y:%7.2f z:%7.2f h:%6.2f",MyPos.x,MyPos.y,MyPos.z,MyHdg))
+			if CheatMod.Active then
+				ui.DrawTextBlock("Cheat mode")
+			end
+			if VehicleMod.Active then
+				ui.DrawTextBlock("Vehicle mode")
+			end
 		end
-		if natives.NETWORK.NETWORK_IS_HOST() then
-			debugtext = debugtext.." (Host)"
+		if Myself:IsInVehicle() then
+			local Speed = natives.ENTITY.GET_ENTITY_SPEED(Myself.ID) * 3.6
+			local Altitude = MyPos.z * 3.6
+			ui.DrawTextBlock(string.format("%04.0f", Speed), .94, .875, FontPricedown, .7, COLOR_CYAN)
+			ui.DrawTextBlock(string.format("%04.0f", Altitude))
 		end
-		ui.DrawTextBlock(debugtext, .01, .01, FontChaletComprimeCologne, _FontSize, COLOR_RED, BLINK)
-		ui.DrawTextBlock("Plr ID: "..Myself.PlayerID.."/"..Network_NetworkHashFromPlayerHandle(Myself.PlayerID),nil,nil,nil,nil,COLOR_WHITE,NOBLINK)
-		ui.DrawTextBlock(string.format("x:%04.2f y:%04.2f z:%04.2f h:%03.2f",MyPos.x,MyPos.y,MyPos.z,MyHdg))
-		if CheatMod.Active then
-			ui.DrawTextBlock("Cheat mode")
-		end
-		if VehicleMod.Active then
-			ui.DrawTextBlock("Vehicle mode")
-		end
-
 		local entityHit,pointHit = game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue)
 		if not pointHit then
 			pointHit = game.GetCoordsInFrontOfCam(_RayDistance)
@@ -74,7 +81,6 @@ function Debug:Run()
 				ui.Draw3DPoint(pointHit, .05, COLOR_RED)
 			end
 		end
-
 		if entityHit then
 			local entPos = entityHit:GetPosition()
 			if entPos.x ~= 0 then
@@ -151,8 +157,8 @@ function Debug:Run()
 end
 
 -- Run when an addon if (properly) unloaded
-function Debug:Unload()
 
+function Debug:Unload()
 end
 
 -- This line must match the module folder name

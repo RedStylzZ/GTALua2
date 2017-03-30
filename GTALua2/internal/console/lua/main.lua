@@ -1,4 +1,5 @@
 -- Runs a Lua command
+
 function console.lua(...)
 	local str = table.concat({...}, " ")
 	local func = load(str)

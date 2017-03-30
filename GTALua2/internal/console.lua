@@ -4,14 +4,13 @@ console.Commands = {}
 console.Descriptions = {}
 
 -- Process input
+
 function console.Process(input)
 	if type(input) ~= "string" or input == "" then
 		return
 	end
-
 	local args = explode(" ", input)
 	local cmd = string.lower(table.remove(args, 1))
-	
 	local func = console.Commands[cmd]
 	if func == nil then
 		print("Unknown console command: "..cmd)
@@ -21,15 +20,17 @@ function console.Process(input)
 end
 
 -- Register a Command onto the console list
+
 function console.RegisterCommand(name, descr, callback)
 	console.Commands[name] = callback
 	console.Descriptions[name] = descr
 	print("  Loaded: "..name.." - "..descr)
 end
-
 print("Loading console commands ...")
 print("-----------------------------")
+
 -- Help
+
 function console.help()
 	print("List of available commands:")
 	print("-----------------------------")
@@ -41,6 +42,7 @@ end
 console.RegisterCommand("help", "Lists all registered commands", console.help)
 
 -- Lists all addons
+
 function console.list()
 	print("List of loaded addons:")
 	print("-----------------------------")
@@ -52,6 +54,7 @@ end
 console.RegisterCommand("list", "Lists all registered addons", console.list)
 
 -- Loads an addon
+
 function console.load(name)
 	if file_exists(LuaFolder().."/addons/"..name.."/main.lua") then
 		package.loaded[LuaFolder().."/addons/"..name.."/main"] = nil
@@ -74,6 +77,7 @@ end
 console.RegisterCommand("load", "Loads an addon from file", console.load)
 
 -- Reloads an addon
+
 function console.reload(name)
 	if addons[name] then
 		console.unload(name)
@@ -83,6 +87,7 @@ end
 console.RegisterCommand("reload", "Reloads an addon from file", console.reload)
 
 -- Reloads all addons
+
 function console.reloadall()
 	print("Reloading all addons:")
 	print("-----------------------------")
@@ -94,6 +99,7 @@ end
 console.RegisterCommand("reloadall", "Reloads all addons", console.reloadall)
 
 -- Unload an addon
+
 function console.unload(name)
 	if addons[name] then
 		print("Unloading "..name.." ...")

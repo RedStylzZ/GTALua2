@@ -16,13 +16,12 @@ ui.TextBlockInfo = {
 }
 
 -- Draws a text onscreen with the option to have it blink
+
 function ui.DrawTextUI(text, x, y, font, scale, color, blink)
 	font = font or FontChaletComprimeCologne
 	scale = scale or .5
 	color = color or {r=255, g=255, b=255, a=255}
-
 	local draw = not blink
-
 	if math.floor(game.GetSeconds()/10)%2 == 0 or draw then
 		natives.UI.SET_TEXT_FONT(font)
 		natives.UI.SET_TEXT_SCALE(0.0, scale)
@@ -36,6 +35,7 @@ function ui.DrawTextUI(text, x, y, font, scale, color, blink)
 end
 
 -- Draws a text block
+
 function ui.DrawTextBlock(text, x, y, font, scale, color, blink, increment)
 	ui.TextBlockInfo.TextX = x or ui.TextBlockInfo.TextX
 	ui.TextBlockInfo.TextY = y or ui.TextBlockInfo.TextY
@@ -54,6 +54,7 @@ function ui.DrawTextBlock(text, x, y, font, scale, color, blink, increment)
 end
 
 -- Prints a message above the game map
+
 function ui.MapMessage(text, blink)
 	natives.UI.SET_TEXT_OUTLINE()
 	natives.UI._SET_NOTIFICATION_TEXT_ENTRY("STRING")
@@ -66,6 +67,7 @@ function ui.MapMessage(text, blink)
 end
 
 -- Reads a line from the onscreen keyboard
+
 function ui.OnscreenKeyboard(title, size)
 	size = size or 20
 	natives.GAMEPLAY.DISPLAY_ONSCREEN_KEYBOARD(1, "", "", "", "", "", "", size)
@@ -78,7 +80,14 @@ function ui.OnscreenKeyboard(title, size)
 	return natives.GAMEPLAY.GET_ONSCREEN_KEYBOARD_RESULT()
 end
 
+-- Tell if the chat is active
+
+function ui.ChatActive()
+	return natives.UI._IS_TEXT_CHAT_ACTIVE()
+end
+
 -- Draws a 3D point
+
 function ui.Draw3DPoint(p, size, color, blink)
 	size = size or 1
 	local cx = color or COLOR_RED
@@ -100,6 +109,7 @@ function ui.Draw3DPoint(p, size, color, blink)
 end
 
 -- Draws a 3D line
+
 function ui.Draw3DLine(p1, p2, color, blink)
 	color = color or COLOR_WHITE
 	local draw = not blink
@@ -109,6 +119,7 @@ function ui.Draw3DLine(p1, p2, color, blink)
 end
 
 -- Draws a 3D polygon
+
 function ui.Draw3DPoly(p1, p2, p3, color, blink)
 	color = color or COLOR_WHITE
 	local draw = not blink
@@ -118,6 +129,7 @@ function ui.Draw3DPoly(p1, p2, p3, color, blink)
 end
 
 -- Draws a 3D box (solid)
+
 function ui.Draw3DBox(p1, p2, color, blink)
 	color = color or COLOR_WHITE
 	local draw = not blink
@@ -127,6 +139,7 @@ function ui.Draw3DBox(p1, p2, color, blink)
 end
 
 -- Shows a HUD component this frame
+
 function ui.ShowHudComponent(component)
 	natives.UI.SHOW_HUD_COMPONENT_THIS_FRAME(component)
 end

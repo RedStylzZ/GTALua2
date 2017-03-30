@@ -28,7 +28,6 @@ require (LuaFolder () .. "/classes/vehicle")
 require (LuaFolder () .. "/classes/blip")
 
 -- Main code starts here
-
 ClrScr()
 FGColor(console_Aqua)
 print ("GTALua2 v" .. GameVersion () .. " loaded.")
@@ -37,10 +36,13 @@ FGColor(console_White)
 
 -- Set MPVehsOnSP Global to 1 (for v1.0.877.1)
 --local MPVehPtr = Cptr:new(GlobalPointer(2576573))
+
 -- Set MPVehsOnSP Global to 1 (for v1.0.944.2)
 --local MPVehPtr = Cptr:new(GlobalPointer(2593910))
+
 -- Set MPVehsOnSP Global to 1 (for v1.0.1011.1)
 local MPVehPtr = Cptr:new(GlobalPointer(2593970))
+
 MPVehPtr:setInt(0, 1)
 
 -- Load external addons
@@ -54,7 +56,6 @@ function LoadMod(name)
 		addons[name] = export
 		addonCount = addonCount + 1
 end
-
 local f = io.popen("dir /b /a:d "..LuaFolder().."\\addons")
 for addon in f:lines() do
 	local array = explode(".", addon)
@@ -70,7 +71,6 @@ for addon in f:lines() do
 		print("  Not loaded: "..name..".")
 	end
 end
-
 print("\nInitializing all addons ...")
 print("----------------------------------------------")
 for k, v in pairs(addons) do
@@ -82,13 +82,13 @@ for k, v in pairs(addons) do
 end
 
 -- This function is called every time a Vehicle is spawned
-function OnVehSpawn(VehId)
 
+function OnVehSpawn(VehId)
 end
 
 -- This function is called every time a Ped is spawned
+
 function OnPedSpawn(PedID)
-	
 end
 
 function Run ()
@@ -97,7 +97,6 @@ function Run ()
 	if IsKeyJustDown(VK_OEM_3) then -- cheat code key was pressed
 		console.Process(ui.OnscreenKeyboard("Console Command", 200))
 	end
-
 	-- Execute existing addons
 	for k, v in pairs(addons) do
 		success, err = xpcall (v.Run, debug.traceback)

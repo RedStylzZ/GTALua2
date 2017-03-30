@@ -1,19 +1,17 @@
 -- Vehicle modification (and spawning) addon
-
 -- These two lines must match the module folder name
 VehicleMod = {}
 VehicleMod.__index = VehicleMod
-
 -- ScriptInfo table must exist and define Name, Author and Version
 VehicleMod.ScriptInfo = {
 	Name = "VehicleMod",	-- Must match the module folder name
 	Author = "Mockba the Borg",
 	Version = "1.0a"
 }
-
 -- Global variable to signal Debug that we're enabled
 VehicleMod.Active = false
-
+-- Last spawned vehicle
+local LastSpawned = nil
 -- Variables for Vehicle Modification
 local ToggleKey = KEY_F11
 local _FontSize = .4
@@ -31,7 +29,6 @@ local _KeyModExtraLeft = KEY_NUMPAD7
 local _KeyModValueRight = KEY_NUMPAD6
 local _KeyModValueLeft = KEY_NUMPAD4
 local _KeyTakeCar = KEY_DECIMAL
-
 -- Variables for the Vehicle modification module
 local _ModX = .01
 local _ModY = .13
@@ -177,7 +174,6 @@ _ModType[16][1] = "Armor Upgrade 40%"
 _ModType[16][2] = "Armor Upgrade 60%"
 _ModType[16][3] = "Armor Upgrade 80%"
 _ModType[16][4] = "Armor Upgrade 100%"
-
 local _VehicleModKit = nil
 local _MinVehicleModID = _Mod_PRI_COLOR
 local _MaxVehicleModID = 48
@@ -189,7 +185,6 @@ local _VehicleWType = nil
 local _VehicleExtra = 1
 local _MinVehicleExtras = 1
 local _MaxVehicleExtras = 12
-
 -- Default full upgrade values
 local _FullUpgrade = 0
 local _UpgradeHorn = 10
@@ -206,7 +201,6 @@ local _UpgradeWhlColor = 12
 local _UpgradeTrmColor = 38
 local _UpgradeAccColor = 38
 local _MPBitset = 16777224
-
 -- Wheel types
 local _ModW = {}
 _ModW[0] = "Sport"
@@ -390,14 +384,14 @@ local _ModColorTypes = {
 	"Metals",
 	"Chrome"
 }
-
 -- Functions must match module folder name
-
 -- Init function is called once from the main Lua
+
 function VehicleMod:Init()
 	-- Initialization code goes here
 	print("VehicleMod v1.0a - by Mockba the Borg")
 end
+
 
 function VehicleMod:ApplyNeons(vehID, color)
 	if not color then
@@ -423,6 +417,7 @@ function VehicleMod:ApplyNeons(vehID, color)
 	natives.VEHICLE._SET_VEHICLE_NEON_LIGHT_ENABLED(vehID, 3, true)
 end
 
+
 function VehicleMod:RemoveNeons(vehID, color)
 	natives.VEHICLE._SET_VEHICLE_NEON_LIGHT_ENABLED(vehID, 0, false)
 	natives.VEHICLE._SET_VEHICLE_NEON_LIGHT_ENABLED(vehID, 1, false)
@@ -431,7 +426,11 @@ function VehicleMod:RemoveNeons(vehID, color)
 end
 
 -- Run function is called multiple times from the main Lua
+
 function VehicleMod:Run()
+	if ui.ChatActive() then
+		return
+	end
 	if VehicleMod.Active then
 		VehicleMod:Process()
 	end
@@ -449,6 +448,7 @@ function VehicleMod:Run()
 	end
 end
 
+
 function VehicleMod:Process()
 	if LocalPlayer():IsInVehicle() then
 		if natives.ENTITY.GET_ENTITY_SPEED(LocalPlayer():GetVehicle().ID) > 10 then
@@ -457,7 +457,6 @@ function VehicleMod:Process()
 		end
 -- Mod kit and vehicle
 		local hasmod = false
-
 		local veh = LocalPlayer():GetVehicle()
 		if not _VehicleModKit then
 			natives.VEHICLE.SET_VEHICLE_MOD_KIT(veh.ID, 0)
@@ -493,7 +492,6 @@ function VehicleMod:Process()
 			end
 			str = str..")"
 		end
-		
 -- Mod limits
 		if _ModLimits[_VehicleModID] then
 			_MinVehicleModValue = _ModLimits[_VehicleModID].vmin
@@ -505,7 +503,6 @@ function VehicleMod:Process()
 			else
 				_MinVehicleModValue = -1
 				_MaxVehicleModValue = (natives.VEHICLE.GET_NUM_VEHICLE_MODS(veh.ID, _VehicleModID) or 0)-1
-
 			end
 		end
 		local nvar = _MaxVehicleModValue - _MinVehicleModValue + 1
@@ -666,14 +663,11 @@ function VehicleMod:Process()
 			natives.VEHICLE.SET_VEHICLE_ENGINE_CAN_DEGRADE(veh.ID, false)
 			natives.VEHICLE.SET_VEHICLE_IS_STOLEN(veh.ID, false)
 			natives.VEHICLE.ADD_VEHICLE_UPSIDEDOWN_CHECK(veh.ID)
-
 			local multiplier = 50
 			print("Setting engine multiplier to", multiplier)
 			natives.VEHICLE._SET_VEHICLE_ENGINE_POWER_MULTIPLIER(veh.ID, multiplier)
 			natives.VEHICLE._SET_VEHICLE_ENGINE_TORQUE_MULTIPLIER(veh.ID, multiplier)
-			
 			natives.VEHICLE.SET_VEHICLE_FRICTION_OVERRIDE(veh.ID, 2)
-
 			if _FullUpgrade == 1 then
 				ui.MapMessage("~b~Vehicle upgraded.")
 			else
@@ -873,6 +867,12 @@ function VehicleMod:Process()
 		if IsKeyJustDown(_KeyAddVehicle, true) then
 			local name = ui.OnscreenKeyboard("Enter Vehicle name", 20)
 			if name then
+				if LastSpawned ~= nil then
+					if LastSpawned:Exists() then
+						LastSpawned:Delete()
+					end
+					LastSpawned = nil
+				end
 				local position = LocalPlayer():GetPosition()
 				local heading = LocalPlayer():GetHeading()
 				local hash = natives.GAMEPLAY.GET_HASH_KEY(name)
@@ -884,7 +884,7 @@ function VehicleMod:Process()
 					natives.DECORATOR.DECOR_SET_INT(ent.ID, "PV_Slot", 0)
 					LocalPlayer():SetIntoVehicle(ent.ID, VehicleSeatDriver)
 					ent:SetRadioStationName("OFF")
---					ent:SetNotNeeded()
+					LastSpawned = ent
 					ui.MapMessage("~b~"..string.upper(name).." spawned.")
 				else
 					print("Vehicle does not exist.")
@@ -895,8 +895,8 @@ function VehicleMod:Process()
 end
 
 -- Run when an addon if (properly) unloaded
-function VehicleMod:Unload()
 
+function VehicleMod:Unload()
 end
 
 -- This line must match the module folder name

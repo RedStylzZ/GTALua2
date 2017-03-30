@@ -1,30 +1,23 @@
 -- Cheating mod ... not cool man, not cool!!!
-
 -- These two lines must match the module folder name
 CheatMod = {}
 CheatMod.__index = CheatMod
-
 -- ScriptInfo table must exist and define Name, Author and Version
 CheatMod.ScriptInfo = {
 	Name = "CheatMod",	-- Must match the module folder name
 	Author = "Mockba the Borg",
 	Version = "1.0"
 }
-
 -- Global variable to signal Debug that we're enabled
 CheatMod.Active = false
-
 -- Variables for Cheating
 local ToggleKey = KEY_F10
-
 local _KeyDeleteGun = KEY_SUBTRACT
 local _KeyTakeCar = KEY_DECIMAL
-
 -- Variables for ray casting
 local _IntersectFlags = -1	-- Flags for casting rays
 local _IntersectValue = 7
 local _RayDistance = 5000
-
 -- Select weapons to top-up
 local _Weapons = {
 -- Pistol
@@ -45,6 +38,8 @@ local _Weapons = {
 	[0xaf113f99] = {0x8ec1c979, 0xaa2c45b4},
 -- Advanced Carbine
 	[0xc0a3098d] = {0x7c8bd10e, 0xa0d89c42, 0x0c164f53, 0x6b59aeaa},
+-- Marksman Rifle
+	[0xC734385A] = {},
 -- Sniper Rifle
 	[0x05fc3c11] = {0xa73d4664, 0xbc54da77},
 -- Heavy Sniper
@@ -66,17 +61,26 @@ local _Weapons = {
 -- Sticky Bomb
 	[0x2C3731D9] = {}
 }
-
 -- Functions must match module folder name
-
 -- Init function is called once from the main Lua
+
 function CheatMod:Init()
 	print("CheatMod v1.0 - by Mockba the Borg")
 end
 
 -- Run function is called multiple times from the main Lua
+
 function CheatMod:Run()
-		natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropAmmo, true) -- Prevents dropping ammo
+	if ui.ChatActive() then
+		return
+	end
+	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropAmmo, true) -- Prevents dropping ammo
+	local Myself = LocalPlayer()
+	local pos = Myself:GetPosition()
+	if (pos.x > 5000 and pos.y > 5000) or (pos.x > 25000) then
+		Myself:SetPosition(0, 0, 72)
+		natives.AI.CLEAR_PED_TASKS_IMMEDIATELY(Myself.ID)
+	end
 	-- Runtime code goes here
 	if CheatMod.Active then
 		CheatMod:Process()
@@ -91,9 +95,11 @@ function CheatMod:Run()
 	end
 end
 
+
 function StatGetString(statName)
 	return natives.STATS.STAT_GET_STRING(joaat(statName), -1)
 end
+
 
 function StatGetDate(statName)
 	local value = Cmem:new(8)
@@ -101,16 +107,16 @@ function StatGetDate(statName)
 	return value:getInt(0)
 end
 
+
 function StatGetInt(statName)
 	local value = Cvar:new()
 	natives.STATS.STAT_GET_INT(joaat(statName), value, -1)
 	return value:getInt()
 end
 
+
 function CheatMod:Process()
-
 	ui.ShowHudComponent(HudComponentReticle)	
-
 -- Owner of bullet (if Aiming = player)
 	local bulletOwner, bulletPower, bulletWeapon
 	if natives.CONTROLS.IS_CONTROL_PRESSED(0, ControlAim) then
@@ -125,7 +131,6 @@ function CheatMod:Process()
 		bulletPower = 50
 		bulletWeapon = WEAPON_SMG
 	end
-
 -- Shows aiming players
 	for i=0,31 do
 		local playername = natives.PLAYER.GET_PLAYER_NAME(i)
@@ -137,7 +142,6 @@ function CheatMod:Process()
 			end
 		end
 	end
-
 -- Take car
 	if IsKeyJustDown(_KeyTakeCar, true) then
 		local ent = select(1, game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue))
@@ -192,17 +196,15 @@ function CheatMod:Process()
 				natives.DECORATOR.DECOR_REMOVE(ent.ID, "Player_Vehicle")
 				natives.DECORATOR.DECOR_REMOVE(ent.ID, "MPBitset")
 				natives.DECORATOR.DECOR_REMOVE(ent.ID, "Veh_Modded_By_Player")
-
-				natives.DECORATOR.DECOR_SET_INT(ent.ID, "Player_Vehicle", natives.NETWORK._NETWORK_HASH_FROM_PLAYER_HANDLE(PlayerID))
+				natives.DECORATOR.DECOR_SET_INT(ent.ID, "Player_Vehicle", Network_NetworkHashFromPlayerHandle(PlayerID))
 				natives.DECORATOR.DECOR_SET_INT(ent.ID, "MPBitset", 16777224)
 				if not natives.DECORATOR.DECOR_EXIST_ON(ent.ID, "PV_Slot") then
 					natives.DECORATOR.DECOR_SET_INT(ent.ID, "PV_Slot", 0)
 				end
 				if not natives.DECORATOR.DECOR_EXIST_ON(ent.ID, "Previous_Owner") then
-					natives.DECORATOR.DECOR_SET_INT(ent.ID, "Previous_Owner", 0)
+					natives.DECORATOR.DECOR_SET_INT(ent.ID, "Previous_Owner", -1)
 				end
 				natives.DECORATOR.DECOR_SET_INT(ent.ID, "Veh_Modded_By_Player", natives.GAMEPLAY.GET_HASH_KEY(PlayerName))
-
 				if ent:IsCar() or ent:IsBike() or ent:IsQuadbike() then
 					natives.VEHICLE.SET_VEHICLE_ALARM(ent.ID, false)
 					natives.AI.TASK_ENTER_VEHICLE(LocalPlayer().ID, ent.ID, 10000, VehicleSeatDriver, 1.0, 9, 0)
@@ -222,7 +224,6 @@ function CheatMod:Process()
 			print("done.")
 		end
 	end
-
 -- Fix/Clean/Flip Up vehicle
 	if natives.CONTROLS.IS_CONTROL_JUST_PRESSED(0, ControlSelectWeaponAutoRifle) then -- Default: *8
 		local veh
@@ -245,7 +246,6 @@ function CheatMod:Process()
 		end
 		return
 	end
-
 -- Steal other vehicle's colors
 	if natives.CONTROLS.IS_CONTROL_JUST_PRESSED(0, ControlSelectWeaponSniper) then -- Default: (9
 		local veh
@@ -268,7 +268,6 @@ function CheatMod:Process()
 			print("Not in a vehicle.")
 		end
 	end
-
 -- Delete gun
 	if IsKeyJustDown(_KeyDeleteGun, true) then
 		local ent = select(1, game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue))
@@ -325,7 +324,6 @@ function CheatMod:Process()
 		end
 		print("done.")
 	end
-
 -- Top me Up (give less suspicious weapons/ammo) (Shift to remove all)
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlLookBehind, true)
 	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlLookBehind) then
@@ -342,7 +340,6 @@ function CheatMod:Process()
 			end
 		end
 	end
-
 -- Find Hacker
 	if IsKeyJustDown(KEY_F4) then
 		for i=0,31 do
@@ -359,7 +356,6 @@ function CheatMod:Process()
 			end
 		end
 	end
-
 -- Teleport few meters ahead
 	if IsKeyJustDown(KEY_E) then
 		if IsKeyDown(KEY_SHIFT) then
@@ -370,7 +366,13 @@ function CheatMod:Process()
 			end
 		end
 	end
-
+-- Not chased by police
+	Controls_DisableControlAction(0, ControlFrontendPause, true) -- Prevents pause
+	if IsKeyJustDown(KEY_P) then
+		if IsKeyDown(KEY_SHIFT) then
+			Player_SetPlayerWantedLevel(LocalPlayer().PlayerID, 0, true)
+		end
+	end
 -- Go Off-Radar
 	if IsKeyJustDown(KEY_O) then
 		if IsKeyDown(KEY_SHIFT) then
@@ -381,7 +383,6 @@ function CheatMod:Process()
 			timer:setInt(0, natives.NETWORK.GET_NETWORK_TIME())
 		end
 	end
-
 -- Heart attack gun
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlVehicleDuck, true)
 	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlVehicleDuck) then
@@ -391,7 +392,6 @@ function CheatMod:Process()
 			natives.PED.APPLY_DAMAGE_TO_PED(ped.ID, 1000, false)
 		end
 	end
-
 -- Drone strike gun
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlThrowGrenade, true)
 	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlThrowGrenade) then
@@ -406,7 +406,6 @@ function CheatMod:Process()
 			end
 		end
 	end
-
 -- AC-130 strike gun
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlNextCamera, true)
 	if natives.CONTROLS.IS_DISABLED_CONTROL_JUST_PRESSED(0, ControlNextCamera) then
@@ -425,8 +424,8 @@ function CheatMod:Process()
 end
 
 -- Run when an addon if (properly) unloaded
-function CheatMod:Unload()
 
+function CheatMod:Unload()
 end
 
 -- This line must match the module folder name

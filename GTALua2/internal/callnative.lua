@@ -1,9 +1,7 @@
 -- Calls the game native
-
 local AconvTable = {
 	BOOL		= "boolean",
 	["BOOL*"]	= "userdata",
-
 	Any		= "integer",
 	Blip		= "integer",
 	Cam		= "integer",
@@ -26,30 +24,26 @@ local AconvTable = {
 	["Player*"]	= "userdata",
 	["ScrHandle*"]	= "userdata",
 	["Vehicle*"]	= "userdata",
-
 	int		= "integer",
 	float		= "number",
 	["int*"]	= "userdata",
 	["float*"]	= "userdata",
-
 	void		= "nil",
-
 	["char*"]	= "string",
-
 	Vector3		= "Vector3",
 	["Vector3*"]	= "userdata"
 }
 
 -- Converts the arg type into Lua type
+
 function Aconv(atype)
 	return AconvTable[atype] or "Unknown"
 end
 
 -- Effectively calls the native after some sanity check
+
 function CallNative(namespace, native, ...)
-
 	-- Sanity check
-
 	if nativeDescription[namespace] == nil then
 		error(namespace.." is not a valid namespace")
 	end
@@ -77,10 +71,8 @@ function CallNative(namespace, native, ...)
 			error("Arg "..k.." of "..namespace.."."..native.." should be "..etype.."("..cetype.."), got "..atype)
 		end
 	end
-	
 	-- Sanity check done, just call the natives
 	nativeInit(nativeDescription[namespace][native].hash)
-
 	if nargs > 0 then
 		for k,v in pairs({...}) do
 			cetype = Aconv(expected[k])
@@ -110,9 +102,7 @@ function CallNative(namespace, native, ...)
 			end
 		end
 	end
-
 	local returns = Aconv(nativeDescription[namespace][native].returns)
-
 	if returns == "boolean" then
 		return(nativeCall(1))
 	end

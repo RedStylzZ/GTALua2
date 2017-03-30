@@ -3,6 +3,7 @@ Ped = Entity:new()
 Ped_mt = { __index = Ped }
 
 -- Ped CTor
+
 function Ped:new (id)
 	local new_inst = {}
 	new_inst.ID = id or -1
@@ -14,6 +15,7 @@ end
 -- Methods
 
 -- Delete
+
 function Ped:Delete()
 	self:_CheckExists()
 	local c_handle = Cvar:new()
@@ -22,6 +24,7 @@ function Ped:Delete()
 end
 
 --Set not needed
+
 function Ped:SetNotNeeded()
 	self:_CheckExists()
 	local c_handle = Cvar:new()
@@ -30,14 +33,15 @@ function Ped:SetNotNeeded()
 end
 
 -- Weapon Switching
+
 function Ped:AllowWeaponSwitching(b)
 	self:_CheckExists()
 	b = b or true
-	
 	natives.PED.SET_PED_CAN_SWITCH_WEAPON(self.ID, b)
 end
 
 -- Weapon
+
 function Ped:GiveWeapon(wep, ammo)
 	self:_CheckExists()
 	if type(wep) == "string" then
@@ -79,6 +83,7 @@ function Ped:GiveWeaponComponent(wep, comp)
 end
 
 -- Group Member
+
 function Ped:AddGroupMember(other_ped)
 	self:_CheckExists()
 	local group_id = other_ped
@@ -87,16 +92,19 @@ function Ped:AddGroupMember(other_ped)
 	end
 	natives.PED.SET_PED_AS_GROUP_MEMBER(self.ID, group_id)
 end
+
 function Ped:GetGroupIndex()
 	self:_CheckExists()
 	return natives.PED.GET_PED_GROUP_INDEX(self.ID)
 end
 
 -- Vehicle
+
 function Ped:IsInVehicle()
 	self:_CheckExists()
 	return natives.PED.IS_PED_IN_ANY_VEHICLE(self.ID, false)
 end
+
 function Ped:GetVehicle()
 	self:_CheckExists()
 	if self:IsInVehicle() then
@@ -106,11 +114,13 @@ function Ped:GetVehicle()
 end
 
 -- Armour
+
 function Ped:SetArmour(i)
 	self:_CheckExists()
 	natives.PED.SET_PED_ARMOUR(self.ID, i)
 end
 Ped.SetArmor = Ped.SetArmour
+
 function Ped:GetArmour()
 	self:_CheckExists()
 	return natives.PED.GET_PED_ARMOUR(self.ID)
@@ -118,36 +128,36 @@ end
 Ped.GetArmor = Ped.GetArmour
 
 -- Money
+
 function Ped:SetMoney(i)
 	self:_CheckExists()
 	natives.PED.SET_PED_MONEY(self.ID, i)
 end
+
 function Ped:GetMoney()
 	self:_CheckExists()
 	return natives.PED.GET_PED_MONEY(self.ID)
 end
 
 -- Type
+
 function Ped:GetType()
 	self:_CheckExists()
 	return natives.PED.GET_PED_TYPE(self.ID)
 end
 
 -- Nearby Peds
+
 function Ped:GetNearbyPeds(max_peds)
 	self:_CheckExists()
-	
 	-- default value
 	max_peds = max_peds or 50
-	
 	-- c array
 	local array_size = max_peds + 1
 	local c_array_peds = Cmem:new(array_size * 8)
 	c_array_peds:setInt(0, max_peds)
-
 	-- call native
 	local found=natives.PED.GET_PED_NEARBY_PEDS(self.ID, c_array_peds, -1)
-	
 	-- check returned peds
 	local nearby_peds = {}
 	local i=0
@@ -159,25 +169,21 @@ function Ped:GetNearbyPeds(max_peds)
 		end
 		i=i+1
 	end
-	
 	return nearby_peds
 end
 
 -- Nearby Vehicles
+
 function Ped:GetNearbyVehicles(max_vehicles)
 	self:_CheckExists()
-	
 	-- default value
 	max_vehicles = max_vehicles or 50
-	
 	-- c array
 	local array_size = max_vehicles + 1
 	local c_array_vehicles = Cmem:new(array_size * 8)
 	c_array_vehicles:setInt(0, max_vehicles)
-	
 	-- call native
 	local found=natives.PED.GET_PED_NEARBY_VEHICLES(self.ID, c_array_vehicles)
-	
 	-- check
 	local nearby_vehicles = {}
 	local i=0
@@ -189,19 +195,19 @@ function Ped:GetNearbyVehicles(max_vehicles)
 		end
 		i=i+1
 	end
-	
 	return nearby_vehicles
 end
 
 -- Set Ped into specified vehicle's seat
+
 function Ped:SetIntoVehicle(vehicle, seat)
 	self:_CheckExists()
 	natives.PED.SET_PED_INTO_VEHICLE(self.ID, vehicle, seat)
 end
 
 -- Explode Ped's head
+
 function Ped:ExplodeHead(weapon)
 	self:_CheckExists()
 	natives.PED.EXPLODE_PED_HEAD(self.ID, weapon)
 end
-

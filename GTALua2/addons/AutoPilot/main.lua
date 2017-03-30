@@ -1,22 +1,18 @@
 -- Simple Auto Pilot for hovering and ground avoidance
-
 -- These two lines must match the module folder name
 AutoPilot = {}
 AutoPilot.__index = AutoPilot
-
 -- ScriptInfo table must exist and define Name, Author and Version
 AutoPilot.ScriptInfo = {
 	Name = "AutoPilot",	-- Must match the module name
 	Author = "Mockba the Borg",
 	Version = "1.0a"
 }
-
 -- Defines
 local AP_Off = 0
 local AP_Altitude = 1
 local AP_Avoidance = 2
 local AP_Hover = 3
-
 -- Mode texts
 local Modes = {
 	[0] = "~r~AutoPilot Off",
@@ -24,23 +20,22 @@ local Modes = {
 	[2] = "~g~Ground Avoidance",
 	[3] = "~b~Hover Mode"
 }
-
 local ToggleKey = KEY_F12
 local AutoPilotMode = AP_Off
 local MaxModes = 3
-
 local _Altitude = 0
 local _PositionX = 0
 local _PositionY = 0
 local _MinAltitude = 5
-
 -- Functions must match module folder name
 -- Init function is called once from the main Lua
+
 function AutoPilot:Init()
 	print("AutoPilot v1.0 - by Mockba the Borg")
 end
 
 -- Run function is called multiple times from the main Lua
+
 function AutoPilot:Run()
 	if AutoPilotMode ~= AP_Off then
 		local plr = LocalPlayer()
@@ -59,18 +54,13 @@ function AutoPilot:Run()
 		local posX = tonumber(string.format("%.4f", playerPos.x))
 		local posY = tonumber(string.format("%.4f", playerPos.y))
 		local posZ = tonumber(string.format("%.4f", playerPos.z))
-		
 		local vec = natives.ENTITY.GET_ENTITY_FORWARD_VECTOR(plr.ID)
 		local disp = natives.ENTITY.GET_ENTITY_SPEED(veh.ID)/2
 		local org = { x=posX+(vec.x*disp), y=posY+(vec.y*disp), z=posZ+(vec.z*disp) }
-
---		ui.Draw3DPoint(org)
---		ui.Draw3DPoint({x=_PositionX, y=_PositionY, z=_Altitude})
 		playerPos = org
 		local posX = playerPos.x
 		local posY = playerPos.y
 		local posZ = playerPos.z
-
 		local adjX=0
 		local adjY=0
 		local adjZ=0
@@ -134,6 +124,9 @@ function AutoPilot:Run()
 		if adjX~=0 or adjY~=0 or adjZ~=0 then
 			natives.ENTITY.APPLY_FORCE_TO_ENTITY_CENTER_OF_MASS(LocalPlayer():GetVehicle().ID, 1, adjX, adjY, adjZ, true, false, true, true)
 		end				
+	end
+	if ui.ChatActive() then
+		return
 	end
 	if IsKeyJustDown(ToggleKey) then
 		plr = LocalPlayer()
@@ -205,8 +198,8 @@ function AutoPilot:Run()
 end
 
 -- Run when an addon if (properly) unloaded
-function AutoPilot:Unload()
 
+function AutoPilot:Unload()
 end
 
 -- This line must match the module folder name

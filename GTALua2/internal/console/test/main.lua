@@ -1,4 +1,5 @@
 -- Loads a test addon
+
 function console.test(name)
 	print("Loading test "..name.." ...")
 	if file_exists(LuaFolder().."/addons-test/"..name.."/main.lua") then
@@ -15,4 +16,3 @@ function console.test(name)
 	end
 end
 console.RegisterCommand("test", "Loads a test addon from file", console.test)
-

@@ -1,8 +1,6 @@
 -- Loads the native descriptions from natives.h
-
 natives = {}
 nativeDescription = {}
-
 local nativesH = LuaFolder().."/API/natives.h"
 local namespaces = 0
 local nativecount = 0
@@ -14,7 +12,6 @@ function RegisterNative(namespace, native, hash, nargs, takes, returns)
 	x = load("natives."..namespace.."."..native.." = function(...) return CallNative(\""..namespace.."\", \""..native.."\", ...) end")
 	x()
 end
-
 if file_exists(nativesH) then
 	print("Loading native methods from natives.h ...")
 	file = io.open(nativesH, "r")
@@ -54,12 +51,17 @@ if file_exists(nativesH) then
 			RegisterNative(namespace, native, hash, nargs, takes, returns)
 		end
 	end
+
 --	print_r(natives)
 	file:close()
 	print("Detected "..namespaces.." namespaces.")
 	print("Loaded "..nativecount.." natives.")
-	
+
+-- This is for overriding natives from natives.h, in case they are defined differently there
+	RegisterNative("GRAPHICS", "DRAW_MARKER", 0x28477EC23D892089, 24, "int,float,float,float,float,float,float,float,float,float,float,float,float,int,int,int,int,BOOL,BOOL,int,BOOL,int,int,BOOL", "void");
+
 -- This is for adding natives that are not present on natives.h
+
 -- These may need to be manually changed when the game version advances
 	print("Adding custom natives ...")
 	nativecount = 0 
@@ -68,7 +70,6 @@ if file_exists(nativesH) then
 	RegisterNative("VEHICLE", "_GET_VEHICLE_TRIM_COLOR", 0x7D1464D472D32136, 2, "int,int*", "void")
 	RegisterNative("VEHICLE", "_SET_VEHICLE_TRIM_COLOR", 0xF40DD601A65F7F19, 2, "int,int", "void")
 	print("Added "..nativecount.." custom natives.")
-
 else
 	error("File natives.h not found. Cannot continue.")
 end

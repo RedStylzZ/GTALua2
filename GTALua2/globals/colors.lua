@@ -177,7 +177,6 @@ COLOR_BLACK_50	= {r=0,   g=0,   b=0,   a=128}
 BLINK = true
 NOBLINK = false
 
-
 -- Console colors
 console_Black = 0
 console_Blue = 1
@@ -195,4 +194,3 @@ console_BrightRed = 12
 console_BrightPurple = 13
 console_BrightYellow = 14
 console_BrightWhite = 15
-

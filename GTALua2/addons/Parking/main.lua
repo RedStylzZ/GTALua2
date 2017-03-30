@@ -3,20 +3,16 @@
 --
 Parking = {}
 Parking.__index = Parking
-
 -- ScriptInfo table must exist and define Name, Author and Version
 Parking.ScriptInfo = {
 	Name = "Parking",	-- Must match the module folder name
 	Author = "Mockba the Borg",
 	Version = "1.0"
 }
-
 -- Version Number
 local _Version = "1.0"
-
 -- Global variables
 Parking.Debug = false
-
 -- Garage global variables
 local _DrawAsMissionEntity = true
 local _NGarages = 15
@@ -83,7 +79,6 @@ local _GarageOutDoor = {x=405.44, y=-978.8, z=_GarageZ}
 local _InsideGarage = false
 local _DoorRadius = 3
 local _WaitTime = 3000
-
 -- Vehicle storage variables
 local _VehicleTable
 local _VehicleFileFolder = LuaFolder() .. "\\addons\\Parking\\"
@@ -91,22 +86,19 @@ local _VehicleFileName = "Garage"
 local _VehicleFileExt = ".vdf"
 local _VehicleBlip
 local _VehicleOut
-
 -- Garage vehicles values
 local _MPBitset = 16777224
-
 -- Garage camera and interior
 local _GarageCam
 local _GarageInterior = 0
-
 -- Player global variables
 local playerPlayerID
 local playerID
 local playerPos
 local playerVehicle
 local playerDead = false
-
 -- Debug printing conditioned to _Debug = true
+
 function Parking:DebugPrint(...)
 	local res = ""
 	if Parking.Debug then
@@ -118,6 +110,7 @@ function Parking:DebugPrint(...)
 end
 
 -- Checks if a vehicle description file exists locally
+
 function Parking:VehicleFileExists(spot)
 	local filename = _VehicleFileFolder.._VehicleFileName.._GarageInUse.."Spot"..spot.._VehicleFileExt
 	local f=io.open(filename, "r")
@@ -125,6 +118,7 @@ function Parking:VehicleFileExists(spot)
 end
 
 -- Splits a string in parts base on a field separator
+
 function string:split(sep)
 	local sep, fields = sep or ":", {}
 	local pattern = string.format("([^%s]+)", sep)
@@ -133,6 +127,7 @@ function string:split(sep)
 end
 
 -- Loads a vehicle description file and places the data on a garage spot
+
 function Parking:LoadVehicleFile(spot)
 	local filename = _VehicleFileFolder.._VehicleFileName.._GarageInUse.."Spot"..spot.._VehicleFileExt
 	local f,err=io.open(filename, "r")
@@ -162,11 +157,11 @@ function Parking:LoadVehicleFile(spot)
 		print("Invalid vehicle file.")
 		_GarageSpots[_GarageInUse][spot]=nil
 	end
-
 	f:close()
 end
 
 -- Saves a garage spot on a local vehicle description file
+
 function Parking:SaveVehicleFile(garage, spot)
 	local vehicle = _GarageSpots[garage][spot]
 	local filename = _VehicleFileFolder.._VehicleFileName..garage.."Spot"..spot.._VehicleFileExt
@@ -203,12 +198,14 @@ function Parking:SaveVehicleFile(garage, spot)
 end
 
 -- Removes a local vehicle description file
+
 function Parking:RemoveVehicleFile(garage, spot)
 	local filename = _VehicleFileFolder.._VehicleFileName..garage.."Spot"..spot.._VehicleFileExt
 	os.remove(filename)
 end
 
 -- Loads an entire garage into memory spots
+
 function Parking:LoadGarage()
 	Parking:DebugPrint("Loading local garage", _GarageInUse, "...")
 	for spot=1,_GarageSize do
@@ -220,6 +217,7 @@ function Parking:LoadGarage()
 end
 
 -- Saves an entire garage onto local vehicle description files
+
 function Parking:SaveGarage(garage)
 	garage = garage or _GarageInUse
 	Parking:DebugPrint("Saving garage", garage, "locally ...")
@@ -235,6 +233,7 @@ function Parking:SaveGarage(garage)
 end
 
 -- Teleports a player and vehicle to a destination position
+
 function Parking:Teleport(entID, pos)
 	pos = pos or LocalPlayer():GetPosition()
 	pos.h = pos.h or LocalPlayer():GetHeading()
@@ -246,6 +245,7 @@ function Parking:Teleport(entID, pos)
 end
 
 -- Makes a player and vehicle invincible
+
 function Parking:MakeInvincible(entID)
 	natives.ENTITY.FREEZE_ENTITY_POSITION(entID, true)
 	natives.ENTITY.SET_ENTITY_COLLISION(entID, false, true)
@@ -255,6 +255,7 @@ function Parking:MakeInvincible(entID)
 end
 
 -- Makes a player and vehicle vincible
+
 function Parking:MakeVincible(entID)
 	natives.ENTITY.FREEZE_ENTITY_POSITION(entID, false)
 	natives.ENTITY.SET_ENTITY_COLLISION(entID, true, true)
@@ -264,16 +265,19 @@ function Parking:MakeVincible(entID)
 end
 
 -- Makes an entity invisible
+
 function Parking:MakeInvisible(entID)
 	natives.ENTITY.SET_ENTITY_VISIBLE(entID, false, false)
 end
 
 -- Makes an entity visible
+
 function Parking:MakeVisible(entID)
 	natives.ENTITY.SET_ENTITY_VISIBLE(entID, true, false)
 end
 
 -- Set a vehicle as not needed
+
 function Parking:SetNotNeeded(vehID)
 	Parking:DebugPrint("Setting as not needed ...")
 	local c_vehicle_handle = Cvar:new()
@@ -282,6 +286,7 @@ function Parking:SetNotNeeded(vehID)
 end
 
 -- Checks if a player is in vehicle and sets playerVehicle global
+
 function Parking:IsInVehicle()
 	local InVehicle = natives.PED.IS_PED_IN_ANY_VEHICLE(playerID, false)
 	if InVehicle then
@@ -291,6 +296,7 @@ function Parking:IsInVehicle()
 end
 
 -- Finds the first free spot in a garage
+
 function Parking:FirstFreeSpot()
 	for spot=1,_GarageSize do
 		if not _GarageSpots[_GarageInUse][spot] then
@@ -301,6 +307,7 @@ function Parking:FirstFreeSpot()
 end
 
 -- Draws (spawns) the cars inside the garage
+
 function Parking:DrawGarage(Skip)
 	Parking:DebugPrint("Drawing garage", _GarageInUse, "...")
 	for spot=1,_GarageSize do
@@ -355,7 +362,6 @@ function Parking:DrawGarage(Skip)
 				local multiplier = 50
 				natives.VEHICLE._SET_VEHICLE_ENGINE_POWER_MULTIPLIER(vehID, multiplier)
 				natives.VEHICLE._SET_VEHICLE_ENGINE_TORQUE_MULTIPLIER(vehID, multiplier)
-			
 				natives.VEHICLE.SET_VEHICLE_FRICTION_OVERRIDE(vehID, 2)
 --
 				Parking:SetGarageInfo(vehID, _GarageInUse, spot)
@@ -374,6 +380,7 @@ function Parking:DrawGarage(Skip)
 end
 
 -- Deletes a vehicle (entity)
+
 function Parking:Delete(entID)
 	Parking:DeleteEntityBlip(entID)
 	natives.ENTITY.SET_ENTITY_AS_MISSION_ENTITY(entID, true, false)
@@ -385,6 +392,7 @@ function Parking:Delete(entID)
 end
 
 -- Deletes a blip
+
 function Parking:DeleteBlip(blipID)
 	if blipID>0 then
 		local c_blip_handle = Cvar:new()
@@ -394,12 +402,14 @@ function Parking:DeleteBlip(blipID)
 end
 
 -- Deletes a vehicle (entity) blip
+
 function Parking:DeleteEntityBlip(entID)
 	local blip = natives.UI.GET_BLIP_FROM_ENTITY(entID)
 	Parking:DeleteBlip(blip)
 end
 
 -- Deletes a vehicle left outside the garage
+
 function Parking:DeleteOut()
 	if _VehicleOut then
 		Parking:Delete(_VehicleOut)
@@ -408,6 +418,7 @@ function Parking:DeleteOut()
 end
 
 -- Cleans up all the garage spots
+
 function Parking:ClearGarage()
 	local last
 	Parking:DebugPrint("Cleaning up garage ...")
@@ -427,6 +438,7 @@ function Parking:ClearGarage()
 end
 
 -- Converts a vehicle to a vehicle description array
+
 function Parking:VehicleToArray(vehID)
 	local vehicle = {}
 	vehicle.ID = vehID								-- ID
@@ -481,12 +493,14 @@ function Parking:VehicleToArray(vehID)
 end
 
 -- Repairs and cleans a vehicle
+
 function Parking:WashAndFix(vehID)
 	natives.VEHICLE.SET_VEHICLE_FIXED(vehID)
 	natives.VEHICLE.SET_VEHICLE_DIRT_LEVEL(vehID, 0)
 end
 
 -- Transfers vehicles between garages
+
 function Parking:TransferVehicleFrom(garage, spot)
 	Parking:DebugPrint("Transfering vehicle from garage", garage, "slot", spot, "...")
 	_GarageSpots[garage][spot] = nil
@@ -494,26 +508,25 @@ function Parking:TransferVehicleFrom(garage, spot)
 end
 
 -- Sets garage information into vehicle
+
 function Parking:SetGarageInfo(entID, garage, spot)
 	natives.DECORATOR.DECOR_SET_INT(entID, "Previous_Owner", garage)
 	natives.DECORATOR.DECOR_SET_INT(entID, "PV_Slot", spot)
 end
 
 -- Enters a garage, either by boot or on a vehicle
+
 function Parking:EnterGarage()
 --	ClearGarage()
 	ui.MapMessage("Entering Garage ".._GarageInUse.."...")
-
 	local InVehicle = false
 	local FreeSpot, entID, entPos, PreviousGarage, PreviousSpot
-
 	if Parking:IsInVehicle() then
 		Parking:DebugPrint("  In vehicle ...")
 		InVehicle = true
 		entID = playerVehicle
 		Parking:DebugPrint("  Stopping ...")
 		natives.VEHICLE._SET_VEHICLE_HALT(entID, 3, 2, false)
-
 		if natives.DECORATOR.DECOR_EXIST_ON(entID, "Previous_Owner") then
 			PreviousGarage = natives.DECORATOR.DECOR_GET_INT(entID, "Previous_Owner")
 			if PreviousGarage == 0 then
@@ -522,7 +535,6 @@ function Parking:EnterGarage()
 				PreviousGarage = nil
 			end
 		end
-
 		if PreviousGarage ~= _GarageInUse then
 			FreeSpot = Parking:FirstFreeSpot()
 			if not FreeSpot then
@@ -556,20 +568,15 @@ function Parking:EnterGarage()
 		entPos = _GarageInSpawn
 		Parking:DeleteOut()
 	end
-
 	Parking:FadeScreenOut()
 	Parking:MakeInvincible(entID)
 	Parking:FadePlayerOut(entID)
-
 	Parking:Teleport(entID, entPos)
 	Parking:MakeVincible(entID)
 	Parking:MakeVisible(entID)
-
 	_InsideGarage = true
-
 	Parking:DeleteEntityBlip(entID)
 	Parking:DrawGarage(FreeSpot)	-- Skips FreeSpot
-
 	if InVehicle then
 		if natives.VEHICLE.IS_VEHICLE_SIREN_ON(entID) then
 			natives.VEHICLE.SET_VEHICLE_SIREN(entID, false)
@@ -585,16 +592,14 @@ function Parking:EnterGarage()
 		natives.AI.TASK_LEAVE_ANY_VEHICLE(playerID, 0, 0)
 		_Spots[FreeSpot] = entID
 	end
-
 	natives.CAM.SET_GAMEPLAY_CAM_RELATIVE_HEADING(0)
-
 	game.WaitMS(_WaitTime)
 	Parking:FadeScreenIn()
-
 	Parking:DebugPrint("Entered garage ".._GarageInUse)
 end
 
 -- Shows markers depicting the various garage points
+
 function Parking:ShowDebugData()
 	if Parking.Debug then
 		if _InDoorEnabled then
@@ -627,14 +632,12 @@ function Parking:ShowDebugData()
 end
 
 -- Exits a garage, either by foot or on a vehicle
+
 function Parking:ExitGarage()
 	ui.MapMessage("Exiting Garage ".._GarageInUse.."...")
 	_InDoorEnabled = false
-
 	local Spot, entID, entPos
-
 	Parking:FadeScreenOut()
-
 	if Parking:IsInVehicle() then
 		Parking:DebugPrint("  In vehicle ...")
 		entID = playerVehicle
@@ -652,28 +655,22 @@ function Parking:ExitGarage()
 		Parking:DebugPrint("  On foot ...")
 		entID = playerID
 	end
-
 	entPos = _GarageOutSpawn[_GarageInUse]
-
 	Parking:SaveGarage()
-
 	Parking:MakeInvincible(entID)
 	Parking:Teleport(entID, entPos)
 	Parking:ClearGarage()
 	_InsideGarage = false
-
 	Parking:FadePlayerIn(entID)
 	Parking:MakeVincible(entID)
-
 	natives.CAM.SET_GAMEPLAY_CAM_RELATIVE_HEADING(0)
-
 	game.WaitMS(_WaitTime)
 	Parking:FadeScreenIn()
-
 	Parking:DebugPrint("Exited garage ".._GarageInUse)
 end
 
 -- Fades out the game screen
+
 function Parking:FadeScreenOut(n)
 	n = n or 1000
 	natives.CAM.DO_SCREEN_FADE_OUT(n)
@@ -683,6 +680,7 @@ function Parking:FadeScreenOut(n)
 end
 
 -- Fades in the game screen
+
 function Parking:FadeScreenIn(n)
 	n = n or 1000
 	natives.CAM.DO_SCREEN_FADE_IN(n)
@@ -692,18 +690,21 @@ function Parking:FadeScreenIn(n)
 end
 
 -- Fades out the player and vehicle
+
 function Parking:FadePlayerOut(entID)
 	natives.NETWORK.NETWORK_FADE_OUT_ENTITY(entID, true, true)
 	game.WaitMS(_WaitTime)
 end
 
 -- Fades in the player and vehicle
+
 function Parking:FadePlayerIn(entID)
 	natives.NETWORK.NETWORK_FADE_IN_ENTITY(entID, true)
 	game.WaitMS(_WaitTime)
 end
 
 -- Re-Enables the garage entrances after exiting
+
 function Parking:EnableEntrance()
 	if not _InDoorEnabled then
 		_InDoorEnabled = true
@@ -716,15 +717,16 @@ function Parking:EnableEntrance()
 end
 
 -- Draws a maker on entry/exit doors
+
 function Parking:DrawMarker(pos)
 	local m_groundZ = Cvar:new()
 	natives.GAMEPLAY.GET_GROUND_Z_FOR_3D_COORD(pos.x, pos.y, pos.z, m_groundZ, true)
 	local newz = m_groundZ:getFloat()
 	if newz ~= 0 then
 		natives.GRAPHICS.DRAW_MARKER(1, pos.x, pos.y, newz, 0, 0, 0, 0, 0, 0, .5, .5, .5, 0, 255, 200, 70, false, false, 2, false, 0, 0, false)
-
 	end
 end
+
 
 function Parking:Init()
 	print("----------------------------------------------")
@@ -741,11 +743,9 @@ function Parking:Init()
 		Parking:LoadGarage()
 	end
 	_GarageInUse = _DefaultGarage	-- Default in case of teleport key
-
 	while LocalPlayer():GetName() == "**Invalid**" do
 		Wait(10)
 	end
-
 	for i = 1,_NGarages do
 		local pos = _GarageInDoor[i]
 		_GarageBlips[i] = natives.UI.ADD_BLIP_FOR_COORD(pos.x, pos.y, pos.z)
@@ -758,6 +758,7 @@ function Parking:Init()
 end
 
 -- Cleans up garage info when a player dies
+
 function Parking:DeadReset()
 	_InsideGarage = false
 	_InDoorEnabled = true
@@ -767,14 +768,13 @@ function Parking:DeadReset()
 end
 
 -- Run function is called multiple times from the main Lua
+
 function Parking:Run()
 	playerPlayerID = natives.PLAYER.GET_PLAYER_INDEX()
 --	playerID = natives.PLAYER.GET_PLAYER_PED(playerPlayerID)
 	playerID = natives.PLAYER.GET_PLAYER_PED_SCRIPT_INDEX(playerPlayerID)
 	playerPos = natives.ENTITY.GET_ENTITY_COORDS(playerID, false)
-
 	Parking:ShowDebugData()
-	
 	if natives.PLAYER.IS_PLAYER_DEAD(LocalPlayer().PlayerID) then
 		if not playerDead then
 			playerDead = true
@@ -783,7 +783,6 @@ function Parking:Run()
 	else
 		playerDead = false
 	end
-
 	-- Draw exit marker, HUD and Map accordingly
 	if _InsideGarage then
 		natives.UI.SET_RADAR_AS_INTERIOR_THIS_FRAME(natives.GAMEPLAY.GET_HASH_KEY("v_winningroom"), 405.45, -955.75, 0, 10)
@@ -793,7 +792,6 @@ function Parking:Run()
 		end
 		Parking:DrawMarker(_GarageOutDoor)
 	end
-
 	-- Are we outside the garage?
 	if not _InsideGarage then
 		for n=1,_NGarages do
@@ -811,7 +809,6 @@ function Parking:Run()
 			end
 		end
 	end
-
 	-- Are we inside the garage?
 	if _InsideGarage then
 		-- Are we at the Garage Exit area?
@@ -820,7 +817,6 @@ function Parking:Run()
 			Parking:DebugPrint("Touched Garage", _GarageInUse, "exit trigger ...")
 			Parking:ExitGarage()
 		end
-
 	-- Are we leaving the garage in a car?
 		if Parking:IsInVehicle() then
 			if natives.ENTITY.GET_ENTITY_SPEED(playerVehicle) > 1 then
@@ -830,7 +826,9 @@ function Parking:Run()
 			end
 		end
 	end
-
+	if ui.ChatActive() then
+		return
+	end
 	-- Are we pressing the Garage key?
 	if IsKeyJustDown(_TeleportKey, true) then
 		Parking:DebugPrint("----------------------------------------------")
@@ -853,10 +851,8 @@ function Parking:Run()
 			end
 		end
 	end
-
 	-- Re-Enable (or not) the entrance doors
 	Parking:EnableEntrance()
-
 	-- Are we pressing the Redraw key?
 	if IsKeyJustDown(_RedrawKey, true) then
 		if _InsideGarage then
@@ -876,6 +872,7 @@ function Parking:Run()
 end
 
 -- Run when an addon if (properly) unloaded
+
 function Parking:Unload()
 	print("Removing garage blips ...")
 	for i = 1,_NGarages do

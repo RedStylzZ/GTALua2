@@ -3,6 +3,7 @@ Blip = {}
 Blip_mt = { __index = Blip }
 
 -- Blip CTor
+
 function Blip:new (id)
 	local new_inst = {}
 	new_inst.ID = id or -1
@@ -14,17 +15,21 @@ end
 -- Methods
 
 -- type & string
+
 function Blip:__tostring()
 	return "[Blip]"
 end
+
 function Blip:__type()
 	return "Blip"
 end
 
 -- Exists
+
 function Blip:Exists()
 	return natives.UI.DOES_BLIP_EXIST(self.ID)
 end
+
 function Blip:_CheckExists()
 	if not self:Exists() then
 		error("Blip is not valid!")
@@ -32,6 +37,7 @@ function Blip:_CheckExists()
 end
 
 -- Delete
+
 function Blip:Delete()
 	self:_CheckExists()
 	local c_handle = Cvar:new()
@@ -40,12 +46,14 @@ function Blip:Delete()
 end
 
 -- Position
+
 function Blip:GetCoords()
 	self:_CheckExists()
 	return natives.UI.GET_BLIP_COORDS(self.ID)
 end
 
 -- Sprite
+
 function Blip:SetSprite(i)
 	self:_CheckExists()
 	natives.UI.SET_BLIP_SPRITE(self.ID, i)
@@ -57,6 +65,7 @@ function Blip:GetSprite()
 end
 
 -- Flashing/Pulse
+
 function Blip:SetFlashing(b)
 	self:_CheckExists()
 	natives.UI.SET_BLIP_FLASHES(self.ID,b)
@@ -88,6 +97,7 @@ function Blip:Pulse()
 end
 
 -- Route
+
 function Blip:ShowRoute(b)
 	self:_CheckExists()
 	natives.UI.SET_BLIP_ROUTE(self.ID,b)
@@ -99,6 +109,7 @@ function Blip:SetRouteColour(colour)
 end
 
 -- Visible
+
 function Blip:SetVisible(b)
 	self:_CheckExists()
 	natives.UI.SET_BLIP_DISPLAY(self.ID, b)
@@ -115,12 +126,14 @@ function Blip:GetAlpha()
 end
 
 -- Iterators
+
 function Blip:GetFirstInfoID()
 	self:_CheckExists()
 	return natives.UI.GET_FIRST_BLIP_INFO_ID(self.ID)
 end
 
 -- Color
+
 function Blip:SetPrimaryColour(color)
 	self:_CheckExists()
 	natives.UI.SET_BLIP_COLOUR(self.ID, color)
@@ -142,6 +155,7 @@ function Blip:GetHUDColour()
 end
 
 -- Info ID
+
 function Blip:GetNextInfoID()
 	self:_CheckExists()
 	return natives.UI.GET_NEXT_BLIP_INFO_ID(self.ID)
@@ -173,6 +187,7 @@ function Blip:GetInfoIDPickupIndex()
 end
 
 -- Others
+
 function Blip:SetFade(n,n2)
 	self:_CheckExists()
 	natives.UI.SET_BLIP_FADE(self.ID,n or 0,n2 or 0)

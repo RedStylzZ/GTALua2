@@ -3,6 +3,7 @@ Object = Entity:new()
 Object_mt = { __index = Object }
 
 -- Object CTor
+
 function Object:new (id)
 	local new_inst = {}
 	new_inst.ID = id or -1
@@ -14,6 +15,7 @@ end
 -- Methods
 
 -- Delete
+
 function Object:Delete()
 	self:_CheckExists()
 	local c_handle = Cvar:new()
@@ -22,6 +24,7 @@ function Object:Delete()
 end
 
 --Set not needed
+
 function Object:SetNotNeeded()
 	self:_CheckExists()
 	local c_handle = Cvar:new()
