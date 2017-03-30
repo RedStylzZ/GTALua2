@@ -213,6 +213,51 @@ static int LuaJoaat(lua_State *L) {
 	return 1;
 }
 
+#define HEXDUMP_COLS 16
+static int LuaMemDump(lua_State *L) {
+	auto mem = (void*)luaL_checkinteger(L, 1);
+	printf("Base: 0x%llx\n", (UINT64)mem);
+	unsigned int len = (unsigned int)luaL_checkinteger(L, 2);
+
+	unsigned int i, j;
+
+	for (i = 0; i < len + ((len % HEXDUMP_COLS) ? (HEXDUMP_COLS - len % HEXDUMP_COLS) : 0); i++)
+	{
+		/* print offset */
+		if (i % HEXDUMP_COLS == 0)
+		{
+			printf("0x%06x: ", i);
+		}
+		/* print hex data */
+		if (i < len)
+		{
+			printf("%02x ", 0xFF & ((char*)mem)[i]);
+		} else /* end of block, just aligning for ASCII dump */
+		{
+			printf("   ");
+		}
+		/* print ASCII dump */
+		if (i % HEXDUMP_COLS == (HEXDUMP_COLS - 1))
+		{
+			for (j = i - (HEXDUMP_COLS - 1); j <= i; j++)
+			{
+				if (j >= len) /* end of block, not really printing */
+				{
+					putchar(' ');
+				} else if (isprint(((char*)mem)[j])) /* printable char */
+				{
+					putchar(0xFF & ((char*)mem)[j]);
+				} else /* other char */
+				{
+					putchar('.');
+				}
+			}
+			putchar('\n');
+		}
+	}
+	return 0;
+}
+
 // -----------------------------------------------------------------------------------
 
 // End program execution
@@ -221,6 +266,8 @@ void die(const char *why) {
 	char r = getc(stdin);
 	exit(1);
 }
+
+// -----------------------------------------------------------------------------------
 
 // Get EntityId from veh/ped creation pointers
 typedef DWORD32(__fastcall* GetEntityID_t)(__int64* pEntity);
@@ -303,6 +350,7 @@ void init() {
 	lua_register(L, "GlobalsBase", LuaGlobalsBase);
 	lua_register(L, "GlobalPointer", LuaGlobalPointer);
 	lua_register(L, "joaat", LuaJoaat);
+	lua_register(L, "MemDump", LuaMemDump);
 
 	register_Cmem(L);
 	register_Cvar(L);
@@ -322,6 +370,8 @@ void init() {
 		printf("Error!\nFailed to execute main file: %s\n", lua_tostring(L, -1));
 		die(PRESS_ENTER);
 	}
+
+// Hookings for the OnVehCreated and OnPedCreated events
 
 	auto pat_GetEntityID = Memory::pattern("48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 20 8B 15 ? ? ? ? 48 8B F9 48 83 C1 10 33 DB");
 	void *pGetEntityID = pat_GetEntityID.count(1).get(0).get<void>(0);

@@ -22,6 +22,7 @@ void Hooking::Start(HMODULE hmoduleDLL)
 {
 	_hmoduleDLL = hmoduleDLL;
 
+	// Wait for the game to finish unpacking
 	printf(WAIT_FOR_UNPACK);
 	uint64_t *address;
 	do {
