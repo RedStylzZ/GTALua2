@@ -427,7 +427,7 @@ void ScriptMain() {
 	system("cls");
 	SetTextFGColor(3);
 	printf(DASH);
-	printf(APP " - v" VERSION " - build: " BUILD "\n");
+	printf(" " APP " - v" VERSION " - build: " BUILD "\n");
 	printf(DASH);
 	SetTextFGColor(7);
 

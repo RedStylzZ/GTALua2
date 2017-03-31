@@ -30,8 +30,10 @@ require (LuaFolder () .. "/classes/blip")
 -- Main code starts here
 ClrScr()
 FGColor(console_Aqua)
-print ("GTALua2 v" .. GameVersion () .. " loaded.")
-print ("Online module for v" .. OnlineVersion () .. " loaded.")
+print ("=--------------------------------------------=")
+print (" GTALua2 v" .. GameVersion () .. " loaded.")
+print (" Online module for v" .. OnlineVersion () .. " loaded.")
+print ("=--------------------------------------------=")
 FGColor(console_White)
 
 -- Set MPVehsOnSP Global to 1 (for v1.0.877.1)

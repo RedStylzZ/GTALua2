@@ -12,8 +12,8 @@
 static const char* texts[] = {
 	"Message",
 	"Fatal error",
-	"=------------------------------------------=\n",
-	" Self loading mod v1.0 - by Mockba the Borg\n",
+	"=--------------------------------------------=\n",
+	"  Self loading mod v1.0 - by Mockba the Borg\n",
 	"ok.\n",
 	DLLNAME " proxy: Unable to find original dll!",
 	"Press enter to exit the game...",
