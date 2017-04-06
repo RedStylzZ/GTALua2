@@ -162,12 +162,6 @@ void Hooking::FindPatterns()
 	char *c_location = nullptr;
 	void *v_location = nullptr;
 
-	// Executable Base Address
-	printf(BASE_ADDR, (long long)get_base());
-
-	// Executable End Address
-	printf(END_ADDR, (long long)(get_base() + get_size()));	
-
 	// Get game state
 	printf(GET_GAME_STATE);
 	c_location = p_gameState.count(1).get(0).get<char>(2);

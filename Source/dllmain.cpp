@@ -33,8 +33,40 @@ bool GetVolume_hook(LPCTSTR lpRootPathName, LPTSTR lpVolumeNameBuffer, DWORD nVo
 
 DWORD WINAPI MyThread(LPVOID lpParam)
 {
+	__int64 LoadAddr = (__int64)Memory::get_base();
+	__int64 LoadSize = (__int64)Memory::get_size();
+	__int64 LoadEnd = LoadAddr + LoadSize;
+
+	// Executable Base Address
+	printf(BASE_ADDR, LoadAddr);
+
+	// Executable End Address
+	printf(END_ADDR, LoadEnd);
+
+	// Look for type of game (Steam versus SC)
+	__int64 Ptr = LoadAddr;
+	bool IsSteam = false;
+	while (Ptr < (LoadEnd-8)) {
+		if (*(__int64*)Ptr == 0x4950416d61657453) {
+			IsSteam = true;
+			break;
+		}
+		Ptr++;
+	}
+
+	if (IsSteam) {
+		printf(STEAM_VERSION);
+	} else {
+		printf(SC_VERSION);
+	}
+
 	// Waits for when the game finishes unpacking (when it is safe for pattern searches)
-	DWORD *UnpackCheck = (DWORD*)0x142D05CC0; // This offset is for v1.0.1032.1 SC Only
+	DWORD *UnpackCheck;
+	if (IsSteam) {
+		UnpackCheck = (DWORD*)(LoadAddr + 0x2D0B140);	// This offset is for v1.0.1032.1 Steam Only
+	} else {
+		UnpackCheck = (DWORD*)(LoadAddr + 0x2D05CC0);	// This offset is for v1.0.1032.1 SC Only
+	}
 	printf(WAIT_FOR_UNPACK);
 	while (*UnpackCheck != 1) {
 		Sleep(100);

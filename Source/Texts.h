@@ -56,6 +56,8 @@ static const char* texts[] = {
 	"Error loading OpenIV module.\n",
 	"Preventing the console from closing ... ",
 	"Randomizing volume information ... ",
+	"Game is Social Club version\n",
+	"Game is Steam version\n",
 	"Done.\n"
 };
 
@@ -105,4 +107,6 @@ static const char* texts[] = {
 #define ERROR_OPENIV			texts[43]
 #define KEEP_CONSOLE			texts[44]
 #define RANDOMIZE_VOLUME		texts[45]
-#define DONE					texts[46]
+#define SC_VERSION				texts[46]
+#define STEAM_VERSION			texts[47]
+#define DONE					texts[48]
