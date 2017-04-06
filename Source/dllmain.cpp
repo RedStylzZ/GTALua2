@@ -33,6 +33,32 @@ bool GetVolume_hook(LPCTSTR lpRootPathName, LPTSTR lpVolumeNameBuffer, DWORD nVo
 
 DWORD WINAPI MyThread(LPVOID lpParam)
 {
+	// Waits for when the game finishes unpacking (when it is safe for pattern searches)
+	DWORD *UnpackCheck = (DWORD*)0x142D05CC0; // This offset is for v1.0.1032.1 SC Only
+	printf(WAIT_FOR_UNPACK);
+	while (*UnpackCheck != 1) {
+		Sleep(100);
+	}
+	printf(OK);
+
+#ifdef NoLoader
+	printf(NO_LOADER);
+	uint64_t *address = Memory::pattern("E8 ? ? ? ? 84 C0 75 0C B2 01 B9 ? ? ? ?").count(1).get(0).get<uint64_t>(0);
+	*address = 0xEB90909090909090;
+	printf(OK);
+#endif
+
+#ifdef OpenIV
+	// Opens OpenIV.ASI to allow for modded .RPF files
+	printf(LOADING_OPENIV);
+	HMODULE hOpenIV = LoadLibraryA("OpenIV.asi");
+	if (hOpenIV == NULL) {
+		printf(ERROR_OPENIV);
+	} else {
+		printf(OK);
+	}
+#endif
+
 	Hooking::Start((HMODULE)lpParam);
 	return 0;
 }
@@ -42,9 +68,6 @@ LPCSTR mExportNames[] = {"AddIPAddress", "AllocateAndGetInterfaceInfoFromStack",
 
 BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved )
 {
-#ifdef OpenIV
-	HMODULE hOpenIV;
-#endif
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
@@ -65,21 +88,14 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 		}
 		printf(OK);
 
-#ifdef OpenIV
-		// Opens OpenIV.ASI to allow for modded .RPF files
-		printf(LOADING_OPENIV);
-		hOpenIV = LoadLibraryA("OpenIV.asi");
-		if (hOpenIV == NULL) {
-			printf("Error loading OpenIV.asi\n");
-			return(FALSE);
-		}
-		printf(OK);
-#endif
-
 		// Prevents GTA from closing the console window
+		printf(KEEP_CONSOLE);
 		Hooking::HookLibraryFunction("user32.dll", "ShowWindow", &ShowWindow_Hook, (void**)&pShowWindow);
+		printf(OK);
 		// Hooks the GetVolumeInformation to randomize VolumeId
+		printf(RANDOMIZE_VOLUME);
 		Hooking::HookLibraryFunction("kernel32.dll", "GetVolumeInformationA", &GetVolume_hook, (void**)&pGetVolume);
+		printf(OK);
 
 		printf(REMAP_EXPORTS);
 		// Find original dll

@@ -4,8 +4,8 @@
 #define VERSION "1.2"
 #define BUILD __DATE__ "-" __TIME__
 
-#define GAME_VERSION "1.0.1011.1"
-#define ONLINE_VERSION "1.38"
+#define GAME_VERSION "1.0.1032.1"
+#define ONLINE_VERSION "1.39"
 
 #define DLLNAME "iphlpapi.dll"
 
@@ -52,6 +52,10 @@ static const char* texts[] = {
 	"Build time: " __TIMESTAMP__ "\n",
 	"Loading OpenIV.asi ... ",
 	"Waiting for the game to unpack ... ",
+	"Bypass loader requirement ... ",
+	"Error loading OpenIV module.\n",
+	"Preventing the console from closing ... ",
+	"Randomizing volume information ... ",
 	"Done.\n"
 };
 
@@ -97,4 +101,8 @@ static const char* texts[] = {
 #define BUILT_ON				texts[39]
 #define LOADING_OPENIV			texts[40]
 #define WAIT_FOR_UNPACK			texts[41]
-#define DONE					texts[42]
+#define NO_LOADER				texts[42]
+#define ERROR_OPENIV			texts[43]
+#define KEEP_CONSOLE			texts[44]
+#define RANDOMIZE_VOLUME		texts[45]
+#define DONE					texts[46]

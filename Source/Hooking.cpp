@@ -22,17 +22,7 @@ void Hooking::Start(HMODULE hmoduleDLL)
 {
 	_hmoduleDLL = hmoduleDLL;
 
-	// Wait for the game to finish unpacking
-	printf(WAIT_FOR_UNPACK);
-	uint64_t *address;
-	do {
-		address = Memory::pattern("E8 ? ? ? ? 84 C0 75 0C B2 01 B9 ? ? ? ?").count(1).get(0).get<uint64_t>(0);
-	} while (address == 0);
-#ifdef NoLoader
-	*address = 0xEB90909090909090;
-#endif
-	printf(OK);
-	// Don't do anything else until you see the game window
+	// Don't do anything until the game window shows up
 	printf(WAIT_WINDOW);
 	while (!hWindow) {
 		hWindow = FindWindow("grcWindow", NULL);
