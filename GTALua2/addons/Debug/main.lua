@@ -38,7 +38,7 @@ end
 -- Run function is called multiple times from the main Lua
 
 function Debug:Run()
-	if ui.ChatActive() then
+	if ui.ChatActive() or natives.UI.IS_PAUSE_MENU_ACTIVE() or natives.UI._0x214CD562A939246A() then
 		return
 	end
 	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlDropWeapon, true) -- Prevents dropping weapon
@@ -156,7 +156,7 @@ function Debug:Run()
 	end
 end
 
--- Run when an addon if (properly) unloaded
+-- Run when an addon is (properly) unloaded
 
 function Debug:Unload()
 end

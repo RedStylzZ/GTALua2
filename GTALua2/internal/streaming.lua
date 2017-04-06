@@ -6,9 +6,11 @@ streaming = {}
 function streaming.RequestModel(hash)
 	if streaming.HasModelLoaded(hash) then return end
 	natives.STREAMING.REQUEST_MODEL(hash)
+	local counter = 200
 	-- Wait
-	while not streaming.HasModelLoaded(hash) do
+	while not streaming.HasModelLoaded(hash) and counter > 0 do
 		Wait(10)
+		counter = counter - 1
 	end
 end
 
@@ -25,9 +27,11 @@ end
 function streaming.RequestAnimDict(name)
 	if streaming.HasAnimDictLoaded(name) then return end
 	natives.STREAMING.REQUEST_ANIM_DICT(name)
+	local counter = 200
 	-- Wait
-	while not streaming.HasAnimDictLoaded(name) do
+	while not streaming.HasAnimDictLoaded(name) and counter > 0 do
 		Wait(10)
+		counter = counter - 1
 	end
 end
 

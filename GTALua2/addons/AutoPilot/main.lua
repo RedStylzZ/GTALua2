@@ -197,7 +197,7 @@ function AutoPilot:Run()
 	end
 end
 
--- Run when an addon if (properly) unloaded
+-- Run when an addon is (properly) unloaded
 
 function AutoPilot:Unload()
 end

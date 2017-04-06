@@ -205,6 +205,13 @@ function Ped:SetIntoVehicle(vehicle, seat)
 	natives.PED.SET_PED_INTO_VEHICLE(self.ID, vehicle, seat)
 end
 
+-- Fasten seat belt
+
+function Ped:FastenSeatBelt(fasten)
+	self:_CheckExists()
+	natives.PED.SET_PED_CAN_BE_KNOCKED_OFF_VEHICLE(self.ID, fasten)
+end
+
 -- Explode Ped's head
 
 function Ped:ExplodeHead(weapon)

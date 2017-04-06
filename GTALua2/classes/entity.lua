@@ -14,6 +14,20 @@ end
 
 -- Methods
 
+function Entity:HasControl()
+	result = natives.NETWORK.NETWORK_HAS_CONTROL_OF_ENTITY(self.ID)
+	if not result then	-- Attempt to get control
+		local retries = 300
+		while not result and retries > 0 do
+			natives.NETWORK.NETWORK_REQUEST_CONTROL_OF_ENTITY(self.ID)
+			result = natives.NETWORK.NETWORK_HAS_CONTROL_OF_ENTITY(self.ID)
+			retries = retries - 1
+			Wait(5)
+		end
+	end
+	return result
+end
+
 -- Is*
 
 function Entity:IsPed()

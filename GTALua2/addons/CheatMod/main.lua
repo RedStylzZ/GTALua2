@@ -9,7 +9,7 @@ CheatMod.ScriptInfo = {
 	Version = "1.0"
 }
 -- Global variable to signal Debug that we're enabled
-CheatMod.Active = false
+CheatMod.Active = true
 -- Variables for Cheating
 local ToggleKey = KEY_F10
 local _KeyDeleteGun = KEY_SUBTRACT
@@ -268,6 +268,20 @@ function CheatMod:Process()
 			print("Not in a vehicle.")
 		end
 	end
+-- Clean up
+	if natives.CONTROLS.IS_CONTROL_JUST_PRESSED(0, ControlSelectWeaponSmg) then -- Default: &7
+		local Myself = LocalPlayer()
+		if Myself:HasControl() then
+			natives.PED.CLEAR_PED_WETNESS(Myself.ID)
+			natives.PED.CLEAR_PED_BLOOD_DAMAGE(Myself.ID)
+			natives.PED.RESET_PED_VISIBLE_DAMAGE(Myself.ID)
+			natives.ENTITY.SET_ENTITY_HEALTH(Myself.ID, natives.PED.GET_PED_MAX_HEALTH(Myself.ID))
+			natives.PLAYER.RESET_PLAYER_STAMINA(Myself.PlayerID)
+			ui.MapMessage("Player cleaned up")
+		else
+			ui.MapMessage("Couldn't clean up")
+		end
+	end
 -- Delete gun
 	if IsKeyJustDown(_KeyDeleteGun, true) then
 		local ent = select(1, game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue))
@@ -360,10 +374,8 @@ function CheatMod:Process()
 	if IsKeyJustDown(KEY_E) then
 		if IsKeyDown(KEY_SHIFT) then
 			local plr = LocalPlayer()
-			if not plr:IsInVehicle() then
-				local newpos = game.GetCoordsInFrontOfCam(10)
-				plr:SetPosition(newpos.x, newpos.y, newpos.z)
-			end
+			local newpos = game.GetCoordsInFrontOfCam(10)
+			natives.PED.SET_PED_COORDS_KEEP_VEHICLE(plr.ID, newpos.x, newpos.y, newpos.z)
 		end
 	end
 -- Not chased by police
@@ -423,7 +435,7 @@ function CheatMod:Process()
 	end
 end
 
--- Run when an addon if (properly) unloaded
+-- Run when an addon is (properly) unloaded
 
 function CheatMod:Unload()
 end

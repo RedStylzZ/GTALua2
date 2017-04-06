@@ -86,6 +86,16 @@ function ui.ChatActive()
 	return natives.UI._IS_TEXT_CHAT_ACTIVE()
 end
 
+-- Tell if the pause menu is active
+function ui.PauseActive()
+	return natives.UI.IS_PAUSE_MENU_ACTIVE()
+end
+
+-- Tell if there's a menu active
+function ui.MenuActive()
+	return natives.UI._0x214CD562A939246A()
+end
+
 -- Draws a 3D point
 
 function ui.Draw3DPoint(p, size, color, blink)

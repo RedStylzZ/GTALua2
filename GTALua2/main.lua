@@ -42,7 +42,7 @@ FGColor(console_White)
 -- Set MPVehsOnSP Global to 1 (for v1.0.944.2)
 --local MPVehPtr = Cptr:new(GlobalPointer(2593910))
 
--- Set MPVehsOnSP Global to 1 (for v1.0.1011.1)
+-- Set MPVehsOnSP Global to 1 (for v1.0.1011.1 and v1.0.1032.1)
 local MPVehPtr = Cptr:new(GlobalPointer(2593970))
 
 MPVehPtr:setInt(0, 1)

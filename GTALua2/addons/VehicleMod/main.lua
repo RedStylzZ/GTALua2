@@ -883,6 +883,7 @@ function VehicleMod:Process()
 					natives.DECORATOR.DECOR_SET_INT(ent.ID, "Previous_Owner", 0)
 					natives.DECORATOR.DECOR_SET_INT(ent.ID, "PV_Slot", 0)
 					LocalPlayer():SetIntoVehicle(ent.ID, VehicleSeatDriver)
+					LocalPlayer():FastenSeatBelt(1)
 					ent:SetRadioStationName("OFF")
 					LastSpawned = ent
 					ui.MapMessage("~b~"..string.upper(name).." spawned.")
@@ -894,7 +895,7 @@ function VehicleMod:Process()
 	end
 end
 
--- Run when an addon if (properly) unloaded
+-- Run when an addon is (properly) unloaded
 
 function VehicleMod:Unload()
 end
