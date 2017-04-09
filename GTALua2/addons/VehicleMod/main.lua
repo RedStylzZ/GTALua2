@@ -622,9 +622,9 @@ function VehicleMod:Process()
 					natives.VEHICLE.SET_VEHICLE_MOD(veh.ID, i, _MaxVehicleModValue-1, true)
 				end
 			end
+			natives.VEHICLE.SET_VEHICLE_MOD(veh.ID, 14, _UpgradeHorn, true)
 			if _FullUpgrade > 1 then
 				if veh:IsCar() or veh:IsBike() then
-					natives.VEHICLE.SET_VEHICLE_MOD(veh.ID, 14, _UpgradeHorn, true)
 					veh:SetPlateText(_UpgradePlateText)
 					veh:SetPlateType(_UpgradePlateType)
 				end
@@ -879,9 +879,13 @@ function VehicleMod:Process()
 				if natives.VEHICLE.GET_DISPLAY_NAME_FROM_VEHICLE_MODEL(hash) ~= "CARNOTFOUND" then
 					streaming.RequestModel(hash)
 					local ent = game.CreateVehicle(hash, position, heading)
-					natives.DECORATOR.DECOR_SET_INT(ent.ID, "MPBitset", _MPBitset)
-					natives.DECORATOR.DECOR_SET_INT(ent.ID, "Previous_Owner", 0)
-					natives.DECORATOR.DECOR_SET_INT(ent.ID, "PV_Slot", 0)
+--					natives.DECORATOR.DECOR_SET_INT(ent.ID, "MPBitset", _MPBitset)
+--					natives.DECORATOR.DECOR_SET_INT(ent.ID, "Previous_Owner", 0)
+--					natives.DECORATOR.DECOR_SET_INT(ent.ID, "PV_Slot", 0)
+					natives.DECORATOR.DECOR_SET_INT(ent.ID, "MPBitset", -1)
+					natives.DECORATOR.DECOR_SET_INT(ent.ID, "Previous_Owner", -1)
+					natives.DECORATOR.DECOR_SET_INT(ent.ID, "PV_Slot", -1)
+					ent:SetNotNeeded()
 					LocalPlayer():SetIntoVehicle(ent.ID, VehicleSeatDriver)
 					LocalPlayer():FastenSeatBelt(1)
 					ent:SetRadioStationName("OFF")

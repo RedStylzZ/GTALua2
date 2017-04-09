@@ -529,7 +529,7 @@ function Parking:EnterGarage()
 		natives.VEHICLE._SET_VEHICLE_HALT(entID, 3, 2, false)
 		if natives.DECORATOR.DECOR_EXIST_ON(entID, "Previous_Owner") then
 			PreviousGarage = natives.DECORATOR.DECOR_GET_INT(entID, "Previous_Owner")
-			if PreviousGarage == 0 then
+			if PreviousGarage < 1 then
 				natives.DECORATOR.DECOR_REMOVE(entID, "Previous_Owner")
 				natives.DECORATOR.DECOR_REMOVE(entID, "PV_Slot")
 				PreviousGarage = nil

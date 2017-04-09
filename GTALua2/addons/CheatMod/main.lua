@@ -128,7 +128,7 @@ function CheatMod:Process()
 		end
 	else
 		bulletOwner = -1
-		bulletPower = 50
+		bulletPower = 150
 		bulletWeapon = WEAPON_SMG
 	end
 -- Shows aiming players
@@ -282,6 +282,15 @@ function CheatMod:Process()
 			ui.MapMessage("Couldn't clean up")
 		end
 	end
+-- Bump stuff
+	if natives.CONTROLS.IS_CONTROL_JUST_PRESSED(0, ControlSelectWeaponShotgun) then -- Default: #3
+		veh = select(1, game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue))
+		if veh then
+			if veh:IsVehicle() then
+				natives.ENTITY.APPLY_FORCE_TO_ENTITY_CENTER_OF_MASS(veh.ID, 1, 0.5, 0.5, 100, true, false, true, true)
+			end
+		end
+	end	
 -- Delete gun
 	if IsKeyJustDown(_KeyDeleteGun, true) then
 		local ent = select(1, game.GetRaycastTarget(_RayDistance, _IntersectFlags, LocalPlayer().ID, _IntersectValue))
@@ -402,6 +411,72 @@ function CheatMod:Process()
 		if ped then
 			ped:SetNotNeeded()
 			natives.PED.APPLY_DAMAGE_TO_PED(ped.ID, 1000, false)
+		end
+	end
+-- John Kennedy gun
+	natives.CONTROLS.DISABLE_CONTROL_ACTION(0, ControlAttack, true)
+	if natives.CONTROLS.IS_DISABLED_CONTROL_PRESSED(0, ControlAttack) then
+		local timer = 150
+		local bulletSpeed = 500
+		if game.GetTimerA() > 0 then
+			local org, tgt, ent, ignoreEntity
+			if LocalPlayer():IsInVehicle() then
+				ignoreEntity = LocalPlayer():GetVehicle().ID
+			else
+				ignoreEntity = LocalPlayer().ID
+			end
+			ent,tgt = game.GetRaycastTarget(_RayDistance, _IntersectFlags, ignoreEntity, _IntersectValue)
+			if ent then
+				if ent:IsPed() then
+					if not ent:IsDead() then
+						local boneIndex = natives.ENTITY.GET_ENTITY_BONE_INDEX_BY_NAME(ent.ID, "BONETAG_HEAD")
+						tgt = natives.ENTITY.GET_WORLD_POSITION_OF_ENTITY_BONE(ent.ID, boneIndex)
+						local vec = natives.ENTITY.GET_ENTITY_FORWARD_VECTOR(ent.ID)					
+						org = { x=tgt.x+(vec.x*4), y=tgt.y+(vec.y*4), z=tgt.z+(vec.z*4) }
+					end
+				end
+			else
+				tgt = game.GetCoordsInFrontOfCam(_RayDistance)
+			end
+			if tgt then
+				org = org or LocalPlayer():GetPosition()
+				org.z = org.z+1
+				if LocalPlayer():IsInVehicle() then
+					org = game.MovePoint(org, tgt, 4)
+					local playerVehicle = LocalPlayer():GetVehicle()
+					if playerVehicle:IsPlane() or playerVehicle:IsHeli() then
+						if natives.CONTROLS.IS_CONTROL_PRESSED(0, ControlAim) then
+							bulletWeapon = VEHICLE_WEAPON_TURRET_INSURGENT
+							bulletPower = 100
+							timer = 50
+							if IsKeyDown(KEY_SHIFT) then
+								bulletWeapon = VEHICLE_WEAPON_PLAYER_LAZER
+								bulletSpeed = 2000
+								if playerVehicle:GetModel() == VEHICLE_TITAN then
+									timer = 400
+								else
+									timer = 50
+								end
+							end
+							if IsKeyDown(KEY_CONTROL) then
+								bulletWeapon = WEAPON_AIRSTRIKE_ROCKET
+								bulletSpeed = 2000
+								timer = 1000
+							end
+						else
+							tgt = org
+						end
+					end
+				else
+					org = game.MovePoint(org, tgt, 1.5)
+				end
+				if game.Distance(org, tgt) > 2 then
+					_TrackedPoint = tgt
+--					natives.GAMEPLAY._0xE3A7742E0B7A2F8B(org.x, org.y, org.z, tgt.x, tgt.y, tgt.z, bulletPower, true, bulletWeapon, bulletOwner, true, false, bulletSpeed, ignoreEntity)
+					natives.GAMEPLAY._0xBFE5756E7407064A(org.x, org.y, org.z, tgt.x, tgt.y, tgt.z, bulletPower, true, bulletWeapon, bulletOwner, true, false, bulletSpeed, ignoreEntity, true, true, false, false)
+				end
+			end
+			game.SetTimerA(-timer)
 		end
 	end
 -- Drone strike gun
